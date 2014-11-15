@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace RadiantTulip.Model.Input
 {
-    public interface ISpatialReader
+    public class ExcelReader : ISpatialReader
     {
-        List<Team> GetTeams(Stream stream);
+        public List<Team> GetTeams(Stream stream)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

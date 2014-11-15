@@ -39,7 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\GPSConverter.cs" />
+    <Compile Include="Converter\ICoordinateConverter.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameCreator.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="Ground.cs" />
+    <Compile Include="IGameCreator.cs" />
+    <Compile Include="Input\ExcelReader.cs" />
+    <Compile Include="Input\ISpatialReader.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Team.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

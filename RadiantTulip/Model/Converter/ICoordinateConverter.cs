@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantTulip.Model
+namespace RadiantTulip.Model.Converter
 {
-    public interface IGameCreator
+    public interface ICoordinateConverter
     {
-        Game CreateGame();
+        Position Convert(Position position);
     }
 }
