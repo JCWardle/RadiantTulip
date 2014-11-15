@@ -8,6 +8,6 @@ namespace RadiantTulip.Model.Converter
 {
     public interface ICoordinateConverter
     {
-        Position Convert(Position position);
+        Position Convert(Position position, Ground ground);
     }
 }

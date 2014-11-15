@@ -8,7 +8,7 @@ namespace RadiantTulip.Model.Converter
 {
     public class GPSConverter : ICoordinateConverter
     {
-        public Position Convert(Position position)
+        public Position Convert(Position position, Ground ground)
         {
             throw new NotImplementedException();
         }

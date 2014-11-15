@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace RadiantTulip.Model
 {
-    class IModelUpdater
+    public interface IModelUpdater
     {
+        Game Update();
     }
 }

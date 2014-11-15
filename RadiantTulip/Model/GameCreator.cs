@@ -20,18 +20,19 @@ namespace RadiantTulip.Model
             _reader = reader;
         }
 
-        public Game CreateGame(Stream stream)
+        public Game CreateGame(Stream spatialData)
         {
             var game = new Game();
+            game.Ground = new Ground();
 
-            game.Teams = _reader.GetTeams(stream);
+            game.Teams = _reader.GetTeams(spatialData);
 
             foreach(var t in game.Teams)
                 foreach (var p in t.Players)
                 {
                     var positions = new List<Position>();
                     foreach (var pos in p.Positions)
-                        positions.Add(_converter.Convert(pos));
+                        positions.Add(_converter.Convert(pos, game.Ground));
                     p.Positions = positions;
                 }
 

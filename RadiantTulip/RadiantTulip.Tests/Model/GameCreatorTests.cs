@@ -58,7 +58,7 @@ namespace RadiantTulip.Tests.Model
             });
 
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(position)).Returns(new Position
+            coordinateConverter.Setup(c => c.Convert(position, Moq.It.IsAny<Ground>())).Returns(new Position
             {
                 X = 3,
                 Y = 4
