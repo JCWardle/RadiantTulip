@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace RadiantTulip.Model
 {
-    public class Game
+    public interface IGameCreator
     {
-        public List<Team> Teams { get; set; }
-        public GameState GameState { get; set; }
-        public Ground Ground { get; set; }
+        public Game CreateGame();
     }
 }
