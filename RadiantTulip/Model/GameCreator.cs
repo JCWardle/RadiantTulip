@@ -2,6 +2,7 @@
 using RadiantTulip.Model.Input;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,22 @@ namespace RadiantTulip.Model
             _reader = reader;
         }
 
-        public Game CreateGame()
+        public Game CreateGame(Stream stream)
         {
-            throw new NotImplementedException();
+            var game = new Game();
+
+            game.Teams = _reader.GetTeams(stream);
+
+            foreach(var t in game.Teams)
+                foreach (var p in t.Players)
+                {
+                    var positions = new List<Position>();
+                    foreach (var pos in p.Positions)
+                        positions.Add(_converter.Convert(pos));
+                    p.Positions = positions;
+                }
+
+            return game;
         }
     }
 }
