@@ -156,3 +156,8 @@ $RECYCLE.BIN/
 .DS_Store
 
 TestData/
+*.aux
+*.log
+*.pdf
+*.gz
+*.toc

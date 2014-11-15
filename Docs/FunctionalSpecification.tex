@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+
+\title{Radiant Tulip - 
+A visual tool for representing spatial moment in sport}
+\author{Jordan Wardle}
+
+\begin{document}
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{Purpose}
+	This document outlines the requirements and analysis for the Radiant Tulip project.
+	It explains what the problem is and how software is going to solve the problem, it should be used as a reference by developers and stake holders.
+	
+	\section{Key Stake Holders}
+	\begin{list}{}{}
+		\item Jason Hunt - Sports statistics expert
+	\end{list}
+	
+	\pagebreak
+	
+	\section{Problem}
+	There has been a gradual increase in sports funding over recent years which has made the top teams extremely competitive and they are looking for more subjective information to improve their teams.
+	One area that hasn't been explored deeply is tactical analysis of a team's formation.
+	Currently coaches have to watch video records of games to analysis the team's tactics, the problem with this method is that coaches cannot view the entire field at once, only certain sections.
+	There is also a lot of other information on the recordings which distracts coaches from identifying critical problems with their formation.
+	
+	\section{Solution}
+	An automated application will be created that will take a record of spacial movement of players on the field and then display it on a virtual field in the application.
+	This will give coaches the overview they need to make tactical improvements, it will also allow other statistical over lays, that coaches need to fine tune their team.
+	
+	\subsection{Spacial Data}
+	Data will be spacial data will be collected during the sports game, this is going to be collected in a number of different ways
+	\begin{list}{}{}
+		\item GPS trackers - Players will wear GPS trackers while playing the sport
+		\item Video tracking - The game will be recorded on video in a specific way so that spacial data can be generated from it, this will be done using an external tool
+	\end{list} 
+	
+	Each player in the game will have spacial data points associated with them.
+	The data points can be taken at different hertz rates, for example 10 hertz means there is 10 readings a second.
+	
+	The application will be responsible for interrupting the spacial data and displaying it.
+	
+	\subsection{Game Presentation}
+	Players will be displayed on a virtual sports ground in the application, this can be manipulated by users in the following ways:
+	
+	\begin{list}{}{}
+		\item Time - the game time can change updating the ground with all the player's locations at that time
+		\item Display certain players - The display of a player can be turned off and on
+		\item Statistical displays - Different information displays can be turned off and on
+	\end{list}
+	
+	
+	\subsection{Statistical Displays}
+	There is a number of different statistical displays that need to be shown on the virtual game, these are yet to be decided.
+	An example of a possible display is - each player will have a small trail behind them showing where they came from.
+	The solution may have up to 20 different statistical displays.
+	
+	\subsection{Statistics Table}
+	The statistics table shows a list of all the players that are in the current game, next to each player is a series of columns.
+	Each column represents a certain statistical value about that player.
+	An example of the type of statistic that will display in this table is meters run so far through out the game.
+	It is still unknown how many of these displays will be required.
+	
+\end{document}
