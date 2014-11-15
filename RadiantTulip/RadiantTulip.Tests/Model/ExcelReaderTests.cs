@@ -98,6 +98,19 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(new DateTime(1, 1, 1, 0, 0, 0, 20), positions[2].TimeStamp);
         }
 
+        [Test]
+        public void Read_Lots_Of_Positions_One_Player()
+        {
+            List<Team> result;
+            using (var stream = GetFilePath("OnePlayerBig.xlsx"))
+            {
+                var input = new ExcelReader();
+                result = input.GetTeams(stream);
+            }
+
+            Assert.AreEqual(18510, result[0].Players[0].Positions.Count);
+        }
+
         private Stream GetFilePath(string fileName)
         {
             return Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Concat("RadiantTulip.Tests.TestFiles.", fileName));

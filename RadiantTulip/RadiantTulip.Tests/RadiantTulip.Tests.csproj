@@ -82,6 +82,7 @@
     <EmbeddedResource Include="TestFiles\TwoPlayers.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\OnePlayerBig.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\RadiantTulip.Model.csproj">
