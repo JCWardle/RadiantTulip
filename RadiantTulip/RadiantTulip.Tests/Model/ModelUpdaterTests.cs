@@ -286,5 +286,36 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(4, position1.X);
             Assert.AreEqual(4, position1.Y);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "You need to have a team")]
+        public void Game_Empty_Teams()
+        {
+            var game = new Game();
+            game.Teams = new List<Team>();
+
+            var updater = new ModelUpdater(game);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "You need to have a team")]
+        public void Game_Null_Teams()
+        {
+            var game = new Game();
+            game.Teams = new List<Team>();
+
+            var updater = new ModelUpdater(game);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "You must have atleast one player")]
+        public void Game_Must_Have_Player()
+        {
+            var game = new Game();
+            game.Teams = new List<Team>();
+            game.Teams.Add(new Team());
+
+            var updater = new ModelUpdater(game);
+        }
     }
 }

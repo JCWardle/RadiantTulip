@@ -9,6 +9,7 @@ namespace RadiantTulip.Model
     public class ModelUpdater : IModelUpdater
     {
         private Game _game;
+        private DateTime _time;
 
         public ModelUpdater(Game game)
         {
