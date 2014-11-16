@@ -58,6 +58,7 @@
     <Compile Include="IModelUpdater.cs" />
     <Compile Include="Input\ExcelReader.cs" />
     <Compile Include="Input\ISpatialReader.cs" />
+    <Compile Include="ModelUpdater.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

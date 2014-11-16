@@ -8,6 +8,8 @@ namespace RadiantTulip.Model
 {
     public interface IModelUpdater
     {
-        Game Update();
+        void Update();
+        Game Game { get; }
+        DateTime Time { set; get; }
     }
 }

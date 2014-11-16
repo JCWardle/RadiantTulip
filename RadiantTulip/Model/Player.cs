@@ -11,5 +11,6 @@ namespace RadiantTulip.Model
         public Team Team { get; set; }
         public bool Visible { get; set; }
         public List<Position> Positions { get; set; }
+        public Position CurrentPosition { get; set; }
     }
 }
