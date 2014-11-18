@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace RadiantTulip.Tests.View
 {
-    [TestFixture]
+    [TestFixture, RequiresSTA]
     public class GameDrawerTests
     {
         [Test]
@@ -21,17 +22,20 @@ namespace RadiantTulip.Tests.View
             var groundDrawer = new Mock<IGroundDrawer>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player() 
+                    new Player { Visible = true }
                 }
             });
 
-            drawer.DrawGame(canvas, grid, game);
+            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), canvas));
+
+            drawer.DrawGame(canvas, table, game);
 
             playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), canvas), Times.Once);
         }
@@ -43,20 +47,26 @@ namespace RadiantTulip.Tests.View
             var groundDrawer = new Mock<IGroundDrawer>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            var player1 = new Player { Visible = true };
+            var player2 = new Player { Visible = true };
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player(),
-                    new Player()
+                    player1,
+                    player2
                 }
             });
 
-            drawer.DrawGame(canvas, grid, game);
+            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), canvas));
 
-            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), canvas), Times.Exactly(2));
+            drawer.DrawGame(canvas, table, game);
+
+            playerDrawer.Verify(p => p.Draw(player1, canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(player2, canvas), Times.Once);
         }
 
         [Test]
@@ -66,7 +76,8 @@ namespace RadiantTulip.Tests.View
             var groundDrawer = new Mock<IGroundDrawer>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
@@ -76,7 +87,7 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
             playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), canvas), Times.Never);
         }
@@ -88,7 +99,8 @@ namespace RadiantTulip.Tests.View
             var groundDrawer = new Mock<IGroundDrawer>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
@@ -99,7 +111,7 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
             playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), canvas), Times.Once);
         }
@@ -111,11 +123,12 @@ namespace RadiantTulip.Tests.View
             var groundDrawer = new Mock<IGroundDrawer>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
-            var grid = new DataGrid();
-            var game = new Game();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
+            var game = new Game() { Teams = new List<Team>() };
             game.Ground = new Ground();
 
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
             groundDrawer.Verify(g => g.Draw(canvas, game.Ground), Times.Once);
         }
@@ -128,20 +141,21 @@ namespace RadiantTulip.Tests.View
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var visualArtifact = new Mock<IVisualArtifact>();
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player() 
+                    new Player { Visible = true }
                 }
             });
 
             drawer.AddVisualArtifact(visualArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
-            visualArtifact.Verify(v => v.Draw(canvas, new Player()), Times.Once);
+            visualArtifact.Verify(v => v.Draw(canvas, It.IsAny<Player>()), Times.Once);
         }
 
         [Test]
@@ -152,7 +166,8 @@ namespace RadiantTulip.Tests.View
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var visualArtifact = new Mock<IVisualArtifact>();
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
 
             var player1 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1 } };
             var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 2, Y = 2 } };
@@ -167,7 +182,7 @@ namespace RadiantTulip.Tests.View
             });
 
             drawer.AddVisualArtifact(visualArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
             visualArtifact.Verify(v => v.Draw(canvas, player1), Times.Once);
             visualArtifact.Verify(v => v.Draw(canvas, player2), Times.Once);
@@ -182,22 +197,26 @@ namespace RadiantTulip.Tests.View
             var visualArtifact1 = new Mock<IVisualArtifact>();
             var visualArtifact2 = new Mock<IVisualArtifact>();
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player() 
+                    new Player { Visible= true }
                 }
             });
 
+            visualArtifact1.Setup(v => v.Draw(canvas, It.IsAny<Player>()));
+            visualArtifact2.Setup(v => v.Draw(canvas, It.IsAny<Player>()));
+
             drawer.AddVisualArtifact(visualArtifact1.Object);
             drawer.AddVisualArtifact(visualArtifact2.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
-            visualArtifact1.Verify(v => v.Draw(canvas, new Player()), Times.Once);
-            visualArtifact2.Verify(v => v.Draw(canvas, new Player()), Times.Once);
+            visualArtifact1.Verify(v => v.Draw(canvas, It.IsAny<Player>()), Times.Once);
+            visualArtifact2.Verify(v => v.Draw(canvas, It.IsAny<Player>()), Times.Once);
         }
 
         [Test]
@@ -208,27 +227,35 @@ namespace RadiantTulip.Tests.View
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var descriptiveArtifact1 = new Mock<IDescriptiveArtifact>();
             var descriptiveArtifact2 = new Mock<IDescriptiveArtifact>();
+            var player = new Player { Visible = true };
 
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player() 
+                    player
                 }
             });
 
             descriptiveArtifact1.Setup(d => d.Calculate(new Player())).Returns(1);
+            descriptiveArtifact1.Setup(d => d.GetName()).Returns("One");
             descriptiveArtifact2.Setup(d => d.Calculate(new Player())).Returns(2);
+            descriptiveArtifact2.Setup(d => d.GetName()).Returns("Two");
 
             drawer.AddDescriptiveArtifact(descriptiveArtifact1.Object);
             drawer.AddDescriptiveArtifact(descriptiveArtifact2.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
-            descriptiveArtifact1.Verify(d => d.Calculate(new Player()), Times.Once);
-            descriptiveArtifact2.Verify(d => d.Calculate(new Player()), Times.Once);
+            descriptiveArtifact1.Verify(d => d.Calculate(player), Times.Once);
+            descriptiveArtifact2.Verify(d => d.Calculate(player), Times.Once);
+            Assert.AreEqual("One", table.Columns[0].Name);
+            Assert.AreEqual("Two", table.Columns[1].Name);
+            Assert.NotNull(table.RowGroups[0].Rows[0].Cells[0]);
+            Assert.NotNull(table.RowGroups[0].Rows[0].Cells[1]);
         }
 
         [Test]
@@ -238,24 +265,29 @@ namespace RadiantTulip.Tests.View
             var groundDrawer = new Mock<IGroundDrawer>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var descriptiveArtifact = new Mock<IDescriptiveArtifact>();
+            var player = new Player { Visible = true };
 
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player() 
+                    player
                 }
             });
 
             descriptiveArtifact.Setup(d => d.Calculate(new Player())).Returns(1);
+            descriptiveArtifact.Setup(d => d.GetName()).Returns("One");
 
             drawer.AddDescriptiveArtifact(descriptiveArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
-            descriptiveArtifact.Verify(d => d.Calculate(new Player()), Times.Once);
+            descriptiveArtifact.Verify(d => d.Calculate(player), Times.Once);
+            Assert.AreEqual("One", table.Columns[0].Name);
+            Assert.NotNull(table.RowGroups[0].Rows[0].Cells[0]);
         }
 
         [Test]
@@ -266,7 +298,8 @@ namespace RadiantTulip.Tests.View
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var descriptiveArtifact = new Mock<IDescriptiveArtifact>();
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
 
             var player1 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1 } };
             var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 2, Y = 2 } };
@@ -280,11 +313,18 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
+            descriptiveArtifact.Setup(d => d.Calculate(player1)).Returns(1);
+            descriptiveArtifact.Setup(d => d.Calculate(player2)).Returns(2);
+            descriptiveArtifact.Setup(d => d.GetName()).Returns("One");
+
             drawer.AddDescriptiveArtifact(descriptiveArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
             descriptiveArtifact.Verify(d => d.Calculate(player1), Times.Once);
             descriptiveArtifact.Verify(d => d.Calculate(player2), Times.Once);
+            Assert.AreEqual("One", table.Columns[0].Name);
+            Assert.NotNull(table.RowGroups[0].Rows[0].Cells[0]);
+            Assert.NotNull(table.RowGroups[0].Rows[1].Cells[0]);
         }
 
         [Test]
@@ -295,7 +335,8 @@ namespace RadiantTulip.Tests.View
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var descriptiveArtifact = new Mock<IDescriptiveArtifact>();
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
 
             var player1 = new Player { Visible = false, CurrentPosition = new Position { X = 1, Y = 1 } };
             var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 2, Y = 2 } };
@@ -309,11 +350,18 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
+            descriptiveArtifact.Setup(d => d.Calculate(player1)).Returns(1);
+            descriptiveArtifact.Setup(d => d.Calculate(player2)).Returns(2);
+            descriptiveArtifact.Setup(d => d.GetName()).Returns("One");
+
             drawer.AddDescriptiveArtifact(descriptiveArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
             descriptiveArtifact.Verify(d => d.Calculate(player1), Times.Never);
             descriptiveArtifact.Verify(d => d.Calculate(player2), Times.Once);
+
+            Assert.AreEqual("One", table.Columns[0].Name);
+            Assert.NotNull(table.RowGroups[0].Rows[0].Cells[0]);
         }
 
         [Test]
@@ -324,7 +372,8 @@ namespace RadiantTulip.Tests.View
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var visualArtifact = new Mock<IVisualArtifact>();
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
 
             var player1 = new Player { Visible = false, CurrentPosition = new Position { X = 1, Y = 1 } };
             var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 2, Y = 2 } };
@@ -339,7 +388,7 @@ namespace RadiantTulip.Tests.View
             });
 
             drawer.AddVisualArtifact(visualArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
             visualArtifact.Verify(v => v.Draw(canvas, player1), Times.Never);
             visualArtifact.Verify(v => v.Draw(canvas, player2), Times.Once);
@@ -354,24 +403,25 @@ namespace RadiantTulip.Tests.View
             var descriptiveArtifact = new Mock<IDescriptiveArtifact>();
 
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player() 
+                    new Player() { Visible = true }
                 }
             });
 
             descriptiveArtifact.Setup(d => d.Calculate(new Player())).Returns(1);
 
             drawer.AddDescriptiveArtifact(descriptiveArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
             drawer.RemoveDescriptiveArtifact(descriptiveArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
-            descriptiveArtifact.Verify(d => d.Calculate(new Player()), Times.Once);
+            descriptiveArtifact.Verify(d => d.Calculate(It.IsAny<Player>()), Times.Once);
         }
 
         [Test]
@@ -382,22 +432,23 @@ namespace RadiantTulip.Tests.View
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var visualArtifact = new Mock<IVisualArtifact>();
             var canvas = new Canvas();
-            var grid = new DataGrid();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
                 {
-                    new Player() 
+                    new Player { Visible =  true }
                 }
             });
 
             drawer.AddVisualArtifact(visualArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
             drawer.RemoveVisualArtifact(visualArtifact.Object);
-            drawer.DrawGame(canvas, grid, game);
+            drawer.DrawGame(canvas, table, game);
 
-            visualArtifact.Verify(v => v.Draw(canvas, new Player()), Times.Once);
+            visualArtifact.Verify(v => v.Draw(canvas, It.IsAny<Player>()), Times.Once);
         }
     }
 }
