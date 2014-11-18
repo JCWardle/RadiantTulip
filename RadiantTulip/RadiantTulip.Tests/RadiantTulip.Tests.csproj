@@ -59,7 +59,11 @@
       <HintPath>..\packages\NUnitTestAdapter.1.2\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -78,6 +82,7 @@
     <Compile Include="Model\GameCreatorTests.cs" />
     <Compile Include="Model\ModelUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\GameDrawerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -89,13 +94,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestFiles\OnePlayerBig.xlsx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\RadiantTulip.Model\RadiantTulip.Model.csproj">
       <Project>{b6580426-3e13-4338-b307-34f7696ab476}</Project>
       <Name>RadiantTulip.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RadiantTulip.View\RadiantTulip.View.csproj">
+      <Project>{1ab68a28-2810-420b-a527-6e9b72164c61}</Project>
+      <Name>RadiantTulip.View</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

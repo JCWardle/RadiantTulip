@@ -61,6 +61,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Game\GameDrawer.cs" />
     <Compile Include="Game\IDescriptiveArtifact.cs" />
     <Compile Include="Game\IGameDrawer.cs" />
     <Compile Include="Game\IGroundDrawer.cs" />
