@@ -90,13 +90,13 @@
     <EmbeddedResource Include="TestFiles\OnePlayerBig.xlsx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\RadiantTulip.Model.csproj">
+    <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RadiantTulip.Model\RadiantTulip.Model.csproj">
       <Project>{b6580426-3e13-4338-b307-34f7696ab476}</Project>
       <Name>RadiantTulip.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
