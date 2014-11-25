@@ -9,9 +9,9 @@ namespace RadiantTulip.Model
     public class Ground
     {
         public string Image { get; set; }
-        public string CentreLongitude { get; set; }
-        public string CentreLatitude { get; set; }
-        public string Length { get; set; }
-        public string Width { get; set; }
+        public double CentreLongitude { get; set; }
+        public double CentreLatitude { get; set; }
+        public int Length { get; set; }
+        public int Width { get; set; }
     }
 }

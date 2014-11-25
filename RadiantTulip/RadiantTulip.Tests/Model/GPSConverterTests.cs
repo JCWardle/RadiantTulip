@@ -15,13 +15,20 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Test_Converter()
         {
-            var position = new Position { X = -31.94453984, Y = 115.8308636 };
-            var ground = new Ground();
+            var position = new Position
+            {
+                X = -31.94451244,
+                Y = 115.830105,
+                TimeStamp = new DateTime(1, 1, 1)
+            };
+            var ground = new Ground() { CentreLatitude = 389424.61, CentreLongitude = 6465102.83 };
             var converter = new GPSConverter();
 
             var result = converter.Convert(position, ground);
 
-
+            Assert.AreEqual(2.2769579348387197, result.X);
+            Assert.AreEqual(14.209707674570382, result.Y);
+            Assert.AreEqual(new DateTime(1, 1, 1), new DateTime(1, 1, 1));
         }
     }
 }
