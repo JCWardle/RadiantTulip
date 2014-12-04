@@ -21,13 +21,13 @@ namespace RadiantTulip.Tests.Model
                 Y = 115.830105,
                 TimeStamp = new DateTime(1, 1, 1)
             };
-            var ground = new Ground() { CentreLatitude = 389424.61, CentreLongitude = 6465102.83 };
+            var ground = new Ground() { CentreLatitude = -31.944464, CentreLongitude = 115.830156 };
             var converter = new GPSConverter();
 
             var result = converter.Convert(position, ground);
 
-            Assert.AreEqual(2.2769579348387197, result.X);
-            Assert.AreEqual(14.209707674570382, result.Y);
+            Assert.AreEqual(5.3909321529616587, result.X);
+            Assert.AreEqual(4.8162957775718658, result.Y);
             Assert.AreEqual(new DateTime(1, 1, 1), new DateTime(1, 1, 1));
         }
     }
