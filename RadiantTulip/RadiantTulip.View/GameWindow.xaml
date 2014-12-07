@@ -2,9 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
-    <StackPanel>
-        <DataGrid>
+    <StackPanel x:Name="Panel">
+        <Canvas x:Name="MainCanvas" >
             
-        </DataGrid>
+        </Canvas>
+        <FlowDocumentReader>
+            <FlowDocument>
+                <Table x:Name="Table">
+                    
+                </Table>
+            </FlowDocument>
+        </FlowDocumentReader>
     </StackPanel>
 </Window>
