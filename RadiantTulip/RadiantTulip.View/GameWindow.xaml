@@ -1,17 +1,9 @@
 ﻿<Window x:Class="RadiantTulip.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:g="clr-namespace:RadiantTulip.View"
         Title="MainWindow" Height="350" Width="525">
     <StackPanel x:Name="Panel">
-        <Canvas x:Name="MainCanvas" >
-            
-        </Canvas>
-        <FlowDocumentReader>
-            <FlowDocument>
-                <Table x:Name="Table">
-                    
-                </Table>
-            </FlowDocument>
-        </FlowDocumentReader>
+        <g:GameControl></g:GameControl>
     </StackPanel>
 </Window>

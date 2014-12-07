@@ -61,6 +61,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GameControl.cs" />
     <Compile Include="Game\GameDrawer.cs" />
     <Compile Include="Game\GroundDrawer.cs" />
     <Compile Include="Game\IDescriptiveArtifact.cs" />
@@ -72,6 +73,10 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\PlayerDrawer.cs" />
