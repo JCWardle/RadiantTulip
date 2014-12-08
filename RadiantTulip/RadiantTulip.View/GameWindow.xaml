@@ -2,8 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:g="clr-namespace:RadiantTulip.View"
+        xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         Title="MainWindow" Height="350" Width="525">
+    
+    <Window.DataContext>
+        <VM:GameViewModel/>
+    </Window.DataContext>
+    
     <StackPanel x:Name="Panel">
-        <g:GameControl></g:GameControl>
+        
+        <g:GameControl Game="{Binding Game}"></g:GameControl>
+        
     </StackPanel>
 </Window>
