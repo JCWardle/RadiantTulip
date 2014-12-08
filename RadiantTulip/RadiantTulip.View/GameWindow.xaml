@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:g="clr-namespace:RadiantTulip.View"
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="350" Width="525">
     
     <Window.DataContext>
@@ -12,6 +13,12 @@
     <StackPanel x:Name="Panel">
         
         <g:GameControl Game="{Binding Game}"></g:GameControl>
-        
+        <Button Name="Update" Content="Update">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding UpdateGame}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
     </StackPanel>
 </Window>
