@@ -5,6 +5,7 @@ using RadiantTulip.Model.Converter;
 using RadiantTulip.Model.Input;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,7 @@ namespace RadiantTulip.View.ViewModels
         private void Update()
         {
             _gameUpdater.Update();
+            OnPropertyChanged("Game");
         }
 
         public GameViewModel()
