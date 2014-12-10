@@ -10,11 +10,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace RadiantTulip.View.ViewModels
 {
-    public class GameViewModel : BindableBase
+    public class GameViewModel : RadiantTulip.View.BindableBase
     {
         private Model.Game _game;
         private IModelUpdater _gameUpdater;

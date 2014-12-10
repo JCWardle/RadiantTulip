@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,13 +18,13 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.View
 {
-    public class GameControl : ContentControl, INotifyPropertyChanged
+    public class GameControl : ContentControl
     {
-        public readonly static DependencyProperty GameProperty = DependencyProperty.Register("Game",  
+        public static DependencyProperty GameProperty = DependencyProperty.Register("Game",  
             typeof(RadiantTulip.Model.Game), 
             typeof(GameControl), 
-            new PropertyMetadata(new PropertyChangedCallback(Update)));
-        public event PropertyChangedEventHandler PropertyChanged;
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(Update)));
+        
 
         private Canvas _canvas;
         private Table _table;
@@ -44,15 +45,6 @@ namespace RadiantTulip.View
             }
         }
 
-        protected void OnPropertyChanged(string name)
-        {
-            var handler = PropertyChanged;
-            if(handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
         private static void Update(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var g = sender as GameControl;
@@ -65,11 +57,6 @@ namespace RadiantTulip.View
         private void OnGameChanged(Model.Game game)
         {
             _drawer.DrawGame(_canvas, _table, game);
-        }
-
-        static GameControl()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(GameControl), new FrameworkPropertyMetadata(typeof(GameControl)));
         }
 
         public GameControl()
