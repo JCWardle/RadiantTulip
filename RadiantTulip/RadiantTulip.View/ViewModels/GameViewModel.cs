@@ -3,13 +3,7 @@ using Microsoft.Practices.Prism.Mvvm;
 using RadiantTulip.Model;
 using RadiantTulip.Model.Converter;
 using RadiantTulip.Model.Input;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace RadiantTulip.View.ViewModels
@@ -17,7 +11,7 @@ namespace RadiantTulip.View.ViewModels
     public class GameViewModel : BindableBase
     {
         private Model.Game _game;
-        private IModelUpdater _gameUpdater;
+        private readonly IModelUpdater _gameUpdater;
 
         public ICommand UpdateGame
         {
