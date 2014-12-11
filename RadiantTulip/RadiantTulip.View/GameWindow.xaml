@@ -11,14 +11,17 @@
     </Window.DataContext>
     
     <StackPanel x:Name="Panel">
+        <StackPanel>
+            <Button Name="Update" Content="Update">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding UpdateGame}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </StackPanel>
         
         <g:GameControl Game="{Binding Game}"></g:GameControl>
-        <Button Name="Update" Content="Update">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding UpdateGame}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
+
     </StackPanel>
 </Window>
