@@ -1,17 +1,17 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using RadiantTulip.Model;
-using RadiantTulip.Model.Converter;
-using RadiantTulip.Model.Input;
 using System.IO;
 using System.Windows.Input;
+using Microsoft.Practices.Unity;
 
 namespace RadiantTulip.View.ViewModels
 {
-    public class GameViewModel : BindableBase
+    public class GameViewModel : BindableBase, IGameViewModel
     {
         private Model.Game _game;
         private readonly IModelUpdater _gameUpdater;
+        private readonly IUnityContainer _container;
 
         public ICommand UpdateGame
         {
@@ -30,12 +30,10 @@ namespace RadiantTulip.View.ViewModels
             OnPropertyChanged("Game");
         }
 
-        public GameViewModel()
+        public GameViewModel() { }
+         
+        public GameViewModel(IGameCreator creator)
         {
-            var converter = new GPSConverter();
-            var reader = new ExcelReader();
-            var creator = new GameCreator(converter, reader);
-
             using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallRaw.xlsx", FileMode.Open))
                 _game = creator.CreateGame(stream);
 

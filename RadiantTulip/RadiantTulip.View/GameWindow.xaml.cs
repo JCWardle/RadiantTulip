@@ -1,20 +1,19 @@
-﻿using RadiantTulip.Model;
-using RadiantTulip.Model.Converter;
-using RadiantTulip.Model.Input;
-using RadiantTulip.View.Game;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
+﻿using System.Windows;
+using Microsoft.Practices.Unity;
+using RadiantTulip.View.ViewModels;
 
-namespace RadiantTulip
+namespace RadiantTulip.View
 {
     public partial class GameWindow : Window
     {
+        private readonly IUnityContainer _container;
+
+        public GameWindow(IUnityContainer container)
+        {
+            UnityHelper.SetContainer(this, container);
+            InitializeComponent();
+            _container = container;
+            this.DataContext = _container.Resolve<IGameViewModel>();
+        }
     }
 }

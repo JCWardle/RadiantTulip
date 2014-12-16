@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using Microsoft.Practices.ObjectBuilder2;
+using Microsoft.Practices.Prism.UnityExtensions;
+using Microsoft.Practices.Unity;
 
 namespace RadiantTulip.View
 {
@@ -13,10 +16,13 @@ namespace RadiantTulip.View
             typeof(GameControl), 
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null, Update));
 
+        [Dependency]
+        public IGameDrawer Drawer { get; set; }
+
         private Canvas _canvas;
         private Table _table;
         private Model.Game _game;
-        private IGameDrawer _drawer;
+        
 
         [BindableAttribute(true)]
         public Model.Game Game
@@ -44,14 +50,13 @@ namespace RadiantTulip.View
 
         private void OnGameChanged(Model.Game game)
         {
-            _drawer.DrawGame(_canvas, _table, game);
+            Drawer.DrawGame(_canvas, _table, game);
         }
 
         public GameControl()
         {
-            _canvas = new Canvas();
-            _canvas.Width = 400;
-            _canvas.Height = 350;
+            Drawer = UnityHelper.GetContainer(this.Parent).Resolve<IGameDrawer>();
+            _canvas = new Canvas { Width = 400, Height =  350};
             AddChild(_canvas);
             var reader = new FlowDocumentReader();
             var document = new FlowDocument();
@@ -59,11 +64,6 @@ namespace RadiantTulip.View
             _table = new Table();
             _table.RowGroups.Add(new TableRowGroup());
             document.Blocks.Add(_table);
-
-            var groundDrawer = new GroundDrawer();
-            var playerDrawer = new PlayerDrawer();
-
-            _drawer = new GameDrawer(groundDrawer, playerDrawer);
         }
     }
 }
