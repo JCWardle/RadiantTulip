@@ -24,6 +24,7 @@ namespace RadiantTulip.View
             Container.RegisterType(typeof(ISpatialReader), typeof(ExcelReader));
             Container.RegisterType(typeof(ICoordinateConverter), typeof(GPSConverter));
             Container.RegisterType(typeof(IGameCreator), typeof(GameCreator));
+            Container.RegisterType(typeof (IModelUpdater), typeof (ModelUpdater));
 
             //Drawing
             Container.RegisterType(typeof (IGameDrawer), typeof (GameDrawer));

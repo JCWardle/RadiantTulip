@@ -32,12 +32,12 @@ namespace RadiantTulip.View.ViewModels
 
         public GameViewModel() { }
          
-        public GameViewModel(IGameCreator creator)
+        public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
             using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallRaw.xlsx", FileMode.Open))
                 _game = creator.CreateGame(stream);
 
-            _gameUpdater = new ModelUpdater(_game);
+            _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
         }
 
         public Model.Game Game
