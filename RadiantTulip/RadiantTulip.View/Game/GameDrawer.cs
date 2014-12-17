@@ -33,7 +33,7 @@ namespace RadiantTulip.View.Game
             foreach(var t in game.Teams)
                 foreach(var p in t.Players.Where(p => p.Visible))
                 {
-                    _playerDrawer.Draw(p, canvas);
+                    _playerDrawer.Draw(p, game.Ground, canvas);
                     ApplyVisualArtifacts(canvas, p);
                     ApplyDescriptiveArtifacts(table, p);
                 }
