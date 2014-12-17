@@ -21,7 +21,7 @@
             </Button>
         </StackPanel>
         
-        <g:GameControl Game="{Binding Game}"></g:GameControl>
+        <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
 
     </StackPanel>
 </Window>

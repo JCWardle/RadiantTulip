@@ -3,8 +3,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 
 namespace RadiantTulip.View
@@ -12,7 +10,7 @@ namespace RadiantTulip.View
     public class GameControl : ContentControl
     {
         public readonly static DependencyProperty GameProperty = DependencyProperty.Register("Game",  
-            typeof(RadiantTulip.Model.Game), 
+            typeof(Model.Game), 
             typeof(GameControl), 
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null, Update));
 
@@ -50,12 +48,14 @@ namespace RadiantTulip.View
 
         private void OnGameChanged(Model.Game game)
         {
-            Drawer.DrawGame(_canvas, _table, game);
+            if (Drawer != null)
+            {
+                Drawer.DrawGame(_canvas, _table, game);
+            }
         }
 
         public GameControl()
         {
-            Drawer = UnityHelper.GetContainer(this.Parent).Resolve<IGameDrawer>();
             _canvas = new Canvas { Width = 400, Height =  350};
             AddChild(_canvas);
             var reader = new FlowDocumentReader();
