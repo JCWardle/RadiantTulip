@@ -1,10 +1,27 @@
-﻿<Window x:Class="RadiantTulip.MainWindow"
+﻿<Window x:Class="RadiantTulip.View.GameWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:g="clr-namespace:RadiantTulip.View"
+        xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="350" Width="525">
-    <StackPanel>
-        <DataGrid>
-            
-        </DataGrid>
+    
+    <Window.DataContext>
+        <VM:GameViewModel/>
+    </Window.DataContext>
+    
+    <StackPanel x:Name="Panel">
+        <StackPanel>
+            <Button Name="Update" Content="Update">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding UpdateGame}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </StackPanel>
+        
+        <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
+
     </StackPanel>
 </Window>

@@ -11,7 +11,7 @@ namespace RadiantTulip.Model
         public string Image { get; set; }
         public double CentreLongitude { get; set; }
         public double CentreLatitude { get; set; }
-        public int Length { get; set; }
+        public int Height { get; set; }
         public int Width { get; set; }
     }
 }

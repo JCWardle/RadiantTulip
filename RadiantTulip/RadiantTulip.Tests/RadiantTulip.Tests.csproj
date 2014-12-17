@@ -84,8 +84,10 @@
     <Compile Include="Model\ModelUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
+    <Compile Include="View\PlayerDrawerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="TestFiles\OnePlayer.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

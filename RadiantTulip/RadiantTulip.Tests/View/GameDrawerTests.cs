@@ -2,11 +2,7 @@
 using NUnit.Framework;
 using RadiantTulip.Model;
 using RadiantTulip.View.Game;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -24,7 +20,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas();
             var table = new Table();
             table.RowGroups.Add(new TableRowGroup());
-            var game = new Game() { Teams = new List<Team>() };
+            var game = new Game() { Ground = new Ground(), Teams = new List<Team>() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
@@ -33,11 +29,11 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), canvas));
+            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas));
 
             drawer.DrawGame(canvas, table, game);
 
-            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Once);
         }
 
         [Test]
@@ -61,12 +57,12 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), canvas));
+            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas));
 
             drawer.DrawGame(canvas, table, game);
 
-            playerDrawer.Verify(p => p.Draw(player1, canvas), Times.Once);
-            playerDrawer.Verify(p => p.Draw(player2, canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(player1, It.IsAny<Ground>(), canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(player2, It.IsAny<Ground>(), canvas), Times.Once);
         }
 
         [Test]
@@ -89,7 +85,7 @@ namespace RadiantTulip.Tests.View
 
             drawer.DrawGame(canvas, table, game);
 
-            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), canvas), Times.Never);
+            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Never);
         }
 
         [Test]
@@ -113,7 +109,7 @@ namespace RadiantTulip.Tests.View
 
             drawer.DrawGame(canvas, table, game);
 
-            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Once);
         }
 
         [Test]
