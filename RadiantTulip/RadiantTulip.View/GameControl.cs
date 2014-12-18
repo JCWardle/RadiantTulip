@@ -15,11 +15,21 @@ namespace RadiantTulip.View
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null, Update));
 
         [Dependency]
-        public IGameDrawer Drawer { get; set; }
+        public IGameDrawer Drawer {
+            get
+            {
+                return _drawer;
+            }
+            set
+            {
+                _drawer = value;
+            }
+        }
 
         private Canvas _canvas;
         private Table _table;
         private Model.Game _game;
+        private IGameDrawer _drawer;
         
 
         [BindableAttribute(true)]
@@ -48,15 +58,20 @@ namespace RadiantTulip.View
 
         private void OnGameChanged(Model.Game game)
         {
-            if (Drawer != null)
+            if (_drawer != null)
             {
-                Drawer.DrawGame(_canvas, _table, game);
+                _drawer.DrawGame(_canvas, _table, game);
             }
         }
 
         public GameControl()
         {
-            _canvas = new Canvas { Width = 400, Height =  350};
+            _canvas = new Canvas
+            {
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Margin = new Thickness(5)
+            };
             AddChild(_canvas);
             var reader = new FlowDocumentReader();
             var document = new FlowDocument();

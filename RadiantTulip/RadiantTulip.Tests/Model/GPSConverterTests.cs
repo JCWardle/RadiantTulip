@@ -2,10 +2,6 @@
 using RadiantTulip.Model;
 using RadiantTulip.Model.Converter;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RadiantTulip.Tests.Model
 {

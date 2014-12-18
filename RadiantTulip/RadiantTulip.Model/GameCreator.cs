@@ -23,7 +23,14 @@ namespace RadiantTulip.Model
         public Game CreateGame(Stream spatialData)
         {
             var game = new Game();
-            game.Ground = new Ground();
+            game.Ground = new Ground
+            {
+                CentreLatitude = -31.944464,
+                CentreLongitude = 115.830156,
+                Height = 19100,
+                Width = 13200,
+                Image = @"E:\Code\RadiantTulip\RadiantTulip\Grounds\Patersons.png"
+            };
 
             game.Teams = _reader.GetTeams(spatialData);
 

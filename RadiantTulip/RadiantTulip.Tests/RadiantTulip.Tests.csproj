@@ -84,6 +84,7 @@
     <Compile Include="Model\ModelUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
+    <Compile Include="View\GroundDrawerTests.cs" />
     <Compile Include="View\PlayerDrawerTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -97,7 +98,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestFiles\OnePlayerBig.xlsx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TestFiles\Patersons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RadiantTulip.Model\RadiantTulip.Model.csproj">
       <Project>{b6580426-3e13-4338-b307-34f7696ab476}</Project>

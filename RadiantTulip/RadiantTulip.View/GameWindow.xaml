@@ -10,8 +10,8 @@
         <VM:GameViewModel/>
     </Window.DataContext>
     
-    <StackPanel x:Name="Panel">
-        <StackPanel>
+    <DockPanel>
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
             <Button Name="Update" Content="Update">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
@@ -20,8 +20,8 @@
                 </i:Interaction.Triggers>
             </Button>
         </StackPanel>
-        
-        <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
-
-    </StackPanel>
+        <Border>
+            <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
+        </Border>
+    </DockPanel>
 </Window>

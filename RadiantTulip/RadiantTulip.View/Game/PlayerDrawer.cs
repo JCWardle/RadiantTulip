@@ -13,8 +13,8 @@ namespace RadiantTulip.View.Game
             if (position.X > ground.Width || position.Y > ground.Height)
                 return;
 
-            var x = position.X / ground.Width * canvas.Width;
-            var y = position.Y / ground.Height * canvas.Height;
+            var x = position.X / ground.Width * canvas.ActualWidth;
+            var y = position.Y / ground.Height * canvas.ActualHeight;
 
             var circle = new Ellipse { Width = 5, Height = 5 };
             circle.Margin  = new Thickness { Left = x, Top = y };
