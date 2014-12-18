@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using RadiantTulip.Model;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace RadiantTulip.View.Game
@@ -16,8 +17,13 @@ namespace RadiantTulip.View.Game
             var x = position.X / ground.Width * canvas.ActualWidth;
             var y = position.Y / ground.Height * canvas.ActualHeight;
 
-            var circle = new Ellipse { Width = 5, Height = 5 };
-            circle.Margin  = new Thickness { Left = x, Top = y };
+            var circle = new Ellipse
+            {
+                Width = 5, 
+                Height = 5, 
+                Margin = new Thickness {Left = x, Top = y},
+                Fill = new SolidColorBrush(Colors.Red)
+            };
             canvas.Children.Add(circle);
         }
     }
