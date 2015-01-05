@@ -22,8 +22,8 @@ namespace RadiantTulip.Tests.Model
 
             var result = converter.Convert(position, ground);
 
-            Assert.AreEqual(5.3909321529616587, result.X);
-            Assert.AreEqual(4.8162957775718658, result.Y);
+            Assert.AreEqual(539.09321529616591, result.X);
+            Assert.AreEqual(481.62957775718655, result.Y);
             Assert.AreEqual(new DateTime(1, 1, 1), new DateTime(1, 1, 1));
         }
     }

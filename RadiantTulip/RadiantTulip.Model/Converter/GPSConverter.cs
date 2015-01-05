@@ -15,11 +15,13 @@ namespace RadiantTulip.Model.Converter
             var positionX = new GeoCoordinate(position.X, ground.CentreLongitude);
             var positionY = new GeoCoordinate(ground.CentreLatitude, position.Y);
 
+            //GetDistanceTo returns the value in meters.
+
             return new Position
             {
                 TimeStamp = position.TimeStamp,
-                X = groundCenter.GetDistanceTo(positionX),
-                Y = groundCenter.GetDistanceTo(positionY)
+                X = groundCenter.GetDistanceTo(positionX) * 100,
+                Y = groundCenter.GetDistanceTo(positionY) * 100
             };
         }
     }
