@@ -11,16 +11,30 @@
     </Window.DataContext>
     
     <DockPanel>
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
             <Button Name="Update" Content="Update">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding UpdateGame}"/>
+                        <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button Name="Play" Content="Play">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding PlayCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button Name="Stop" Content="Stop">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding StopCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
         </StackPanel>
-        <Border>
+        <Border DockPanel.Dock="Top">
             <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
         </Border>
     </DockPanel>

@@ -1,9 +1,11 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿using System;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using RadiantTulip.Model;
 using System.IO;
 using System.Windows.Input;
 using Microsoft.Practices.Unity;
+using System.Threading;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -12,17 +14,28 @@ namespace RadiantTulip.View.ViewModels
         private Model.Game _game;
         private readonly IModelUpdater _gameUpdater;
         private readonly IUnityContainer _container;
+        private DelegateCommand _update;
+        private DelegateCommand _play;
+        private DelegateCommand _stop;
+        private Thread _runner;
+        private object _lock = new object();
 
-        public ICommand UpdateGame
+        public GameViewModel() {}
+
+        public ICommand UpdateCommand
         {
-            get
-            {
-                return _command ??
-                    (_command = new DelegateCommand(Update));
-            }
+            get { return _update ?? (_update = new DelegateCommand(Update)); }
         }
 
-        private DelegateCommand _command;
+        public ICommand PlayCommand
+        {
+            get { return _play ?? (_play = new DelegateCommand(Play)); }
+        }
+
+        public ICommand StopCommand
+        {
+            get { return _stop ?? (_stop = new DelegateCommand(Stop)); }
+        }
 
         private void Update()
         {
@@ -30,7 +43,40 @@ namespace RadiantTulip.View.ViewModels
             OnPropertyChanged("Game");
         }
 
-        public GameViewModel() { }
+        private void Play()
+        {
+            _runner = new Thread(GameRunner);
+            _runner.Start();
+        }
+
+        private void Stop()
+        {
+            lock (_lock)
+            {
+                _runner.Interrupt();
+            }
+        }
+
+        private void GameRunner()
+        {
+            try
+            {
+                var previous = DateTime.MaxValue;
+                while (previous != _gameUpdater.Time)
+                {
+                    lock (_lock)
+                    {
+                        previous = _gameUpdater.Time;
+                        _gameUpdater.Update();
+                        OnPropertyChanged("Game");
+                    }
+                }
+            }
+            catch (ThreadInterruptedException e)
+            {
+                return;
+            }
+        }
          
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {

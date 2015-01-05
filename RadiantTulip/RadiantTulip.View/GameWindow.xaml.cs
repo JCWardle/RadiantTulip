@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using RadiantTulip.View.Game;
 using RadiantTulip.View.ViewModels;
 
