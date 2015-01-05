@@ -6,6 +6,9 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.View.Game
 {
+    /// <summary>
+    /// Co-ordinates start at the top left at 0,0
+    /// </summary>
     public class PlayerDrawer : IPlayerDrawer
     {
         public void Draw(Player player, Ground ground, Canvas canvas)

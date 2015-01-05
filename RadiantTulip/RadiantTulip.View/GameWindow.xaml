@@ -14,7 +14,7 @@
         <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
             <Button Name="Update" Content="Update">
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:EventTrigger EventName="Click">
                         <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>

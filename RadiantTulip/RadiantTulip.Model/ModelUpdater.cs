@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RadiantTulip.Model
 {
@@ -11,6 +8,7 @@ namespace RadiantTulip.Model
         private Game _game;
         private DateTime _time;
         private TimeSpan _increment;
+        private DateTime _max;
         private bool _incrementTime;
 
         public ModelUpdater(Game game)
@@ -22,8 +20,10 @@ namespace RadiantTulip.Model
 
             _game = game;
             _time = game.Teams.First().Players.First().Positions.Min(p => p.TimeStamp);
+            _max = game.Teams.First().Players.First().Positions.Max(p => p.TimeStamp);
 
             _increment = game.Teams.First().Players.First().Positions.Where(p => p.TimeStamp != _time).Min(p => p.TimeStamp) - _time;
+            
 
             _incrementTime = false;
             Update();
@@ -31,6 +31,9 @@ namespace RadiantTulip.Model
 
         public void Update()
         {
+            if (_time == _max)
+                return;
+
             if (!_incrementTime)
                 _incrementTime = true;
             else
@@ -38,7 +41,7 @@ namespace RadiantTulip.Model
 
             foreach (var t in _game.Teams)
                 foreach (var player in t.Players)
-                    player.CurrentPosition = player.Positions.First(p => p.TimeStamp == _time);
+                   player.CurrentPosition = player.Positions.First(p => p.TimeStamp == _time);
         }
 
         public Game Game
@@ -65,6 +68,14 @@ namespace RadiantTulip.Model
                 }                    
                 else
                     throw new ArgumentException("Time out of range");
+            }
+        }
+
+        public DateTime MaxTime
+        {
+            get
+            {
+                return _max;
             }
         }
     }
