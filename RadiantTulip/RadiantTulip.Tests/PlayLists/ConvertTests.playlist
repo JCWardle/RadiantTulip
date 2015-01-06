@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="RadiantTulip.Tests.Model.GPSConverterTests.Convert_Top_Left_Quadrant" /><Add Test="RadiantTulip.Tests.Model.GPSConverterTests.Convert_Top_Right_Quadrant" /><Add Test="RadiantTulip.Tests.Model.GPSConverterTests.Convert_Bottom_Right_Quadrant" /><Add Test="RadiantTulip.Tests.Model.GPSConverterTests.Convert_Bottom_Left_Quadrant" /></Playlist>

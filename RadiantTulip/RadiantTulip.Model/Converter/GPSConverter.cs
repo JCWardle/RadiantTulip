@@ -7,23 +7,22 @@ namespace RadiantTulip.Model.Converter
         public Position Convert(Position position, Ground ground)
         {
             var groundCenter = new GeoCoordinate(ground.CentreLatitude, ground.CentreLongitude);
-            var positionX = new GeoCoordinate(position.X, ground.CentreLongitude);
-            var positionY = new GeoCoordinate(ground.CentreLatitude, position.Y);
+            var positionX = new GeoCoordinate(ground.CentreLatitude, position.X);
+            var positionY = new GeoCoordinate(position.Y, ground.CentreLongitude);
 
             //GetDistanceTo returns the value in meters, centimeters are required
             var xDistance = groundCenter.GetDistanceTo(positionX) * 100;
             var yDistance = groundCenter.GetDistanceTo(positionY) * 100;
 
-            //If the player is on the right hand side of the ground place the co-ordinates over there
-            if (position.X < ground.CentreLatitude)
-                xDistance += ground.Width / 2d;
+            if (position.X < ground.CentreLongitude)
+                xDistance = ground.Width / 2d - xDistance;
             else
-                xDistance = (ground.Width / 2d) - xDistance;
+                xDistance = (ground.Width / 2d) + xDistance;
 
-            if (position.Y > ground.CentreLongitude)
-                yDistance += ground.Height / 2d;
+            if (position.Y > ground.CentreLatitude)
+                yDistance = ground.Height / 2d - yDistance;
             else
-                yDistance = (ground.Height / 2d) - yDistance;
+                yDistance = (ground.Height / 2d) + yDistance;
 
             return new Position
             {

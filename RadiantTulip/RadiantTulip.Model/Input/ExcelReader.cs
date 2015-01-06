@@ -45,8 +45,8 @@ namespace RadiantTulip.Model.Input
                     result.Positions.Add(new Position
                         {
                             TimeStamp = timeStamp,
-                            X = row.Cell(3).GetDouble(),
-                            Y = row.Cell(4).GetDouble()
+                            Y = row.Cell(3).GetDouble(),
+                            X = row.Cell(4).GetDouble()
                         });
                     timeStamp = timeStamp.Add(new TimeSpan(0, 0, 0, 0, 10));
                 }
