@@ -2,9 +2,6 @@
 using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RadiantTulip.Tests.Model
 {
@@ -313,7 +310,7 @@ namespace RadiantTulip.Tests.Model
             var game = new Game();
             game.Teams = new List<Team>();
 
-            var updater = new ModelUpdater(game);
+            new ModelUpdater(game);
         }
 
         [Test]
@@ -322,7 +319,7 @@ namespace RadiantTulip.Tests.Model
         {
             var game = new Game();
 
-            var updater = new ModelUpdater(game);
+            new ModelUpdater(game);
         }
 
         [Test]
@@ -333,7 +330,7 @@ namespace RadiantTulip.Tests.Model
             game.Teams = new List<Team>();
             game.Teams.Add(new Team());
 
-            var updater = new ModelUpdater(game);
+            new ModelUpdater(game);
         }
 
         [Test]
@@ -347,7 +344,7 @@ namespace RadiantTulip.Tests.Model
                 Players = new List<Player>()
             });
 
-            var updater = new ModelUpdater(game);
+            new ModelUpdater(game);
         }
 
         [Test]
@@ -427,6 +424,61 @@ namespace RadiantTulip.Tests.Model
             updater.Time = new DateTime(2, 1, 1, 0, 0, 0, 10);
 
             Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 10), updater.Time);
+        }
+
+        [Test]
+        public void Update_At_End()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
+                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+
+            var updater = new ModelUpdater(game);
+            updater.Update();
+            updater.Update();
+            updater.Update();
+
+            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 20), updater.Time);
+        }
+
+        [Test]
+        public void Max_Returns_Highest_Position_Time()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
+                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+
+            var updater = new ModelUpdater(game);
+
+            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 20), updater.MaxTime);
         }
     }
 }
