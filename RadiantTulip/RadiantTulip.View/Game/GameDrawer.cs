@@ -27,6 +27,7 @@ namespace RadiantTulip.View.Game
 
         public void DrawGame(Canvas canvas, Table table, GameModel game)
         {
+            canvas.Children.Clear();
             table.RowGroups[0].Rows.Clear();
             _groundDrawer.Draw(canvas, game.Ground);
 
