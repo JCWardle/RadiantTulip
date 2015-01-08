@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -8,5 +9,7 @@ namespace RadiantTulip.View.ViewModels
         ICommand StopCommand { get; }
         ICommand PlayCommand { get; }
         Model.Game Game { get; set; }
+        TimeSpan RunTime { get; }
+        TimeSpan CurrentTime { get; set; }
     }
 }

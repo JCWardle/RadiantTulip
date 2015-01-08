@@ -5,7 +5,6 @@ using RadiantTulip.Model;
 using System.IO;
 using System.Windows.Input;
 using Microsoft.Practices.Unity;
-using System.Threading;
 using System.Windows.Threading;
 
 namespace RadiantTulip.View.ViewModels
@@ -18,8 +17,9 @@ namespace RadiantTulip.View.ViewModels
         private DelegateCommand _update;
         private DelegateCommand _play;
         private DelegateCommand _stop;
-        private Thread _runner;
-        private DispatcherTimer _timer;
+        private readonly DispatcherTimer _timer;
+        private TimeSpan _runTime;
+        private DateTime _minTime;
 
         public GameViewModel() {}
 
@@ -57,6 +57,7 @@ namespace RadiantTulip.View.ViewModels
         private void UpdateGame(object o, EventArgs args)
         {
             _gameUpdater.Update();
+            OnPropertyChanged("CurrentTime");
             OnPropertyChanged("Game");
         }
          
@@ -66,12 +67,14 @@ namespace RadiantTulip.View.ViewModels
                 Game = creator.CreateGame(stream);
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
-            Update();
 
             _timer = new DispatcherTimer();
             _timer.Tick += UpdateGame;
             _timer.Interval = _gameUpdater.Increment;
             _timer.Start();
+
+            _minTime = _gameUpdater.Time;
+            _runTime = _gameUpdater.MaxTime - _gameUpdater.Time;
         }
 
         public Model.Game Game
@@ -84,6 +87,34 @@ namespace RadiantTulip.View.ViewModels
             set
             {
                 _game = value;
+            }
+        }
+
+        public TimeSpan RunTime 
+        {
+            get
+            {
+                return _runTime;
+            }
+        }
+
+        public TimeSpan CurrentTime
+        {
+            get
+            {
+                return _gameUpdater.Time - _minTime;
+            }
+
+            set
+            {
+                var restart = _timer.IsEnabled;
+                if(restart)
+                    _timer.Stop();
+
+                _gameUpdater.Time = _minTime + value;
+
+                if(restart)
+                    _timer.Start();
             }
         }
     }
