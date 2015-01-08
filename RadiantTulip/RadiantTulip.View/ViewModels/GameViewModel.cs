@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Input;
 using Microsoft.Practices.Unity;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -18,7 +19,7 @@ namespace RadiantTulip.View.ViewModels
         private DelegateCommand _play;
         private DelegateCommand _stop;
         private Thread _runner;
-        private object _lock = new object();
+        private DispatcherTimer _timer;
 
         public GameViewModel() {}
 
@@ -45,37 +46,18 @@ namespace RadiantTulip.View.ViewModels
 
         private void Play()
         {
-            _runner = new Thread(GameRunner);
-            _runner.Start();
+            _timer.Start();
         }
 
         private void Stop()
         {
-            lock (_lock)
-            {
-                _runner.Interrupt();
-            }
+            _timer.Stop();
         }
 
-        private void GameRunner()
+        private void UpdateGame(object o, EventArgs args)
         {
-            try
-            {
-                var previous = DateTime.MaxValue;
-                while (previous != _gameUpdater.Time)
-                {
-                    lock (_lock)
-                    {
-                        previous = _gameUpdater.Time;
-                        _gameUpdater.Update();
-                        OnPropertyChanged("Game");
-                    }
-                }
-            }
-            catch (ThreadInterruptedException e)
-            {
-                return;
-            }
+            _gameUpdater.Update();
+            OnPropertyChanged("Game");
         }
          
         public GameViewModel(IUnityContainer container, IGameCreator creator)
@@ -85,6 +67,11 @@ namespace RadiantTulip.View.ViewModels
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
             Update();
+
+            _timer = new DispatcherTimer();
+            _timer.Tick += UpdateGame;
+            _timer.Interval = _gameUpdater.Increment;
+            _timer.Start();
         }
 
         public Model.Game Game

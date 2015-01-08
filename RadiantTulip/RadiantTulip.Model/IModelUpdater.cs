@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RadiantTulip.Model
 {
@@ -11,5 +7,6 @@ namespace RadiantTulip.Model
         void Update();
         Game Game { get; }
         DateTime Time { set; get; }
+        TimeSpan Increment { get; }
     }
 }

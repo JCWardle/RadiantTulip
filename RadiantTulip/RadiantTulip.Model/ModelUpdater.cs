@@ -71,6 +71,14 @@ namespace RadiantTulip.Model
             }
         }
 
+        public TimeSpan Increment
+        {
+            get
+            {
+                return _increment;
+            }
+        }
+
         public DateTime MaxTime
         {
             get

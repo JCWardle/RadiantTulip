@@ -480,5 +480,57 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 20), updater.MaxTime);
         }
+
+        [Test]
+        public void Increment_Returns_Small_Increment()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
+                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+
+            var updater = new ModelUpdater(game);
+
+            Assert.AreEqual(10, updater.Increment.Milliseconds);
+        }
+
+        [Test]
+        public void Increment_Returns_Big_Increment()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 30, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 1, 0, 0) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+
+            var updater = new ModelUpdater(game);
+
+            Assert.AreEqual(30, updater.Increment.Seconds);
+        }
     }
 }
