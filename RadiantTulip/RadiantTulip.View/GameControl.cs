@@ -28,7 +28,6 @@ namespace RadiantTulip.View
 
         private Canvas _canvas;
         private Table _table;
-        private Model.Game _game;
         private IGameDrawer _drawer;
         
 

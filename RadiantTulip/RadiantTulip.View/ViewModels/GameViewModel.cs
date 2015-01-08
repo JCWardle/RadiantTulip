@@ -13,13 +13,11 @@ namespace RadiantTulip.View.ViewModels
     {
         private Model.Game _game;
         private readonly IModelUpdater _gameUpdater;
-        private readonly IUnityContainer _container;
         private DelegateCommand _update;
         private DelegateCommand _play;
         private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
         private TimeSpan _runTime;
-        private TimeSpan _minTime;
 
         public GameViewModel() {}
 
@@ -73,7 +71,6 @@ namespace RadiantTulip.View.ViewModels
             _timer.Interval = _gameUpdater.Increment;
             _timer.Start();
 
-            _minTime = _gameUpdater.Time;
             _runTime = _gameUpdater.MaxTime - _gameUpdater.Time;
         }
 
