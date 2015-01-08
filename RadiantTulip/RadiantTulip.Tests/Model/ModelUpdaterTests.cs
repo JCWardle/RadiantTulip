@@ -16,8 +16,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -42,8 +42,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -57,7 +57,7 @@ namespace RadiantTulip.Tests.Model
 
             var updater = new ModelUpdater(game);
 
-            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 0), updater.Time);
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
         }
 
         [Test]
@@ -68,8 +68,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -96,8 +96,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -125,11 +125,11 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
-                    new Position { X = 3, Y = 3, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) },
-                    new Position { X = 4, Y = 4, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 30) },
-                    new Position { X = 5, Y = 5, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 40) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
+                    new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) },
+                    new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 30) },
+                    new Position { X = 5, Y = 5, TimeStamp = new TimeSpan(0, 0, 0, 0, 40) }
                 }
             };
             var team = new Team()
@@ -160,8 +160,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -175,10 +175,10 @@ namespace RadiantTulip.Tests.Model
 
             var updater = new ModelUpdater(game);
             updater.Update();
-            updater.Time = new DateTime(2, 1, 1, 0, 0, 0, 0);
+            updater.Time = new TimeSpan(0, 0, 0, 0, 0);
             updater.Update();
 
-            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 0), updater.Time);
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
             var currentPosition = updater.Game.Teams[0].Players[0].CurrentPosition;
             Assert.AreEqual(1, currentPosition.X);
             Assert.AreEqual(1, currentPosition.Y);
@@ -192,8 +192,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -208,7 +208,7 @@ namespace RadiantTulip.Tests.Model
             var updater = new ModelUpdater(game);
             updater.Update();
 
-            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 10), updater.Time);
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 10), updater.Time);
         }
 
         [Test]
@@ -219,16 +219,16 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var player2 = new Player
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 3, Y = 3, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 4, Y = 4, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -261,16 +261,16 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var player2 = new Player
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 3, Y = 3, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 4, Y = 4, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team1 = new Team()
@@ -356,8 +356,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -370,7 +370,7 @@ namespace RadiantTulip.Tests.Model
             game.Teams.Add(team);
 
             var updater = new ModelUpdater(game);
-            updater.Time = new DateTime(2, 1, 1, 0, 0, 0, 20);
+            updater.Time = new TimeSpan(0, 0, 0, 0, 20);
         }
 
         [Test]
@@ -382,8 +382,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -396,7 +396,7 @@ namespace RadiantTulip.Tests.Model
             game.Teams.Add(team);
 
             var updater = new ModelUpdater(game);
-            updater.Time = new DateTime(2, 1, 1, 0, 0, 0, 0);
+            updater.Time = new TimeSpan(0, 0, 0, 0, 20);
         }
 
         [Test]
@@ -407,8 +407,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -421,9 +421,9 @@ namespace RadiantTulip.Tests.Model
             game.Teams.Add(team);
 
             var updater = new ModelUpdater(game);
-            updater.Time = new DateTime(2, 1, 1, 0, 0, 0, 10);
+            updater.Time = new TimeSpan(0, 0, 0, 0, 10);
 
-            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 10), updater.Time);
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 10), updater.Time);
         }
 
         [Test]
@@ -434,8 +434,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -452,7 +452,7 @@ namespace RadiantTulip.Tests.Model
             updater.Update();
             updater.Update();
 
-            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 20), updater.Time);
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 10), updater.Time);
         }
 
         [Test]
@@ -463,8 +463,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -478,7 +478,7 @@ namespace RadiantTulip.Tests.Model
 
             var updater = new ModelUpdater(game);
 
-            Assert.AreEqual(new DateTime(2, 1, 1, 0, 0, 0, 20), updater.MaxTime);
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 10), updater.MaxTime);
         }
 
         [Test]
@@ -489,8 +489,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 0, 0, 20) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
                 }
             };
             var team = new Team()
@@ -515,8 +515,8 @@ namespace RadiantTulip.Tests.Model
             {
                 Positions = new List<Position>
                 {
-                    new Position { X = 1, Y = 1, TimeStamp = new DateTime(2, 1, 1, 0, 0, 30, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new DateTime(2, 1, 1, 0, 1, 0, 0) }
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 30, 0) }
                 }
             };
             var team = new Team()

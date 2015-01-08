@@ -8,6 +8,6 @@ namespace RadiantTulip.Model
         public double X { get; set; }
         //Latitude or converted Y co-ordinate
         public double Y { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public TimeSpan TimeStamp { get; set; }
     }
 }

@@ -6,9 +6,9 @@ namespace RadiantTulip.Model
     public class ModelUpdater : IModelUpdater
     {
         private Game _game;
-        private DateTime _time;
+        private TimeSpan _time;
         private TimeSpan _increment;
-        private DateTime _max;
+        private TimeSpan _max;
         private bool _incrementTime;
 
         public ModelUpdater(Game game)
@@ -50,7 +50,7 @@ namespace RadiantTulip.Model
         }
 
 
-        public DateTime Time
+        public TimeSpan Time
         {
             get
             {
@@ -79,7 +79,7 @@ namespace RadiantTulip.Model
             }
         }
 
-        public DateTime MaxTime
+        public TimeSpan MaxTime
         {
             get
             {

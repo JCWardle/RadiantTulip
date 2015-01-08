@@ -19,7 +19,7 @@
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
                 <Label Name="CurrentTime" DockPanel.Dock="Left" Content="{Binding CurrentTime, StringFormat=ss:ff}" Grid.Column="0"/>
-                <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime}" Grid.Column="1" Value="{Binding CurrentTime}"/>
+                <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime.TotalMilliseconds}" Interval="10" Grid.Column="1" Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}"/>
                 <Label Name="TotalTime" DockPanel.Dock="Right" Content="{Binding RunTime, StringFormat=ss:ff}" Grid.Column="2"/>
             </Grid>
 

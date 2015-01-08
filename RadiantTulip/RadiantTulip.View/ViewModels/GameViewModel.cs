@@ -19,7 +19,7 @@ namespace RadiantTulip.View.ViewModels
         private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
         private TimeSpan _runTime;
-        private DateTime _minTime;
+        private TimeSpan _minTime;
 
         public GameViewModel() {}
 
@@ -102,7 +102,7 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return _gameUpdater.Time - _minTime;
+                return _gameUpdater.Time;
             }
 
             set
@@ -111,7 +111,7 @@ namespace RadiantTulip.View.ViewModels
                 if(restart)
                     _timer.Stop();
 
-                _gameUpdater.Time = _minTime + value;
+                _gameUpdater.Time = value;
 
                 if(restart)
                     _timer.Start();

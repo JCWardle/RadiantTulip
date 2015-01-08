@@ -15,7 +15,7 @@ namespace RadiantTulip.Tests.Model
             {
                 X = 115.829664d,
                 Y = -31.944220d,
-                TimeStamp = new DateTime(1, 1, 1)
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
             };
             var ground = new Ground()
             {
@@ -42,7 +42,7 @@ namespace RadiantTulip.Tests.Model
             {
                 Y = -31.944255,
                 X = 115.830572,
-                TimeStamp = new DateTime(1, 1, 1)
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
             };
             var ground = new Ground()
             {
@@ -69,7 +69,7 @@ namespace RadiantTulip.Tests.Model
             {
                 Y = -31.944667,
                 X = 115.830706,
-                TimeStamp = new DateTime(1, 1, 1)
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
             };
             var ground = new Ground()
             {
@@ -96,7 +96,7 @@ namespace RadiantTulip.Tests.Model
             {
                 Y = -31.944745,
                 X = 115.829690,
-                TimeStamp = new DateTime(1, 1, 1)
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
             };
             var ground = new Ground()
             {

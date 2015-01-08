@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RadiantTulip.Model.Input
 {
@@ -35,7 +32,7 @@ namespace RadiantTulip.Model.Input
                 Visible = true,
                 Positions = new List<Position>()
             };
-            var timeStamp = new DateTime(1, 1, 1, 0, 0, 0, 0);
+            var time = new TimeSpan();
 
             var row = sheet.FirstRow();
             while(!row.Cell(1).IsEmpty())
@@ -44,11 +41,11 @@ namespace RadiantTulip.Model.Input
                 {
                     result.Positions.Add(new Position
                         {
-                            TimeStamp = timeStamp,
+                            TimeStamp = time,
                             Y = row.Cell(3).GetDouble(),
                             X = row.Cell(4).GetDouble()
                         });
-                    timeStamp = timeStamp.Add(new TimeSpan(0, 0, 0, 0, 10));
+                    time = time.Add(new TimeSpan(0,0,0,0, 10));
                 }
                 row = row.RowBelow();
             }

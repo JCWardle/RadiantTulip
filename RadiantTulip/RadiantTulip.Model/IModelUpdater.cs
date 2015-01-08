@@ -6,8 +6,8 @@ namespace RadiantTulip.Model
     {
         void Update();
         Game Game { get; }
-        DateTime Time { set; get; }
+        TimeSpan Time { set; get; }
         TimeSpan Increment { get; }
-        DateTime MaxTime { get; }
+        TimeSpan MaxTime { get; }
     }
 }
