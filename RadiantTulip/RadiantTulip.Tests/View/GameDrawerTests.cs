@@ -5,6 +5,7 @@ using RadiantTulip.View.Game;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Shapes;
 
 namespace RadiantTulip.Tests.View
 {
@@ -445,6 +446,30 @@ namespace RadiantTulip.Tests.View
             drawer.DrawGame(canvas, table, game);
 
             visualArtifact.Verify(v => v.Draw(canvas, It.IsAny<Player>()), Times.Once);
+        }
+
+        [Test]
+        public void Clears_View_Before_New_Frame()
+        {
+            var playerDrawer = new Mock<IPlayerDrawer>();
+            var groundDrawer = new Mock<IGroundDrawer>();
+            var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
+            var canvas = new Canvas();
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            game.Teams.Add(new Team
+            {
+                Players = new List<Player>()
+                {
+                    new Player { Visible =  true }
+                }
+            });
+
+            canvas.Children.Add(new Ellipse());
+            drawer.DrawGame(canvas, table, game);
+
+            Assert.AreEqual(0, canvas.Children.Count);
         }
     }
 }

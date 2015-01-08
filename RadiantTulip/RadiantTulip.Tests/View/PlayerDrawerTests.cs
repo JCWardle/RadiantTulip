@@ -6,6 +6,7 @@ using RadiantTulip.Model;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using RadiantTulip.View.Game;
+using System.Windows.Media;
 
 namespace RadiantTulip.Tests.View
 {
