@@ -15,7 +15,12 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.Column="0"></TabControl>
+        
+        <TabControl Grid.Column="0">
+            <TabItem Header="Team 1" Content="{Binding Game.Teams[0]}"/>
+            <TabItem Header="Team 2"/>
+        </TabControl>
+        
         <DockPanel Grid.Column="1">
             <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
                 <Grid>
@@ -76,7 +81,7 @@
                 </Button>
             </StackPanel>
             <Border DockPanel.Dock="Top">
-                <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
+                <g:GameControl Game="{Binding Game, Mode = OneWay}" x:Name="GameControl"></g:GameControl>
             </Border>
         </DockPanel>
     </Grid>

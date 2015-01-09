@@ -62,7 +62,7 @@ namespace RadiantTulip.View.ViewModels
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
             using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallRaw.xlsx", FileMode.Open))
-                Game = creator.CreateGame(stream);
+                _game = creator.CreateGame(stream);
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
 
@@ -79,11 +79,6 @@ namespace RadiantTulip.View.ViewModels
             get
             {
                 return _game;
-            }
-            
-            set
-            {
-                _game = value;
             }
         }
 
