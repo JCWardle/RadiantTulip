@@ -30,7 +30,8 @@ namespace RadiantTulip.Model.Input
             var result = new Player
             {
                 Visible = true,
-                Positions = new List<Position>()
+                Positions = new List<Position>(),
+                Name = sheet.Name
             };
             var time = new TimeSpan();
 

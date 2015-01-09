@@ -4,73 +4,80 @@
         xmlns:g="clr-namespace:RadiantTulip.View"
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="800">
     
     <Window.DataContext>
         <VM:GameViewModel/>
     </Window.DataContext>
     
-    <DockPanel>
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="60"/>
-                </Grid.ColumnDefinitions>
-                <Label Name="CurrentTime" Grid.Column="0">
-                    <Label.Content>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
-                                    <Binding Path="CurrentTime.Minutes"/>
-                                    <Binding Path="CurrentTime.Seconds" />
-                                    <Binding Path="CurrentTime.Milliseconds"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Label.Content>
-                </Label>
-                <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime.TotalMilliseconds}" Interval="10" Grid.Column="1" Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}"/>
-                <Label Name="RunTime" Grid.Column="2">
-                    <Label.Content>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
-                                    <Binding Path="RunTime.Minutes"/>
-                                    <Binding Path="RunTime.Seconds" />
-                                    <Binding Path="RunTime.Milliseconds"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Label.Content>
-                </Label>
-            </Grid>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Column="0"></TabControl>
+        <DockPanel Grid.Column="1">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Name="CurrentTime" Grid.Column="0">
+                        <Label.Content>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+                                        <Binding Path="CurrentTime.Minutes"/>
+                                        <Binding Path="CurrentTime.Seconds" />
+                                        <Binding Path="CurrentTime.Milliseconds"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </Label.Content>
+                    </Label>
+                    <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime.TotalMilliseconds}" Interval="10" Grid.Column="1" Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}"/>
+                    <Label Name="RunTime" Grid.Column="2">
+                        <Label.Content>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+                                        <Binding Path="RunTime.Minutes"/>
+                                        <Binding Path="RunTime.Seconds" />
+                                        <Binding Path="RunTime.Milliseconds"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </Label.Content>
+                    </Label>
+                </Grid>
 
-            <Button Name="Update" Content="Update">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-            <Button Name="Play" Content="Play">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding PlayCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-            <Button Name="Stop" Content="Stop">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding StopCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-        </StackPanel>
-        <Border DockPanel.Dock="Top">
-            <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
-        </Border>
-    </DockPanel>
+                <Button Name="Update" Content="Update">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Name="Play" Content="Play">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding PlayCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Name="Stop" Content="Stop">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding StopCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+            <Border DockPanel.Dock="Top">
+                <g:GameControl Game="{Binding Game}" x:Name="GameControl"></g:GameControl>
+            </Border>
+        </DockPanel>
+    </Grid>
 </Window>
