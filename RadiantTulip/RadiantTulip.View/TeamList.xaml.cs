@@ -15,7 +15,7 @@ namespace RadiantTulip.View
         public readonly static DependencyProperty PlayersProperty = DependencyProperty.Register("Players",
             typeof(List<Player>),
             typeof(TeamList),
-            null);
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         [BindableAttribute(true)]
         public List<Player> Players
@@ -31,7 +31,7 @@ namespace RadiantTulip.View
             }
         }
 
-        public readonly static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
+        public static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
             typeof(List<Player>),
             typeof(TeamList),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectPlayer));
@@ -58,7 +58,7 @@ namespace RadiantTulip.View
 
         private static void SelectPlayer(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 }

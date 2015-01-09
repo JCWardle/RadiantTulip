@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RadiantTulip.Model;
+using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace RadiantTulip.View.ViewModels
@@ -11,5 +13,6 @@ namespace RadiantTulip.View.ViewModels
         Model.Game Game { get; }
         TimeSpan RunTime { get; }
         TimeSpan CurrentTime { get; set; }
+        List<Player> SelectedPlayers { get; set; }
     }
 }

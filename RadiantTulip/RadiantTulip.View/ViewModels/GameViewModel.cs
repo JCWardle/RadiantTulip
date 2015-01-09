@@ -18,8 +18,8 @@ namespace RadiantTulip.View.ViewModels
         private DelegateCommand _play;
         private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
-        private TimeSpan _runTime;
-        private List<Player> _players = new List<Player>(); 
+        private readonly TimeSpan _runTime;
+        private List<Player> _selectedPlayers = new List<Player>(); 
 
         public GameViewModel() {}
 
@@ -117,7 +117,12 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return _players;
+                return _selectedPlayers;
+            }
+
+            set
+            {
+                _selectedPlayers = value;
             }
         }
     }

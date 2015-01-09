@@ -7,14 +7,34 @@
              d:DesignHeight="300" d:DesignWidth="300" >
     
     <StackPanel Orientation="Vertical">
-        <Label Content="Team 1"/>
-        <ItemsControl ItemsSource="{Binding Players}">
+        <ListBox ItemsSource="{Binding Players}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <Label DockPanel.Dock="Top" Content="{Binding Name}"/>
+                            <Label DockPanel.Dock="Bottom" Content="{Binding CurrentPosition.X}" />
+                        </StackPanel>
+                        <Label Margin="0, 7, 0, 0" Grid.Column="1" Content="|>" FontSize="15pt"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!--<ItemsControl ItemsSource="{Binding Players}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ListBox></ListBox>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        
+        </ItemsControl>-->
     </StackPanel>
 </UserControl>
