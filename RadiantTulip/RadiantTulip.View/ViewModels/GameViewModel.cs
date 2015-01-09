@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Input;
 using Microsoft.Practices.Unity;
 using System.Windows.Threading;
+using System.Collections.Generic;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -18,6 +19,7 @@ namespace RadiantTulip.View.ViewModels
         private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
         private TimeSpan _runTime;
+        private List<Player> _players = new List<Player>(); 
 
         public GameViewModel() {}
 
@@ -57,6 +59,7 @@ namespace RadiantTulip.View.ViewModels
             _gameUpdater.Update();
             OnPropertyChanged("CurrentTime");
             OnPropertyChanged("Game");
+            OnPropertyChanged("Players");
         }
          
         public GameViewModel(IUnityContainer container, IGameCreator creator)
@@ -107,6 +110,14 @@ namespace RadiantTulip.View.ViewModels
 
                 if(restart)
                     _timer.Start();
+            }
+        }
+
+        public List<Player> SelectedPlayers
+        {
+            get
+            {
+                return _players;
             }
         }
     }

@@ -17,7 +17,9 @@
         </Grid.ColumnDefinitions>
         
         <TabControl Grid.Column="0">
-            <TabItem Header="Team 1" Content="{Binding Game.Teams[0]}"/>
+            <TabItem Header="Team 1">
+                <g:TeamList Players="{Binding Game.Teams[0].Players}"/>
+            </TabItem>
             <TabItem Header="Team 2"/>
         </TabControl>
         
