@@ -45,7 +45,7 @@ namespace RadiantTulip.Model.Input
                             Y = row.Cell(3).GetDouble(),
                             X = row.Cell(4).GetDouble()
                         });
-                    time = time.Add(new TimeSpan(0,0,0,0, 10));
+                    time = time.Add(new TimeSpan(0,0,0,0, 100));
                 }
                 row = row.RowBelow();
             }

@@ -18,9 +18,33 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="CurrentTime" DockPanel.Dock="Left" Content="{Binding CurrentTime, StringFormat=ss:ff}" Grid.Column="0"/>
+                <Label Name="CurrentTime" Grid.Column="0">
+                    <Label.Content>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+                                    <Binding Path="CurrentTime.Minutes"/>
+                                    <Binding Path="CurrentTime.Seconds" />
+                                    <Binding Path="CurrentTime.Milliseconds"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Label.Content>
+                </Label>
                 <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime.TotalMilliseconds}" Interval="10" Grid.Column="1" Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}"/>
-                <Label Name="TotalTime" DockPanel.Dock="Right" Content="{Binding RunTime, StringFormat=ss:ff}" Grid.Column="2"/>
+                <Label Name="RunTime" Grid.Column="2">
+                    <Label.Content>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+                                    <Binding Path="RunTime.Minutes"/>
+                                    <Binding Path="RunTime.Seconds" />
+                                    <Binding Path="RunTime.Milliseconds"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Label.Content>
+                </Label>
             </Grid>
 
             <Button Name="Update" Content="Update">
