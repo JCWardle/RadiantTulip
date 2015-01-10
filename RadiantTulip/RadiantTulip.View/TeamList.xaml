@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300" >
     
     <StackPanel Orientation="Vertical">
-        <ListBox ItemsSource="{Binding Players}">
+        <ListBox ItemsSource="{Binding Players}" SelectionMode="Multiple">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

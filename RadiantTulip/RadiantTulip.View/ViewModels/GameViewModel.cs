@@ -23,11 +23,6 @@ namespace RadiantTulip.View.ViewModels
 
         public GameViewModel() {}
 
-        public ICommand UpdateCommand
-        {
-            get { return _update ?? (_update = new DelegateCommand(Update)); }
-        }
-
         public ICommand PlayCommand
         {
             get { return _play ?? (_play = new DelegateCommand(Play)); }
@@ -36,12 +31,6 @@ namespace RadiantTulip.View.ViewModels
         public ICommand StopCommand
         {
             get { return _stop ?? (_stop = new DelegateCommand(Stop)); }
-        }
-
-        private void Update()
-        {
-            _gameUpdater.Update();
-            OnPropertyChanged("Game");
         }
 
         private void Play()
@@ -64,7 +53,7 @@ namespace RadiantTulip.View.ViewModels
          
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
-            using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallRaw.xlsx", FileMode.Open))
+            using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\Raw.xlsx", FileMode.Open))
                 _game = creator.CreateGame(stream);
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));

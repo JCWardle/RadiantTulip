@@ -68,17 +68,74 @@ namespace RadiantTulip.Tests.View
         }
 
         [Test]
-        public void Player_Out_Of_Bounds()
+        public void Player_Out_Of_Bounds_Left()
         {
             var player = new Player
             {
                 CurrentPosition = new Position
                 {
                     X = 500,
-                    Y = 500
+                    Y = 450
                 }
             };
-            var ground = new Ground { Height = 400, Width = 400 };
+            var ground = new Ground { Height = 500, Width = 400 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+            Assert.AreEqual(0, canvas.Children.Count);
+        }
+
+        [Test]
+        public void Player_Out_Of_Bounds_Right()
+        {
+            var player = new Player
+            {
+                CurrentPosition = new Position
+                {
+                    X = -50,
+                    Y = 450
+                }
+            };
+            var ground = new Ground { Height = 500, Width = 400 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+            Assert.AreEqual(0, canvas.Children.Count);
+        }
+
+        [Test]
+        public void Player_Out_Of_Bounds_Top()
+        {
+            var player = new Player
+            {
+                CurrentPosition = new Position
+                {
+                    X = 100,
+                    Y = -50
+                }
+            };
+            var ground = new Ground { Height = 500, Width = 400 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+            Assert.AreEqual(0, canvas.Children.Count);
+        }
+
+        [Test]
+        public void Player_Out_Of_Bounds_Bottom()
+        {
+            var player = new Player
+            {
+                CurrentPosition = new Position
+                {
+                    X = 100,
+                    Y = 550
+                }
+            };
+            var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
             var drawer = new PlayerDrawer();
 

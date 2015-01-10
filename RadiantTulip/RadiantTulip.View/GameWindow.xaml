@@ -44,7 +44,9 @@
                             </TextBlock>
                         </Label.Content>
                     </Label>
-                    <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime.TotalMilliseconds}" Interval="10" Grid.Column="1" Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}"/>
+                    <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime.TotalMilliseconds}" Interval="100" Grid.Column="1" Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}">
+                        
+                    </Slider>
                     <Label Name="RunTime" Grid.Column="2">
                         <Label.Content>
                             <TextBlock>
@@ -60,13 +62,6 @@
                     </Label>
                 </Grid>
 
-                <Button Name="Update" Content="Update">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
                 <Button Name="Play" Content="Play">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
