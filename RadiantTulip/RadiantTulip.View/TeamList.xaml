@@ -5,24 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" >
-    
-    <StackPanel Orientation="Vertical">
-        <ListBox ItemsSource="{Binding Players}" SelectionMode="Multiple">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="35"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <Label DockPanel.Dock="Top" Content="{Binding Name}"/>
-                            <Label DockPanel.Dock="Bottom" Content="{Binding CurrentPosition.X}" />
-                        </StackPanel>
-                        <Label Margin="0, 7, 0, 0" Grid.Column="1" Content="|>" FontSize="15pt"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </StackPanel>
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical">
+            <ListBox ItemsSource="{Binding Players}" SelectionMode="Multiple">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="35"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.Column="0">
+                                <Label DockPanel.Dock="Top" Content="{Binding Name}"/>
+                                <Label DockPanel.Dock="Bottom" Content="{Binding CurrentPosition.X}" />
+                            </StackPanel>
+                            <Label Margin="0, 7, 0, 0" Grid.Column="1" Content="|>" FontSize="15pt"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
