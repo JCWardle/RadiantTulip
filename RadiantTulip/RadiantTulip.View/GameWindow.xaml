@@ -44,9 +44,15 @@
                             </TextBlock>
                         </Label.Content>
                     </Label>
-                    <Slider Name="PlayHead" Minimum="0" Maximum="{Binding RunTime.TotalMilliseconds}" Interval="100" Grid.Column="1" Value="{Binding CurrentTime.TotalMilliseconds, Mode=OneWay}">
-                        
-                    </Slider>
+                    <g:DraggableThumbSlider x:Name="PlayHead" 
+                        Minimum="0" 
+                        Maximum="{Binding RunTime.TotalMilliseconds}" 
+                        TickFrequency="100"
+                        Grid.Column="1"
+                        IsSnapToTickEnabled="True"
+                        FinalValue="{Binding CurrentTimeMilliseconds, Mode=TwoWay}"
+                        IsMoveToPointEnabled="True"
+                        />
                     <Label Name="RunTime" Grid.Column="2">
                         <Label.Content>
                             <TextBlock>

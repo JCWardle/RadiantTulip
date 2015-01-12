@@ -1,6 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
 using RadiantTulip.View.Game;
 using RadiantTulip.View.ViewModels;
+using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace RadiantTulip.View
 {

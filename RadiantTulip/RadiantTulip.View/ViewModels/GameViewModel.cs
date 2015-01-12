@@ -7,6 +7,10 @@ using System.Windows.Input;
 using Microsoft.Practices.Unity;
 using System.Windows.Threading;
 using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -14,7 +18,6 @@ namespace RadiantTulip.View.ViewModels
     {
         private Model.Game _game;
         private readonly IModelUpdater _gameUpdater;
-        private DelegateCommand _update;
         private DelegateCommand _play;
         private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
@@ -53,7 +56,7 @@ namespace RadiantTulip.View.ViewModels
          
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
-            using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\Raw.xlsx", FileMode.Open))
+            using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallRaw.xlsx", FileMode.Open))
                 _game = creator.CreateGame(stream);
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
@@ -88,16 +91,23 @@ namespace RadiantTulip.View.ViewModels
             {
                 return _gameUpdater.Time;
             }
+        }
+
+        public double CurrentTimeMilliseconds
+        {
+            get
+            {
+                return _gameUpdater.Time.TotalMilliseconds;
+            }
 
             set
             {
                 var restart = _timer.IsEnabled;
-                if(restart)
-                    _timer.Stop();
+                _timer.Stop();
 
-                _gameUpdater.Time = value;
+                _gameUpdater.Time = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
 
-                if(restart)
+                if (restart)
                     _timer.Start();
             }
         }

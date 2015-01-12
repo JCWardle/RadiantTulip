@@ -100,6 +100,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="DraggableThumbSlider.cs" />
     <Compile Include="TeamList.xaml.cs">
       <DependentUpon>TeamList.xaml</DependentUpon>
     </Compile>

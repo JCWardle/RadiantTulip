@@ -1,6 +1,8 @@
 ﻿using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace RadiantTulip.View.ViewModels
@@ -11,7 +13,8 @@ namespace RadiantTulip.View.ViewModels
         ICommand PlayCommand { get; }
         Model.Game Game { get; }
         TimeSpan RunTime { get; }
-        TimeSpan CurrentTime { get; set; }
+        TimeSpan CurrentTime { get; }
+        double CurrentTimeMilliseconds { get; set; }
         List<Player> SelectedPlayers { get; set; }
     }
 }
