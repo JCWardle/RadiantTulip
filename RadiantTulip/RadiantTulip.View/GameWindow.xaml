@@ -4,7 +4,7 @@
         xmlns:g="clr-namespace:RadiantTulip.View"
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="1200">
     
     <Window.DataContext>
         <VM:GameViewModel/>
@@ -14,6 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
         <TabControl Grid.Column="0">
@@ -87,5 +88,9 @@
                 <g:GameControl Game="{Binding Game, Mode = OneWay}" x:Name="GameControl"></g:GameControl>
             </Border>
         </DockPanel>
+        
+        <StackPanel Grid.Column="2">
+            <g:ContextPanel SelectedPlayers="{Binding SelectedPlayers}"/>
+        </StackPanel>
     </Grid>
 </Window>

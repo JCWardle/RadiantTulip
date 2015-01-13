@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
+using Microsoft.Practices.Prism.Commands;
+using System.Windows.Input;
+using System.Collections;
+using System.Linq;
 
 namespace RadiantTulip.View
 {
-    /// <summary>
-    /// Interaction logic for TeamList.xaml
-    /// </summary>
     public partial class TeamList : UserControl
     {
+        private DelegateCommand<object> _select;
+
+        public ICommand SelectCommand
+        {
+            get { return _select ?? (_select = new DelegateCommand<object>(PlayerSelected)); }
+        }
+
         public readonly static DependencyProperty PlayersProperty = DependencyProperty.Register("Players",
             typeof(List<Player>),
             typeof(TeamList),
@@ -34,7 +42,7 @@ namespace RadiantTulip.View
         public static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
             typeof(List<Player>),
             typeof(TeamList),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectPlayer));
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         [BindableAttribute(true)]
         public List<Player> SelectedPlayers
@@ -56,9 +64,13 @@ namespace RadiantTulip.View
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        private static void SelectPlayer(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private void PlayerSelected(object items)
         {
-            return;
+            var players = ((IList)items).Cast<Player>();
+            SelectedPlayers.Clear();
+            var list = new List<Player>();
+            list.AddRange(players);
+            SelectedPlayers = list;
         }
     }
 }
