@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using RadiantTulip.Model;
 using RadiantTulip.View.Game;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,25 @@ namespace RadiantTulip.View
             }
         }
 
+        public static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
+            typeof(List<Player>),
+            typeof(GameDisplay),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        [BindableAttribute(true)]
+        public List<Player> SelectedPlayers
+        {
+            get
+            {
+                return (List<Player>)GetValue(SelectedPlayersProperty);
+            }
+
+            set
+            {
+                SetValue(SelectedPlayersProperty, value);
+            }
+        }
+
         [Dependency]
         public IGameDrawer Drawer
         {
@@ -84,6 +104,30 @@ namespace RadiantTulip.View
             InitializeComponent();
             _table = new Table();
             _table.RowGroups.Add(new TableRowGroup());
+            Canvas.MouseUp += Canvas_MouseUp;
+        }
+
+        private void Canvas_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.GetBindingExpression(GameDisplay.GameProperty).UpdateTarget();
+
+            var element = Canvas.InputHitTest(Mouse.GetPosition(Canvas));
+            if (element is FrameworkElement)
+            {
+                var shape = (FrameworkElement)element;
+
+                foreach (var t in Game.Teams)
+                {
+                    var player = t.Players.FirstOrDefault(p => DistanceBetweenPoints(p.CurrentPosition.X, p.CurrentPosition.Y, shape.Margin.Left, shape.Margin.Top) <= 5);
+                    if (player != null)
+                        SelectedPlayers.Add(player);
+                }
+            }
+        }
+
+        private double DistanceBetweenPoints(double x1, double y1, double x2, double y2)
+        {
+            return (Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
         }
     }
 }

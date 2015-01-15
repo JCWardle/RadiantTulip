@@ -1,6 +1,7 @@
 ﻿using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 
 namespace RadiantTulip.Model.Input
@@ -31,7 +32,9 @@ namespace RadiantTulip.Model.Input
             {
                 Visible = true,
                 Positions = new List<Position>(),
-                Name = sheet.Name
+                Name = sheet.Name,
+                Size = 5,
+                Colour = Color.Red
             };
             var time = new TimeSpan();
 

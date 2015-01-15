@@ -128,7 +128,6 @@ namespace RadiantTulip.View.ViewModels
             set
             {
                 _selectedPlayers = value;
-                OnPropertyChanged("SelectedPlayers");
             }
         }
     }
