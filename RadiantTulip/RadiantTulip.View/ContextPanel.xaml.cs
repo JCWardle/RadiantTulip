@@ -43,7 +43,6 @@ namespace RadiantTulip.View
 
         private static void SelectedPlayersChanged(DependencyObject control, DependencyPropertyChangedEventArgs args)
         {
-
             var context = control as ContextPanel;
             context.SelectedPlayers = (List<Player>)args.NewValue;
             context.Players.GetBindingExpression(TextBox.TextProperty).UpdateTarget();

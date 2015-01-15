@@ -11,7 +11,7 @@ namespace RadiantTulip.View.ViewModels
     {
         ICommand StopCommand { get; }
         ICommand PlayCommand { get; }
-        Model.Game Game { get; }
+        Model.Game Game { get; set; }
         TimeSpan RunTime { get; }
         TimeSpan CurrentTime { get; }
         double CurrentTimeMilliseconds { get; set; }
