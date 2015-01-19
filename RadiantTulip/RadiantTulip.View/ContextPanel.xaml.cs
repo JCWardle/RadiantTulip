@@ -45,27 +45,35 @@ namespace RadiantTulip.View
         {
             var context = control as ContextPanel;
             context.SelectedPlayers = (List<Player>)args.NewValue;
-            context.Players.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            
+            if(context.SelectedPlayers.Count == 1)
+            {
+                var player = context.SelectedPlayers.First();
+                context.MultiPlayer.Visibility = Visibility.Collapsed;
+                context.SinglePlayer.Visibility = Visibility.Visible;
+                context.Tools.Visibility = Visibility.Visible;
+
+                context.PlayerName.Content = player.Name;
+            }
+            else if (context.SelectedPlayers.Count > 1)
+            {
+                context.MultiPlayer.Visibility = Visibility.Visible;
+                context.SinglePlayer.Visibility = Visibility.Collapsed;
+                context.Tools.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                context.MultiPlayer.Visibility = Visibility.Collapsed;
+                context.SinglePlayer.Visibility = Visibility.Collapsed;
+                context.Tools.Visibility = Visibility.Hidden;
+            }
+
         }
 
         public ContextPanel()
         {
             InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
-        }
-
-        public string PlayerList
-        {
-            get
-            {
-                var builder = new StringBuilder();
-                foreach(var p in SelectedPlayers)
-                {
-                    builder.AppendLine(p.Name);
-                }
-
-                return builder.ToString();
-            }
         }
     }
 }
