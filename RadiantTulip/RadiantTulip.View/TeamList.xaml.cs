@@ -14,6 +14,7 @@ namespace RadiantTulip.View
     public partial class TeamList : UserControl
     {
         private DelegateCommand<object> _select;
+        protected bool _suppressItemSelect = false;
 
         public ICommand SelectCommand
         {
@@ -60,14 +61,15 @@ namespace RadiantTulip.View
 
         private static void SelectedPlayersChanged(DependencyObject control, DependencyPropertyChangedEventArgs args)
         {
-            var context = control as TeamList;
+            var context = control as TeamList;            
             context.SelectedPlayers = (List<Player>)args.NewValue;
-            context.GetBindingExpression(TeamList.SelectedPlayersProperty).UpdateTarget();
 
+            context._suppressItemSelect = true;
             foreach(var p in context.SelectedPlayers)
             {
                 context.PlayersList.SelectedItems.Add(p);
             }
+            context._suppressItemSelect = false;
         }
         
         public TeamList()
@@ -78,6 +80,9 @@ namespace RadiantTulip.View
 
         private void PlayerSelected(object items)
         {
+            if (_suppressItemSelect)
+                return;
+
             var players = ((IList)items).Cast<Player>();
             SelectedPlayers.Clear();
             var list = new List<Player>();

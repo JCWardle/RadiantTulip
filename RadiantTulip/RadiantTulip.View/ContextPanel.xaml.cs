@@ -25,7 +25,7 @@ namespace RadiantTulip.View
         public readonly static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
             typeof(List<Player>),
             typeof(ContextPanel),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.None, SelectedPlayersChanged));
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedPlayersChanged));
 
         [BindableAttribute(true)]
         public List<Player> SelectedPlayers
@@ -43,7 +43,6 @@ namespace RadiantTulip.View
 
         private static void SelectedPlayersChanged(DependencyObject control, DependencyPropertyChangedEventArgs args)
         {
-
             var context = control as ContextPanel;
             context.SelectedPlayers = (List<Player>)args.NewValue;
             context.Players.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
