@@ -42,7 +42,7 @@ namespace RadiantTulip.View
         public static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
             typeof(List<Player>),
             typeof(TeamList),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedPlayersChanged));
 
         [BindableAttribute(true)]
         public List<Player> SelectedPlayers
@@ -55,6 +55,18 @@ namespace RadiantTulip.View
             set
             {
                 SetValue(SelectedPlayersProperty, value);
+            }
+        }
+
+        private static void SelectedPlayersChanged(DependencyObject control, DependencyPropertyChangedEventArgs args)
+        {
+            var context = control as TeamList;
+            context.SelectedPlayers = (List<Player>)args.NewValue;
+            context.GetBindingExpression(TeamList.SelectedPlayersProperty).UpdateTarget();
+
+            foreach(var p in context.SelectedPlayers)
+            {
+                context.PlayersList.SelectedItems.Add(p);
             }
         }
         

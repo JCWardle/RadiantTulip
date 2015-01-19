@@ -25,7 +25,7 @@ namespace RadiantTulip.View
         public readonly static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
             typeof(List<Player>),
             typeof(ContextPanel),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedPlayersChanged));
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.None, SelectedPlayersChanged));
 
         [BindableAttribute(true)]
         public List<Player> SelectedPlayers

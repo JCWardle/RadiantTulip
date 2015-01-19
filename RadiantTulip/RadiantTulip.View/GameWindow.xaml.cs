@@ -15,7 +15,7 @@ namespace RadiantTulip.View
             InitializeComponent();
             _container = container;
             this.DataContext = _container.Resolve<IGameViewModel>();
-            this.GameControl.Drawer = _container.Resolve<IGameDrawer>();
+            this.GameDisplay.Drawer = _container.Resolve<IGameDrawer>();
         }
     }
 }

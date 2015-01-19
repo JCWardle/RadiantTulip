@@ -85,7 +85,7 @@
                 </Button>
             </StackPanel>
             <Border DockPanel.Dock="Top">
-                <g:GameControl Game="{Binding Game, Mode = OneWay}" x:Name="GameControl"></g:GameControl>
+                <g:GameDisplay x:Name="GameDisplay" Game="{Binding Game}" CurrentTime="{Binding CurrentTime}" SelectedPlayers="{Binding SelectedPlayers}"/>
             </Border>
         </DockPanel>
         

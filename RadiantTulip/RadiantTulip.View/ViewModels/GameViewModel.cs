@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.ComponentModel;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -22,6 +23,7 @@ namespace RadiantTulip.View.ViewModels
         private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
         private readonly TimeSpan _runTime;
+        private TimeSpan _currentTime;
         private List<Player> _selectedPlayers = new List<Player>(); 
 
         public GameViewModel() {}
@@ -49,9 +51,8 @@ namespace RadiantTulip.View.ViewModels
         private void UpdateGame(object o, EventArgs args)
         {
             _gameUpdater.Update();
+            CurrentTime = _gameUpdater.Time;
             OnPropertyChanged("CurrentTime");
-            OnPropertyChanged("Game");
-            OnPropertyChanged("Players");
         }
          
         public GameViewModel(IUnityContainer container, IGameCreator creator)
@@ -89,7 +90,12 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return _gameUpdater.Time;
+                return _currentTime;
+            }
+
+            set
+            {
+                _currentTime = value;
             }
         }
 
