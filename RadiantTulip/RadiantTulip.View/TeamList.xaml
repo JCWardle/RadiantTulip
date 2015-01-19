@@ -8,24 +8,27 @@
              d:DesignHeight="300" d:DesignWidth="300" >
     <ScrollViewer>
         <StackPanel Orientation="Vertical">
-            <ListBox ItemsSource="{Binding Players}" SelectionMode="Multiple" Name="Team">
+            <ListBox ItemsSource="{Binding Players}" SelectionMode="Multiple" Name="PlayersList">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectCommand}" CommandParameter="{Binding ElementName=Team, Path=SelectedItems}"/>
+                        <i:InvokeCommandAction Command="{Binding SelectCommand}" CommandParameter="{Binding ElementName=PlayersList, Path=SelectedItems}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="35"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <CheckBox Grid.Column="0"></CheckBox>
+                            <StackPanel Orientation="Vertical" Grid.Column="1">
+                                
                                 <Label DockPanel.Dock="Top" Content="{Binding Name}"/>
                                 <Label DockPanel.Dock="Bottom" Content="{Binding CurrentPosition.X}" />
                             </StackPanel>
-                            <Label Margin="0, 7, 0, 0" Grid.Column="1" Content="|>" FontSize="15pt"/>
+                            <Label Margin="0, 7, 0, 0" Grid.Column="2" Content="|>" FontSize="15pt"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

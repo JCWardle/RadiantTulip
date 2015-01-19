@@ -4,6 +4,7 @@ using RadiantTulip.View.Game;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,22 +113,29 @@ namespace RadiantTulip.View
             this.GetBindingExpression(GameDisplay.GameProperty).UpdateTarget();
 
             var element = Canvas.InputHitTest(Mouse.GetPosition(Canvas));
-            if (element is FrameworkElement)
+
+            if (element is Shape)
             {
                 var shape = (FrameworkElement)element;
+                var x = Game.Ground.Width * shape.Margin.Left / Canvas.ActualWidth;
+                var y = Game.Ground.Height * shape.Margin.Top / Canvas.ActualHeight;
 
                 foreach (var t in Game.Teams)
                 {
-                    var player = t.Players.FirstOrDefault(p => DistanceBetweenPoints(p.CurrentPosition.X, p.CurrentPosition.Y, shape.Margin.Left, shape.Margin.Top) <= 5);
-                    if (player != null)
-                        SelectedPlayers.Add(player);
+                    var player = t.Players.FirstOrDefault(p => Math.Round(p.CurrentPosition.X, 0) == Math.Round(x, 0) && Math.Round(p.CurrentPosition.Y, 0) == Math.Round(y, 0));
+
+                    var list = new List<Player>();
+                    list.Add(player);
+                    if (SelectedPlayers != null)
+                        list.AddRange(SelectedPlayers);
+                    SelectedPlayers = list;
                 }
             }
         }
 
         private double DistanceBetweenPoints(double x1, double y1, double x2, double y2)
         {
-            return (Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+            return Math.Sqrt((Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2)));
         }
     }
 }
