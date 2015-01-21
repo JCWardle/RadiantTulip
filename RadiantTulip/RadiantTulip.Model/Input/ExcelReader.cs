@@ -1,8 +1,8 @@
 ﻿using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
+using System.Windows.Media;
 
 namespace RadiantTulip.Model.Input
 {
@@ -33,9 +33,10 @@ namespace RadiantTulip.Model.Input
                 Visible = true,
                 Positions = new List<Position>(),
                 Name = sheet.Name,
-                Size = 5,
-                Colour = Color.Red
+                Size = Size.Medium,
+                Colour = Color.FromRgb(255, 0, 0)
             };
+
             var time = new TimeSpan();
 
             var row = sheet.FirstRow();

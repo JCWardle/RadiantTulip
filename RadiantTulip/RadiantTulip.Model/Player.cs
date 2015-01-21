@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
+using System.Windows.Media;
 
 namespace RadiantTulip.Model
 {
@@ -11,6 +11,6 @@ namespace RadiantTulip.Model
         public Position CurrentPosition { get; set; }
         public string Name { get; set; }
         public Color Colour { get; set; }
-        public int Size { get; set; }
+        public Size Size { get; set; }
     }
 }

@@ -20,13 +20,15 @@ namespace RadiantTulip.View.Game
 
             var x = position.X / ground.Width * canvas.ActualWidth;
             var y = position.Y / ground.Height * canvas.ActualHeight;
+            x -= (double)player.Size / 2;
+            y -= (double)player.Size / 2;
 
             var circle = new Ellipse
             {
-                Width = 5, 
-                Height = 5, 
+                Width = (int)player.Size, 
+                Height = (int)player.Size, 
                 Margin = new Thickness {Left = x, Top = y},
-                Fill = new SolidColorBrush(Colors.Red)
+                Fill = new SolidColorBrush(player.Colour)
             };
             canvas.Children.Add(circle);
         }

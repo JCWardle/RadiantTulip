@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PlayerSize = RadiantTulip.Model.Player;
 
 namespace RadiantTulip.View
 {
@@ -74,6 +75,7 @@ namespace RadiantTulip.View
         {
             InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+            SizeSelector.ItemsSource = Enum.GetValues(typeof(PlayerSize));
         }
     }
 }
