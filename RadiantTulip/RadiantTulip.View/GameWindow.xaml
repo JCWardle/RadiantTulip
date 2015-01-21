@@ -89,8 +89,8 @@
             </Border>
         </DockPanel>
         
-        <StackPanel Grid.Column="2">
+        <DockPanel Grid.Column="2" VerticalAlignment="Stretch">
             <g:ContextPanel SelectedPlayers="{Binding SelectedPlayers}"/>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

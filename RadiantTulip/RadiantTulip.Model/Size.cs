@@ -9,13 +9,13 @@ namespace RadiantTulip.Model
 {
     public enum Size
     {
-        [Description("Small")]
-        Small = 5,
-        [Description("Medium")]
-        Medium = 10,
-        [Description("Large")]
-        Large = 15,
-        [Description("Extra-Large")]
-        ExtraLarge = 20
+        [Description("S")]
+        Small = 3,
+        [Description("M")]
+        Medium = 5,
+        [Description("L")]
+        Large = 7,
+        [Description("XL")]
+        ExtraLarge = 9
     }
 }

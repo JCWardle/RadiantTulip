@@ -7,13 +7,10 @@
              xmlns:cp="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:m="clr-namespace:RadiantTulip.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Name="SinglePlayer" Visibility="Collapsed">
+             d:DesignHeight="300" d:DesignWidth="300"
+             VerticalAlignment="Stretch">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Name="SinglePlayer" Visibility="Collapsed">
             <Label Name="PlayerName"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Speed:"/>
@@ -24,11 +21,11 @@
                 <Label Content="99km"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="0" Name="MultiPlayer" Visibility="Collapsed">
+        <StackPanel Name="MultiPlayer" Visibility="Collapsed" DockPanel.Dock="Top">
             <Label Content="Group Name:"/>
             <TextBox Name="GroupName"/>
         </StackPanel>
-        <UniformGrid Grid.Row="1" Rows="1" Name="Tools">
+        <UniformGrid DockPanel.Dock="Bottom" Height="30" Rows="1" Name="Tools">
             <ComboBox Name="SizeSelector">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -36,21 +33,20 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
-            <cp:ColorPicker DisplayColorAndName="True">
+            <cp:ColorPicker Name="ColourSelector">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="ColorChanged">
                         <i:InvokeCommandAction Command="{Binding ColorChangedCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </cp:ColorPicker>
-            <Button Content="Shape">
+            <Button Content="Shape" Name="PlayerShape">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:InvokeCommandAction Command="{Binding ShapeCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-        </UniformGrid>
-        
-    </Grid>
+        </UniformGrid>        
+    </DockPanel>
 </UserControl>

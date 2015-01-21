@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PlayerSize = RadiantTulip.Model.Player;
+using PlayerSize = RadiantTulip.Model.Size;
 
 namespace RadiantTulip.View
 {
@@ -23,6 +23,9 @@ namespace RadiantTulip.View
     /// </summary>
     public partial class ContextPanel : UserControl
     {
+        private enum State { None, Multiple, Single };
+        private State _state = State.None;
+
         public readonly static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
             typeof(List<Player>),
             typeof(ContextPanel),
@@ -49,18 +52,11 @@ namespace RadiantTulip.View
             
             if(context.SelectedPlayers.Count == 1)
             {
-                var player = context.SelectedPlayers.First();
-                context.MultiPlayer.Visibility = Visibility.Collapsed;
-                context.SinglePlayer.Visibility = Visibility.Visible;
-                context.Tools.Visibility = Visibility.Visible;
-
-                context.PlayerName.Content = player.Name;
+                context.SinglePlayerContext();
             }
             else if (context.SelectedPlayers.Count > 1)
             {
-                context.MultiPlayer.Visibility = Visibility.Visible;
-                context.SinglePlayer.Visibility = Visibility.Collapsed;
-                context.Tools.Visibility = Visibility.Visible;
+                context.MutliplayerContext();
             }
             else
             {
@@ -69,6 +65,29 @@ namespace RadiantTulip.View
                 context.Tools.Visibility = Visibility.Hidden;
             }
 
+        }
+
+        private void MutliplayerContext()
+        {
+            _state = State.Multiple;
+            MultiPlayer.Visibility = Visibility.Visible;
+            SinglePlayer.Visibility = Visibility.Collapsed;
+            Tools.Visibility = Visibility.Visible;
+
+            SizeSelector.SelectedItem = null;
+        }
+
+        private void SinglePlayerContext()
+        {
+            _state = State.Single;
+            var player = SelectedPlayers.First();
+            MultiPlayer.Visibility = Visibility.Collapsed;
+            SinglePlayer.Visibility = Visibility.Visible;
+            Tools.Visibility = Visibility.Visible;
+
+            PlayerName.Content = player.Name;
+            SizeSelector.SelectedItem = player.Size;
+            ColourSelector.SelectedColor = player.Colour;
         }
 
         public ContextPanel()
