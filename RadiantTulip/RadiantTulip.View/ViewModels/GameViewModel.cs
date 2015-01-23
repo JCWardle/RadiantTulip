@@ -70,9 +70,11 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return string.Format("{0}:{1}", _gameUpdater.Time.TotalMinutes, _gameUpdater.Time.Seconds);
+                return string.Format("{0}:{1}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds);
             }
         }
+
+        public Action UpdateView { get; set; }
 
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
@@ -92,6 +94,9 @@ namespace RadiantTulip.View.ViewModels
         private void UpdateGame(object o, EventArgs args)
         {
             _gameUpdater.Update();
+            OnPropertyChanged("CurrentTime");
+            CommandManager.InvalidateRequerySuggested();
+            UpdateView();
         }
 
         private void Play()

@@ -13,5 +13,6 @@ namespace RadiantTulip.View.ViewModels
         TimeSpan RunTime { get; }
         string CurrentTime { get; }
         List<Player> SelectedPlayers { get; set; }
+        Action UpdateView { get; set; }
     }
 }
