@@ -1,4 +1,5 @@
-﻿using RadiantTulip.Model;
+﻿using Microsoft.Practices.Prism.Commands;
+using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,7 @@ namespace RadiantTulip.View
     {
         private enum State { None, Multiple, Single };
         private State _state = State.None;
+        private DelegateCommand<object> _colourChangedCommand;
 
         public readonly static DependencyProperty SelectedPlayersProperty = DependencyProperty.Register("SelectedPlayers",
             typeof(List<Player>),
@@ -43,6 +45,11 @@ namespace RadiantTulip.View
             {
                 SetValue(SelectedPlayersProperty, value);
             }
+        }
+
+        public ICommand ColorChangedCommand
+        {
+            get { return _colourChangedCommand ?? (_colourChangedCommand = new DelegateCommand<object>(ColourChanged)); }
         }
 
         private static void SelectedPlayersChanged(DependencyObject control, DependencyPropertyChangedEventArgs args)
@@ -85,9 +92,12 @@ namespace RadiantTulip.View
             SinglePlayer.Visibility = Visibility.Visible;
             Tools.Visibility = Visibility.Visible;
 
-            PlayerName.Content = player.Name;
-            SizeSelector.SelectedItem = player.Size;
-            ColourSelector.SelectedColor = player.Colour;
+            if (PlayerName != null && player != null )
+            {
+                PlayerName.Content = player.Name;
+                SizeSelector.SelectedItem = player.Size;
+                ColourSelector.SelectedColor = player.Colour;
+            }
         }
 
         public ContextPanel()
@@ -95,6 +105,20 @@ namespace RadiantTulip.View
             InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
             SizeSelector.ItemsSource = Enum.GetValues(typeof(PlayerSize));
+        }
+
+        private void ColourChanged(object colour)
+        {
+            switch (_state)
+            {
+                case State.Single:
+                    SelectedPlayers.First().Colour = (Color)colour;
+                    break;
+                case State.Multiple:
+                    foreach (var p in SelectedPlayers)
+                        p.Colour = (Color)colour;
+                    break;
+            }
         }
     }
 }

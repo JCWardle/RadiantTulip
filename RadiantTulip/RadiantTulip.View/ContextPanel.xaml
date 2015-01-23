@@ -35,8 +35,8 @@
             </ComboBox>
             <cp:ColorPicker Name="ColourSelector">
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="ColorChanged">
-                        <i:InvokeCommandAction Command="{Binding ColorChangedCommand}"/>
+                    <i:EventTrigger EventName="SelectedColorChanged">
+                        <i:InvokeCommandAction Command="{Binding ColorChangedCommand}" CommandParameter="{Binding ElementName=ColourSelector, Path=SelectedColor}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </cp:ColorPicker>
