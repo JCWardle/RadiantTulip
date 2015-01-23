@@ -23,7 +23,6 @@ namespace RadiantTulip.View.ViewModels
         private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
         private readonly TimeSpan _runTime;
-        private TimeSpan _currentTime;
         private List<Player> _selectedPlayers = new List<Player>(); 
 
         public GameViewModel() {}
@@ -38,23 +37,43 @@ namespace RadiantTulip.View.ViewModels
             get { return _stop ?? (_stop = new DelegateCommand(Stop)); }
         }
 
-        private void Play()
+        public Model.Game Game
         {
-            _timer.Start();
+            get
+            {
+                return _game;
+            }
         }
 
-        private void Stop()
+        public TimeSpan RunTime
         {
-            _timer.Stop();
+            get
+            {
+                return _runTime;
+            }
         }
 
-        private void UpdateGame(object o, EventArgs args)
+        public List<Player> SelectedPlayers
         {
-            _gameUpdater.Update();
-            CurrentTime = _gameUpdater.Time;
-            OnPropertyChanged("CurrentTime");
+            get
+            {
+                return _selectedPlayers;
+            }
+
+            set
+            {
+                _selectedPlayers = value;
+            }
         }
-         
+
+        public string CurrentTime
+        {
+            get
+            {
+                return string.Format("{0}:{1}", _gameUpdater.Time.TotalMinutes, _gameUpdater.Time.Seconds);
+            }
+        }
+
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
             using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallFullTeam.xlsx", FileMode.Open))
@@ -70,66 +89,19 @@ namespace RadiantTulip.View.ViewModels
             _runTime = _gameUpdater.MaxTime - _gameUpdater.Time;
         }
 
-        public Model.Game Game
+        private void UpdateGame(object o, EventArgs args)
         {
-            get
-            {
-                return _game;
-            }
+            _gameUpdater.Update();
         }
 
-        public TimeSpan RunTime 
+        private void Play()
         {
-            get
-            {
-                return _runTime;
-            }
+            _timer.Start();
         }
 
-        public TimeSpan CurrentTime
+        private void Stop()
         {
-            get
-            {
-                return _currentTime;
-            }
-
-            set
-            {
-                _currentTime = value;
-            }
-        }
-
-        public double CurrentTimeMilliseconds
-        {
-            get
-            {
-                return _gameUpdater.Time.TotalMilliseconds;
-            }
-
-            set
-            {
-                var restart = _timer.IsEnabled;
-                _timer.Stop();
-
-                _gameUpdater.Time = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
-
-                if (restart)
-                    _timer.Start();
-            }
-        }
-
-        public List<Player> SelectedPlayers
-        {
-            get
-            {
-                return _selectedPlayers;
-            }
-
-            set
-            {
-                _selectedPlayers = value;
-                OnPropertyChanged("SelectedPlayers");
-            }
+            _timer.Stop();
         }
     }
 }

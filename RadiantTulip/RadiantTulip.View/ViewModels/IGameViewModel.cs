@@ -9,12 +9,9 @@ namespace RadiantTulip.View.ViewModels
 {
     public interface IGameViewModel
     {
-        ICommand StopCommand { get; }
-        ICommand PlayCommand { get; }
         Model.Game Game { get; }
         TimeSpan RunTime { get; }
-        TimeSpan CurrentTime { get; }
-        double CurrentTimeMilliseconds { get; set; }
+        string CurrentTime { get; }
         List<Player> SelectedPlayers { get; set; }
     }
 }
