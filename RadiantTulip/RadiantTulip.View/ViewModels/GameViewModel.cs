@@ -33,6 +33,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _stop;
         private ICommand _playerSelected;
         private ICommand _playerChecked;
+        private ICommand _playerUnchecked;
 
         public GameViewModel() {}
 
@@ -70,6 +71,16 @@ namespace RadiantTulip.View.ViewModels
         public ICommand PlayerSelectedCommand
         {
             get { return _playerSelected ?? (_playerSelected = new DelegateCommand<IList>(PlayerSelected)); }
+        }
+
+        public ICommand PlayerUncheckedCommand
+        {
+            get { return _playerUnchecked ?? (_playerUnchecked = new DelegateCommand<Player>(PlayerUnchecked)); }
+        }
+
+        private void PlayerUnchecked(Player player)
+        {
+            SelectedPlayers.Remove(player);
         }
 
         private void PlayerChecked(Player player)

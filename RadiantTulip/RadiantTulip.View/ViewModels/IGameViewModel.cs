@@ -22,5 +22,6 @@ namespace RadiantTulip.View.ViewModels
         ICommand StopCommand { get; }
         ICommand PlayerSelectedCommand { get; }
         ICommand PlayerCheckedCommand { get; }
+        ICommand PlayerUncheckedCommand { get; }
     }
 }

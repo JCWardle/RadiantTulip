@@ -40,6 +40,10 @@
                                                         <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerCheckedCommand}" 
                                                                                CommandParameter="{Binding}"/>
                                                     </i:EventTrigger>
+                                                    <i:EventTrigger EventName="Unchecked">
+                                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerUncheckedCommand}" 
+                                                                               CommandParameter="{Binding}"/>
+                                                    </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                             </CheckBox>
                                             <Label Content="{Binding Name}"/>
