@@ -12,6 +12,9 @@ using System.Windows.Data;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Collections;
+using System.Linq;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -21,13 +24,15 @@ namespace RadiantTulip.View.ViewModels
         private readonly IModelUpdater _gameUpdater;
         private readonly DispatcherTimer _timer;
         private readonly TimeSpan _runTime;
-        private List<Player> _selectedPlayers = new List<Player>();
+        private ObservableCollection<Player> _selectedPlayers = new ObservableCollection<Player>();
 
         private ICommand _play;
         private ICommand _pause;
         private ICommand _forward;
         private ICommand _rewind;
         private ICommand _stop;
+        private ICommand _playerSelected;
+        private ICommand _playerChecked;
 
         public GameViewModel() {}
 
@@ -55,6 +60,32 @@ namespace RadiantTulip.View.ViewModels
         public ICommand StopCommand
         {
             get { return _stop ?? (_stop = new DelegateCommand(Stop)); }
+        }
+
+        public ICommand PlayerCheckedCommand
+        {
+            get { return _playerChecked ?? (_playerChecked = new DelegateCommand<Player>(PlayerChecked)); }
+        }
+
+        public ICommand PlayerSelectedCommand
+        {
+            get { return _playerSelected ?? (_playerSelected = new DelegateCommand<IList>(PlayerSelected)); }
+        }
+
+        private void PlayerChecked(Player player)
+        {
+            _selectedPlayers.Add(player);
+        }
+
+        private void PlayerSelected(IList players)
+        {
+            var collection = players.Cast<Player>();
+            SelectedPlayers.Clear();
+            
+            foreach(var p in collection)
+            {
+                SelectedPlayers.Add(p);
+            }
         }
 
         private void Stop()
@@ -105,7 +136,7 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
-        public List<Player> SelectedPlayers
+        public ObservableCollection<Player> SelectedPlayers
         {
             get
             {
