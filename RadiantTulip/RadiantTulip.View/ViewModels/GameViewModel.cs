@@ -19,22 +19,74 @@ namespace RadiantTulip.View.ViewModels
     {
         private Model.Game _game;
         private readonly IModelUpdater _gameUpdater;
-        private DelegateCommand _play;
-        private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
         private readonly TimeSpan _runTime;
-        private List<Player> _selectedPlayers = new List<Player>(); 
+        private List<Player> _selectedPlayers = new List<Player>();
+
+        private ICommand _play;
+        private ICommand _pause;
+        private ICommand _forward;
+        private ICommand _rewind;
+        private ICommand _stop;
 
         public GameViewModel() {}
+
 
         public ICommand PlayCommand
         {
             get { return _play ?? (_play = new DelegateCommand(Play)); }
         }
 
+        public ICommand PauseCommand
+        {
+            get { return _pause ?? (_pause = new DelegateCommand(Pause)); }
+        }
+
+        public ICommand ForwardCommand
+        {
+            get { return _forward ?? (_forward = new DelegateCommand(Forward)); }
+        }
+
+        public ICommand RewindCommand
+        {
+            get { return _rewind ?? (_rewind = new DelegateCommand(Rewind)); }
+        }
+
         public ICommand StopCommand
         {
             get { return _stop ?? (_stop = new DelegateCommand(Stop)); }
+        }
+
+        private void Stop()
+        {
+            _timer.Stop();
+            _gameUpdater.Time = new TimeSpan(0, 0, 0, 0, 0);
+            UpdateView();
+        }
+
+        private void Rewind()
+        {
+            var span = new TimeSpan(_gameUpdater.Increment.Ticks * 3);
+            _timer.Interval = span;
+            _timer.Start();
+        }
+
+        private void Forward()
+        {
+            var span = new TimeSpan(_gameUpdater.Increment.Ticks / 3);
+            _timer.Interval = span;
+            _timer.Start();
+        }
+
+        private void Pause()
+        {
+            _timer.Stop();
+        }
+
+        private void Play()
+        {
+            _timer.Interval = _gameUpdater.Increment;
+            _timer.Start();
         }
 
         public Model.Game Game
@@ -97,16 +149,6 @@ namespace RadiantTulip.View.ViewModels
             OnPropertyChanged("CurrentTime");
             CommandManager.InvalidateRequerySuggested();
             UpdateView();
-        }
-
-        private void Play()
-        {
-            _timer.Start();
-        }
-
-        private void Stop()
-        {
-            _timer.Stop();
         }
     }
 }

@@ -14,5 +14,10 @@ namespace RadiantTulip.View.ViewModels
         string CurrentTime { get; }
         List<Player> SelectedPlayers { get; set; }
         Action UpdateView { get; set; }
+        ICommand PlayCommand { get; }
+        ICommand PauseCommand { get; }
+        ICommand ForwardCommand { get; }
+        ICommand RewindCommand { get; }
+        ICommand StopCommand { get; }
     }
 }

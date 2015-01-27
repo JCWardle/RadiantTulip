@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Unity;
 using RadiantTulip.Model;
 using RadiantTulip.View.Game;
 using RadiantTulip.View.ViewModels;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
