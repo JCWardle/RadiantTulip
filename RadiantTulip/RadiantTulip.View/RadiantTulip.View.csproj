@@ -118,9 +118,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="Converters\MultipleSelectConverter.cs" />
     <Compile Include="DraggableThumbSlider.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\IGameViewModel.cs" />
+    <Compile Include="Converters\SingleSelectConverter.cs" />
     <Page Include="GameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

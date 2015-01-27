@@ -106,7 +106,7 @@
         <!-- Context Panel -->
         <DockPanel Grid.Column="2" VerticalAlignment="Stretch">
             <!-- Single Player Selection Context -->
-            <StackPanel DockPanel.Dock="Top" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource singleSelectConverter}}">
                 <Label Name="PlayerName"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Speed:"/>
@@ -119,7 +119,7 @@
             </StackPanel>
             
             <!-- Multiple Player Selection Context -->
-            <StackPanel DockPanel.Dock="Top" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource multipleSelectConverter}}">
                 <Label Content="Group Name:"/>
                 <TextBox Name="GroupName"/>
             </StackPanel>
