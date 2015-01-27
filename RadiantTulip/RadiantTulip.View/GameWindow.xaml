@@ -5,8 +5,7 @@
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cp="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="MainWindow" Height="600" Width="1200"
-        Loaded="GameWindow_Loaded">
+        Title="MainWindow" Height="600" Width="1200">
     
     <Window.DataContext>
         <VM:GameViewModel/>
@@ -20,12 +19,54 @@
         </Grid.ColumnDefinitions>
 
         <!--Player Selection on left-->
-        <TabControl Grid.Column="0" ItemsSource="{Binding Game.Teams}" Name="PlayerTabs">
-            <TabControl.ItemTemplate>
+        <TabControl Grid.Column="0" Name="PlayerTabs">
+            <ItemsControl ItemsSource="{Binding Game.Teams}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollViewer>
+                            <ListBox ItemsSource="{Binding Players}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox/>
+                                            <Label Content="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TabItem Header="Group">
+                <StackPanel>
+                    <Label Content="New Group" FontSize="14"/>
+                    <Label Content="Group Name"/>
+                    <TextBox />
+                    <Button Content="Create Group"/>
+                </StackPanel>
+            </TabItem>
+            <!--<TabControl.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ScrollViewer>
+                        <ListBox ItemsSource="{DynamicResource Players}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox/>
+                                        <Label Content="{DynamicResource Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </DataTemplate>
+            </TabControl.ContentTemplate>-->
         </TabControl>
         
         

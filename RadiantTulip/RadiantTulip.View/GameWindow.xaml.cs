@@ -32,40 +32,6 @@ namespace RadiantTulip.View
             _view.UpdateView = new Action(ReRender);
         }
 
-        private void GameWindow_Loaded(object sender, RoutedEventArgs args)
-        {
-            foreach(var t in PlayerTabs.Items)
-            {
-                var team = (Team)t;
-                var tab = (TabItem)PlayerTabs.ItemContainerGenerator.ContainerFromItem(t);
-                var scrollView = new ScrollViewer();
-                var outterPanel = new StackPanel( ){ Orientation = Orientation.Vertical };
-                var list = new ListBox();
-
-                foreach(var p in team.Players)
-                {
-                    var panel = new StackPanel()
-                    {
-                        Orientation = Orientation.Horizontal
-                    };
-                    panel.Children.Add(new CheckBox()
-                    {
-                        Margin = new Thickness(0, 5, 0, 0)
-                    });
-                    panel.Children.Add(new Label() 
-                    {
-                        Content = p.Name,
-                        FontSize = 14
-                    });
-                    list.Items.Add(panel);
-                }
-
-                scrollView.Content = outterPanel;
-                outterPanel.Children.Add(list);
-                tab.Content = scrollView;
-            }
-        }
-
         protected void ReRender()
         {
             _drawer.DrawGame(Game, _table, _view.Game);
