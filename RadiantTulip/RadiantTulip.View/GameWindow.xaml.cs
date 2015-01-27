@@ -15,7 +15,6 @@ namespace RadiantTulip.View
     public partial class GameWindow
     {
         private readonly IGameDrawer _drawer;
-        private readonly DispatcherTimer _timer;
         private Table _table;
         private IGameViewModel _view;
 
@@ -43,7 +42,20 @@ namespace RadiantTulip.View
 
                 foreach(var p in team.Players)
                 {
-                    list.Items.Add(new Label() { Content = p.Name });
+                    var panel = new StackPanel()
+                    {
+                        Orientation = Orientation.Horizontal
+                    };
+                    panel.Children.Add(new CheckBox()
+                    {
+                        Margin = new Thickness(0, 5, 0, 0)
+                    });
+                    panel.Children.Add(new Label() 
+                    {
+                        Content = p.Name,
+                        FontSize = 14
+                    });
+                    list.Items.Add(panel);
                 }
 
                 scrollView.Content = outterPanel;
@@ -52,14 +64,9 @@ namespace RadiantTulip.View
             }
         }
 
-        protected override void OnRender(DrawingContext dc)
-        {
-            _drawer.DrawGame(Game, _table, _view.Game);
-        }
-
         protected void ReRender()
         {
-            InvalidateVisual();
+            _drawer.DrawGame(Game, _table, _view.Game);
         }
     }
 }
