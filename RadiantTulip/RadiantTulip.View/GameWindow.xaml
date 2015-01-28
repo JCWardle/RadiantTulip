@@ -63,12 +63,16 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <TabItem Header="Groups">
-                <StackPanel>
-                    <Label Content="New Group" FontSize="14"/>
-                    <Label Content="Group Name"/>
-                    <TextBox />
-                    <Button Content="Create Group"/>
-                </StackPanel>
+                <ListBox ItemsSource="{Binding Groups}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Name}"/>
+                                <Label Content="{Binding Players.Count}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </TabItem>
         </TabControl>
         
@@ -133,6 +137,13 @@
             <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource multipleSelectConverter}}">
                 <Label Content="Group Name:"/>
                 <TextBox Name="GroupName"/>
+                <Button Content="Create Group">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding CreateGroupCommand}" CommandParameter="{Binding ElementName=GroupName, Path=Text}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
             </StackPanel>
             <!-- Player Context Controls -->
             <UniformGrid DockPanel.Dock="Bottom" Height="30" Rows="1" Name="Tools">

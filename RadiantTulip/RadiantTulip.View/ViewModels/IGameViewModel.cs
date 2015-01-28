@@ -14,6 +14,7 @@ namespace RadiantTulip.View.ViewModels
         TimeSpan RunTime { get; }
         string CurrentTime { get; }
         ObservableCollection<Player> SelectedPlayers { get; set; }
+        ObservableCollection<Group> Groups { get; }
         Action UpdateView { get; set; }
         ICommand PlayCommand { get; }
         ICommand PauseCommand { get; }
@@ -23,5 +24,7 @@ namespace RadiantTulip.View.ViewModels
         ICommand PlayerSelectedCommand { get; }
         ICommand PlayerCheckedCommand { get; }
         ICommand PlayerUncheckedCommand { get; }
+        ICommand ColourChangedCommand { get; }
+        ICommand CreateGroupCommand { get; }
     }
 }

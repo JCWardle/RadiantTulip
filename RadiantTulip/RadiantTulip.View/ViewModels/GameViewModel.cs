@@ -26,6 +26,7 @@ namespace RadiantTulip.View.ViewModels
         private readonly DispatcherTimer _timer;
         private readonly TimeSpan _runTime;
         private ObservableCollection<Player> _selectedPlayers = new ObservableCollection<Player>();
+        private ObservableCollection<Group> _groups = new ObservableCollection<Group>();
 
         private ICommand _play;
         private ICommand _pause;
@@ -36,6 +37,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _playerChecked;
         private ICommand _playerUnchecked;
         private ICommand _colourChanged;
+        private ICommand _createGroup;
 
         public GameViewModel() {}
 
@@ -83,6 +85,26 @@ namespace RadiantTulip.View.ViewModels
         public ICommand ColourChangedCommand
         {
             get { return _colourChanged ?? (_colourChanged = new DelegateCommand<object>(ColourChanged)); }
+        }
+
+        public ICommand CreateGroupCommand
+        {
+            get { return _createGroup ?? (_createGroup = new DelegateCommand<string>(CreateGroup)); }
+        }
+
+        private void CreateGroup(string name)
+        {
+            var players = new ObservableCollection<Player>();
+            foreach(var p in SelectedPlayers)
+                players.Add(p);
+
+            var group = new Group
+            {
+                Players = players,
+                Name = name
+            };
+
+            Groups.Add(group);
         }
 
         private void ColourChanged(object colour)
@@ -172,6 +194,14 @@ namespace RadiantTulip.View.ViewModels
             set
             {
                 _selectedPlayers = value;
+            }
+        }
+
+        public ObservableCollection<Group> Groups
+        {
+            get
+            {
+                return _groups;
             }
         }
 
