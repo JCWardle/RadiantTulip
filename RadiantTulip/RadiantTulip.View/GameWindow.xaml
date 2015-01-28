@@ -4,6 +4,7 @@
         xmlns:g="clr-namespace:RadiantTulip.View"
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cp="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="MainWindow" Height="600" Width="1200">
     
     <Window.DataContext>
@@ -16,81 +17,129 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <TabControl Grid.Column="0">
-            <TabItem Header="Team 1">
-                <g:TeamList Players="{Binding Game.Teams[0].Players}" SelectedPlayers="{Binding SelectedPlayers}"/>
+
+        <!--Player Selection on left-->
+        <TabControl Grid.Column="0" Name="PlayerTabs">
+            <ItemsControl ItemsSource="{Binding Game.Teams}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollViewer>
+                            <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.SelectedPlayers}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerSelectedCommand}"
+                                                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItems}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox>
+                                                <CheckBox.IsChecked>
+                                                    <MultiBinding Converter="{StaticResource isSelected}" Mode="OneWay">
+                                                        <Binding RelativeSource="{RelativeSource Self}" Path="DataContext" />
+                                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count"/>
+                                                    </MultiBinding>
+                                                </CheckBox.IsChecked>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Checked">
+                                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerCheckedCommand}" 
+                                                                               CommandParameter="{Binding}"/>
+                                                    </i:EventTrigger>
+                                                    <i:EventTrigger EventName="Unchecked">
+                                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerUncheckedCommand}" 
+                                                                               CommandParameter="{Binding}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </CheckBox>
+                                            <Label Content="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TabItem Header="Groups">
+                <StackPanel>
+                    <Label Content="New Group" FontSize="14"/>
+                    <Label Content="Group Name"/>
+                    <TextBox />
+                    <Button Content="Create Group"/>
+                </StackPanel>
             </TabItem>
-            <TabItem Header="Team 2"/>
         </TabControl>
         
+        
         <DockPanel Grid.Column="1">
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="60"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Name="CurrentTime" Grid.Column="0">
-                        <Label.Content>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
-                                        <Binding Path="CurrentTime.Minutes"/>
-                                        <Binding Path="CurrentTime.Seconds" />
-                                        <Binding Path="CurrentTime.Milliseconds"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </Label.Content>
-                    </Label>
-                    <g:DraggableThumbSlider x:Name="PlayHead" 
-                        Minimum="0" 
-                        Maximum="{Binding RunTime.TotalMilliseconds}" 
-                        TickFrequency="100"
-                        Grid.Column="1"
-                        IsSnapToTickEnabled="True"
-                        FinalValue="{Binding CurrentTimeMilliseconds, Mode=TwoWay}"
-                        IsMoveToPointEnabled="True"
-                        />
-                    <Label Name="RunTime" Grid.Column="2">
-                        <Label.Content>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
-                                        <Binding Path="RunTime.Minutes"/>
-                                        <Binding Path="RunTime.Seconds" />
-                                        <Binding Path="RunTime.Milliseconds"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </Label.Content>
-                    </Label>
-                </Grid>
-
-                <Button Name="Play" Content="Play">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding PlayCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                <Button Name="Stop" Content="Stop">
+            <!--Play Controls-->
+            <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button Content="Stop">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding StopCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
+                <Button Content="Rewind">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding RewindCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="Play">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding PlayCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="Forward">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding ForwardCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="Rec"/>
+                <Label Content="{Binding CurrentTime}"/>
             </StackPanel>
+            
+            <!-- Game Display-->
             <Border DockPanel.Dock="Top">
-                <g:GameDisplay x:Name="GameDisplay" Game="{Binding Game}" CurrentTime="{Binding CurrentTime}" SelectedPlayers="{Binding SelectedPlayers}"/>
+                <Canvas Name="Game" MouseUp="Game_MouseUp"/>
             </Border>
         </DockPanel>
         
+        <!-- Context Panel -->
         <DockPanel Grid.Column="2" VerticalAlignment="Stretch">
-            <g:ContextPanel SelectedPlayers="{Binding SelectedPlayers}"/>
+            <!-- Single Player Selection Context -->
+            <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource singleSelectConverter}}">
+                <Label Name="PlayerName"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Speed:"/>
+                    <Label Content="99m/s"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Distance Covered:"/>
+                    <Label Content="99km"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- Multiple Player Selection Context -->
+            <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource multipleSelectConverter}}">
+                <Label Content="Group Name:"/>
+                <TextBox Name="GroupName"/>
+            </StackPanel>
+            <!-- Player Context Controls -->
+            <UniformGrid DockPanel.Dock="Bottom" Height="30" Rows="1" Name="Tools">
+                <ComboBox Name="SizeSelector"/>
+                <cp:ColorPicker Name="ColourSelector" />
+                <Button Content="Shape" Name="PlayerShape" />
+            </UniformGrid>
         </DockPanel>
     </Grid>
 </Window>

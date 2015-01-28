@@ -12,6 +12,9 @@ using System.Windows.Data;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Collections;
+using System.Linq;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -19,18 +22,40 @@ namespace RadiantTulip.View.ViewModels
     {
         private Model.Game _game;
         private readonly IModelUpdater _gameUpdater;
-        private DelegateCommand _play;
-        private DelegateCommand _stop;
         private readonly DispatcherTimer _timer;
         private readonly TimeSpan _runTime;
-        private TimeSpan _currentTime;
-        private List<Player> _selectedPlayers = new List<Player>(); 
+        private ObservableCollection<Player> _selectedPlayers = new ObservableCollection<Player>();
+
+        private ICommand _play;
+        private ICommand _pause;
+        private ICommand _forward;
+        private ICommand _rewind;
+        private ICommand _stop;
+        private ICommand _playerSelected;
+        private ICommand _playerChecked;
+        private ICommand _playerUnchecked;
 
         public GameViewModel() {}
+
 
         public ICommand PlayCommand
         {
             get { return _play ?? (_play = new DelegateCommand(Play)); }
+        }
+
+        public ICommand PauseCommand
+        {
+            get { return _pause ?? (_pause = new DelegateCommand(Pause)); }
+        }
+
+        public ICommand ForwardCommand
+        {
+            get { return _forward ?? (_forward = new DelegateCommand(Forward)); }
+        }
+
+        public ICommand RewindCommand
+        {
+            get { return _rewind ?? (_rewind = new DelegateCommand(Rewind)); }
         }
 
         public ICommand StopCommand
@@ -38,23 +63,113 @@ namespace RadiantTulip.View.ViewModels
             get { return _stop ?? (_stop = new DelegateCommand(Stop)); }
         }
 
-        private void Play()
+        public ICommand PlayerCheckedCommand
         {
-            _timer.Start();
+            get { return _playerChecked ?? (_playerChecked = new DelegateCommand<Player>(PlayerChecked)); }
+        }
+
+        public ICommand PlayerSelectedCommand
+        {
+            get { return _playerSelected ?? (_playerSelected = new DelegateCommand<IList>(PlayerSelected)); }
+        }
+
+        public ICommand PlayerUncheckedCommand
+        {
+            get { return _playerUnchecked ?? (_playerUnchecked = new DelegateCommand<Player>(PlayerUnchecked)); }
+        }
+
+        private void PlayerUnchecked(Player player)
+        {
+            SelectedPlayers.Remove(player);
+        }
+
+        private void PlayerChecked(Player player)
+        {
+            _selectedPlayers.Add(player);
+        }
+
+        private void PlayerSelected(IList players)
+        {
+            var collection = players.Cast<Player>();
+            SelectedPlayers.Clear();
+            
+            foreach(var p in collection)
+            {
+                SelectedPlayers.Add(p);
+            }
         }
 
         private void Stop()
         {
             _timer.Stop();
+            _gameUpdater.Time = new TimeSpan(0, 0, 0, 0, 0);
+            UpdateView();
         }
 
-        private void UpdateGame(object o, EventArgs args)
+        private void Rewind()
         {
-            _gameUpdater.Update();
-            CurrentTime = _gameUpdater.Time;
-            OnPropertyChanged("CurrentTime");
+            var span = new TimeSpan(_gameUpdater.Increment.Ticks * 3);
+            _timer.Interval = span;
+            _timer.Start();
         }
-         
+
+        private void Forward()
+        {
+            var span = new TimeSpan(_gameUpdater.Increment.Ticks / 3);
+            _timer.Interval = span;
+            _timer.Start();
+        }
+
+        private void Pause()
+        {
+            _timer.Stop();
+        }
+
+        private void Play()
+        {
+            _timer.Interval = _gameUpdater.Increment;
+            _timer.Start();
+        }
+
+        public Model.Game Game
+        {
+            get
+            {
+                return _game;
+            }
+        }
+
+        public TimeSpan RunTime
+        {
+            get
+            {
+                return _runTime;
+            }
+        }
+
+        public ObservableCollection<Player> SelectedPlayers
+        {
+            get
+            {
+                return _selectedPlayers;
+            }
+
+            set
+            {
+                _selectedPlayers = value;
+            }
+        }
+
+        public string CurrentTime
+        {
+            get
+            {
+                return string.Format("{0}:{1}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds);
+            }
+        }
+
+        public Action UpdateView { get; set; }
+
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
             using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallFullTeam.xlsx", FileMode.Open))
@@ -70,66 +185,12 @@ namespace RadiantTulip.View.ViewModels
             _runTime = _gameUpdater.MaxTime - _gameUpdater.Time;
         }
 
-        public Model.Game Game
+        private void UpdateGame(object o, EventArgs args)
         {
-            get
-            {
-                return _game;
-            }
-        }
-
-        public TimeSpan RunTime 
-        {
-            get
-            {
-                return _runTime;
-            }
-        }
-
-        public TimeSpan CurrentTime
-        {
-            get
-            {
-                return _currentTime;
-            }
-
-            set
-            {
-                _currentTime = value;
-            }
-        }
-
-        public double CurrentTimeMilliseconds
-        {
-            get
-            {
-                return _gameUpdater.Time.TotalMilliseconds;
-            }
-
-            set
-            {
-                var restart = _timer.IsEnabled;
-                _timer.Stop();
-
-                _gameUpdater.Time = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
-
-                if (restart)
-                    _timer.Start();
-            }
-        }
-
-        public List<Player> SelectedPlayers
-        {
-            get
-            {
-                return _selectedPlayers;
-            }
-
-            set
-            {
-                _selectedPlayers = value;
-                OnPropertyChanged("SelectedPlayers");
-            }
+            _gameUpdater.Update();
+            OnPropertyChanged("CurrentTime");
+            CommandManager.InvalidateRequerySuggested();
+            UpdateView();
         }
     }
 }

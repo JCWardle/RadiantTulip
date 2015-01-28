@@ -1,7 +1,10 @@
 ﻿<Application x:Class="RadiantTulip.View.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:RadiantTulip.View.Converters">
     <Application.Resources>
-         
+        <converters:SingleSelectConverter x:Key="singleSelectConverter"/>
+        <converters:MultipleSelectConverter x:Key="multipleSelectConverter"/>
+        <converters:IsSelected x:Key="isSelected"/>
     </Application.Resources>
 </Application>

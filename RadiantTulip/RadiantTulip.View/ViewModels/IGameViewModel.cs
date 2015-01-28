@@ -1,6 +1,7 @@
 ﻿using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -9,12 +10,18 @@ namespace RadiantTulip.View.ViewModels
 {
     public interface IGameViewModel
     {
-        ICommand StopCommand { get; }
-        ICommand PlayCommand { get; }
         Model.Game Game { get; }
         TimeSpan RunTime { get; }
-        TimeSpan CurrentTime { get; }
-        double CurrentTimeMilliseconds { get; set; }
-        List<Player> SelectedPlayers { get; set; }
+        string CurrentTime { get; }
+        ObservableCollection<Player> SelectedPlayers { get; set; }
+        Action UpdateView { get; set; }
+        ICommand PlayCommand { get; }
+        ICommand PauseCommand { get; }
+        ICommand ForwardCommand { get; }
+        ICommand RewindCommand { get; }
+        ICommand StopCommand { get; }
+        ICommand PlayerSelectedCommand { get; }
+        ICommand PlayerCheckedCommand { get; }
+        ICommand PlayerUncheckedCommand { get; }
     }
 }
