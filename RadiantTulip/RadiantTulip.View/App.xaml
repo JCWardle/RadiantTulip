@@ -5,5 +5,6 @@
     <Application.Resources>
         <converters:SingleSelectConverter x:Key="singleSelectConverter"/>
         <converters:MultipleSelectConverter x:Key="multipleSelectConverter"/>
+        <converters:IsSelected x:Key="isSelected"/>
     </Application.Resources>
 </Application>

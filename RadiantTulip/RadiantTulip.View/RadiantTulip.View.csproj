@@ -118,6 +118,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="Converters\IsSelected.cs" />
     <Compile Include="Converters\MultipleSelectConverter.cs" />
     <Compile Include="DraggableThumbSlider.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />

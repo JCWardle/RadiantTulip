@@ -24,7 +24,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ScrollViewer>
-                            <ListBox ItemsSource="{Binding Players}">
+                            <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.SelectedPlayers}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
                                         <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerSelectedCommand}"
@@ -35,6 +35,13 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <CheckBox>
+                                                <CheckBox.IsChecked>
+                                                    <MultiBinding Converter="{StaticResource isSelected}" Mode="OneWay">
+                                                        <Binding RelativeSource="{RelativeSource Self}" Path="DataContext" />
+                                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count"/>
+                                                    </MultiBinding>
+                                                </CheckBox.IsChecked>
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="Checked">
                                                         <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerCheckedCommand}" 
@@ -103,7 +110,7 @@
             
             <!-- Game Display-->
             <Border DockPanel.Dock="Top">
-                <Canvas Name="Game"/>
+                <Canvas Name="Game" MouseUp="Game_MouseUp"/>
             </Border>
         </DockPanel>
         
