@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
+using System.Windows.Media;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -34,6 +35,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _playerSelected;
         private ICommand _playerChecked;
         private ICommand _playerUnchecked;
+        private ICommand _colourChanged;
 
         public GameViewModel() {}
 
@@ -78,6 +80,18 @@ namespace RadiantTulip.View.ViewModels
             get { return _playerUnchecked ?? (_playerUnchecked = new DelegateCommand<Player>(PlayerUnchecked)); }
         }
 
+        public ICommand ColourChangedCommand
+        {
+            get { return _colourChanged ?? (_colourChanged = new DelegateCommand<object>(ColourChanged)); }
+        }
+
+        private void ColourChanged(object colour)
+        {
+            foreach (var p in SelectedPlayers)
+                p.Colour = (Color)colour;
+            UpdateView();
+        }
+
         private void PlayerUnchecked(Player player)
         {
             SelectedPlayers.Remove(player);
@@ -85,7 +99,8 @@ namespace RadiantTulip.View.ViewModels
 
         private void PlayerChecked(Player player)
         {
-            _selectedPlayers.Add(player);
+            if (!_selectedPlayers.Contains(player))
+                _selectedPlayers.Add(player);
         }
 
         private void PlayerSelected(IList players)

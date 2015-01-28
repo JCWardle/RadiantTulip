@@ -24,7 +24,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ScrollViewer>
-                            <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.SelectedPlayers}">
+                            <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.SelectedPlayers, Mode=OneWay}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
                                         <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerSelectedCommand}"
@@ -137,7 +137,13 @@
             <!-- Player Context Controls -->
             <UniformGrid DockPanel.Dock="Bottom" Height="30" Rows="1" Name="Tools">
                 <ComboBox Name="SizeSelector"/>
-                <cp:ColorPicker Name="ColourSelector" />
+                <cp:ColorPicker Name="ColourSelector" SelectedColor="{Binding SelectedPlayers, Converter={StaticResource selectedColour}, Mode=OneWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedColorChanged">
+                            <i:InvokeCommandAction Command="{Binding ColourChangedCommand}" CommandParameter="{Binding Path=SelectedColor, RelativeSource={RelativeSource AncestorType={x:Type cp:ColorPicker}}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </cp:ColorPicker>
                 <Button Content="Shape" Name="PlayerShape" />
             </UniformGrid>
         </DockPanel>
