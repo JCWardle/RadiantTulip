@@ -35,10 +35,10 @@ namespace RadiantTulip.Tests.View
 
             Assert.AreEqual(1, canvas.Children.Count);
             var circle = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(72.5, circle.Margin.Left);
-            Assert.AreEqual(72.5, circle.Margin.Top);
-            Assert.AreEqual(5, circle.Width);
-            Assert.AreEqual(5, circle.Height);
+            Assert.AreEqual(73.5, circle.Margin.Left);
+            Assert.AreEqual(73.5, circle.Margin.Top);
+            Assert.AreEqual(3, circle.Width);
+            Assert.AreEqual(3, circle.Height);
         }
 
         [Test]
@@ -63,10 +63,10 @@ namespace RadiantTulip.Tests.View
             Assert.AreEqual(1, canvas.Children.Count);
             var circle = (Ellipse) canvas.Children[0];
             Assert.AreNotEqual(null, circle);
-            Assert.AreEqual(72.5, circle.Margin.Left);
-            Assert.AreEqual(87.5, circle.Margin.Top);
-            Assert.AreEqual(5, circle.Width);
-            Assert.AreEqual(5, circle.Height);
+            Assert.AreEqual(73.5, circle.Margin.Left);
+            Assert.AreEqual(88.5, circle.Margin.Top);
+            Assert.AreEqual(3, circle.Width);
+            Assert.AreEqual(3, circle.Height);
         }
 
         [Test]
@@ -195,8 +195,8 @@ namespace RadiantTulip.Tests.View
             Assert.AreEqual(1, canvas.Children.Count);
             var circle = (Ellipse)canvas.Children[0];
             Assert.AreNotEqual(null, circle);
-            Assert.AreEqual(15, circle.Height);
-            Assert.AreEqual(15, circle.Width);
+            Assert.AreEqual(7, circle.Height);
+            Assert.AreEqual(7, circle.Width);
         }
     }
 }

@@ -25,10 +25,9 @@ namespace RadiantTulip.View.Game
             _descriptiveArtifacts = new List<IDescriptiveArtifact>();
         }
 
-        public void DrawGame(Canvas canvas, Table table, GameModel game)
+        public void DrawGame(Canvas canvas, GameModel game)
         {
             canvas.Children.Clear();
-            table.RowGroups[0].Rows.Clear();
             _groundDrawer.Draw(canvas, game.Ground);
 
             foreach(var t in game.Teams)
@@ -36,7 +35,6 @@ namespace RadiantTulip.View.Game
                 {
                     _playerDrawer.Draw(p, game.Ground, canvas);
                     ApplyVisualArtifacts(canvas, p);
-                    ApplyDescriptiveArtifacts(table, p);
                 }
         }
 
@@ -46,46 +44,14 @@ namespace RadiantTulip.View.Game
                 v.Draw(canvas, player);
         }
 
-        private void ApplyDescriptiveArtifacts(Table table, Player player)
-        {
-            var row = new TableRow();
-
-            foreach(var d in _descriptiveArtifacts)
-            {
-                if (!table.Columns.Any(c => c.Name == d.GetName()))
-                {
-                    table.Columns.Add(
-                        new TableColumn
-                        {
-                            Name = d.GetName()
-                        });
-                }
-
-                var column = table.Columns.Where(c => c.Name == d.GetName());
-                var cell = new TableCell(new Paragraph(new Run (d.Calculate(player).ToString())));
-                row.Cells.Add(cell);
-            }
-            table.RowGroups[0].Rows.Add(row);
-        }
-
         public void AddVisualArtifact(IVisualArtifact artifact)
         {
             _visualArtifacts.Add(artifact);
         }
 
-        public void AddDescriptiveArtifact(IDescriptiveArtifact artifact)
-        {
-            _descriptiveArtifacts.Add(artifact);
-        }
-
         public void RemoveVisualArtifact(IVisualArtifact artifact)
         {
             _visualArtifacts.Remove(artifact);
-        }
-
-        public void RemoveDescriptiveArtifact(IDescriptiveArtifact artifact)
-        {
-            _descriptiveArtifacts.Remove(artifact);
         }
     }
 }

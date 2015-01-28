@@ -6,10 +6,8 @@ namespace RadiantTulip.View.Game
 {
     public interface IGameDrawer
     {
-        void DrawGame(Canvas canvas, Table table, GameModel game);
+        void DrawGame(Canvas canvas, GameModel game);
         void AddVisualArtifact(IVisualArtifact artifact);
-        void AddDescriptiveArtifact(IDescriptiveArtifact artifact);
         void RemoveVisualArtifact(IVisualArtifact artifact);
-        void RemoveDescriptiveArtifact(IDescriptiveArtifact artifact);
     }
 }

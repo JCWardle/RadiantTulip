@@ -21,7 +21,6 @@ namespace RadiantTulip.View
     public partial class GameWindow
     {
         private readonly IGameDrawer _drawer;
-        private Table _table;
         private IGameViewModel _view;
 
         public GameWindow(IUnityContainer container)
@@ -30,15 +29,13 @@ namespace RadiantTulip.View
             this.DataContext = container.Resolve<IGameViewModel>();
             _drawer = container.Resolve<IGameDrawer>();
 
-            _table = new Table();
-            _table.RowGroups.Add(new TableRowGroup());
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);
         }
 
         protected void ReRender()
         {
-            _drawer.DrawGame(Game, _table, _view.Game);
+            _drawer.DrawGame(Game, _view.Game);
         }
 
         private void Game_MouseUp(object sender, MouseButtonEventArgs e)
