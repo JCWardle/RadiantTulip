@@ -119,34 +119,42 @@
         </DockPanel>
         
         <!-- Context Panel -->
-        <DockPanel Grid.Column="2" VerticalAlignment="Stretch">
+        <Grid Grid.Column="2" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+                       
             <!-- Single Player Selection Context -->
-            <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource singleSelectConverter}}">
-                <Label Name="PlayerName"/>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Speed:"/>
-                    <Label Content="99m/s"/>
+            <StackPanel Grid.Row="0">
+                <StackPanel Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource singleSelectConverter}}">
+                    <Label Name="PlayerName"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Speed:"/>
+                        <Label Content="99m/s"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Distance Covered:"/>
+                        <Label Content="99km"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Distance Covered:"/>
-                    <Label Content="99km"/>
-                </StackPanel>
-            </StackPanel>
             
-            <!-- Multiple Player Selection Context -->
-            <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource multipleSelectConverter}}">
-                <Label Content="Group Name:"/>
-                <TextBox Name="GroupName"/>
-                <Button Content="Create Group">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding CreateGroupCommand}" CommandParameter="{Binding ElementName=GroupName, Path=Text}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
+                <!-- Multiple Player Selection Context -->
+                <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource multipleSelectConverter}}">
+                    <Label Content="Group Name:"/>
+                    <TextBox Name="GroupName"/>
+                    <Button Content="Create Group">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding CreateGroupCommand}" CommandParameter="{Binding ElementName=GroupName, Path=Text}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
             </StackPanel>
+
             <!-- Player Context Controls -->
-            <UniformGrid DockPanel.Dock="Bottom" Height="30" Rows="1" Name="Tools">
+            <UniformGrid Grid.Row="1" Height="30" Rows="1" Name="Tools">
                 <ComboBox Name="SizeSelector"/>
                 <cp:ColorPicker Name="ColourSelector" SelectedColor="{Binding SelectedPlayers, Converter={StaticResource selectedColour}, Mode=OneWay}">
                     <i:Interaction.Triggers>
@@ -157,6 +165,6 @@
                 </cp:ColorPicker>
                 <Button Content="Shape" Name="PlayerShape" />
             </UniformGrid>
-        </DockPanel>
+        </Grid>
     </Grid>
 </Window>
