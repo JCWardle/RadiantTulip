@@ -21,6 +21,7 @@ namespace RadiantTulip.View.ViewModels
 {
     public class GameViewModel : BindableBase, IGameViewModel
     {
+        private SelectionState _state;
         private Model.Game _game;
         private readonly IModelUpdater _gameUpdater;
         private readonly DispatcherTimer _timer;
@@ -38,6 +39,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _playerUnchecked;
         private ICommand _colourChanged;
         private ICommand _createGroup;
+        private ICommand _groupSelected;
 
         public GameViewModel() {}
 
@@ -92,6 +94,17 @@ namespace RadiantTulip.View.ViewModels
             get { return _createGroup ?? (_createGroup = new DelegateCommand<string>(CreateGroup)); }
         }
 
+        public ICommand GroupSelectedCommand
+        {
+            get { return _groupSelected ?? (_groupSelected = new DelegateCommand<Group>(GroupSelected)); }
+        }
+
+        private void GroupSelected(Group group)
+        {
+            SelectedGroup = group;
+            State = SelectionState.Group;
+        }
+
         private void CreateGroup(string name)
         {
             var players = new ObservableCollection<Player>();
@@ -109,20 +122,44 @@ namespace RadiantTulip.View.ViewModels
 
         private void ColourChanged(object colour)
         {
-            foreach (var p in SelectedPlayers)
-                p.Colour = (Color)colour;
+            if (State == SelectionState.MultiplePlayers || State == SelectionState.SinglePlayer)
+            {
+                foreach (var p in SelectedPlayers)
+                    p.Colour = (Color)colour;
+            }
+            else if (State == SelectionState.Group)
+            {
+                foreach (var p in SelectedGroup.Players)
+                    p.Colour = (Color)colour;
+            }
             UpdateView();
         }
 
         private void PlayerUnchecked(Player player)
         {
             SelectedPlayers.Remove(player);
+
+            SetState();
+        }
+
+        private void SetState()
+        {
+            if (SelectedGroup != null)
+                State = SelectionState.Group;
+            else if (SelectedPlayers.Count == 1)
+                State = SelectionState.SinglePlayer;
+            else if (SelectedPlayers.Count > 1)
+                State = SelectionState.MultiplePlayers;
+            else
+                State = SelectionState.None;
         }
 
         private void PlayerChecked(Player player)
-        {
+        {            
             if (!_selectedPlayers.Contains(player))
                 _selectedPlayers.Add(player);
+
+            SetState();
         }
 
         private void PlayerSelected(IList players)
@@ -134,6 +171,7 @@ namespace RadiantTulip.View.ViewModels
             {
                 SelectedPlayers.Add(p);
             }
+            SetState();
         }
 
         private void Stop()
@@ -205,6 +243,20 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
+        public SelectionState State
+        {
+            get
+            {
+                return _state;
+            }
+
+            set
+            {
+                _state = value;
+                OnPropertyChanged("State");
+            }
+        }
+
         public string CurrentTime
         {
             get
@@ -212,6 +264,8 @@ namespace RadiantTulip.View.ViewModels
                 return string.Format("{0}:{1}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds);
             }
         }
+
+        public Group SelectedGroup { get; set; }
 
         public Action UpdateView { get; set; }
 
@@ -228,6 +282,7 @@ namespace RadiantTulip.View.ViewModels
             _timer.Start();
 
             _runTime = _gameUpdater.MaxTime - _gameUpdater.Time;
+            State = SelectionState.None;
         }
 
         private void UpdateGame(object o, EventArgs args)

@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:RadiantTulip.View.Converters">
     <Application.Resources>
-        <converters:SingleSelectConverter x:Key="singleSelectConverter"/>
-        <converters:MultipleSelectConverter x:Key="multipleSelectConverter"/>
+        <converters:SingleSelect x:Key="singleSelectConverter"/>
+        <converters:MultipleSelect x:Key="multipleSelectConverter"/>
+        <converters:GroupSelect x:Key="groupSelectConverter"/>
         <converters:IsSelected x:Key="isSelected"/>
         <converters:SelectedColour x:Key="selectedColour"/>
     </Application.Resources>

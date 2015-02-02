@@ -64,6 +64,11 @@
             </ItemsControl>
             <TabItem Header="Groups">
                 <ListBox ItemsSource="{Binding Groups}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding GroupSelectedCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -126,31 +131,41 @@
             </Grid.RowDefinitions>
                        
             <!-- Single Player Selection Context -->
-            <StackPanel Grid.Row="0">
-                <StackPanel Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource singleSelectConverter}}">
-                    <Label Name="PlayerName"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Speed:"/>
-                        <Label Content="99m/s"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Distance Covered:"/>
-                        <Label Content="99km"/>
-                    </StackPanel>
+            <StackPanel Grid.Row="0" Visibility="{Binding State, Converter={StaticResource singleSelectConverter}, Mode=OneWay}">
+                <Label Name="PlayerName" Content="Create Converter For Player Name"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Speed:"/>
+                    <Label Content="99m/s"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Distance Covered:"/>
+                    <Label Content="99km"/>
+                </StackPanel>
+            </StackPanel>
             
-                <!-- Multiple Player Selection Context -->
-                <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectedPlayers.Count, Converter={StaticResource multipleSelectConverter}}">
-                    <Label Content="Group Name:"/>
-                    <TextBox Name="GroupName"/>
-                    <Button Content="Create Group">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding CreateGroupCommand}" CommandParameter="{Binding ElementName=GroupName, Path=Text}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                </StackPanel>
+             <!-- Multiple Player Selection Context -->
+            <StackPanel Grid.Row="0" Visibility="{Binding State, Converter={StaticResource multipleSelectConverter}, Mode=OneWay}">
+                <Label Content="Group Name:"/>
+                <TextBox Name="GroupName"/>
+                <Button Content="Create Group">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding CreateGroupCommand}" CommandParameter="{Binding ElementName=GroupName, Path=Text}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+            
+            <!-- Group Selection Context -->
+            <StackPanel Grid.Row="0" Visibility="{Binding State, Converter={StaticResource groupSelectConverter}, Mode=OneWay}">
+                <Label FontSize="14" Content="{Binding SelectedGroup.Name}" />
+                <ItemsControl ItemsSource="{Binding SelectedGroup.Players}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
 
             <!-- Player Context Controls -->

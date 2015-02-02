@@ -8,20 +8,18 @@ using System.Windows.Data;
 
 namespace RadiantTulip.View.Converters
 {
-    public class MultipleSelectConverter : IValueConverter
+    public class GroupSelect : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var count = (int)value;
+            var state = (SelectionState)value;
 
-            return (count > 1 ? Visibility.Visible : Visibility.Collapsed);
+            return (state == SelectionState.Group ? Visibility.Visible : Visibility.Collapsed);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var visibility = (Visibility)value == Visibility.Visible;
-
-            return (visibility ? 2 : 1);
+            throw new NotImplementedException();
         }
     }
 }
