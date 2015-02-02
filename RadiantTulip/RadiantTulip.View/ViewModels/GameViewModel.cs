@@ -40,6 +40,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _colourChanged;
         private ICommand _createGroup;
         private ICommand _groupSelected;
+        private ICommand _sizeChanged;
 
         public GameViewModel() {}
 
@@ -99,6 +100,11 @@ namespace RadiantTulip.View.ViewModels
             get { return _groupSelected ?? (_groupSelected = new DelegateCommand<Group>(GroupSelected)); }
         }
 
+        public ICommand SizeChangedCommand
+        {
+            get { return _sizeChanged ?? (_sizeChanged = new DelegateCommand<object>(SizeChanged)); }
+        }
+
         private void GroupSelected(Group group)
         {
             SelectedGroup = group;
@@ -131,6 +137,22 @@ namespace RadiantTulip.View.ViewModels
             {
                 foreach (var p in SelectedGroup.Players)
                     p.Colour = (Color)colour;
+            }
+            UpdateView();
+        }
+
+        private void SizeChanged(object obj)
+        {
+            var size = (RadiantTulip.Model.Size)obj;
+            if (State == SelectionState.MultiplePlayers || State == SelectionState.SinglePlayer)
+            {
+                foreach (var p in SelectedPlayers)
+                    p.Size = size;
+            }
+            else if (State == SelectionState.Group)
+            {
+                foreach (var p in SelectedGroup.Players)
+                    p.Size = size;
             }
             UpdateView();
         }
@@ -254,6 +276,14 @@ namespace RadiantTulip.View.ViewModels
             {
                 _state = value;
                 OnPropertyChanged("State");
+            }
+        }
+
+        public IEnumerable<RadiantTulip.Model.Size> SizeOptions
+        {
+            get
+            {
+                return Enum.GetValues(typeof(RadiantTulip.Model.Size)).Cast<RadiantTulip.Model.Size>();
             }
         }
 
