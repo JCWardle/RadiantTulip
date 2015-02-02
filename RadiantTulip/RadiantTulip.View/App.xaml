@@ -8,5 +8,6 @@
         <converters:GroupSelect x:Key="groupSelectConverter"/>
         <converters:IsSelected x:Key="isSelected"/>
         <converters:SelectedColour x:Key="selectedColour"/>
+        <converters:SelectedSize x:Key="selectedSize"/>
     </Application.Resources>
 </Application>

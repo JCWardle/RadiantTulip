@@ -6,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace RadiantTulip.View.Converters
 {
-    public class SelectedColour : IMultiValueConverter
+    public class SelectedSize : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -23,9 +22,9 @@ namespace RadiantTulip.View.Converters
                 players = ((Group)values[1]).Players;
 
             if (players.Count == 0)
-                return new Color() { R = 255, A = 255};
+                return Size.Medium;
 
-            return players.First().Colour;
+            return players.First().Size;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
