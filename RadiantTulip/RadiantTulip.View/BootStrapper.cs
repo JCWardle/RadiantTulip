@@ -7,6 +7,7 @@ using RadiantTulip.View.Game;
 using RadiantTulip.View.ViewModels;
 using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
+using RadiantTulip.View.Game.VisualEffects;
 
 namespace RadiantTulip.View
 {
@@ -30,6 +31,7 @@ namespace RadiantTulip.View
             Container.RegisterType(typeof (IGameDrawer), typeof (GameDrawer));
             Container.RegisterType(typeof (IGroundDrawer), typeof (GroundDrawer));
             Container.RegisterType(typeof (IPlayerDrawer), typeof (PlayerDrawer));
+            Container.RegisterType(typeof(IAffectFactory), typeof(AffectFactory));
 
             //Views
             Container.RegisterType(typeof (IGameViewModel), typeof (GameViewModel));

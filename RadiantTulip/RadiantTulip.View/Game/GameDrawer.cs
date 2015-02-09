@@ -14,42 +14,28 @@ namespace RadiantTulip.View.Game
     {
         private IGroundDrawer _groundDrawer;
         private IPlayerDrawer _playerDrawer;
-        private List<IVisualArtifact> _visualArtifacts;
 
         public GameDrawer(IGroundDrawer groundDrawer, IPlayerDrawer playerDrawer)
         {
             _groundDrawer = groundDrawer;
             _playerDrawer = playerDrawer;
-            _visualArtifacts = new List<IVisualArtifact>();
         }
 
-        public void DrawGame(Canvas canvas, GameModel game)
+        public void DrawGame(Canvas canvas, GameModel game, IList<IVisualAffect> visualAffects)
         {
             canvas.Children.Clear();
             _groundDrawer.Draw(canvas, game.Ground);
+
 
             foreach(var t in game.Teams)
                 foreach(var p in t.Players.Where(p => p.Visible))
                 {
                     _playerDrawer.Draw(p, game.Ground, canvas);
-                    ApplyVisualArtifacts(canvas, p);
+                    
                 }
-        }
 
-        private void ApplyVisualArtifacts(Canvas canvas, Player player)
-        {
-            foreach(var v in _visualArtifacts)
-                v.Draw(canvas, player);
-        }
-
-        public void AddVisualArtifact(IVisualArtifact artifact)
-        {
-            _visualArtifacts.Add(artifact);
-        }
-
-        public void RemoveVisualArtifact(IVisualArtifact artifact)
-        {
-            _visualArtifacts.Remove(artifact);
+            foreach (var v in visualAffects)
+                v.Draw(canvas);
         }
     }
 }

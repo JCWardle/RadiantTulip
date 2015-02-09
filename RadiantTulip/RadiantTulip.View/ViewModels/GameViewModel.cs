@@ -16,6 +16,8 @@ using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
 using System.Windows.Media;
+using RadiantTulip.View.Game.VisualEffects;
+using RadiantTulip.View.Game;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -26,8 +28,10 @@ namespace RadiantTulip.View.ViewModels
         private readonly IModelUpdater _gameUpdater;
         private readonly DispatcherTimer _timer;
         private readonly TimeSpan _runTime;
+        private IAffectFactory _affectFactory;
         private ObservableCollection<Player> _selectedPlayers = new ObservableCollection<Player>();
         private ObservableCollection<Group> _groups = new ObservableCollection<Group>();
+        private List<IVisualAffect> _visualAffects;
 
         private ICommand _play;
         private ICommand _pause;
@@ -41,6 +45,8 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _createGroup;
         private ICommand _groupSelected;
         private ICommand _sizeChanged;
+        private ICommand _playerAffectCheckedCommand;
+        private ICommand _groupAffectCheckedCommand;
 
         public GameViewModel() {}
 
@@ -103,6 +109,29 @@ namespace RadiantTulip.View.ViewModels
         public ICommand SizeChangedCommand
         {
             get { return _sizeChanged ?? (_sizeChanged = new DelegateCommand<object>(SizeChanged)); }
+        }
+
+        public ICommand PlayerAffectCheckedCommand
+        {
+            get { return _playerAffectCheckedCommand ?? (_playerAffectCheckedCommand = new DelegateCommand<object>(PlayerEffectChecked)); }
+        }
+
+        public ICommand GroupAffectCheckedCommand
+        {
+            get { return _groupAffectCheckedCommand ?? (_groupAffectCheckedCommand = new DelegateCommand<object>(GroupAffectChecked)); }
+        }
+
+        private void GroupAffectChecked(object obj)
+        {
+            var affect = (GroupAffect)obj;
+            _visualAffects.Add(_affectFactory.CreateGroupEffect(SelectedGroup.Players.ToList(), affect, Game));
+        }
+
+        private void PlayerEffectChecked(object obj)
+        {
+            var affect = (PlayerAffect)obj;
+            foreach(var p in SelectedPlayers)
+                _visualAffects.Add(_affectFactory.CreatePlayerEffect(p, affect, Game));
         }
 
         private void GroupSelected(Group group)
@@ -287,11 +316,35 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
+        public IEnumerable<GroupAffect> GroupAffects
+        {
+            get
+            {
+                return Enum.GetValues(typeof(GroupAffect)).Cast<GroupAffect>();
+            }
+        }
+
+        public IEnumerable<PlayerAffect> PlayerAffects
+        {
+            get
+            {
+                return Enum.GetValues(typeof(PlayerAffect)).Cast<PlayerAffect>();
+            }
+        }
+
         public string CurrentTime
         {
             get
             {
                 return string.Format("{0}:{1}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds);
+            }
+        }
+
+        public List<IVisualAffect> VisualAffects
+        {
+            get
+            {
+                return _visualAffects;
             }
         }
 
@@ -305,7 +358,8 @@ namespace RadiantTulip.View.ViewModels
                 _game = creator.CreateGame(stream);
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
-
+            _affectFactory = container.Resolve<IAffectFactory>();
+            
             _timer = new DispatcherTimer();
             _timer.Tick += UpdateGame;
             _timer.Interval = _gameUpdater.Increment;
@@ -313,6 +367,7 @@ namespace RadiantTulip.View.ViewModels
 
             _runTime = _gameUpdater.MaxTime - _gameUpdater.Time;
             State = SelectionState.None;
+            _visualAffects = new List<IVisualAffect>();
         }
 
         private void UpdateGame(object o, EventArgs args)

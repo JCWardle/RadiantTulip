@@ -1,4 +1,5 @@
 ﻿using RadiantTulip.Model;
+using RadiantTulip.View.Game;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,5 +27,6 @@ namespace RadiantTulip.View.ViewModels
         ICommand PlayerUncheckedCommand { get; }
         ICommand ColourChangedCommand { get; }
         ICommand CreateGroupCommand { get; }
+        List<IVisualAffect> VisualAffects { get; }
     }
 }

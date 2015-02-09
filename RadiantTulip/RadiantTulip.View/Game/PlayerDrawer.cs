@@ -9,7 +9,7 @@ namespace RadiantTulip.View.Game
     /// <summary>
     /// Co-ordinates start at the top left at 0,0
     /// </summary>
-    public class PlayerDrawer : IPlayerDrawer
+    public class PlayerDrawer : Drawer, IPlayerDrawer
     {
         public void Draw(Player player, Ground ground, Canvas canvas)
         {
@@ -18,10 +18,9 @@ namespace RadiantTulip.View.Game
                 || position.X < 0 || position.Y < 0)
                 return;
 
-            var x = position.X / ground.Width * canvas.ActualWidth;
-            var y = position.Y / ground.Height * canvas.ActualHeight;
-            x -= (double)player.Size / 2;
-            y -= (double)player.Size / 2;
+            var transform = TransformToCanvas(position.X, position.Y, ground, canvas);
+            var x = transform.Item1 - (double)player.Size / 2;
+            var y = transform.Item2 - (double)player.Size / 2;
 
             var circle = new Ellipse
             {

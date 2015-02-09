@@ -35,7 +35,7 @@ namespace RadiantTulip.View
 
         protected void ReRender()
         {
-            _drawer.DrawGame(Game, _view.Game);
+            _drawer.DrawGame(Game, _view.Game, _view.VisualAffects);
         }
 
         private void Game_MouseUp(object sender, MouseButtonEventArgs e)
