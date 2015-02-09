@@ -15,14 +15,12 @@ namespace RadiantTulip.View.Game
         private IGroundDrawer _groundDrawer;
         private IPlayerDrawer _playerDrawer;
         private List<IVisualArtifact> _visualArtifacts;
-        private List<IDescriptiveArtifact> _descriptiveArtifacts;
 
         public GameDrawer(IGroundDrawer groundDrawer, IPlayerDrawer playerDrawer)
         {
             _groundDrawer = groundDrawer;
             _playerDrawer = playerDrawer;
             _visualArtifacts = new List<IVisualArtifact>();
-            _descriptiveArtifacts = new List<IDescriptiveArtifact>();
         }
 
         public void DrawGame(Canvas canvas, GameModel game)
