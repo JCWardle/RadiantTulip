@@ -11,7 +11,7 @@ namespace RadiantTulip.View.Game.VisualAffects
     public interface IVisualAffect
     {
         void Draw(Canvas canvas);
-        PlayerAffect Affect { get; }
-        Player Player { get; }
+        bool AffectFor(List<Player> players, GroupAffect affect);
+        bool AffectFor(List<Player> players, PlayerAffect affect);
     }
 }

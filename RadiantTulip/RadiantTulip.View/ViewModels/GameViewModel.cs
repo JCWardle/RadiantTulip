@@ -130,7 +130,7 @@ namespace RadiantTulip.View.ViewModels
         private void PlayerAffectUnchecked(object obj)
         {
             var affect = (PlayerAffect)obj;
-            _visualAffects.RemoveAll(v => v.Affect == affect && SelectedPlayers.Contains(v.Player));
+            _visualAffects.RemoveAll(v => v.AffectFor(SelectedPlayers.ToList(), affect));
         }
 
         private void GroupAffectChecked(object obj)

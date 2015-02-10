@@ -51,14 +51,14 @@ namespace RadiantTulip.View.Game.VisualAffects
         }
 
 
-        public PlayerAffect Affect
+        public bool AffectFor(List<Player> players, GroupAffect affect)
         {
-            get { return PlayerAffect.Tadpole; }
+            return false;
         }
 
-        public Player Player
+        public bool AffectFor(List<Player> players, PlayerAffect affect)
         {
-            get { return _player; }
+            return players.Contains(_player) && affect == PlayerAffect.Tadpole;
         }
     }
 }
