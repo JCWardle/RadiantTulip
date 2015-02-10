@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RadiantTulip.View.Game.VisualAffects;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using GameModel = RadiantTulip.Model.Game;

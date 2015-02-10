@@ -7,7 +7,7 @@ using RadiantTulip.View.Game;
 using RadiantTulip.View.ViewModels;
 using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
-using RadiantTulip.View.Game.VisualEffects;
+using RadiantTulip.View.Game.VisualAffects;
 
 namespace RadiantTulip.View
 {

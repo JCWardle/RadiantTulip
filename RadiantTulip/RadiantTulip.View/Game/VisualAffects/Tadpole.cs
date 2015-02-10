@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace RadiantTulip.View.Game.VisualEffects
+namespace RadiantTulip.View.Game.VisualAffects
 {
     class Tadpole : Drawer, IVisualAffect
     {
@@ -48,6 +48,17 @@ namespace RadiantTulip.View.Game.VisualEffects
 
                 canvas.Children.Add(circle);
             }
+        }
+
+
+        public PlayerAffect Affect
+        {
+            get { return PlayerAffect.Tadpole; }
+        }
+
+        public Player Player
+        {
+            get { return _player; }
         }
     }
 }

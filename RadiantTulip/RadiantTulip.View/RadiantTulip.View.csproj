@@ -125,11 +125,11 @@
     <Compile Include="Converters\SelectedSize.cs" />
     <Compile Include="DraggableThumbSlider.cs" />
     <Compile Include="Game\Drawer.cs" />
-    <Compile Include="Game\VisualEffects\AffectFactory.cs" />
-    <Compile Include="Game\VisualEffects\GroupAffect.cs" />
-    <Compile Include="Game\VisualEffects\IAffectFactory.cs" />
-    <Compile Include="Game\VisualEffects\PlayerAffect.cs" />
-    <Compile Include="Game\VisualEffects\Tadpole.cs" />
+    <Compile Include="Game\VisualAffects\AffectFactory.cs" />
+    <Compile Include="Game\VisualAffects\GroupAffect.cs" />
+    <Compile Include="Game\VisualAffects\IAffectFactory.cs" />
+    <Compile Include="Game\VisualAffects\PlayerAffect.cs" />
+    <Compile Include="Game\VisualAffects\Tadpole.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="SelectionState.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
@@ -148,7 +148,7 @@
     <Compile Include="Game\IGameDrawer.cs" />
     <Compile Include="Game\IGroundDrawer.cs" />
     <Compile Include="Game\IPlayerDrawer.cs" />
-    <Compile Include="Game\VisualEffects\IVisualAffect.cs" />
+    <Compile Include="Game\VisualAffects\IVisualAffect.cs" />
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

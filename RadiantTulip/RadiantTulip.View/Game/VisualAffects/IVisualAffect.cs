@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Game.VisualAffects
 {
-    public interface IVisualArtifact
+    public interface IVisualAffect
     {
-        void Draw(Canvas canvas, Player Player);
+        void Draw(Canvas canvas);
+        PlayerAffect Affect { get; }
+        Player Player { get; }
     }
 }

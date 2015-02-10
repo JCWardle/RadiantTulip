@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantTulip.View.Game.VisualEffects
+namespace RadiantTulip.View.Game.VisualAffects
 {
     public enum PlayerAffect
     {

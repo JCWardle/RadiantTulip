@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using RadiantTulip.Model;
 using RadiantTulip.View.Game;
+using RadiantTulip.View.Game.VisualAffects;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Documents;

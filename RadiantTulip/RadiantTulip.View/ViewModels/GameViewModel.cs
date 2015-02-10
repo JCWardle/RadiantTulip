@@ -16,8 +16,8 @@ using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
 using System.Windows.Media;
-using RadiantTulip.View.Game.VisualEffects;
 using RadiantTulip.View.Game;
+using RadiantTulip.View.Game.VisualAffects;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -47,6 +47,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _sizeChanged;
         private ICommand _playerAffectCheckedCommand;
         private ICommand _groupAffectCheckedCommand;
+        private ICommand _playerAffectUncheckedCommand;
 
         public GameViewModel() {}
 
@@ -113,12 +114,23 @@ namespace RadiantTulip.View.ViewModels
 
         public ICommand PlayerAffectCheckedCommand
         {
-            get { return _playerAffectCheckedCommand ?? (_playerAffectCheckedCommand = new DelegateCommand<object>(PlayerEffectChecked)); }
+            get { return _playerAffectCheckedCommand ?? (_playerAffectCheckedCommand = new DelegateCommand<object>(PlayerAffectChecked)); }
         }
 
         public ICommand GroupAffectCheckedCommand
         {
             get { return _groupAffectCheckedCommand ?? (_groupAffectCheckedCommand = new DelegateCommand<object>(GroupAffectChecked)); }
+        }
+
+        public ICommand PlayerAffectUncheckedCommand
+        {
+            get { return _playerAffectUncheckedCommand ?? (_playerAffectUncheckedCommand = new DelegateCommand<object>(PlayerAffectUnchecked)); }
+        }
+
+        private void PlayerAffectUnchecked(object obj)
+        {
+            var affect = (PlayerAffect)obj;
+            _visualAffects.RemoveAll(v => v.Affect == affect && SelectedPlayers.Contains(v.Player));
         }
 
         private void GroupAffectChecked(object obj)
@@ -127,7 +139,7 @@ namespace RadiantTulip.View.ViewModels
             _visualAffects.Add(_affectFactory.CreateGroupEffect(SelectedGroup.Players.ToList(), affect, Game));
         }
 
-        private void PlayerEffectChecked(object obj)
+        private void PlayerAffectChecked(object obj)
         {
             var affect = (PlayerAffect)obj;
             foreach(var p in SelectedPlayers)

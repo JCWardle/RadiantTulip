@@ -151,6 +151,9 @@
                                         <i:EventTrigger EventName="Checked">
                                             <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectCheckedCommand}" CommandParameter="{Binding}"/>
                                         </i:EventTrigger>
+                                        <i:EventTrigger EventName="Unchecked">
+                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectUncheckedCommand}" CommandParameter="{Binding}"/>
+                                        </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </CheckBox>
                             </StackPanel>
@@ -179,6 +182,9 @@
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Checked">
                                             <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectCheckedCommand}" CommandParameter="{Binding}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="Unchecked">
+                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectUncheckedCommand}" CommandParameter="{Binding}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </CheckBox>
