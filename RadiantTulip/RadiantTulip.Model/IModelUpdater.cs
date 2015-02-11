@@ -9,5 +9,6 @@ namespace RadiantTulip.Model
         TimeSpan Time { set; get; }
         TimeSpan Increment { get; }
         TimeSpan MaxTime { get; }
+        void ChangeDirection();
     }
 }

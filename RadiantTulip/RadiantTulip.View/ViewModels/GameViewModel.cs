@@ -246,13 +246,19 @@ namespace RadiantTulip.View.ViewModels
 
         private void Rewind()
         {
-            var span = new TimeSpan(_gameUpdater.Increment.Ticks * 3);
-            _timer.Interval = span;
+            if (_gameUpdater.Increment > TimeSpan.Zero)
+                _gameUpdater.ChangeDirection();
+
+            var span = new TimeSpan(_gameUpdater.Increment.Ticks / 3);
+            _timer.Interval = -span;
             _timer.Start();
         }
 
         private void Forward()
         {
+            if (_gameUpdater.Increment < TimeSpan.Zero)
+                _gameUpdater.ChangeDirection();
+
             var span = new TimeSpan(_gameUpdater.Increment.Ticks / 3);
             _timer.Interval = span;
             _timer.Start();
