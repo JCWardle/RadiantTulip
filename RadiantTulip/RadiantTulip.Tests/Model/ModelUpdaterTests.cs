@@ -532,5 +532,97 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(30, updater.Increment.Seconds);
         }
+
+        [Test]
+        public void Plays_Backwards_At_Max_Time()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+            var updater = new ModelUpdater(game);
+            updater.Update();
+
+            updater.ChangeDirection();
+            updater.Update();
+
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
+        }
+
+        [Test]
+        public void Plays_Backwards()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+            var updater = new ModelUpdater(game);
+            updater.Update();
+
+            updater.ChangeDirection();
+            updater.Update();
+
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
+        }
+
+        [Test]
+        public void Goes_Back_Goes_Forward()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+            var updater = new ModelUpdater(game);
+            updater.Update();
+
+            updater.ChangeDirection();
+            updater.Update();
+            updater.ChangeDirection();
+            updater.Update();
+            updater.Update();
+
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 20), updater.Time);
+        }
     }
 }

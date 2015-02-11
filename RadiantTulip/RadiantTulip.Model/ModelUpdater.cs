@@ -31,7 +31,7 @@ namespace RadiantTulip.Model
 
         public void Update()
         {
-            if (_time == _max)
+            if (_time == _max && _increment > TimeSpan.Zero)
                 return;
 
             if (!_incrementTime)
@@ -42,6 +42,11 @@ namespace RadiantTulip.Model
             foreach (var t in _game.Teams)
                 foreach (var player in t.Players)
                    player.CurrentPosition = player.Positions.First(p => p.TimeStamp == _time);
+        }
+
+        public void ChangeDirection()
+        {
+            _increment = -_increment;
         }
 
         public Game Game
