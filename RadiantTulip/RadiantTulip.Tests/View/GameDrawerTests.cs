@@ -18,6 +18,7 @@ namespace RadiantTulip.Tests.View
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
             var groundDrawer = new Mock<IGroundDrawer>();
+            var affects = new List<IVisualAffect>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
             var game = new Game() { Ground = new Ground(), Teams = new List<Team>() };
@@ -31,7 +32,7 @@ namespace RadiantTulip.Tests.View
 
             playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas));
 
-            //drawer.DrawGame(canvas, game);
+            drawer.DrawGame(canvas, game, affects);
 
             playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Once);
         }
@@ -41,6 +42,7 @@ namespace RadiantTulip.Tests.View
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
             var groundDrawer = new Mock<IGroundDrawer>();
+            var affects = new List<IVisualAffect>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
             var player1 = new Player { Visible = true };
@@ -57,7 +59,7 @@ namespace RadiantTulip.Tests.View
 
             playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas));
 
-            //drawer.DrawGame(canvas, game);
+            drawer.DrawGame(canvas, game, affects);
 
             playerDrawer.Verify(p => p.Draw(player1, It.IsAny<Ground>(), canvas), Times.Once);
             playerDrawer.Verify(p => p.Draw(player2, It.IsAny<Ground>(), canvas), Times.Once);
@@ -89,6 +91,7 @@ namespace RadiantTulip.Tests.View
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
             var groundDrawer = new Mock<IGroundDrawer>();
+            var affects = new List<IVisualAffect>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
@@ -101,7 +104,7 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            //drawer.DrawGame(canvas, game);
+            drawer.DrawGame(canvas, game, affects);
 
             playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Once);
         }
@@ -111,12 +114,13 @@ namespace RadiantTulip.Tests.View
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
             var groundDrawer = new Mock<IGroundDrawer>();
+            var affects = new List<IVisualAffect>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
             var game = new Game() { Teams = new List<Team>() };
             game.Ground = new Ground();
 
-            //drawer.DrawGame(canvas, game);
+            drawer.DrawGame(canvas, game, affects);
 
             groundDrawer.Verify(g => g.Draw(canvas, game.Ground), Times.Once);
         }
@@ -126,6 +130,7 @@ namespace RadiantTulip.Tests.View
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
             var groundDrawer = new Mock<IGroundDrawer>();
+            var affects = new List<IVisualAffect>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var visualArtifact = new Mock<IVisualAffect>();
             var canvas = new Canvas();
@@ -137,36 +142,10 @@ namespace RadiantTulip.Tests.View
                     new Player { Visible = true }
                 }
             });
+            affects.Add(visualArtifact.Object);
 
-            //drawer.DrawGame(canvas, game);
+            drawer.DrawGame(canvas, game, affects);
 
-            visualArtifact.Verify(v => v.Draw(canvas), Times.Once);
-        }
-
-        [Test]
-        public void Draws_Visual_Artifact_Multiple_Players()
-        {
-            var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
-            var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
-            var visualArtifact = new Mock<IVisualAffect>();
-            var canvas = new Canvas();
-
-            var player1 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1 } };
-            var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 2, Y = 2 } };
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
-            game.Teams.Add(new Team
-            {
-                Players = new List<Player>()
-                {
-                    player1,
-                    player2
-                }
-            });
-
-            //drawer.DrawGame(canvas, game);
-
-            visualArtifact.Verify(v => v.Draw(canvas), Times.Once);
             visualArtifact.Verify(v => v.Draw(canvas), Times.Once);
         }
 
@@ -175,6 +154,7 @@ namespace RadiantTulip.Tests.View
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
             var groundDrawer = new Mock<IGroundDrawer>();
+            var affects = new List<IVisualAffect>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var visualArtifact1 = new Mock<IVisualAffect>();
             var visualArtifact2 = new Mock<IVisualAffect>();
@@ -190,61 +170,13 @@ namespace RadiantTulip.Tests.View
 
             visualArtifact1.Setup(v => v.Draw(canvas));
             visualArtifact2.Setup(v => v.Draw(canvas));
+            affects.Add(visualArtifact1.Object);
+            affects.Add(visualArtifact2.Object);
 
-            //drawer.DrawGame(canvas, game);
+            drawer.DrawGame(canvas, game, affects);
 
             visualArtifact1.Verify(v => v.Draw(canvas), Times.Once);
             visualArtifact2.Verify(v => v.Draw(canvas), Times.Once);
-        }
-
-        [Test]
-        public void Doesnt_Draw_Visual_Artifact_For_Non_Visible_Player()
-        {
-            var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
-            var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
-            var visualArtifact = new Mock<IVisualAffect>();
-            var canvas = new Canvas();
-
-            var player1 = new Player { Visible = false, CurrentPosition = new Position { X = 1, Y = 1 } };
-            var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 2, Y = 2 } };
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
-            game.Teams.Add(new Team
-            {
-                Players = new List<Player>()
-                {
-                    player1,
-                    player2
-                }
-            });
-
-            //drawer.DrawGame(canvas, game);
-
-            visualArtifact.Verify(v => v.Draw(canvas), Times.Never);
-            visualArtifact.Verify(v => v.Draw(canvas), Times.Once);
-        }
-
-        [Test]
-        public void Remove_Visual_Artifact()
-        {
-            var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
-            var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
-            var visualArtifact = new Mock<IVisualAffect>();
-            var canvas = new Canvas();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
-            game.Teams.Add(new Team
-            {
-                Players = new List<Player>()
-                {
-                    new Player { Visible =  true }
-                }
-            });
-
-            //drawer.DrawGame(canvas, game);
-            //drawer.DrawGame(canvas, game);
-
-            visualArtifact.Verify(v => v.Draw(canvas), Times.Once);
         }
 
         [Test]
@@ -252,6 +184,7 @@ namespace RadiantTulip.Tests.View
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
             var groundDrawer = new Mock<IGroundDrawer>();
+            var affects = new List<IVisualAffect>();
             var drawer = new GameDrawer(groundDrawer.Object, playerDrawer.Object);
             var canvas = new Canvas();
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
@@ -264,7 +197,7 @@ namespace RadiantTulip.Tests.View
             });
 
             canvas.Children.Add(new Ellipse());
-            //drawer.DrawGame(canvas, game);
+            drawer.DrawGame(canvas, game, affects);
 
             Assert.AreEqual(0, canvas.Children.Count);
         }
