@@ -624,5 +624,34 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 20), updater.Time);
         }
+
+        [Test]
+        public void Rewinds_To_Start_And_Stops()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
+                }
+            };
+            var team = new Team()
+            {
+                Players = new List<Player>()
+                {
+                    player
+                }
+            };
+            game.Teams.Add(team);
+            var updater = new ModelUpdater(game);
+            updater.Update();
+
+            updater.ChangeDirection();
+            updater.Update();
+
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
+        }
     }
 }
