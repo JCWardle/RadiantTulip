@@ -7,6 +7,12 @@
     <Style TargetType="TabItem">
         <Setter Property="Background" Value="#494949"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#F7941D"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#F7941D"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#F7941D"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextColorKey}" Color="#000000"/>
+        </Style.Resources>
     </Style>
     
     <Style TargetType="ListBox">
@@ -60,6 +66,12 @@
     
     <Style TargetType="Button" x:Key="PlayControl">
         <Setter Property="Margin" Value="0, 2, 0, 2" />
+    </Style>
+    
+    <Style TargetType="Label" x:Key="GameTime">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Width" Value="100"/>
     </Style>
     
     <Style TargetType="Button" x:Key="Play" BasedOn="{StaticResource PlayControl}">

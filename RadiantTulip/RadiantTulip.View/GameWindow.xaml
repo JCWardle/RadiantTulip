@@ -121,7 +121,7 @@
                     </i:Interaction.Triggers>
                 </Button>
                 <Button Content="Rec"/>
-                <Label Content="{Binding CurrentTime}"/>
+                <Label Content="{Binding CurrentTime}" Style="{StaticResource GameTime}"/>
             </StackPanel>
             
             <!-- Game Display-->
