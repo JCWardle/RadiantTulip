@@ -5,8 +5,15 @@
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cp="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="MainWindow" Height="600" Width="1200">
-    
+        Title="MainWindow" Height="600" Width="1200"
+        Background="#494949">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Window.DataContext>
         <VM:GameViewModel/>
     </Window.DataContext>
@@ -33,7 +40,7 @@
                                 </i:Interaction.Triggers>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" x:Name="PlayerSelector">
                                             <CheckBox>
                                                 <CheckBox.IsChecked>
                                                     <MultiBinding Converter="{StaticResource isSelected}" Mode="OneWay">

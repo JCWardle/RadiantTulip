@@ -3,4 +3,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:RadiantTulip.View">
 
+    <Style TargetType="TabItem">
+        <Setter Property="Background" Value="#494949"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+    
+    <Style TargetType="ListBox">
+        <Setter Property="Background" Value="#494949"/>
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#F7941D"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#F7941D"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#F7941D"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextColorKey}" Color="#000000"/>
+        </Style.Resources>
+    </Style>
+    
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+    
+    <Style TargetType="ListBoxItem">
+        <Setter Property="Background" Value="#BDB7B9"/>
+    </Style>
+    
+    <Style TargetType="StackPanel">
+        <Setter Property="Background" Value="#494949"/>
+    </Style>
+    
+    <Style TargetType="CheckBox">
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1.8" ScaleY="1.8"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
