@@ -27,10 +27,6 @@
         <Setter Property="Background" Value="#BDB7B9"/>
     </Style>
     
-    <Style TargetType="StackPanel">
-        <Setter Property="Background" Value="#494949"/>
-    </Style>
-    
     <Style TargetType="CheckBox">
         <Setter Property="LayoutTransform">
             <Setter.Value>
@@ -56,5 +52,53 @@
     
     <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label" x:Key="FieldLabel">
         <Setter Property="Margin" Value="5, 0, 0, 0"/>
+    </Style>
+    
+    <Style TargetType="DockPanel" x:Key="WhiteBackground">
+        <Setter Property="Background" Value="White"/>
+    </Style>
+    
+    <Style TargetType="Button" x:Key="PlayControl">
+        <Setter Property="Margin" Value="0, 2, 0, 2" />
+    </Style>
+    
+    <Style TargetType="Button" x:Key="Play" BasedOn="{StaticResource PlayControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Image Source="/Images/Play.png" Width="50" Height="25"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="FastForward" BasedOn="{StaticResource PlayControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Image Source="/Images/FastFoward.png" Width="50" Height="25"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="Reverse" BasedOn="{StaticResource PlayControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Image Source="/Images/Rewind.png" Width="50" Height="25"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="Stop" BasedOn="{StaticResource PlayControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Image Source="/Images/Stop.png" Width="50" Height="25"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

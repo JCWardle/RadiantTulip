@@ -87,33 +87,33 @@
                 </ListBox>
             </TabItem>
         </TabControl>
-        
-        
-        <DockPanel Grid.Column="1">
+
+
+        <DockPanel Grid.Column="1" Style="{StaticResource WhiteBackground}">
             <!--Play Controls-->
-            <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal">
-                <Button Content="Stop">
+            <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal" >
+                <Button Content="Stop" Style="{StaticResource Stop}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding StopCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Content="Rewind">
+                <Button Content="Rewind" Style="{StaticResource Reverse}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding RewindCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Content="Play">
+                <Button Content="Play" Style="{StaticResource Play}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding PlayCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Content="Forward">
+                <Button Content="Forward" Style="{StaticResource FastForward}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding ForwardCommand}" />
