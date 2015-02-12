@@ -171,7 +171,8 @@
             
              <!-- Multiple Player Selection Context -->
             <StackPanel Grid.Row="0" Visibility="{Binding State, Converter={StaticResource multipleSelectConverter}, Mode=OneWay}">
-                <Label Content="Group Name:"/>
+                <Label Content="New Group" Style="{StaticResource Heading}" />
+                <Label Content="Group Name:" Style="{StaticResource FieldLabel}"/>
                 <TextBox Name="GroupName"/>
                 <Button Content="Create Group">
                     <i:Interaction.Triggers>

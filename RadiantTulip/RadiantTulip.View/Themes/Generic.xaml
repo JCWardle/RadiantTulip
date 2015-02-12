@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:RadiantTulip.View">
 
+    <!-- General Styles -->
     <Style TargetType="TabItem">
         <Setter Property="Background" Value="#494949"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
@@ -36,5 +37,24 @@
                 <ScaleTransform ScaleX="1.8" ScaleY="1.8"/>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <Style TargetType="TextBox">
+        <Setter Property="Margin" Value="10, 0, 10, 10" />
+        <Setter Property="Foreground" Value="#000000"/>
+    </Style>
+    
+    <Style TargetType="Button">
+        <Setter Property="Margin" Value="10, 0, 10, 0"/>
+    </Style>
+    
+    <!-- Specific Styles -->
+    <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label" x:Key="Heading">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Margin" Value="10, 10, 0, 10"/>
+    </Style>
+    
+    <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label" x:Key="FieldLabel">
+        <Setter Property="Margin" Value="5, 0, 0, 0"/>
     </Style>
 </ResourceDictionary>
