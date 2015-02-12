@@ -21,10 +21,10 @@ namespace RadiantTulip.Model
             var game = new Game();
             game.Ground = new Ground
             {
-                CentreLatitude = -31.944464,
+                CentreLatitude = -31.944664,
                 CentreLongitude = 115.830156,
-                Height = 19100,
-                Width = 13200,
+                Height = 22100,
+                Width = 17200,
                 Image = @"E:\Code\RadiantTulip\RadiantTulip\Grounds\Patersons.png"
             };
 
