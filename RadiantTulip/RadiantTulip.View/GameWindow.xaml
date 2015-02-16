@@ -17,6 +17,14 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="{Binding}"/>
                     <CheckBox>
+                        <CheckBox.IsChecked>
+                            <MultiBinding Converter="{StaticResource affectSelected}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                <Binding Path="."/>
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.VisualAffects" />
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count" />
+                            </MultiBinding>
+                        </CheckBox.IsChecked>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Checked">
                                 <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectCheckedCommand}" CommandParameter="{Binding}"/>

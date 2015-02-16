@@ -123,6 +123,7 @@
     <Compile Include="Converters\MultipleSelect.cs" />
     <Compile Include="Converters\SelectedColour.cs" />
     <Compile Include="Converters\SelectedSize.cs" />
+    <Compile Include="Converters\AffectSelected.cs" />
     <Compile Include="DraggableThumbSlider.cs" />
     <Compile Include="Game\Drawer.cs" />
     <Compile Include="Game\VisualAffects\AffectFactory.cs" />

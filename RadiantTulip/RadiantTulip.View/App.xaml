@@ -9,5 +9,6 @@
         <converters:IsSelected x:Key="isSelected"/>
         <converters:SelectedColour x:Key="selectedColour"/>
         <converters:SelectedSize x:Key="selectedSize"/>
+        <converters:AffectSelected x:Key="affectSelected"/>
     </Application.Resources>
 </Application>
