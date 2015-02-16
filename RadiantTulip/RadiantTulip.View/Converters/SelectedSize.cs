@@ -18,7 +18,7 @@ namespace RadiantTulip.View.Converters
 
             if (state == SelectionState.MultiplePlayers || state == SelectionState.SinglePlayer)
                 players = (ObservableCollection<Player>)values[0];
-            else if (state == SelectionState.Group)
+            else if (state == SelectionState.Group && values[1] != null) 
                 players = ((Group)values[1]).Players;
 
             if (players.Count == 0)

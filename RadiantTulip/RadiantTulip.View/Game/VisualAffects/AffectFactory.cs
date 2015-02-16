@@ -17,11 +17,17 @@ namespace RadiantTulip.View.Game.VisualAffects
                     return new Tadpole(player, game.Ground);
             }
 
-            return null;
+            throw new NotImplementedException();
         }
 
-        public IVisualAffect CreateGroupEffect(IList<Model.Player> player, GroupAffect effect, Model.Game game)
+        public IVisualAffect CreateGroupEffect(IList<Model.Player> players, GroupAffect effect, Model.Game game)
         {
+            switch(effect)
+            {
+                case GroupAffect.Lines:
+                    return new Lines(players, game.Ground);
+            }
+
             throw new NotImplementedException();
         }
     }

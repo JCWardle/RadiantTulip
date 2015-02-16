@@ -125,10 +125,14 @@
     <Compile Include="Converters\SelectedSize.cs" />
     <Compile Include="Converters\AffectSelected.cs" />
     <Compile Include="DraggableThumbSlider.cs" />
+    <Compile Include="GameSetup.xaml.cs">
+      <DependentUpon>GameSetup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Drawer.cs" />
     <Compile Include="Game\VisualAffects\AffectFactory.cs" />
     <Compile Include="Game\VisualAffects\GroupAffect.cs" />
     <Compile Include="Game\VisualAffects\IAffectFactory.cs" />
+    <Compile Include="Game\VisualAffects\Lines.cs" />
     <Compile Include="Game\VisualAffects\PlayerAffect.cs" />
     <Compile Include="Game\VisualAffects\Tadpole.cs" />
     <Compile Include="Group.cs" />
@@ -136,6 +140,10 @@
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\IGameViewModel.cs" />
     <Compile Include="Converters\SingleSelect.cs" />
+    <Page Include="GameSetup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

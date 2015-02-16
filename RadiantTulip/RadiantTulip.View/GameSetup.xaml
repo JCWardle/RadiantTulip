@@ -1,0 +1,56 @@
+﻿<Window x:Class="RadiantTulip.View.GameSetup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GameSetup" Height="300" Width="300"
+        Background="#494949">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <StackPanel Orientation="Vertical">
+        <Label Content="Welcome to Radiant Tulip!" Style="{StaticResource Heading}"/>
+        <TextBlock TextWrapping="WrapWithOverflow">
+            To get started pick your positional data file and the field that the game was played on.
+        </TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Positional Data:"/>
+            <TextBox />
+            <Button Content="Browse"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Field of play"/>
+            <ComboBox></ComboBox>
+        </StackPanel>
+        <Button Content="Advanced Settings"/>
+        <ScrollViewer>
+            <StackPanel Visibility="Visible">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ground Center Latitude"/>
+                    <TextBox></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ground Center Longitude"/>
+                    <TextBox></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ground Width (m)"/>
+                    <TextBox></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ground Height (m)"/>
+                    <TextBox></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ground Padding (m)"/>
+                    <TextBox></TextBox>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Content="Start Game"/>
+    </StackPanel>
+</Window>

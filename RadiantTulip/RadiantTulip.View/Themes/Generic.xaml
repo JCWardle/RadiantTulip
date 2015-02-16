@@ -28,7 +28,12 @@
     <Style TargetType="Label">
         <Setter Property="Foreground" Value="#FFFFFF" />
     </Style>
-    
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Margin" Value="10, 0, 0, 10"/>
+    </Style>
+
     <Style TargetType="ListBoxItem">
         <Setter Property="Background" Value="#BDB7B9"/>
     </Style>

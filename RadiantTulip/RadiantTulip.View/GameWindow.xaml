@@ -97,7 +97,7 @@
                 <ListBox ItemsSource="{Binding Groups}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding GroupSelectedCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                            <i:InvokeCommandAction Command="{Binding GroupSelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItem}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ListBox.ItemTemplate>
@@ -208,7 +208,10 @@
                                 <CheckBox>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Checked">
-                                            <i:InvokeCommandAction Command="{Binding GroupAffectCheckedCommand}" CommandParameter="{Binding}"/>
+                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.GroupAffectCheckedCommand}" CommandParameter="{Binding}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="Unchecked">
+                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.GroupAffectUncheckedCommand}" CommandParameter="{Binding}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </CheckBox>
@@ -222,7 +225,7 @@
             <UniformGrid Grid.Row="1" Height="30" Rows="1" Name="Tools">
                 <ComboBox Name="SizeSelector" ItemsSource="{Binding SizeOptions}">
                     <ComboBox.SelectedValue>
-                        <MultiBinding Converter="{StaticResource selectedSize}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged">
+                        <MultiBinding Converter="{StaticResource selectedSize}" Mode="OneWay">
                             <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
                             <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedGroup" />
                             <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.State" />

@@ -32,6 +32,7 @@ namespace RadiantTulip.View.ViewModels
         private ObservableCollection<Player> _selectedPlayers = new ObservableCollection<Player>();
         private ObservableCollection<Group> _groups = new ObservableCollection<Group>();
         private List<IVisualAffect> _visualAffects;
+        private Group _selectedGroup;
 
         private ICommand _play;
         private ICommand _pause;
@@ -47,6 +48,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _sizeChanged;
         private ICommand _playerAffectCheckedCommand;
         private ICommand _groupAffectCheckedCommand;
+        private ICommand _groupAffectUncheckedCommand;
         private ICommand _playerAffectUncheckedCommand;
 
         public GameViewModel() {}
@@ -104,7 +106,7 @@ namespace RadiantTulip.View.ViewModels
 
         public ICommand GroupSelectedCommand
         {
-            get { return _groupSelected ?? (_groupSelected = new DelegateCommand<Group>(GroupSelected)); }
+            get { return _groupSelected ?? (_groupSelected = new DelegateCommand<object>(GroupSelected)); }
         }
 
         public ICommand SizeChangedCommand
@@ -127,6 +129,17 @@ namespace RadiantTulip.View.ViewModels
             get { return _playerAffectUncheckedCommand ?? (_playerAffectUncheckedCommand = new DelegateCommand<object>(PlayerAffectUnchecked)); }
         }
 
+        public ICommand GroupAffectUncheckedCommand
+        {
+            get { return _groupAffectUncheckedCommand ?? (_groupAffectUncheckedCommand = new DelegateCommand<object>(GroupAffectUnchecked)); }
+        }
+
+        private void GroupAffectUnchecked(object obj)
+        {
+            var affect = (GroupAffect)obj;
+            _visualAffects.RemoveAll(v => v.AffectFor(SelectedGroup.Players.ToList(), affect));
+        }
+
         private void PlayerAffectUnchecked(object obj)
         {
             var affect = (PlayerAffect)obj;
@@ -146,9 +159,9 @@ namespace RadiantTulip.View.ViewModels
                 _visualAffects.Add(_affectFactory.CreatePlayerEffect(p, affect, Game));
         }
 
-        private void GroupSelected(Group group)
+        private void GroupSelected(object group)
         {
-            SelectedGroup = group;
+            SelectedGroup = (Group)group;
             State = SelectionState.Group;
         }
 
@@ -200,6 +213,7 @@ namespace RadiantTulip.View.ViewModels
 
         private void PlayerUnchecked(Player player)
         {
+            SelectedGroup = null;
             SelectedPlayers.Remove(player);
 
             SetState();
@@ -218,7 +232,8 @@ namespace RadiantTulip.View.ViewModels
         }
 
         private void PlayerChecked(Player player)
-        {            
+        {
+            SelectedGroup = null;
             if (!_selectedPlayers.Contains(player))
                 _selectedPlayers.Add(player);
 
@@ -227,6 +242,7 @@ namespace RadiantTulip.View.ViewModels
 
         private void PlayerSelected(IList players)
         {
+            SelectedGroup = null;
             var collection = players.Cast<Player>();
             SelectedPlayers.Clear();
             
@@ -366,7 +382,17 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
-        public Group SelectedGroup { get; set; }
+        public Group SelectedGroup 
+        { 
+            get 
+            {
+                return _selectedGroup;
+            }
+            set
+            {
+                _selectedGroup = value;
+            }
+        }
 
         public Action UpdateView { get; set; }
 
