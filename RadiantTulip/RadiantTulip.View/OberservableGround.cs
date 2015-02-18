@@ -1,16 +1,14 @@
 ﻿using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace RadiantTulip.View.ViewModels
 {
-    public class OberservableGround : Ground, IObservable<Ground>
+    public class OberservableGround : Ground, INotifyPropertyChanged
     {
-        public IDisposable Subscribe(IObserver<Ground> observer)
-        {
-            throw new NotImplementedException();
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

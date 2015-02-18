@@ -59,6 +59,10 @@
         <Setter Property="Margin" Value="10, 10, 10, 10"/>
     </Style>
     
+    <Style TargetType="ComboBox">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    
     <!-- Specific Styles -->
     <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label" x:Key="Heading">
         <Setter Property="FontSize" Value="18"/>

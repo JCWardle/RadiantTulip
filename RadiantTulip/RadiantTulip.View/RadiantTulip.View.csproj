@@ -118,6 +118,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="Converters\BoolToVisibility.cs" />
     <Compile Include="Converters\GroupSelect.cs" />
     <Compile Include="Converters\IsSelected.cs" />
     <Compile Include="Converters\MultipleSelect.cs" />
@@ -139,9 +140,9 @@
     <Compile Include="Game\VisualAffects\Tadpole.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="SelectionState.cs" />
-    <Compile Include="ViewModels\GameSetup.cs" />
+    <Compile Include="ViewModels\GameSetupViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
-    <Compile Include="ViewModels\IGameSetup.cs" />
+    <Compile Include="ViewModels\IGameSetupViewModel.cs" />
     <Compile Include="ViewModels\IGameViewModel.cs" />
     <Compile Include="Converters\SingleSelect.cs" />
     <Compile Include="OberservableGround.cs" />
