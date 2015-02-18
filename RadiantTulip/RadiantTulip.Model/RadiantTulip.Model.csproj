@@ -39,6 +39,9 @@
       <Private>True</Private>
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,9 +62,11 @@
     <Compile Include="Ground.cs" />
     <Compile Include="GroundType.cs" />
     <Compile Include="IGameCreator.cs" />
+    <Compile Include="IGroundReader.cs" />
     <Compile Include="IModelUpdater.cs" />
     <Compile Include="Input\ExcelReader.cs" />
     <Compile Include="Input\ISpatialReader.cs" />
+    <Compile Include="JsonGroundReader.cs" />
     <Compile Include="ModelUpdater.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Position.cs" />

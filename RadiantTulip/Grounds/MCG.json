@@ -1,0 +1,10 @@
+{
+        "Image": "E:\\Code\\RadiantTulip\\RadiantTulip\\Grounds\\MCG.png",
+        "CentreLatitude": -37.819963,
+        "CentreLongitude": 144.983435,
+        "Height": 22100,
+        "Width": 17200,
+        "Padding": 10,
+        "Name": "MCG",
+        "Type": "AFL"
+}
