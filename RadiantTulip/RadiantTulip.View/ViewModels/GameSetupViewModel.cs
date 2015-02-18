@@ -3,6 +3,8 @@ using Microsoft.Practices.Prism.Mvvm;
 using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace RadiantTulip.View.ViewModels
         private string _positionalData;
         private bool _advancedSettings;
         private ICommand _toggleAdvancedSettings;
+        private ObservableCollection<Ground> _selectableGrounds;
 
         public OberservableGround Ground
         {
@@ -26,6 +29,14 @@ namespace RadiantTulip.View.ViewModels
             set
             {
                 _ground = value;
+            }
+        }
+
+        public ObservableCollection<Ground> SelectableGrounds
+        {
+            get
+            {
+                return _selectableGrounds;
             }
         }
 
@@ -69,9 +80,20 @@ namespace RadiantTulip.View.ViewModels
             get { return Enum.GetValues(typeof(GroundType)).Cast<GroundType>(); }
         }
 
-        public GameSetupViewModel()
+        public GameSetupViewModel(){}
+
+        public GameSetupViewModel(IGroundReader reader)
         {
             _advancedSettings = false;
+
+            var streams = Directory.GetFiles("Grounds", "*.json").Select(f => new StreamReader(f).BaseStream).ToList();
+
+            _selectableGrounds = new ObservableCollection<Ground>();
+            
+            foreach(var g in reader.ReadGrounds(streams))
+            {
+                _selectableGrounds.Add(g);
+            }
         }
     }
 }

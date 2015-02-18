@@ -43,7 +43,13 @@
             <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Ground.Type}" ItemsSource="{Binding GroundTypes}"/>
             
             <Label Content="Field of play" Grid.Row="2" Grid.Column="0"/>
-            <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Ground.Name}"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Ground}" ItemsSource="{Binding SelectableGrounds}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"></Label>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </Grid>
         <Button Content="Advanced Settings">
             <i:Interaction.Triggers>

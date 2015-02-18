@@ -1,6 +1,7 @@
 ﻿using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,6 @@ namespace RadiantTulip.View.ViewModels
         bool AdvancedSettings { get; set; }
         ICommand AdvancedSettingsToggle { get; }
         IEnumerable<GroundType> GroundTypes { get; }
+        ObservableCollection<Ground> SelectableGrounds { get; }
     }
 }

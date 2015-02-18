@@ -25,7 +25,7 @@ namespace RadiantTulip.Model
                 CentreLongitude = 115.830156,
                 Height = 22100,
                 Width = 17200,
-                Image = @"E:\Code\RadiantTulip\RadiantTulip\Grounds\Patersons.png"
+                Image = @"E:\Code\RadiantTulip\RadiantTulip\RadiantTulip.Model\Grounds\Patersons.png"
             };
 
             game.Teams = _reader.GetTeams(spatialData);

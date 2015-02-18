@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using RadiantTulip.View.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +16,12 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.View
 {
-    /// <summary>
-    /// Interaction logic for GameSetup.xaml
-    /// </summary>
     public partial class GameSetup : Window
     {
-        public GameSetup()
+        public GameSetup(IUnityContainer container)
         {
             InitializeComponent();
+            this.DataContext = container.Resolve<IGameSetupViewModel>();
         }
     }
 }

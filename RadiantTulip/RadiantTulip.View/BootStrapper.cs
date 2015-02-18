@@ -26,6 +26,7 @@ namespace RadiantTulip.View
             Container.RegisterType(typeof(ICoordinateConverter), typeof(GPSConverter));
             Container.RegisterType(typeof(IGameCreator), typeof(GameCreator));
             Container.RegisterType(typeof (IModelUpdater), typeof (ModelUpdater));
+            Container.RegisterType(typeof(IGroundReader), typeof(JsonGroundReader));
 
             //Drawing
             Container.RegisterType(typeof (IGameDrawer), typeof (GameDrawer));
@@ -35,12 +36,15 @@ namespace RadiantTulip.View
 
             //Views
             Container.RegisterType(typeof (IGameViewModel), typeof (GameViewModel));
+            Container.RegisterType(typeof(IGameSetupViewModel), typeof(GameSetupViewModel));
         }
 
         protected override DependencyObject CreateShell()
         {
             var gameWindow = Container.Resolve<GameWindow>();
             gameWindow.Show();
+            var setupWindow = Container.Resolve<GameSetup>();
+            setupWindow.Show();
             return gameWindow;
         }
     }

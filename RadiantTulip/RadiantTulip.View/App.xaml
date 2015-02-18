@@ -1,8 +1,7 @@
 ﻿<Application x:Class="RadiantTulip.View.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="clr-namespace:RadiantTulip.View.Converters"
-             StartupUri="GameSetup.xaml">
+             xmlns:converters="clr-namespace:RadiantTulip.View.Converters">
     <Application.Resources>
         <converters:SingleSelect x:Key="singleSelectConverter"/>
         <converters:MultipleSelect x:Key="multipleSelectConverter"/>
