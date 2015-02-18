@@ -57,6 +57,7 @@
     <Compile Include="GameCreator.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Ground.cs" />
+    <Compile Include="GroundType.cs" />
     <Compile Include="IGameCreator.cs" />
     <Compile Include="IModelUpdater.cs" />
     <Compile Include="Input\ExcelReader.cs" />

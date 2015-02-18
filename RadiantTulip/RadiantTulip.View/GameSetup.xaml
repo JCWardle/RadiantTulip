@@ -18,36 +18,52 @@
         <TextBlock TextWrapping="WrapWithOverflow">
             To get started pick your positional data file and the field that the game was played on.
         </TextBlock>
-        <v:FileDialog />
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Field of play"/>
-            <ComboBox></ComboBox>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Content="Positional Data:" Grid.Row="0" Grid.Column="0"/>
+            <v:FileDialog Grid.Row="0" Grid.Column="1"/>
+
+            <Label Content="Game Type:" Grid.Row="1" Grid.Column="0"/>
+            <ComboBox Grid.Row="1" Grid.Column="1"/>
+            
+            <Label Content="Field of play" Grid.Row="2" Grid.Column="0"/>
+            <ComboBox Grid.Row="2" Grid.Column="1"/>
+        </Grid>
         <Button Content="Advanced Settings"/>
-        <ScrollViewer>
-            <StackPanel Visibility="Visible">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Ground Center Latitude"/>
-                    <TextBox></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Ground Center Longitude"/>
-                    <TextBox></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Ground Width (m)"/>
-                    <TextBox></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Ground Height (m)"/>
-                    <TextBox></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Ground Padding (m)"/>
-                    <TextBox></TextBox>
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Ground Center Latitude" Grid.Column="0" Grid.Row="0"/>
+            <TextBox Grid.Column="1" Grid.Row="0"/>
+            <Label Content="Ground Center Longitude" Grid.Column="0" Grid.Row="1"/>
+            <TextBox Grid.Column="1" Grid.Row="1"/>
+            <Label Content="Ground Width (m)" Grid.Column="0" Grid.Row="2"/>
+            <TextBox Grid.Column="1" Grid.Row="2"/>
+            <Label Content="Ground Height (m)" Grid.Column="0" Grid.Row="3"/>
+            <TextBox Grid.Column="1" Grid.Row="3"/>
+            <Label Content="Ground Padding (m)" Grid.Column="0" Grid.Row="4"/>
+            <TextBox Grid.Column="1" Grid.Row="4"/>
+        </Grid>
         <Button Content="Start Game"/>
     </StackPanel>
 </Window>

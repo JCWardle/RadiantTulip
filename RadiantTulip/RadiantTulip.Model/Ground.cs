@@ -7,5 +7,7 @@
         public double CentreLatitude { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+        public int Padding { get; set; }
+        public GroundType Type { get; set; }
     }
 }
