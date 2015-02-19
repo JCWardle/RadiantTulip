@@ -251,7 +251,20 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </cp:ColorPicker>
-                <Button Content="Shape" Name="PlayerShape" />
+                <ComboBox Name="ShapeSelector" ItemsSource="{Binding ShapeOptions}">
+                    <ComboBox.SelectedValue>
+                        <MultiBinding Converter="{StaticResource selectedShape}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedGroup" />
+                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.State" />
+                        </MultiBinding>
+                    </ComboBox.SelectedValue>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ShapeChangedCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
             </UniformGrid>
         </Grid>
     </Grid>

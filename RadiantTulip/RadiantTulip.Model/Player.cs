@@ -12,5 +12,6 @@ namespace RadiantTulip.Model
         public string Name { get; set; }
         public Color Colour { get; set; }
         public Size Size { get; set; }
+        public PlayerShape Shape { get; set; }
     }
 }

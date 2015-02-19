@@ -50,6 +50,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _groupAffectCheckedCommand;
         private ICommand _groupAffectUncheckedCommand;
         private ICommand _playerAffectUncheckedCommand;
+        private ICommand _shapeChangedCommand;
 
         public GameViewModel() {}
 
@@ -132,6 +133,28 @@ namespace RadiantTulip.View.ViewModels
         public ICommand GroupAffectUncheckedCommand
         {
             get { return _groupAffectUncheckedCommand ?? (_groupAffectUncheckedCommand = new DelegateCommand<object>(GroupAffectUnchecked)); }
+        }
+
+        public ICommand ShapeChangedCommand
+        {
+            get { return _shapeChangedCommand ?? (_shapeChangedCommand = new DelegateCommand<object>(ShapeChanged)); }
+        }
+
+        private void ShapeChanged(object obj)
+        {
+            var shape = (PlayerShape)obj;
+
+            if (State == SelectionState.MultiplePlayers || State == SelectionState.SinglePlayer)
+            {
+                foreach (var p in SelectedPlayers)
+                    p.Shape = shape;
+            }
+            else if (State == SelectionState.Group)
+            {
+                foreach (var p in SelectedGroup.Players)
+                    p.Shape = shape;
+            }
+            UpdateView();
         }
 
         private void GroupAffectUnchecked(object obj)
@@ -347,6 +370,14 @@ namespace RadiantTulip.View.ViewModels
             get
             {
                 return Enum.GetValues(typeof(RadiantTulip.Model.Size)).Cast<RadiantTulip.Model.Size>();
+            }
+        }
+
+        public IEnumerable<PlayerShape> ShapeOptions
+        {
+            get
+            {
+                return Enum.GetValues(typeof(PlayerShape)).Cast<PlayerShape>();
             }
         }
 

@@ -28,6 +28,7 @@ namespace RadiantTulip.View.ViewModels
         ICommand PlayerUncheckedCommand { get; }
         ICommand ColourChangedCommand { get; }
         ICommand CreateGroupCommand { get; }
+        ICommand ShapeChangedCommand { get; }
         List<IVisualAffect> VisualAffects { get; }
         Group SelectedGroup { get; set; }
     }

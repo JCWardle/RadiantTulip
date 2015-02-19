@@ -11,5 +11,6 @@
         <converters:SelectedSize x:Key="selectedSize"/>
         <converters:AffectSelected x:Key="affectSelected"/>
         <converters:BoolToVisibility x:Key="boolToVisibility"/>
+        <converters:SelectedShape x:Key="selectedShape"/>
     </Application.Resources>
 </Application>
