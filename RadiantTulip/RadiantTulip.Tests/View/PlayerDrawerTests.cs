@@ -23,7 +23,8 @@ namespace RadiantTulip.Tests.View
                     {
                         X = 500,
                         Y = 500
-                    }
+                    },
+                    Shape = PlayerShape.Circle
                 };
             var ground = new Ground { Height = 1000, Width = 1000 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -51,7 +52,8 @@ namespace RadiantTulip.Tests.View
                     {
                         X = 250,
                         Y = 300
-                    }
+                    },
+                    Shape = PlayerShape.Circle
                 };
             var ground = new Ground { Height = 500, Width = 1000 };
             var canvas = new Canvas { Width = 300, Height = 150 };
@@ -135,7 +137,8 @@ namespace RadiantTulip.Tests.View
                 {
                     X = 100,
                     Y = 550
-                }
+                },
+                Shape = PlayerShape.Circle
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -156,7 +159,8 @@ namespace RadiantTulip.Tests.View
                 {
                     X = 10,
                     Y = 10
-                }
+                },
+                Shape = PlayerShape.Circle
             };
 
             var ground = new Ground { Height = 500, Width = 400 };
@@ -183,7 +187,8 @@ namespace RadiantTulip.Tests.View
                 {
                     X = 10,
                     Y = 10
-                }
+                },
+                Shape = PlayerShape.Circle
             };
 
             var ground = new Ground { Height = 500, Width = 400 };
@@ -197,6 +202,34 @@ namespace RadiantTulip.Tests.View
             Assert.AreNotEqual(null, circle);
             Assert.AreEqual(7, circle.Height);
             Assert.AreEqual(7, circle.Width);
+        }
+
+        [Test]
+        public void Player_Draws_With_Rectangle_Shape()
+        {
+            var player = new Player
+            {
+                Size = PlayerSize.Large,
+                Colour = new Color { R = 0, G = 0, B = 255 },
+                CurrentPosition = new Position
+                {
+                    X = 10,
+                    Y = 10
+                },
+                Shape = PlayerShape.Square
+            };
+
+            var ground = new Ground { Height = 500, Width = 400 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+
+            Assert.AreEqual(1, canvas.Children.Count);
+            var rectangle = (Rectangle)canvas.Children[0];
+            Assert.AreNotEqual(null, rectangle);
+            Assert.AreEqual(7, rectangle.Height);
+            Assert.AreEqual(7, rectangle.Width);
         }
     }
 }

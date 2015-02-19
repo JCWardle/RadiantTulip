@@ -22,14 +22,18 @@ namespace RadiantTulip.View.Game
             var x = transform.Item1 - (double)player.Size / 2;
             var y = transform.Item2 - (double)player.Size / 2;
 
-            var circle = new Ellipse
-            {
-                Width = (int)player.Size, 
-                Height = (int)player.Size, 
-                Margin = new Thickness {Left = x, Top = y},
-                Fill = new SolidColorBrush(player.Colour)
-            };
-            canvas.Children.Add(circle);
+            Shape shape = null;
+
+            if (player.Shape == PlayerShape.Circle)
+                shape = new Ellipse();
+            else if (player.Shape == PlayerShape.Square)
+                shape = new Rectangle();
+
+            shape.Width = (int)player.Size;
+            shape.Height = (int)player.Size;
+            shape.Margin = new Thickness {Left = x, Top = y};
+            shape.Fill = new SolidColorBrush(player.Colour);
+            canvas.Children.Add(shape);
         }
     }
 }
