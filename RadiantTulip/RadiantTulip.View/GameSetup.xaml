@@ -43,12 +43,17 @@
             <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Ground.Type}" ItemsSource="{Binding GroundTypes}"/>
             
             <Label Content="Field of play" Grid.Row="2" Grid.Column="0"/>
-            <ComboBox Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Ground}" ItemsSource="{Binding SelectableGrounds}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Name}"></Label>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
+            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding SelectableGrounds}" SelectedItem="{Binding Ground}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedGroundChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"></Label>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
 
         </Grid>

@@ -14,13 +14,14 @@ namespace RadiantTulip.View.ViewModels
 {
     public class GameSetupViewModel : BindableBase, IGameSetupViewModel
     {
-        private OberservableGround _ground;
+        private Ground _ground;
         private string _positionalData;
         private bool _advancedSettings;
         private ICommand _toggleAdvancedSettings;
+        private ICommand _selectedGroundChanged;
         private ObservableCollection<Ground> _selectableGrounds;
 
-        public OberservableGround Ground
+        public Ground Ground
         {
             get
             {
@@ -69,6 +70,16 @@ namespace RadiantTulip.View.ViewModels
             get { return _toggleAdvancedSettings ?? (_toggleAdvancedSettings = new DelegateCommand(ToggleAdvancedSettings)); }
         }
 
+        public ICommand SelectedGroundChanged
+        {
+            get { return _selectedGroundChanged ?? (_selectedGroundChanged = new DelegateCommand(SelectedGroundChange)); }
+        }
+
+        private void SelectedGroundChange()
+        {
+            OnPropertyChanged("Ground");
+        }
+
         private void ToggleAdvancedSettings()
         {
             AdvancedSettings = !AdvancedSettings;
@@ -85,6 +96,7 @@ namespace RadiantTulip.View.ViewModels
         public GameSetupViewModel(IGroundReader reader)
         {
             _advancedSettings = false;
+            Ground = new Ground();
 
             var streams = Directory.GetFiles("Grounds", "*.json").Select(f => new StreamReader(f).BaseStream).ToList();
 

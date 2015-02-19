@@ -11,10 +11,11 @@ namespace RadiantTulip.View.ViewModels
 {
     public interface IGameSetupViewModel
     {
-        OberservableGround Ground { get; set; }
+        Ground Ground { get; set; }
         string PositionalData { get; set; }
         bool AdvancedSettings { get; set; }
         ICommand AdvancedSettingsToggle { get; }
+        ICommand SelectedGroundChanged { get; }
         IEnumerable<GroundType> GroundTypes { get; }
         ObservableCollection<Ground> SelectableGrounds { get; }
     }

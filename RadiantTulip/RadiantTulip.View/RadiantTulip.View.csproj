@@ -145,7 +145,6 @@
     <Compile Include="ViewModels\IGameSetupViewModel.cs" />
     <Compile Include="ViewModels\IGameViewModel.cs" />
     <Compile Include="Converters\SingleSelect.cs" />
-    <Compile Include="OberservableGround.cs" />
     <Page Include="FileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
