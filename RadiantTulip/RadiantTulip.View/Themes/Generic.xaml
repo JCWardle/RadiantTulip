@@ -60,9 +60,16 @@
     </Style>
     
     <Style TargetType="ComboBox">
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#BDB7B9"/>
     </Style>
-    
+
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="Background" Value="#BDB7B9"/>
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#F7941D"/>
+        </Style.Resources>
+    </Style>
+
     <!-- Specific Styles -->
     <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label" x:Key="Heading">
         <Setter Property="FontSize" Value="18"/>
