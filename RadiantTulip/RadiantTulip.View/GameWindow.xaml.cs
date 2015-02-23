@@ -27,10 +27,10 @@ namespace RadiantTulip.View
         {
             InitializeComponent();
             this.DataContext = container.Resolve<IGameViewModel>();
-            _drawer = container.Resolve<IGameDrawer>();
-
+            
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);
+            _drawer = container.Resolve<IGameDrawer>(new ParameterOverride("ground", _view.Game.Ground));
         }
 
         protected void ReRender()
