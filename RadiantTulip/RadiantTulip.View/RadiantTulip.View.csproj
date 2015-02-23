@@ -133,6 +133,8 @@
       <DependentUpon>GameSetup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Drawer.cs" />
+    <Compile Include="Game\GroundDrawerFactory.cs" />
+    <Compile Include="Game\IGroundDrawerFactory.cs" />
     <Compile Include="Game\VisualAffects\AffectFactory.cs" />
     <Compile Include="Game\VisualAffects\GroupAffect.cs" />
     <Compile Include="Game\VisualAffects\IAffectFactory.cs" />
@@ -163,7 +165,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Game\GameDrawer.cs" />
-    <Compile Include="Game\GroundDrawer.cs" />
+    <Compile Include="Game\AFLGroundDrawer.cs" />
     <Compile Include="Game\IGameDrawer.cs" />
     <Compile Include="Game\IGroundDrawer.cs" />
     <Compile Include="Game\IPlayerDrawer.cs" />

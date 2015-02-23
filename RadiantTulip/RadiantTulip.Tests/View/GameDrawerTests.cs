@@ -122,7 +122,7 @@ namespace RadiantTulip.Tests.View
 
             drawer.DrawGame(canvas, game, affects);
 
-            groundDrawer.Verify(g => g.Draw(canvas, game.Ground), Times.Once);
+            groundDrawer.Verify(g => g.Draw(canvas), Times.Once);
         }
 
         [Test]

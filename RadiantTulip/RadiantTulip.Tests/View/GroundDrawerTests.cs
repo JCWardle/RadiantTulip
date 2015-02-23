@@ -19,9 +19,9 @@ namespace RadiantTulip.Tests.View
             var image = GetImagePath("Patersons.png");
             var canvas = new Canvas();
             var ground = new Ground {Image = image};
-            var drawer = new GroundDrawer();
+            var drawer = new AFLGroundDrawer(ground);
 
-            drawer.Draw(canvas, ground);
+            drawer.Draw(canvas);
 
             Assert.AreEqual("ImageBrush", canvas.Background.GetType().Name);
             var brush = (BitmapImage)((ImageBrush)canvas.Background).ImageSource;

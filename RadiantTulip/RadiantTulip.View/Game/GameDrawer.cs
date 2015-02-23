@@ -25,7 +25,7 @@ namespace RadiantTulip.View.Game
         public void DrawGame(Canvas canvas, GameModel game, IList<IVisualAffect> visualAffects)
         {
             canvas.Children.Clear();
-            _groundDrawer.Draw(canvas, game.Ground);
+            _groundDrawer.Draw(canvas);
 
 
             foreach(var t in game.Teams)
