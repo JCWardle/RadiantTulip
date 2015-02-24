@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using GameModel = RadiantTulip.Model.Game;
 
 namespace RadiantTulip.View.Game
@@ -25,6 +26,7 @@ namespace RadiantTulip.View.Game
         public void DrawGame(Canvas canvas, GameModel game, IList<IVisualAffect> visualAffects)
         {
             canvas.Children.Clear();
+            canvas.Background = new SolidColorBrush(Colors.Green);
             _groundDrawer.Draw(canvas);
 
 

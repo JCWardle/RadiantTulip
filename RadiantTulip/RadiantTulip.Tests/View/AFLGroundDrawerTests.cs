@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace RadiantTulip.Tests.View
@@ -50,16 +51,18 @@ namespace RadiantTulip.Tests.View
 
             drawer.Draw(canvas);
 
-            var line1 = (Line)canvas.Children[0];
-            Assert.AreEqual(1, line1.Width);
-            Assert.AreEqual(192, line1.Height);
-            Assert.AreEqual(861, line1.Margin.Top);
-            Assert.AreEqual(0, line1.Margin.Left);
-            var line2 = (Line)canvas.Children[1];
-            Assert.AreEqual(1, line1.Width);
-            Assert.AreEqual(192, line1.Height);
-            Assert.AreEqual(861, line1.Margin.Top);
-            Assert.AreEqual(1850, line1.Margin.Left);
+            var line1 = (Line)canvas.Children[3];
+            Assert.AreEqual(5, line1.StrokeThickness);
+            Assert.AreEqual(0, line1.X1);
+            Assert.AreEqual(964, line1.Y1);
+            Assert.AreEqual(0, line1.X2);
+            Assert.AreEqual(586, line1.Y2);
+            var line2 = (Line)canvas.Children[4];
+            Assert.AreEqual(5, line2.StrokeThickness);
+            Assert.AreEqual(1850, line2.X1);
+            Assert.AreEqual(964, line2.Y1);
+            Assert.AreEqual(1850, line2.X2);
+            Assert.AreEqual(586, line2.Y2);
         }
 
         [Test]
@@ -81,9 +84,9 @@ namespace RadiantTulip.Tests.View
 
             drawer.Draw(canvas);
 
-            var centreSquare = (Rectangle)canvas.Children[0];
-            Assert.AreEqual(50, centreSquare.Width);
-            Assert.AreEqual(50, centreSquare.Height);      
+            var centreSquare = (Rectangle)canvas.Children[2];
+            Assert.AreEqual(500, centreSquare.Width);
+            Assert.AreEqual(500, centreSquare.Height);      
         }
 
         [Test]
@@ -105,7 +108,7 @@ namespace RadiantTulip.Tests.View
 
             drawer.Draw(canvas);
 
-            var centreSquare = (Rectangle)canvas.Children[0];
+            var centreSquare = (Rectangle)canvas.Children[2];
             Assert.AreEqual(675, centreSquare.Margin.Left);
             Assert.AreEqual(525, centreSquare.Margin.Top);
         }
@@ -129,7 +132,7 @@ namespace RadiantTulip.Tests.View
 
             drawer.Draw(canvas);
 
-            var centreSquare = (Ellipse)canvas.Children[0];
+            var centreSquare = (Ellipse)canvas.Children[1];
             Assert.AreEqual(30, centreSquare.Width);
             Assert.AreEqual(30, centreSquare.Height);
         }
@@ -153,9 +156,9 @@ namespace RadiantTulip.Tests.View
 
             drawer.Draw(canvas);
 
-            var centreSquare = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(924.85, centreSquare.Margin.Left);
-            Assert.AreEqual(745.15, centreSquare.Margin.Top);
+            var centreSquare = (Ellipse)canvas.Children[1];
+            Assert.AreEqual(910, centreSquare.Margin.Left);
+            Assert.AreEqual(760, centreSquare.Margin.Top);
         }
 
         [Test]
@@ -183,6 +186,30 @@ namespace RadiantTulip.Tests.View
         }
 
         [Test]
+        public void Centre_Circle_Correct_Position()
+        {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
+
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var centreSquare = (Ellipse)canvas.Children[0];
+            Assert.AreEqual(875, centreSquare.Margin.Left);
+            Assert.AreEqual(725, centreSquare.Margin.Top);
+        }
+
+        [Test]
         public void Goal_Square_Correct_Size()
         {
             var ground = new AFLGround
@@ -201,12 +228,12 @@ namespace RadiantTulip.Tests.View
 
             drawer.Draw(canvas);
 
-            var centreSquare = (Rectangle)canvas.Children[0];
-            Assert.AreEqual(130, centreSquare.Width);
-            Assert.AreEqual(6.4, centreSquare.Height);
-            centreSquare = (Rectangle)canvas.Children[1];
-            Assert.AreEqual(130, centreSquare.Width);
-            Assert.AreEqual(6.4, centreSquare.Height);
+            var centreSquare = (Rectangle)canvas.Children[5];
+            Assert.AreEqual(90, centreSquare.Width);
+            Assert.AreEqual(63, centreSquare.Height);
+            centreSquare = (Rectangle)canvas.Children[6];
+            Assert.AreEqual(90, centreSquare.Width);
+            Assert.AreEqual(63, centreSquare.Height);
         }
 
         [Test]
@@ -228,12 +255,12 @@ namespace RadiantTulip.Tests.View
 
             drawer.Draw(canvas);
 
-            var centreSquare = (Rectangle)canvas.Children[1];
+            var centreSquare = (Rectangle)canvas.Children[5];
             Assert.AreEqual(0, centreSquare.Margin.Left);
-            Assert.AreEqual(771.8, centreSquare.Margin.Top);
-            centreSquare = (Rectangle)canvas.Children[0];
-            Assert.AreEqual(1720, centreSquare.Margin.Left);
-            Assert.AreEqual(771.8, centreSquare.Margin.Top);
+            Assert.AreEqual(743.5, centreSquare.Margin.Top);
+            centreSquare = (Rectangle)canvas.Children[6];
+            Assert.AreEqual(1760, centreSquare.Margin.Left);
+            Assert.AreEqual(743.5, centreSquare.Margin.Top);
         }
 
         [Test]
@@ -264,6 +291,33 @@ namespace RadiantTulip.Tests.View
         public void Fifty_Line_Correct_Position()
         {
 
+        }
+
+        [Test]
+        public void All_Lines_Are_White()
+        {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
+
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            foreach(var c in canvas.Children)
+            {
+                var shape = (Shape)c;
+                shape.Stroke = Brushes.White;
+                shape.Fill = null;
+            }
         }
     }
 }

@@ -86,7 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\AFLGroundDrawerTests.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
-    <Compile Include="View\GroundDrawerTests.cs" />
     <Compile Include="View\PlayerDrawerTests.cs" />
   </ItemGroup>
   <ItemGroup>
