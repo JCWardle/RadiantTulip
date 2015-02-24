@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 
@@ -24,6 +25,8 @@ namespace RadiantTulip.Tests.View
             };
             var drawer = new AFLGroundDrawer(ground);
             var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
 
             drawer.Draw(canvas);
 
@@ -42,6 +45,8 @@ namespace RadiantTulip.Tests.View
             };
             var drawer = new AFLGroundDrawer(ground);
             var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
 
             drawer.Draw(canvas);
 
@@ -71,6 +76,8 @@ namespace RadiantTulip.Tests.View
 
             var drawer = new AFLGroundDrawer(ground);
             var canvas = new Canvas { Width = 1850, Height = 1550};
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
 
             drawer.Draw(canvas);
 
@@ -93,6 +100,8 @@ namespace RadiantTulip.Tests.View
 
             var drawer = new AFLGroundDrawer(ground);
             var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
 
             drawer.Draw(canvas);
 
@@ -102,33 +111,129 @@ namespace RadiantTulip.Tests.View
         }
 
         [Test]
-        public void Fifty_Line_Correct_Position()
+        public void Inner_Circle_Correct_Size()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var centreSquare = (Ellipse)canvas.Children[0];
+            Assert.AreEqual(30, centreSquare.Width);
+            Assert.AreEqual(30, centreSquare.Height);
         }
 
         [Test]
-        public void Inner_Circle_Correct_Size()
+        public void Inner_Circle_Correct_Position()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var centreSquare = (Ellipse)canvas.Children[0];
+            Assert.AreEqual(924.85, centreSquare.Margin.Left);
+            Assert.AreEqual(745.15, centreSquare.Margin.Top);
         }
 
         [Test]
         public void Centre_Circle_Correct_Size()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var centreSquare = (Ellipse)canvas.Children[0];
+            Assert.AreEqual(100, centreSquare.Width);
+            Assert.AreEqual(100, centreSquare.Height);
         }
 
         [Test]
         public void Goal_Square_Correct_Size()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var centreSquare = (Rectangle)canvas.Children[0];
+            Assert.AreEqual(130, centreSquare.Width);
+            Assert.AreEqual(6.4, centreSquare.Height);
+            centreSquare = (Rectangle)canvas.Children[1];
+            Assert.AreEqual(130, centreSquare.Width);
+            Assert.AreEqual(6.4, centreSquare.Height);
         }
 
         [Test]
         public void Goal_Square_Correct_Positions()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var centreSquare = (Rectangle)canvas.Children[1];
+            Assert.AreEqual(0, centreSquare.Margin.Left);
+            Assert.AreEqual(771.8, centreSquare.Margin.Top);
+            centreSquare = (Rectangle)canvas.Children[0];
+            Assert.AreEqual(1720, centreSquare.Margin.Left);
+            Assert.AreEqual(771.8, centreSquare.Margin.Top);
         }
 
         [Test]
@@ -151,6 +256,12 @@ namespace RadiantTulip.Tests.View
 
         [Test]
         public void Point_Posts_Correct_Position()
+        {
+
+        }
+
+        [Test]
+        public void Fifty_Line_Correct_Position()
         {
 
         }
