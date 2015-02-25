@@ -336,9 +336,34 @@ namespace RadiantTulip.Tests.View
             foreach(var c in canvas.Children)
             {
                 var shape = (Shape)c;
-                shape.Stroke = Brushes.White;
-                shape.Fill = null;
+                Assert.AreEqual(Brushes.White, shape.Stroke);
+                Assert.AreEqual(null, shape.Fill);
             }
+        }
+
+        [Test]
+        public void Boundy_Line_Adjusts_For_Padding()
+        {
+            var ground = new Ground
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 1000
+            };
+
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var boundry = (Ellipse)canvas.Children[15];
+            AssertDiff(1669.51, boundry.Width);
+            AssertDiff(1372.85, boundry.Height);
+            AssertDiff(90.2, boundry.Margin.Left);
+            AssertDiff(88.6, boundry.Margin.Top);
         }
 
         [Test]
@@ -362,6 +387,11 @@ namespace RadiantTulip.Tests.View
             var boundry = (Ellipse)canvas.Children[15];
             Assert.AreEqual(1850, boundry.Width);
             Assert.AreEqual(1550, boundry.Height);
+        }
+
+        private void AssertDiff(double a, double b, double diff = 0.1)
+        {
+            Assert.That(Math.Abs(a - b), Is.LessThan(diff));
         }
     }
 }

@@ -23,6 +23,7 @@ namespace RadiantTulip.View.Game
         private const int FIFTY_DISTANCE_OUT = 5000;
 
         private Ground _ground;
+        private Brush _color = Brushes.White;
 
         public AFLGroundDrawer(Ground ground)
         {
@@ -31,8 +32,18 @@ namespace RadiantTulip.View.Game
 
         public void Draw(Canvas canvas)
         {
-            var scaleX = _ground.Width / canvas.ActualWidth;
-            var scaleY = _ground.Height / canvas.ActualHeight;
+            double scaleX, scaleY;
+
+            if (_ground.Padding > 0)
+            {
+                scaleX = (_ground.Width + _ground.Padding * 2) / canvas.ActualWidth;
+                scaleY = (_ground.Height + _ground.Padding * 2) / canvas.ActualHeight;
+            }
+            else
+            {
+                scaleX = _ground.Width / canvas.ActualWidth;
+                scaleY = _ground.Height / canvas.ActualHeight;
+            }
 
             canvas.Children.Add(CreateCentreCircle(scaleX, scaleY, canvas, CENTER_CIRCLE_DIAMETER));
             canvas.Children.Add(CreateCentreCircle(scaleX, scaleY, canvas, INNER_CIRCLE_DIAMETER));
@@ -55,9 +66,10 @@ namespace RadiantTulip.View.Game
         {
             return new Ellipse
             {
-                Width = _ground.Width / scaleX,
-                Height = _ground.Height / scaleY,
-                Margin = new Thickness(0, 0, 0, 0)
+                Width = Scale(scaleX, _ground.Width),
+                Height = Scale(scaleY, _ground.Height),
+                Margin = new Thickness(Scale(scaleX, _ground.Padding), Scale(scaleY, _ground.Padding), Scale(scaleX, _ground.Padding), Scale(scaleY, _ground.Padding)),
+                Stroke = _color
             };
         }
 
@@ -93,6 +105,7 @@ namespace RadiantTulip.View.Game
             foreach(var p in result)
             {
                 p.Y2 = p.Y1;
+                p.Stroke = _color;
 
                 if (left)
                     p.X2 = 0;
@@ -108,7 +121,8 @@ namespace RadiantTulip.View.Game
             var result = new Rectangle
             {
                 Width = Scale(scaleX, GOAL_SQUARE_LENGTH),
-                Height = Scale(scaleY, DISTANCE_BETWEEN_POSTS)
+                Height = Scale(scaleY, DISTANCE_BETWEEN_POSTS),
+                Stroke = _color
             };
 
             var thickness = new Thickness { Top = (canvas.ActualHeight / 2) - (result.Height / 2) };
@@ -130,7 +144,8 @@ namespace RadiantTulip.View.Game
                 Y1 = (canvas.ActualHeight / 2) + Scale(scaleY, DISTANCE_BETWEEN_POSTS * 3),
                 X2 = xPosition,
                 Y2 = (canvas.ActualHeight / 2) - Scale(scaleY, DISTANCE_BETWEEN_POSTS * 3),
-                StrokeThickness = 5
+                StrokeThickness = 5,
+                Stroke = _color
             };
         }
 
@@ -139,7 +154,8 @@ namespace RadiantTulip.View.Game
             var result = new Rectangle
             {
                 Width = Scale(scaleX, CENTRE_SQUARE_LENGTH),
-                Height = Scale(scaleY, CENTRE_SQUARE_LENGTH)
+                Height = Scale(scaleY, CENTRE_SQUARE_LENGTH),
+                Stroke = _color
             };
 
             result.Margin = CentrePosition(canvas, result.Width);
@@ -152,6 +168,7 @@ namespace RadiantTulip.View.Game
             {
                 Width = Scale(scaleX, diameter),
                 Height = Scale(scaleY, diameter),
+                Stroke = _color
             };
             result.Margin = CentrePosition(canvas, result.Width);
             return result;
