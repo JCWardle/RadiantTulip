@@ -351,17 +351,29 @@ namespace RadiantTulip.Tests.View
                 shape.Fill = null;
             }
         }
-        
-        [Test]
-        public void Fifty_Line_Position()
-        {
-
-        }
 
         [Test]
         public void Boundy_Line_Position()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var boundry = (Ellipse)canvas.Children[15];
+            Assert.AreEqual(1850, boundry.Width);
+            Assert.AreEqual(1550, boundry.Height);
         }
     }
 }

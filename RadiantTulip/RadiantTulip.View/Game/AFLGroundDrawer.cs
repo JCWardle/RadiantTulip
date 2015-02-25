@@ -20,6 +20,7 @@ namespace RadiantTulip.View.Game
         private const int GOAL_SQUARE_LENGTH = 900;
         private const int GOAL_POST_HEIGHT = 500;
         private const int BEHIND_POST_HEIGHT = 300;
+        private const int FIFTY_DISTANCE_OUT = 5000;
 
         private Ground _ground;
         private Brush _color = Brushes.White;
@@ -48,6 +49,8 @@ namespace RadiantTulip.View.Game
             var goalPosts = CreateGoalPosts(scaleX, canvas, true);
             goalPosts.AddRange(CreateGoalPosts(scaleX, canvas, false));
 
+            var boundry = CreateBoundry(scaleX, scaleY, canvas);
+
             canvas.Children.Add(centreCircle);
             canvas.Children.Add(innerCircle);
             canvas.Children.Add(centreSquare);
@@ -56,6 +59,17 @@ namespace RadiantTulip.View.Game
             canvas.Children.Add(leftEndGoalSquare);
             canvas.Children.Add(rightEndGoalSquare);
             goalPosts.ForEach(g => canvas.Children.Add(g));
+            canvas.Children.Add(boundry);
+        }
+        private Shape CreateBoundry(double scaleX, double scaleY, Canvas canvas)
+        {
+            return new Ellipse
+            {
+                Width = _ground.Width / scaleX,
+                Height = _ground.Height / scaleY,
+                Stroke = _color,
+                Margin = new Thickness(0, 0, 0, 0)
+            };
         }
 
         private List<Shape> CreateGoalPosts(double scaleX, Canvas canvas, bool left)
@@ -65,22 +79,22 @@ namespace RadiantTulip.View.Game
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
-                X1 = left ? 0 - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
+                X1 = left ? - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
             });
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
-                X1 = left ? 0 - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
+                X1 = left ? - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
             });
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX / 2),
-                X1 = left ? 0 - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
+                X1 = left ? - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
             });
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS / scaleX / 2),
-                X1 = left ? 0 - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
+                X1 = left ? - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
             });
 
             foreach(var p in result)
