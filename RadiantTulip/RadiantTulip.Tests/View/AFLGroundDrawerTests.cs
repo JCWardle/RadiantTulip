@@ -17,26 +17,6 @@ namespace RadiantTulip.Tests.View
     public class AFLGroundDrawerTests
     {
         [Test]
-        public void Correct_Width_And_Height()
-        {
-            var ground = new AFLGround
-            {
-                Width = 18500,
-                Height = 15500
-            };
-            var drawer = new AFLGroundDrawer(ground);
-            var canvas = new Canvas { Width = 1850, Height = 1550 };
-            canvas.Measure(new System.Windows.Size(1850, 1550));
-            canvas.Arrange(new Rect(0, 0, 1850, 1550));
-
-            drawer.Draw(canvas);
-
-            var mainGround = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(1850, mainGround.Width);
-            Assert.AreEqual(1550, mainGround.Height);
-        }
-
-        [Test]
         public void Ground_Finishes_With_Straight_Ends()
         {
             var ground = new AFLGround
@@ -264,33 +244,85 @@ namespace RadiantTulip.Tests.View
         }
 
         [Test]
-        public void Goal_Posts_Correct_Distance_Appart()
+        public void Goal_Posts_Correct_Position_And_Size()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
-        }
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
 
-        [Test] 
-        public void Point_Posts_Correct_Distance_Appart()
-        {
+            drawer.Draw(canvas);
 
-        }
-
-        [Test]
-        public void Goal_Posts_Correct_Position()
-        {
-
+            var goalpost = (Line)canvas.Children[9];
+            Assert.AreEqual(0, goalpost.X2);
+            Assert.AreEqual(-50, goalpost.X1);
+            Assert.AreEqual(743.5, goalpost.Y1);
+            Assert.AreEqual(743.5, goalpost.Y2);
+            goalpost = (Line)canvas.Children[10];
+            Assert.AreEqual(0, goalpost.X2);
+            Assert.AreEqual(-50, goalpost.X1);
+            Assert.AreEqual(806.5, goalpost.Y1);
+            Assert.AreEqual(806.5, goalpost.Y2);
+            goalpost = (Line)canvas.Children[13];
+            Assert.AreEqual(1850, goalpost.X2);
+            Assert.AreEqual(1900, goalpost.X1);
+            Assert.AreEqual(743.5, goalpost.Y1);
+            Assert.AreEqual(743.5, goalpost.Y2);
+            goalpost = (Line)canvas.Children[14];
+            Assert.AreEqual(1850, goalpost.X2);
+            Assert.AreEqual(1900, goalpost.X1);
+            Assert.AreEqual(806.5, goalpost.Y1);
+            Assert.AreEqual(806.5, goalpost.Y2);
         }
 
         [Test]
         public void Point_Posts_Correct_Position()
         {
+            var ground = new AFLGround
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 0,
+                DistanceFrom50ToCentre = 150
+            };
 
-        }
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
 
-        [Test]
-        public void Fifty_Line_Correct_Position()
-        {
+            drawer.Draw(canvas);
 
+            var goalpost = (Line)canvas.Children[7];
+            Assert.AreEqual(0, goalpost.X2);
+            Assert.AreEqual(-30, goalpost.X1);
+            Assert.AreEqual(680.5, goalpost.Y1);
+            Assert.AreEqual(680.5, goalpost.Y2);
+            goalpost = (Line)canvas.Children[8];
+            Assert.AreEqual(0, goalpost.X2);
+            Assert.AreEqual(-30, goalpost.X1);
+            Assert.AreEqual(869.5, goalpost.Y1);
+            Assert.AreEqual(869.5, goalpost.Y2);
+            goalpost = (Line)canvas.Children[11];
+            Assert.AreEqual(1850, goalpost.X2);
+            Assert.AreEqual(1880, goalpost.X1);
+            Assert.AreEqual(680.5, goalpost.Y1);
+            Assert.AreEqual(680.5, goalpost.Y2);
+            goalpost = (Line)canvas.Children[12];
+            Assert.AreEqual(1850, goalpost.X2);
+            Assert.AreEqual(1880, goalpost.X1);
+            Assert.AreEqual(869.5, goalpost.Y1);
+            Assert.AreEqual(869.5, goalpost.Y2);
         }
 
         [Test]
@@ -318,6 +350,18 @@ namespace RadiantTulip.Tests.View
                 shape.Stroke = Brushes.White;
                 shape.Fill = null;
             }
+        }
+        
+        [Test]
+        public void Fifty_Line_Position()
+        {
+
+        }
+
+        [Test]
+        public void Boundy_Line_Position()
+        {
+
         }
     }
 }

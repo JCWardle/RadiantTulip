@@ -1,10 +1,13 @@
 ﻿using RadiantTulip.Model;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace RadiantTulip.View.Game
 {
@@ -15,6 +18,8 @@ namespace RadiantTulip.View.Game
         private const int CENTRE_SQUARE_LENGTH = 5000;
         private const int DISTANCE_BETWEEN_POSTS = 630;
         private const int GOAL_SQUARE_LENGTH = 900;
+        private const int GOAL_POST_HEIGHT = 500;
+        private const int BEHIND_POST_HEIGHT = 300;
 
         private Ground _ground;
         private Brush _color = Brushes.White;
@@ -40,6 +45,9 @@ namespace RadiantTulip.View.Game
             var leftEndGoalSquare = CreateGoalSquare(scaleX, scaleY, canvas, true);
             var rightEndGoalSquare = CreateGoalSquare(scaleX, scaleY, canvas, false);
 
+            var goalPosts = CreateGoalPosts(scaleX, canvas, true);
+            goalPosts.AddRange(CreateGoalPosts(scaleX, canvas, false));
+
             canvas.Children.Add(centreCircle);
             canvas.Children.Add(innerCircle);
             canvas.Children.Add(centreSquare);
@@ -47,6 +55,45 @@ namespace RadiantTulip.View.Game
             canvas.Children.Add(rightEnd);
             canvas.Children.Add(leftEndGoalSquare);
             canvas.Children.Add(rightEndGoalSquare);
+            goalPosts.ForEach(g => canvas.Children.Add(g));
+        }
+
+        private List<Shape> CreateGoalPosts(double scaleX, Canvas canvas, bool left)
+        {
+            var result = new List<Line>();
+
+            result.Add(new Line 
+            { 
+                Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
+                X1 = left ? 0 - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
+            });
+            result.Add(new Line 
+            { 
+                Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
+                X1 = left ? 0 - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
+            });
+            result.Add(new Line 
+            { 
+                Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX / 2),
+                X1 = left ? 0 - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
+            });
+            result.Add(new Line 
+            { 
+                Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS / scaleX / 2),
+                X1 = left ? 0 - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
+            });
+
+            foreach(var p in result)
+            {
+                p.Y2 = p.Y1;
+                p.Stroke = _color;
+
+                if (left)
+                    p.X2 = 0;
+                else
+                    p.X2 = canvas.ActualWidth;
+            }
+            return result.Cast<Shape>().ToList();
         }
 
         private Rectangle CreateGoalSquare(double scaleX, double scaleY, Canvas canvas, bool left)
