@@ -23,7 +23,6 @@ namespace RadiantTulip.View.Game
         private const int FIFTY_DISTANCE_OUT = 5000;
 
         private Ground _ground;
-        private Brush _color = Brushes.White;
 
         public AFLGroundDrawer(Ground ground)
         {
@@ -35,31 +34,22 @@ namespace RadiantTulip.View.Game
             var scaleX = _ground.Width / canvas.ActualWidth;
             var scaleY = _ground.Height / canvas.ActualHeight;
 
-            var centreCircle = CreateCentreCircle(scaleX, scaleY, canvas, CENTER_CIRCLE_DIAMETER);
-            var innerCircle = CreateCentreCircle(scaleX, scaleY, canvas, INNER_CIRCLE_DIAMETER);
+            canvas.Children.Add(CreateCentreCircle(scaleX, scaleY, canvas, CENTER_CIRCLE_DIAMETER));
+            canvas.Children.Add(CreateCentreCircle(scaleX, scaleY, canvas, INNER_CIRCLE_DIAMETER));
 
-            var centreSquare = CreateCentreSquare(scaleX, scaleY, canvas);
+            canvas.Children.Add(CreateCentreSquare(scaleX, scaleY, canvas));
 
-            var leftEnd = CreateEnd(scaleY, canvas, 0);
-            var rightEnd = CreateEnd(scaleY, canvas, canvas.ActualWidth);
+            canvas.Children.Add(CreateEnd(scaleY, canvas, 0));
+            canvas.Children.Add(CreateEnd(scaleY, canvas, canvas.ActualWidth));
 
-            var leftEndGoalSquare = CreateGoalSquare(scaleX, scaleY, canvas, true);
-            var rightEndGoalSquare = CreateGoalSquare(scaleX, scaleY, canvas, false);
+            canvas.Children.Add(CreateGoalSquare(scaleX, scaleY, canvas, true));
+            canvas.Children.Add(CreateGoalSquare(scaleX, scaleY, canvas, false));
 
             var goalPosts = CreateGoalPosts(scaleX, canvas, true);
             goalPosts.AddRange(CreateGoalPosts(scaleX, canvas, false));
-
-            var boundry = CreateBoundry(scaleX, scaleY, canvas);
-
-            canvas.Children.Add(centreCircle);
-            canvas.Children.Add(innerCircle);
-            canvas.Children.Add(centreSquare);
-            canvas.Children.Add(leftEnd);
-            canvas.Children.Add(rightEnd);
-            canvas.Children.Add(leftEndGoalSquare);
-            canvas.Children.Add(rightEndGoalSquare);
             goalPosts.ForEach(g => canvas.Children.Add(g));
-            canvas.Children.Add(boundry);
+
+            canvas.Children.Add(CreateBoundry(scaleX, scaleY, canvas));
         }
         private Shape CreateBoundry(double scaleX, double scaleY, Canvas canvas)
         {
@@ -67,7 +57,6 @@ namespace RadiantTulip.View.Game
             {
                 Width = _ground.Width / scaleX,
                 Height = _ground.Height / scaleY,
-                Stroke = _color,
                 Margin = new Thickness(0, 0, 0, 0)
             };
         }
@@ -76,6 +65,7 @@ namespace RadiantTulip.View.Game
         {
             var result = new List<Line>();
 
+            //Behind Posts
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
@@ -86,6 +76,9 @@ namespace RadiantTulip.View.Game
                 Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
                 X1 = left ? - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
             });
+
+
+            //Goal Posts
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX / 2),
@@ -100,13 +93,13 @@ namespace RadiantTulip.View.Game
             foreach(var p in result)
             {
                 p.Y2 = p.Y1;
-                p.Stroke = _color;
 
                 if (left)
                     p.X2 = 0;
                 else
                     p.X2 = canvas.ActualWidth;
             }
+
             return result.Cast<Shape>().ToList();
         }
 
@@ -114,9 +107,8 @@ namespace RadiantTulip.View.Game
         {
             var result = new Rectangle
             {
-                Width = GOAL_SQUARE_LENGTH / scaleX,
-                Height = DISTANCE_BETWEEN_POSTS / scaleY,
-                Stroke = _color
+                Width = Scale(scaleX, GOAL_SQUARE_LENGTH),
+                Height = Scale(scaleY, DISTANCE_BETWEEN_POSTS)
             };
 
             var thickness = new Thickness { Top = (canvas.ActualHeight / 2) - (result.Height / 2) };
@@ -135,11 +127,10 @@ namespace RadiantTulip.View.Game
             return new Line
             {
                 X1 = xPosition,
-                Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS * 3) / scaleY,
+                Y1 = (canvas.ActualHeight / 2) + Scale(scaleY, DISTANCE_BETWEEN_POSTS * 3),
                 X2 = xPosition,
-                Y2 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS * 3) / scaleY,
-                StrokeThickness = 5,
-                Stroke = _color
+                Y2 = (canvas.ActualHeight / 2) - Scale(scaleY, DISTANCE_BETWEEN_POSTS * 3),
+                StrokeThickness = 5
             };
         }
 
@@ -147,12 +138,11 @@ namespace RadiantTulip.View.Game
         {
             var result = new Rectangle
             {
-                Width = CENTRE_SQUARE_LENGTH / scaleX,
-                Height = CENTRE_SQUARE_LENGTH / scaleY,
-                Stroke = _color
+                Width = Scale(scaleX, CENTRE_SQUARE_LENGTH),
+                Height = Scale(scaleY, CENTRE_SQUARE_LENGTH)
             };
 
-            result.Margin = new Thickness { Left = (canvas.ActualWidth / 2) - (result.Width / 2), Top = (canvas.ActualHeight / 2) - (result.Height / 2) };
+            result.Margin = CentrePosition(canvas, result.Width);
             return result;
         }
 
@@ -160,12 +150,21 @@ namespace RadiantTulip.View.Game
         {
             var result = new Ellipse
             {
-                Width = diameter / scaleX,
-                Height = diameter / scaleY,
-                Stroke = _color
+                Width = Scale(scaleX, diameter),
+                Height = Scale(scaleY, diameter),
             };
-            result.Margin = new Thickness { Left = (canvas.ActualWidth / 2) - (result.Width / 2), Top = (canvas.ActualHeight / 2) - (result.Height / 2) };
+            result.Margin = CentrePosition(canvas, result.Width);
             return result;
+        }
+
+        private Thickness CentrePosition(Canvas canvas, double diameter)
+        {
+            return new Thickness { Left = (canvas.ActualWidth / 2) - (diameter / 2), Top = (canvas.ActualHeight / 2) - (diameter / 2) };
+        }
+
+        private double Scale(double scale, int value)
+        {
+            return value / scale;
         }
     }
 }

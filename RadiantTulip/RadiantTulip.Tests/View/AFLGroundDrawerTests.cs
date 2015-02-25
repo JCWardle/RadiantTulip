@@ -19,7 +19,7 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Ground_Finishes_With_Straight_Ends()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500
@@ -48,13 +48,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Centre_Square_Correct_Size()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -72,13 +71,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Centre_Square_Correct_Position()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -96,13 +94,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Inner_Circle_Correct_Size()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -120,13 +117,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Inner_Circle_Correct_Position()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -144,13 +140,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Centre_Circle_Correct_Size()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -168,13 +163,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Centre_Circle_Correct_Position()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -192,13 +186,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Goal_Square_Correct_Size()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -219,13 +212,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Goal_Square_Correct_Positions()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -246,13 +238,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Goal_Posts_Correct_Position_And_Size()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -287,13 +278,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Point_Posts_Correct_Position()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -328,13 +318,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void All_Lines_Are_White()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
@@ -355,13 +344,12 @@ namespace RadiantTulip.Tests.View
         [Test]
         public void Boundy_Line_Position()
         {
-            var ground = new AFLGround
+            var ground = new Ground
             {
                 Width = 18500,
                 Height = 15500,
                 Type = GroundType.AFL,
-                Padding = 0,
-                DistanceFrom50ToCentre = 150
+                Padding = 0
             };
 
             var drawer = new AFLGroundDrawer(ground);
