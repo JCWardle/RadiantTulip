@@ -240,6 +240,36 @@ namespace RadiantTulip.Tests.View
         }
 
         [Test]
+        public void Goal_Square_Adjusts_For_Padding()
+        {
+            var ground = new Ground
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 1000
+            };
+
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var goalSquare = (Rectangle)canvas.Children[5];
+            AssertDiff(81.2, goalSquare.Width);
+            AssertDiff(55.8, goalSquare.Height);
+            AssertDiff(90.2, goalSquare.Margin.Left);
+            AssertDiff(747.1, goalSquare.Margin.Top);
+            goalSquare = (Rectangle)canvas.Children[6];
+            AssertDiff(81.2, goalSquare.Width);
+            AssertDiff(55.8, goalSquare.Height);
+            AssertDiff(1678.5, goalSquare.Margin.Left);
+            AssertDiff(747.1, goalSquare.Margin.Top);
+        }
+
+        [Test]
         public void Goal_Square_Correct_Positions()
         {
             var ground = new Ground

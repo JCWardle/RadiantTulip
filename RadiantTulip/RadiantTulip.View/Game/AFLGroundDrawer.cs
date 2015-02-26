@@ -118,9 +118,9 @@ namespace RadiantTulip.View.Game
             var thickness = new Thickness { Top = (canvas.ActualHeight / 2) - (result.Height / 2) };
 
             if (left)
-                thickness.Left = 0;
+                thickness.Left = 0 + Scale(scaleX, _ground.Padding);
             else
-                thickness.Left = canvas.ActualWidth - result.Width;
+                thickness.Left = (canvas.ActualWidth - Scale(scaleX, _ground.Padding)) - result.Width;
 
             result.Margin = thickness;
             return result;
