@@ -46,6 +46,36 @@ namespace RadiantTulip.Tests.View
         }
 
         [Test]
+        public void Straight_Ends_Adjust_For_Padding()
+        {
+            var ground = new Ground
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 1000
+            };
+
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var line1 = (Line)canvas.Children[3];
+            AssertDiff(90.2, line1.X1);
+            AssertDiff(942.4, line1.Y1);
+            AssertDiff(90.2, line1.X2);
+            AssertDiff(607.6, line1.Y2);
+            var line2 = (Line)canvas.Children[4];
+            AssertDiff(1759.7, line2.X1);
+            AssertDiff(942.4, line2.Y1);
+            AssertDiff(1759.7, line2.X2);
+            AssertDiff(607.6, line2.Y2);
+        }
+
+        [Test]
         public void Centre_Square_Correct_Size()
         {
             var ground = new Ground
@@ -276,6 +306,46 @@ namespace RadiantTulip.Tests.View
         }
 
         [Test]
+        public void Goal_Posts_Adjust_For_Padding()
+        {
+            var ground = new Ground
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 1000
+            };
+
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var goalpost = (Line)canvas.Children[9];
+            AssertDiff(746.5, goalpost.Y1);
+            AssertDiff(746.5, goalpost.Y2);
+            AssertDiff(45.1, goalpost.X1);
+            AssertDiff(90.2, goalpost.X2);
+            goalpost = (Line)canvas.Children[10];
+            AssertDiff(803.4, goalpost.Y1);
+            AssertDiff(803.4, goalpost.Y2);
+            AssertDiff(45.1, goalpost.X1);
+            AssertDiff(90.2, goalpost.X2);
+            goalpost = (Line)canvas.Children[13];
+            AssertDiff(746.5, goalpost.Y1);
+            AssertDiff(746.5, goalpost.Y2);
+            AssertDiff(1804.8, goalpost.X1);
+            AssertDiff(1759.7, goalpost.X2);
+            goalpost = (Line)canvas.Children[14];
+            AssertDiff(803.4, goalpost.Y1);
+            AssertDiff(803.4, goalpost.Y2);
+            AssertDiff(1804.8, goalpost.X1);
+            AssertDiff(1759.7, goalpost.X2);
+        }
+
+        [Test]
         public void Point_Posts_Correct_Position()
         {
             var ground = new Ground
@@ -313,6 +383,46 @@ namespace RadiantTulip.Tests.View
             Assert.AreEqual(1880, goalpost.X1);
             Assert.AreEqual(869.5, goalpost.Y1);
             Assert.AreEqual(869.5, goalpost.Y2);
+        }
+
+        [Test]
+        public void Point_Posts_Adjust_For_Padding()
+        {
+            var ground = new Ground
+            {
+                Width = 18500,
+                Height = 15500,
+                Type = GroundType.AFL,
+                Padding = 1000
+            };
+
+            var drawer = new AFLGroundDrawer(ground);
+            var canvas = new Canvas { Width = 1850, Height = 1550 };
+            canvas.Measure(new System.Windows.Size(1850, 1550));
+            canvas.Arrange(new Rect(0, 0, 1850, 1550));
+
+            drawer.Draw(canvas);
+
+            var pointPost = (Line)canvas.Children[7];
+            AssertDiff(689.7, pointPost.Y1);
+            AssertDiff(689.7, pointPost.Y2);
+            AssertDiff(63.1, pointPost.X1);
+            AssertDiff(90.2, pointPost.X2);
+            pointPost = (Line)canvas.Children[8];
+            AssertDiff(860.2, pointPost.Y1);
+            AssertDiff(860.2, pointPost.Y2);
+            AssertDiff(63.1, pointPost.X1);
+            AssertDiff(90.2, pointPost.X2);
+            pointPost = (Line)canvas.Children[11];
+            AssertDiff(689.7, pointPost.Y1);
+            AssertDiff(689.7, pointPost.Y2);
+            AssertDiff(1786.8, pointPost.X1);
+            AssertDiff(1759.7, pointPost.X2);
+            pointPost = (Line)canvas.Children[12];
+            AssertDiff(860.2, pointPost.Y1);
+            AssertDiff(860.2, pointPost.Y2);
+            AssertDiff(1786.8, pointPost.X1);
+            AssertDiff(1759.7, pointPost.X2);
         }
 
         [Test]

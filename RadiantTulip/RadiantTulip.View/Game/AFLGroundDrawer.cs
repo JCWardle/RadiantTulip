@@ -32,26 +32,16 @@ namespace RadiantTulip.View.Game
 
         public void Draw(Canvas canvas)
         {
-            double scaleX, scaleY;
-
-            if (_ground.Padding > 0)
-            {
-                scaleX = (_ground.Width + _ground.Padding * 2) / canvas.ActualWidth;
-                scaleY = (_ground.Height + _ground.Padding * 2) / canvas.ActualHeight;
-            }
-            else
-            {
-                scaleX = _ground.Width / canvas.ActualWidth;
-                scaleY = _ground.Height / canvas.ActualHeight;
-            }
+            var scaleX = (_ground.Width + _ground.Padding * 2) / canvas.ActualWidth;
+            var scaleY = (_ground.Height + _ground.Padding * 2) / canvas.ActualHeight;
 
             canvas.Children.Add(CreateCentreCircle(scaleX, scaleY, canvas, CENTER_CIRCLE_DIAMETER));
             canvas.Children.Add(CreateCentreCircle(scaleX, scaleY, canvas, INNER_CIRCLE_DIAMETER));
 
             canvas.Children.Add(CreateCentreSquare(scaleX, scaleY, canvas));
 
-            canvas.Children.Add(CreateEnd(scaleY, canvas, 0));
-            canvas.Children.Add(CreateEnd(scaleY, canvas, canvas.ActualWidth));
+            canvas.Children.Add(CreateEnd(scaleX, scaleY, canvas, true));
+            canvas.Children.Add(CreateEnd(scaleX, scaleY, canvas, false));
 
             canvas.Children.Add(CreateGoalSquare(scaleX, scaleY, canvas, true));
             canvas.Children.Add(CreateGoalSquare(scaleX, scaleY, canvas, false));
@@ -81,12 +71,12 @@ namespace RadiantTulip.View.Game
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
-                X1 = left ? - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
+                X1 = left ? Scale(scaleX, _ground.Padding) - Scale(scaleX, BEHIND_POST_HEIGHT) : (canvas.ActualWidth - Scale(scaleX, _ground.Padding)) + Scale(scaleX, BEHIND_POST_HEIGHT)
             });
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS / scaleX * 1.5),
-                X1 = left ? - BEHIND_POST_HEIGHT / scaleX : canvas.ActualWidth + BEHIND_POST_HEIGHT / scaleX
+                X1 = left ? Scale(scaleX, _ground.Padding) - Scale(scaleX, BEHIND_POST_HEIGHT) : (canvas.ActualWidth - Scale(scaleX, _ground.Padding)) + Scale(scaleX, BEHIND_POST_HEIGHT)
             });
 
 
@@ -94,12 +84,12 @@ namespace RadiantTulip.View.Game
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) - (DISTANCE_BETWEEN_POSTS / scaleX / 2),
-                X1 = left ? - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
+                X1 = left ? Scale(scaleX, _ground.Padding) - Scale(scaleX, GOAL_POST_HEIGHT) : (canvas.ActualWidth - Scale(scaleX, _ground.Padding)) + Scale(scaleX, GOAL_POST_HEIGHT)
             });
             result.Add(new Line 
             { 
                 Y1 = (canvas.ActualHeight / 2) + (DISTANCE_BETWEEN_POSTS / scaleX / 2),
-                X1 = left ? - GOAL_POST_HEIGHT / scaleX : canvas.ActualWidth + GOAL_POST_HEIGHT / scaleX
+                X1 = left ? Scale(scaleX, _ground.Padding) - Scale(scaleX, GOAL_POST_HEIGHT) : (canvas.ActualWidth - Scale(scaleX, _ground.Padding)) + Scale(scaleX, GOAL_POST_HEIGHT)
             });
 
             foreach(var p in result)
@@ -108,9 +98,9 @@ namespace RadiantTulip.View.Game
                 p.Stroke = _color;
 
                 if (left)
-                    p.X2 = 0;
+                    p.X2 = 0 + Scale(scaleX, _ground.Padding);
                 else
-                    p.X2 = canvas.ActualWidth;
+                    p.X2 = canvas.ActualWidth - Scale(scaleX, _ground.Padding);
             }
 
             return result.Cast<Shape>().ToList();
@@ -136,8 +126,9 @@ namespace RadiantTulip.View.Game
             return result;
         }
 
-        private Shape CreateEnd(double scaleY, Canvas canvas, double xPosition)
+        private Shape CreateEnd(double scaleX, double scaleY, Canvas canvas, bool left)
         {
+            var xPosition = left ? 0 + Scale(scaleX, _ground.Padding) : canvas.ActualWidth - Scale(scaleX, _ground.Padding);
             return new Line
             {
                 X1 = xPosition,
@@ -158,7 +149,7 @@ namespace RadiantTulip.View.Game
                 Stroke = _color
             };
 
-            result.Margin = CentrePosition(canvas, result.Width);
+            result.Margin = CentrePosition(canvas, result.Width, result.Height);
             return result;
         }
 
@@ -170,13 +161,17 @@ namespace RadiantTulip.View.Game
                 Height = Scale(scaleY, diameter),
                 Stroke = _color
             };
-            result.Margin = CentrePosition(canvas, result.Width);
+            result.Margin = CentrePosition(canvas, result.Width, result.Height);
             return result;
         }
 
-        private Thickness CentrePosition(Canvas canvas, double diameter)
+        private Thickness CentrePosition(Canvas canvas, double width, double height)
         {
-            return new Thickness { Left = (canvas.ActualWidth / 2) - (diameter / 2), Top = (canvas.ActualHeight / 2) - (diameter / 2) };
+            return new Thickness 
+            { 
+                Left = (canvas.ActualWidth / 2) - (width / 2), 
+                Top = (canvas.ActualHeight / 2) - (height / 2)
+            };
         }
 
         private double Scale(double scale, int value)
