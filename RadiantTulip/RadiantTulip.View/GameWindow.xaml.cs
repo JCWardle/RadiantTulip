@@ -46,8 +46,8 @@ namespace RadiantTulip.View
             if (element is Shape)
             {
                 var shape = (FrameworkElement)element;
-                var x = (game.Ground.Width * (shape.Margin.Left + shape.Width / 2)) / Game.ActualWidth;
-                var y = (game.Ground.Height * (shape.Margin.Top + shape.Height / 2)) / Game.ActualHeight;
+                var x = ((game.Ground.Width + game.Ground.Padding) * (shape.Margin.Left + shape.Width / 2)) / Game.ActualWidth;
+                var y = ((game.Ground.Height + game.Ground.Padding) * (shape.Margin.Top + shape.Height / 2)) / Game.ActualHeight;
 
                 foreach (var t in game.Teams)
                 {
