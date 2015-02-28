@@ -32,17 +32,15 @@ namespace RadiantTulip.Tests.View
             drawer.Draw(canvas);
 
             var line1 = (Line)canvas.Children[3];
-            Assert.AreEqual(5, line1.StrokeThickness);
             Assert.AreEqual(0, line1.X1);
-            Assert.AreEqual(964, line1.Y1);
+            Assert.AreEqual(869.5, line1.Y1);
             Assert.AreEqual(0, line1.X2);
-            Assert.AreEqual(586, line1.Y2);
+            Assert.AreEqual(680.5, line1.Y2);
             var line2 = (Line)canvas.Children[4];
-            Assert.AreEqual(5, line2.StrokeThickness);
             Assert.AreEqual(1850, line2.X1);
-            Assert.AreEqual(964, line2.Y1);
+            Assert.AreEqual(869.5, line2.Y1);
             Assert.AreEqual(1850, line2.X2);
-            Assert.AreEqual(586, line2.Y2);
+            Assert.AreEqual(680.5, line2.Y2);
         }
 
         [Test]
@@ -65,14 +63,14 @@ namespace RadiantTulip.Tests.View
 
             var line1 = (Line)canvas.Children[3];
             AssertDiff(90.2, line1.X1);
-            AssertDiff(942.4, line1.Y1);
+            AssertDiff(858.7, line1.Y1);
             AssertDiff(90.2, line1.X2);
-            AssertDiff(607.6, line1.Y2);
+            AssertDiff(691.3, line1.Y2);
             var line2 = (Line)canvas.Children[4];
             AssertDiff(1759.7, line2.X1);
-            AssertDiff(942.4, line2.Y1);
+            AssertDiff(858.7, line2.Y1);
             AssertDiff(1759.7, line2.X2);
-            AssertDiff(607.6, line2.Y2);
+            AssertDiff(691.3, line2.Y2);
         }
 
         [Test]
@@ -354,23 +352,23 @@ namespace RadiantTulip.Tests.View
             drawer.Draw(canvas);
 
             var goalpost = (Line)canvas.Children[9];
-            AssertDiff(746.5, goalpost.Y1);
-            AssertDiff(746.5, goalpost.Y2);
+            AssertDiff(747.1, goalpost.Y1);
+            AssertDiff(747.1, goalpost.Y2);
             AssertDiff(45.1, goalpost.X1);
             AssertDiff(90.2, goalpost.X2);
             goalpost = (Line)canvas.Children[10];
-            AssertDiff(803.4, goalpost.Y1);
-            AssertDiff(803.4, goalpost.Y2);
+            AssertDiff(802.9, goalpost.Y1);
+            AssertDiff(802.9, goalpost.Y2);
             AssertDiff(45.1, goalpost.X1);
             AssertDiff(90.2, goalpost.X2);
             goalpost = (Line)canvas.Children[13];
-            AssertDiff(746.5, goalpost.Y1);
-            AssertDiff(746.5, goalpost.Y2);
+            AssertDiff(747.1, goalpost.Y1);
+            AssertDiff(747.1, goalpost.Y2);
             AssertDiff(1804.8, goalpost.X1);
             AssertDiff(1759.7, goalpost.X2);
             goalpost = (Line)canvas.Children[14];
-            AssertDiff(803.4, goalpost.Y1);
-            AssertDiff(803.4, goalpost.Y2);
+            AssertDiff(802.9, goalpost.Y1);
+            AssertDiff(802.9, goalpost.Y2);
             AssertDiff(1804.8, goalpost.X1);
             AssertDiff(1759.7, goalpost.X2);
         }
@@ -434,23 +432,23 @@ namespace RadiantTulip.Tests.View
             drawer.Draw(canvas);
 
             var pointPost = (Line)canvas.Children[7];
-            AssertDiff(689.7, pointPost.Y1);
-            AssertDiff(689.7, pointPost.Y2);
+            AssertDiff(691.3, pointPost.Y1);
+            AssertDiff(691.3, pointPost.Y2);
             AssertDiff(63.1, pointPost.X1);
             AssertDiff(90.2, pointPost.X2);
             pointPost = (Line)canvas.Children[8];
-            AssertDiff(860.2, pointPost.Y1);
-            AssertDiff(860.2, pointPost.Y2);
+            AssertDiff(858.7, pointPost.Y1);
+            AssertDiff(858.7, pointPost.Y2);
             AssertDiff(63.1, pointPost.X1);
             AssertDiff(90.2, pointPost.X2);
             pointPost = (Line)canvas.Children[11];
-            AssertDiff(689.7, pointPost.Y1);
-            AssertDiff(689.7, pointPost.Y2);
+            AssertDiff(691.3, pointPost.Y1);
+            AssertDiff(691.3, pointPost.Y2);
             AssertDiff(1786.8, pointPost.X1);
             AssertDiff(1759.7, pointPost.X2);
             pointPost = (Line)canvas.Children[12];
-            AssertDiff(860.2, pointPost.Y1);
-            AssertDiff(860.2, pointPost.Y2);
+            AssertDiff(858.7, pointPost.Y1);
+            AssertDiff(858.7, pointPost.Y2);
             AssertDiff(1786.8, pointPost.X1);
             AssertDiff(1759.7, pointPost.X2);
         }
