@@ -37,13 +37,15 @@ namespace RadiantTulip.View.Game
             _scaleX = (_ground.Width + _ground.Padding * 2) / canvas.ActualWidth;
             _scaleY = (_ground.Height + _ground.Padding * 2) / canvas.ActualHeight;
 
+            var boundry = CreateBoundry(canvas);
+
             canvas.Children.Add(CreateCentreCircle(canvas, CENTER_CIRCLE_DIAMETER));
             canvas.Children.Add(CreateCentreCircle(canvas, INNER_CIRCLE_DIAMETER));
 
             canvas.Children.Add(CreateCentreSquare(canvas));
 
-            canvas.Children.Add(CreateEnd(canvas, true));
-            canvas.Children.Add(CreateEnd(canvas, false));
+            canvas.Children.Add(CreateEnd(canvas, boundry, true));
+            canvas.Children.Add(CreateEnd(canvas, boundry, false));
 
             canvas.Children.Add(CreateGoalSquare(canvas, true));
             canvas.Children.Add(CreateGoalSquare(canvas, false));
@@ -52,9 +54,41 @@ namespace RadiantTulip.View.Game
             goalPosts.AddRange(CreateGoalPosts(canvas, false));
             goalPosts.ForEach(g => canvas.Children.Add(g));
 
-            canvas.Children.Add(CreateBoundry(canvas));
+            canvas.Children.Add(boundry);
+            canvas.Children.Add(Create50Line(canvas, true));
+            canvas.Children.Add(Create50Line(canvas, false));
         }
-        private Shape CreateBoundry(Canvas canvas)
+
+        private Shape Create50Line(Canvas canvas, bool left)
+        {
+            var xPositionCentre = left ? ScaleWidth(_ground.Padding) : canvas.ActualWidth - ScaleWidth(_ground.Padding);
+            var yPositionCentre = canvas.ActualHeight / 2;
+
+            var geometry = new StreamGeometry();
+
+            using (var gc = geometry.Open())
+            {
+                gc.BeginFigure(new Point(xPositionCentre, yPositionCentre + ScaleHeight(FIFTY_DISTANCE_OUT)), false, false);
+
+                gc.ArcTo(
+                    point: new Point(xPositionCentre, yPositionCentre - ScaleHeight(FIFTY_DISTANCE_OUT)),
+                    size: new System.Windows.Size(ScaleWidth(FIFTY_DISTANCE_OUT), ScaleHeight(FIFTY_DISTANCE_OUT)),
+                    rotationAngle: 180,
+                    isLargeArc: true,
+                    sweepDirection: left ? SweepDirection.Counterclockwise : SweepDirection.Clockwise,
+                    isStroked: true,
+                    isSmoothJoin: false);
+            }
+
+            return new Path
+            {
+                Stroke = _color,
+                Data = geometry,
+                StrokeThickness = 1
+            };
+        }
+
+        private Ellipse CreateBoundry(Canvas canvas)
         {
             return new Ellipse
             {
@@ -128,7 +162,7 @@ namespace RadiantTulip.View.Game
             return result;
         }
 
-        private Shape CreateEnd(Canvas canvas, bool left)
+        private Shape CreateEnd(Canvas canvas, Ellipse boundry, bool left)
         {
             var xPosition = left ? 0 + ScaleWidth(_ground.Padding) : canvas.ActualWidth - ScaleWidth(_ground.Padding);
 
@@ -141,6 +175,34 @@ namespace RadiantTulip.View.Game
                 Stroke = _color
             };
 
+            //TODO: Revisit putting the ends in the correct position on the ground
+            /*var boundryCentreX = boundry.Margin.Left + (boundry.Width / 2);
+            var boundryCentreY = boundry.Margin.Top + (boundry.Height / 2);
+
+            var distanceIntoGround = Math.Pow(result.Y1 - boundryCentreY, 2);
+            distanceIntoGround /= (boundry.Height / 2);
+            distanceIntoGround = 1 - distanceIntoGround;
+            distanceIntoGround *= (boundry.Width / 2);
+            
+            //Quadratic equation to solve for X
+            var a = 1;
+            var b = -boundryCentreX + -boundryCentreX;
+            var c = (-boundryCentreX * -boundryCentreX) - distanceIntoGround;
+
+            var discriminant = Math.Sqrt(Math.Pow(b, 2) - 4 * a * c);
+            var solution = (-b + discriminant) / 2 * a;
+
+            if (left)
+            {
+                result.X1 += distanceIntoGround;
+                result.X2 += distanceIntoGround;
+            }
+            else
+            {
+                result.X1 -= distanceIntoGround;
+                result.X2 -= distanceIntoGround;
+            }*/
+            
             return result;
         }
 
