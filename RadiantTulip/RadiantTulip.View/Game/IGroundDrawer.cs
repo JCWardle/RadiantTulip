@@ -5,6 +5,6 @@ namespace RadiantTulip.View.Game
 {
     public interface IGroundDrawer
     {
-        void Draw(Canvas canvas, Ground ground);
+        void Draw(Canvas canvas);
     }
 }

@@ -30,9 +30,10 @@ namespace RadiantTulip.View
 
             //Drawing
             Container.RegisterType(typeof (IGameDrawer), typeof (GameDrawer));
-            Container.RegisterType(typeof (IGroundDrawer), typeof (GroundDrawer));
+            Container.RegisterType(typeof (IGroundDrawer), typeof (AFLGroundDrawer));
             Container.RegisterType(typeof (IPlayerDrawer), typeof (PlayerDrawer));
             Container.RegisterType(typeof(IAffectFactory), typeof(AffectFactory));
+            Container.RegisterType(typeof(IGroundDrawerFactory), typeof(GroundDrawerFactory));
 
             //Views
             Container.RegisterType(typeof (IGameViewModel), typeof (GameViewModel));

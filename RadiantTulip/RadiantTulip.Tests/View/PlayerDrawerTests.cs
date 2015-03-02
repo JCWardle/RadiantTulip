@@ -231,5 +231,85 @@ namespace RadiantTulip.Tests.View
             Assert.AreEqual(7, rectangle.Height);
             Assert.AreEqual(7, rectangle.Width);
         }
+
+        [Test]
+        public void Player_Outside_Ground_But_In_Padding_Bottom()
+        {
+            var player = new Player
+            {
+                CurrentPosition = new Position
+                {
+                    X = 100,
+                    Y = 550
+                },
+                Shape = PlayerShape.Circle
+            };
+            var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+            Assert.AreEqual(1, canvas.Children.Count);
+        }
+
+        [Test]
+        public void Player_Outside_Ground_But_In_Padding_Left()
+        {
+            var player = new Player
+            {
+                CurrentPosition = new Position
+                {
+                    X = 10,
+                    Y = 10
+                },
+                Shape = PlayerShape.Circle
+            };
+            var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+            Assert.AreEqual(1, canvas.Children.Count);
+        }
+
+        [Test]
+        public void Player_Outside_Ground_But_In_Padding_Right()
+        {
+            var player = new Player
+            {
+                CurrentPosition = new Position
+                {
+                    X = 450,
+                    Y = 10
+                },
+                Shape = PlayerShape.Circle
+            };
+            var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+            Assert.AreEqual(1, canvas.Children.Count);
+        }
+
+        [Test]
+        public void Player_Outside_Ground_But_In_Padding_Top()
+        {
+            var player = new Player
+            {
+                CurrentPosition = new Position
+                {
+                    X = 300,
+                    Y = 10
+                },
+                Shape = PlayerShape.Circle
+            };
+            var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            var drawer = new PlayerDrawer();
+
+            drawer.Draw(player, ground, canvas);
+            Assert.AreEqual(1, canvas.Children.Count);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace RadiantTulip.View.Game
         public void Draw(Player player, Ground ground, Canvas canvas)
         {
             var position = player.CurrentPosition;
-            if (position.X > ground.Width || position.Y > ground.Height
+            if (position.X > ground.Width + ground.Padding || position.Y > ground.Height + ground.Padding
                 || position.X < 0 || position.Y < 0)
                 return;
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using GameModel = RadiantTulip.Model.Game;
 
 namespace RadiantTulip.View.Game
@@ -16,24 +17,26 @@ namespace RadiantTulip.View.Game
         private IGroundDrawer _groundDrawer;
         private IPlayerDrawer _playerDrawer;
 
-        public GameDrawer(IGroundDrawer groundDrawer, IPlayerDrawer playerDrawer)
+        public GameDrawer(IGroundDrawerFactory groundFactory, IPlayerDrawer playerDrawer, Ground ground)
         {
-            _groundDrawer = groundDrawer;
+            _groundDrawer = groundFactory.CreateGroundDrawer(ground);
             _playerDrawer = playerDrawer;
         }
 
         public void DrawGame(Canvas canvas, GameModel game, IList<IVisualAffect> visualAffects)
         {
             canvas.Children.Clear();
-            _groundDrawer.Draw(canvas, game.Ground);
+            canvas.Background = new SolidColorBrush(Colors.Green);
+            _groundDrawer.Draw(canvas);
 
 
-            foreach(var t in game.Teams)
-                foreach(var p in t.Players.Where(p => p.Visible))
+            foreach (var t in game.Teams)
+            {
+                foreach (var p in t.Players.Where(p => p.Visible))
                 {
                     _playerDrawer.Draw(p, game.Ground, canvas);
-                    
                 }
+            }
 
             foreach (var v in visualAffects)
                 v.Draw(canvas);

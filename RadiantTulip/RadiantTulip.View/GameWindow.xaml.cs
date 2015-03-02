@@ -27,10 +27,10 @@ namespace RadiantTulip.View
         {
             InitializeComponent();
             this.DataContext = container.Resolve<IGameViewModel>();
-            _drawer = container.Resolve<IGameDrawer>();
-
+            
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);
+            _drawer = container.Resolve<IGameDrawer>(new ParameterOverride("ground", _view.Game.Ground));
         }
 
         protected void ReRender()
@@ -46,8 +46,8 @@ namespace RadiantTulip.View
             if (element is Shape)
             {
                 var shape = (FrameworkElement)element;
-                var x = (game.Ground.Width * (shape.Margin.Left + shape.Width / 2)) / Game.ActualWidth;
-                var y = (game.Ground.Height * (shape.Margin.Top + shape.Height / 2)) / Game.ActualHeight;
+                var x = ((game.Ground.Width + game.Ground.Padding) * (shape.Margin.Left + shape.Width / 2)) / Game.ActualWidth;
+                var y = ((game.Ground.Height + game.Ground.Padding) * (shape.Margin.Top + shape.Height / 2)) / Game.ActualHeight;
 
                 foreach (var t in game.Teams)
                 {

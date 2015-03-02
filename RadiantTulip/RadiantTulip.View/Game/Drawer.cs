@@ -20,8 +20,8 @@ namespace RadiantTulip.View.Game
         /// <returns>Returns x, y</returns>
         public Tuple<double, double> TransformToCanvas(double x, double y, Ground ground, Canvas canvas)
         {
-            var xpos = x / ground.Width * canvas.ActualWidth;
-            var ypos = y / ground.Height * canvas.ActualHeight;
+            var xpos = x / (ground.Width + ground.Padding) * canvas.ActualWidth;
+            var ypos = y / (ground.Height + ground.Padding) * canvas.ActualHeight;
 
             return new Tuple<double, double>(xpos, ypos);
         }

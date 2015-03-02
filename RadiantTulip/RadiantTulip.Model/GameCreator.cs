@@ -21,11 +21,12 @@ namespace RadiantTulip.Model
             var game = new Game();
             game.Ground = new Ground
             {
-                CentreLatitude = -31.944664,
-                CentreLongitude = 115.830156,
-                Height = 22100,
-                Width = 17200,
-                Image = @"E:\Code\RadiantTulip\RadiantTulip\RadiantTulip.Model\Grounds\Patersons.png"
+                CentreLatitude = -31.944191,
+                CentreLongitude = 115.829766,
+                Height = 12000,
+                Width = 17500,
+                Image = @"E:\Code\RadiantTulip\RadiantTulip\RadiantTulip.Model\Grounds\Patersons.png",
+                Padding = 5000
             };
 
             game.Teams = _reader.GetTeams(spatialData);
