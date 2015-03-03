@@ -1,4 +1,5 @@
-﻿using System.Device.Location;
+﻿using System;
+using System.Device.Location;
 
 namespace RadiantTulip.Model.Converter
 {
@@ -24,12 +25,28 @@ namespace RadiantTulip.Model.Converter
             else
                 yDistance = (ground.Height / 2d) + yDistance;
 
+            var theta = ConvertDegreesToRadians(ground.Rotation);
+
+            xDistance -= ground.Width / 2;
+            yDistance -= ground.Height / 2;
+
+            xDistance = xDistance * Math.Cos(theta) + yDistance * Math.Sin(theta);
+            yDistance = xDistance * Math.Sin(theta) + yDistance * Math.Cos(theta) ;
+
+            xDistance += ground.Width / 2;
+            yDistance += ground.Height / 2;
+
             return new Position
             {
                 TimeStamp = position.TimeStamp,
                 X = xDistance,
                 Y = yDistance
             };
+        }
+
+        private double ConvertDegreesToRadians(float degrees)
+        {
+            return (Math.PI / 180) * degrees;
         }
     }
 }

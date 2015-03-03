@@ -10,5 +10,6 @@
         public int Padding { get; set; }
         public GroundType Type { get; set; }
         public string Name { get; set; }
+        public float Rotation { get; set; }
     }
 }

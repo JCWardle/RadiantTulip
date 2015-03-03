@@ -115,5 +115,31 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(12677.274845047472d, result.Y);
             Assert.AreEqual(new DateTime(1, 1, 1), new DateTime(1, 1, 1));
         }
+
+        [Test]
+        public void Adjusts_For_Ground_Rotation()
+        {
+            var position = new Position
+            {
+                Y = -31.0000009,
+                X = 115.0,
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
+            };
+            var ground = new Ground()
+            {
+                CentreLatitude = -31.0,
+                CentreLongitude = 115.0,
+                Height = 500,
+                Width = 1000,
+                Rotation = 180
+            };
+
+            var converter = new GPSConverter();
+
+            var result = converter.Convert(position, ground);
+
+            Assert.AreEqual(500, result.X);
+            Assert.AreEqual(239.98381722506434d, result.Y);
+        }
     }
 }
