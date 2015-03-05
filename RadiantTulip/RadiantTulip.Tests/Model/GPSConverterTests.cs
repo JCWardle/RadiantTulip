@@ -115,5 +115,83 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(12677.274845047472d, result.Y);
             Assert.AreEqual(new DateTime(1, 1, 1), new DateTime(1, 1, 1));
         }
+
+        [Test]
+        public void Adjusts_For_Ground_Rotation_Y()
+        {
+            var position = new Position
+            {
+                Y = -31.0000009,
+                X = 115.0,
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
+            };
+            var ground = new Ground()
+            {
+                CentreLatitude = -31.0,
+                CentreLongitude = 115.0,
+                Height = 500,
+                Width = 1000,
+                Rotation = 180
+            };
+
+            var converter = new GPSConverter();
+
+            var result = converter.Convert(position, ground);
+
+            Assert.AreEqual(500, result.X);
+            Assert.AreEqual(239.9838172250644d, result.Y);
+        }
+
+        [Test]
+        public void Adjusts_For_Ground_Rotation_X()
+        {
+            var position = new Position
+            {
+                Y = -31,
+                X = 115.00001049,
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
+            };
+            var ground = new Ground()
+            {
+                CentreLatitude = -31.0,
+                CentreLongitude = 115.0,
+                Height = 500,
+                Width = 1000,
+                Rotation = 180
+            };
+
+            var converter = new GPSConverter();
+
+            var result = converter.Convert(position, ground);
+
+            Assert.AreEqual(399.93071071314364d, result.X);
+            Assert.AreEqual(250.00000000000009d, result.Y);
+        }
+
+        [Test]
+        public void Adjusts_For_Ground_Rotation_X_Y()
+        {
+            var position = new Position
+            {
+                Y = -31.0000009,
+                X = 115.00001049,
+                TimeStamp = new TimeSpan(0, 0, 0, 0, 0)
+            };
+            var ground = new Ground()
+            {
+                CentreLatitude = -31.0,
+                CentreLongitude = 115.0,
+                Height = 500,
+                Width = 1000,
+                Rotation = 180
+            };
+
+            var converter = new GPSConverter();
+
+            var result = converter.Convert(position, ground);
+
+            Assert.AreEqual(399.93071071314364d, result.X);
+            Assert.AreEqual(239.98381722506443d, result.Y);
+        }
     }
 }
