@@ -26,12 +26,13 @@ namespace RadiantTulip.Model.Converter
                 yDistance = (ground.Height / 2d) + yDistance;
 
             var theta = ConvertDegreesToRadians(ground.Rotation);
+            var originalX = xDistance;
 
             xDistance -= ground.Width / 2;
             yDistance -= ground.Height / 2;
 
-            xDistance = xDistance * Math.Cos(theta) + yDistance * Math.Sin(theta);
-            yDistance = xDistance * Math.Sin(theta) + yDistance * Math.Cos(theta) ;
+            xDistance = (xDistance * Math.Cos(theta)) - (yDistance * Math.Sin(theta));
+            yDistance = (originalX * Math.Sin(theta)) + (yDistance * Math.Cos(theta));
 
             xDistance += ground.Width / 2;
             yDistance += ground.Height / 2;
