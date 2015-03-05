@@ -27,7 +27,7 @@ namespace RadiantTulip.Model
                 Width = 17500,
                 Image = @"E:\Code\RadiantTulip\RadiantTulip\RadiantTulip.Model\Grounds\Patersons.png",
                 Padding = 5000,
-                Rotation = 90
+                Rotation = 0
             };
 
             game.Teams = _reader.GetTeams(spatialData);
