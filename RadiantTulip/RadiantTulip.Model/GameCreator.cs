@@ -23,11 +23,10 @@ namespace RadiantTulip.Model
             {
                 CentreLatitude = -31.944191,
                 CentreLongitude = 115.829766,
-                Height = 12000,
-                Width = 17500,
-                Image = @"E:\Code\RadiantTulip\RadiantTulip\RadiantTulip.Model\Grounds\Patersons.png",
-                Padding = 5000,
-                Rotation = 90
+                Height = 1500,
+                Width = 2800,
+                Rotation = 0,
+                Type = GroundType.WheelChairRugby
             };
 
             game.Teams = _reader.GetTeams(spatialData);
