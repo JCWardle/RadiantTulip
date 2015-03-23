@@ -9,6 +9,8 @@ namespace RadiantTulip.Model
     public enum GroundType
     {
         [Description("AFL")]
-        AFL
+        AFL,
+        [Description("Wheel Chair Rugby")]
+        WheelChairRugby
     }
 }
