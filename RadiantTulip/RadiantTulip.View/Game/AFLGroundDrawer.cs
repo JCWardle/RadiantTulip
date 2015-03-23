@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace RadiantTulip.View.Game
 {
-    public class AFLGroundDrawer : IGroundDrawer
+    public class AFLGroundDrawer : GroundDrawer
     {
         private const int CENTER_CIRCLE_DIAMETER = 1000;
         private const int INNER_CIRCLE_DIAMETER = 300;
@@ -32,7 +32,7 @@ namespace RadiantTulip.View.Game
             _ground = ground;
         }
 
-        public void Draw(Canvas canvas)
+        public override void Draw(Canvas canvas)
         {
             _scaleX = (_ground.Width + _ground.Padding * 2) / canvas.ActualWidth;
             _scaleY = (_ground.Height + _ground.Padding * 2) / canvas.ActualHeight;

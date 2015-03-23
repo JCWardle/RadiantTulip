@@ -9,7 +9,7 @@ namespace RadiantTulip.View.Game
 {
     public class GroundDrawerFactory : IGroundDrawerFactory
     {
-        public IGroundDrawer CreateGroundDrawer(Ground ground)
+        public GroundDrawer CreateGroundDrawer(Ground ground)
         {
             switch(ground.Type)
             {

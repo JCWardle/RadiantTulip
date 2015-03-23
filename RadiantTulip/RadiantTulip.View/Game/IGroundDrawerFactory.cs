@@ -9,6 +9,6 @@ namespace RadiantTulip.View.Game
 {
     public interface IGroundDrawerFactory
     {
-        IGroundDrawer CreateGroundDrawer(Ground ground);
+        GroundDrawer CreateGroundDrawer(Ground ground);
     }
 }

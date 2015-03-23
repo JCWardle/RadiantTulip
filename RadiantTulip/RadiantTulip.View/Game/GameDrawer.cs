@@ -14,7 +14,7 @@ namespace RadiantTulip.View.Game
 {
     public class GameDrawer : IGameDrawer
     {
-        private IGroundDrawer _groundDrawer;
+        private GroundDrawer _groundDrawer;
         private IPlayerDrawer _playerDrawer;
 
         public GameDrawer(IGroundDrawerFactory groundFactory, IPlayerDrawer playerDrawer, Ground ground)

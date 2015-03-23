@@ -26,7 +26,8 @@ namespace RadiantTulip.Model
                 Height = 1500,
                 Width = 2800,
                 Rotation = 0,
-                Type = GroundType.WheelChairRugby
+                Type = GroundType.WheelChairRugby,
+                Padding = 100
             };
 
             game.Teams = _reader.GetTeams(spatialData);
