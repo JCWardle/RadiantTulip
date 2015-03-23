@@ -40,14 +40,16 @@ namespace RadiantTulip.View.Game
 
         private Shape CentreLine(Canvas canvas)
         {
-            return new Line
-            {
-                X1 = canvas.ActualWidth / 2,
-                X2 = canvas.ActualWidth / 2,
-                Y1 = 0 + ScaleY(Ground.Padding),
-                Y2 = canvas.ActualHeight - ScaleY(Ground.Padding),
-                Stroke = _color
-            };
+            var result = new Line
+             {
+                 X1 = CentreX(),
+                 X2 = CentreX(),
+                 Y1 = 0,
+                 Y2 = Ground.Height,
+                 Stroke = _color
+             };
+
+            return ScaleLine(result);
         }
 
         private Shape KeyArea(Canvas canvas, bool left)

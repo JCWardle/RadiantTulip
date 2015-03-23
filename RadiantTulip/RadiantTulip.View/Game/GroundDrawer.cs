@@ -31,6 +31,16 @@ namespace RadiantTulip.View.Game
             };
             return shape;
         }
+
+        protected Shape ScaleLine(Line line)
+        {
+            line.X1 = ScaleX(line.X1 + Ground.Padding);
+            line.X2 = ScaleX(line.X2 + Ground.Padding);
+            line.Y1 = ScaleY(line.Y1 + Ground.Padding);
+            line.Y2 = ScaleY(line.Y2 + Ground.Padding);
+
+            return line;
+        }
         
         protected double CentreX()
         {
