@@ -58,8 +58,8 @@ namespace RadiantTulip.View.Game
 
         private Shape CentreCircle(Canvas canvas)
         {
-            var centreX = (canvas.ActualWidth / 2) - (CENTRE_CIRCLE_DIAMETER / 2);
-            var centreY = (canvas.ActualHeight / 2) - (CENTRE_CIRCLE_DIAMETER / 2);
+            var centreX = (canvas.ActualWidth / 2) - (ScaleWidth(CENTRE_CIRCLE_DIAMETER) / 2);
+            var centreY = (canvas.ActualHeight / 2) - (ScaleHeight(CENTRE_CIRCLE_DIAMETER) / 2);
 
             return new Ellipse
             {

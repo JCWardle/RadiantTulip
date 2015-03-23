@@ -55,8 +55,8 @@ namespace RadiantTulip.Tests.View
             groundDrawer.Draw(canvas);
 
             var centreCircle = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(2620, centreCircle.Margin.Left);
-            Assert.AreEqual(1320, centreCircle.Margin.Top);
+            Assert.AreEqual(2440, centreCircle.Margin.Left);
+            Assert.AreEqual(1140, centreCircle.Margin.Top);
             Assert.AreEqual(720, centreCircle.Width);
             Assert.AreEqual(720, centreCircle.Height);
         }

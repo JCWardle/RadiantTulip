@@ -15,6 +15,8 @@ namespace RadiantTulip.View.Game
             {
                 case GroundType.AFL:
                     return new AFLGroundDrawer(ground);
+                case GroundType.WheelChairRugby:
+                    return new WheelChairRugbyGroundDrawer(ground);
             }
 
 
