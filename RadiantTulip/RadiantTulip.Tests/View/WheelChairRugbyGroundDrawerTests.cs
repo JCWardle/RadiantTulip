@@ -215,5 +215,52 @@ namespace RadiantTulip.Tests.View
             Assert.AreEqual(2228.125, area2.Margin.Left);
             Assert.AreEqual(550, area2.Margin.Top);
         }
+
+        [Test]
+        public void Centre_Line_Correct_Position()
+        {
+            var ground = new Ground
+            {
+                Width = 2800,
+                Height = 1500,
+                Type = GroundType.WheelChairRugby
+            };
+            var groundDrawer = new WheelChairRugbyGroundDrawer(ground);
+            var canvas = new Canvas { Width = 2800, Height = 1500 };
+            canvas.Measure(new System.Windows.Size(2800, 1500));
+            canvas.Arrange(new Rect(0, 0, 2800, 1500));
+
+            groundDrawer.Draw(canvas);
+
+            var line = (Line)canvas.Children[4];
+            Assert.AreEqual(1400, line.X1);
+            Assert.AreEqual(1400, line.X2);
+            Assert.AreEqual(0, line.Y1);
+            Assert.AreEqual(1500, line.Y2);
+        }
+
+        [Test]
+        public void Centre_line_Adjusts_For_Padding()
+        {
+            var ground = new Ground
+            {
+                Width = 2800,
+                Height = 1500,
+                Type = GroundType.WheelChairRugby,
+                Padding = 100
+            };
+            var groundDrawer = new WheelChairRugbyGroundDrawer(ground);
+            var canvas = new Canvas { Width = 2800, Height = 1500 };
+            canvas.Measure(new System.Windows.Size(2800, 1500));
+            canvas.Arrange(new Rect(0, 0, 2800, 1500));
+
+            groundDrawer.Draw(canvas);
+
+            var line = (Line)canvas.Children[4];
+            Assert.AreEqual(1400, line.X1);
+            Assert.AreEqual(1400, line.X2);
+            Assert.AreEqual(115.38461538461539, line.Y1);
+            Assert.AreEqual(1384.6153846153845, line.Y2);
+        }
     }
 }

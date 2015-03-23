@@ -39,6 +39,19 @@ namespace RadiantTulip.View.Game
             canvas.Children.Add(Boundry(canvas));
             canvas.Children.Add(KeyArea(canvas, true));
             canvas.Children.Add(KeyArea(canvas, false));
+            canvas.Children.Add(CentreLine(canvas));
+        }
+
+        private Shape CentreLine(Canvas canvas)
+        {
+            return new Line
+            {
+                X1 = canvas.ActualWidth / 2,
+                X2 = canvas.ActualWidth / 2,
+                Y1 = 0 + ScaleHeight(_ground.Padding),
+                Y2 = canvas.ActualHeight - ScaleHeight(_ground.Padding),
+                Stroke = _color
+            };
         }
 
         private Shape KeyArea(Canvas canvas, bool left)
