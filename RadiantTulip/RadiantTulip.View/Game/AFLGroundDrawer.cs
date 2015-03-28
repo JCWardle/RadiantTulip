@@ -23,8 +23,6 @@ namespace RadiantTulip.View.Game
         private const int FIFTY_DISTANCE_OUT = 5000;
 
         private Brush _color = Brushes.White;
-        private double _scaleX;
-        private double _scaleY;
 
         public AFLGroundDrawer(Ground ground)
         {
