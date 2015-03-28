@@ -5,18 +5,23 @@
 
     <!-- General Styles -->
     <Style TargetType="TabItem">
-        <Setter Property="Background" Value="#494949"/>
-        <Setter Property="Foreground" Value="#FFFFFF"/>
-        <Style.Resources>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#F7941D"/>
-            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#F7941D"/>
-            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#F7941D"/>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextColorKey}" Color="#000000"/>
-        </Style.Resources>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="BorderBrush" Value="#8A8A8A"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="#313131"/>
+                <Setter Property="Background" Value="#C2C2C2"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="False">
+                <Setter Property="Background" Value="#494949"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
     <Style TargetType="ListBox">
         <Setter Property="Background" Value="#494949"/>
+        <Setter Property="BorderBrush" Value="#8A8A8A"/>
         <Style.Resources>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#F7941D"/>
             <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#F7941D"/>
