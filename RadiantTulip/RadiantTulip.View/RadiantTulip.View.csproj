@@ -139,6 +139,7 @@
     <Compile Include="Game\VisualAffects\GroupAffect.cs" />
     <Compile Include="Game\VisualAffects\IAffectFactory.cs" />
     <Compile Include="Game\VisualAffects\Lines.cs" />
+    <Compile Include="Game\VisualAffects\OutterCoverage.cs" />
     <Compile Include="Game\VisualAffects\PlayerAffect.cs" />
     <Compile Include="Game\VisualAffects\Tadpole.cs" />
     <Compile Include="Game\WheelChairRugbyGroundDrawer.cs" />

@@ -8,6 +8,7 @@ namespace RadiantTulip.View.Game.VisualAffects
 {
     public enum GroupAffect
     {
-        Lines
+        Lines,
+        OutterCoverage
     }
 }
