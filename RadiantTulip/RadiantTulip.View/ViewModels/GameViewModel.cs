@@ -149,6 +149,8 @@ namespace RadiantTulip.View.ViewModels
 
         #endregion
 
+        #region Window Command Implementations
+
         private void Resize()
         {
             UpdateView();
@@ -289,6 +291,8 @@ namespace RadiantTulip.View.ViewModels
             }
             SetState();
         }
+
+        #endregion
 
         #region Play Back Methods
         private void Stop()
