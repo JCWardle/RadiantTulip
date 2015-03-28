@@ -17,6 +17,10 @@ namespace RadiantTulip.View.ViewModels
         string CurrentTime { get; }
         ObservableCollection<Player> SelectedPlayers { get; set; }
         ObservableCollection<Group> Groups { get; }
+        List<IVisualAffect> VisualAffects { get; }
+        Group SelectedGroup { get; set; }
+        double CurrentTimeMilliseconds { get; set; }
+        double FrameIncrement { get; }
         Action UpdateView { get; set; }
         ICommand PlayCommand { get; }
         ICommand PauseCommand { get; }
@@ -30,7 +34,5 @@ namespace RadiantTulip.View.ViewModels
         ICommand CreateGroupCommand { get; }
         ICommand ShapeChangedCommand { get; }
         ICommand ResizeCommand { get; }
-        List<IVisualAffect> VisualAffects { get; }
-        Group SelectedGroup { get; set; }
     }
 }

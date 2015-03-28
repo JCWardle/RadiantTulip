@@ -118,41 +118,54 @@
         </TabControl>
 
 
-        <DockPanel Grid.Column="1" Style="{StaticResource WhiteBackground}">
+        <DockPanel Grid.Column="1" Style="{StaticResource WhiteBackground}">            
             <!--Play Controls-->
-            <StackPanel HorizontalAlignment="Center" DockPanel.Dock="Bottom" Orientation="Horizontal" >
-                <Button Content="Stop" Style="{StaticResource Stop}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding StopCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                <Button Content="Rewind" Style="{StaticResource Reverse}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding RewindCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                <Button Content="Play" Style="{StaticResource Play}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding PlayCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                <Button Content="Forward" Style="{StaticResource FastForward}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding ForwardCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                <Button Content="Rec"/>
-                <Label Content="{Binding CurrentTime}" Style="{StaticResource GameTime}"/>
-            </StackPanel>
-            
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Slider Grid.Row="0" 
+                    Value="{Binding CurrentTimeMilliseconds}"
+                    Maximum="{Binding RunTime.TotalMilliseconds}"
+                    Minimum="0"
+                    TickFrequency="{Binding FrameIncrement}"
+                    IsSnapToTickEnabled="True"/>
+                <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal" >
+                    <Button Content="Stop" Style="{StaticResource Stop}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding StopCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="Rewind" Style="{StaticResource Reverse}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RewindCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="Play" Style="{StaticResource Play}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding PlayCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="Forward" Style="{StaticResource FastForward}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding ForwardCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="Rec"/>
+                    <Label Content="{Binding CurrentTime}" Style="{StaticResource GameTime}"/>
+                </StackPanel>
+            </Grid>
+
             <!-- Game Display-->
             <Border DockPanel.Dock="Top">
                 <Canvas Name="Game" MouseUp="Game_MouseUp"/>

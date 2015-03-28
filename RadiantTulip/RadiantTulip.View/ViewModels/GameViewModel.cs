@@ -451,6 +451,32 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
+        public double CurrentTimeMilliseconds
+        {
+            get
+            {
+                return _gameUpdater.Time.TotalMilliseconds;
+            }
+            set
+            {
+                var restart = _timer.IsEnabled;
+                _timer.Stop();
+
+                _gameUpdater.Time = TimeSpan.FromMilliseconds(value); ;
+
+                if (restart)
+                    _timer.Start();                
+            }
+        }
+
+        public double FrameIncrement
+        {
+            get
+            {
+                return _gameUpdater.Increment.TotalMilliseconds;
+            }
+        }
+
         #endregion
 
         public Action UpdateView { get; set; }
@@ -477,6 +503,7 @@ namespace RadiantTulip.View.ViewModels
         {
             _gameUpdater.Update();
             OnPropertyChanged("CurrentTime");
+            OnPropertyChanged("CurrentTimeMilliseconds");
             CommandManager.InvalidateRequerySuggested();
             UpdateView();
         }
