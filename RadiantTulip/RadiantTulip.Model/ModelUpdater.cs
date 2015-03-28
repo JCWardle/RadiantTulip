@@ -31,7 +31,7 @@ namespace RadiantTulip.Model
 
         public void Update()
         {
-            if (_time == _max && _increment > TimeSpan.Zero)
+            if (_time == _max && _increment > TimeSpan.Zero || _time == TimeSpan.Zero && _increment < TimeSpan.Zero)
                 return;
 
             if (!_incrementTime)

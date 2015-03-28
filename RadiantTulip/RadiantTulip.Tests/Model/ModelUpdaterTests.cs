@@ -650,6 +650,7 @@ namespace RadiantTulip.Tests.Model
 
             updater.ChangeDirection();
             updater.Update();
+            updater.Update();
 
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
         }

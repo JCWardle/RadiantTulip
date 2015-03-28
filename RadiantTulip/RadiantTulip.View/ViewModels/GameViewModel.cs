@@ -310,6 +310,9 @@ namespace RadiantTulip.View.ViewModels
 
         private void Play()
         {
+            if (_gameUpdater.Increment < TimeSpan.Zero)
+                _gameUpdater.ChangeDirection();
+
             _timer.Interval = _gameUpdater.Increment;
             _timer.Start();
         }
