@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace RadiantTulip.View.Game
 {
-    public class AFLGroundDrawer : IGroundDrawer
+    public class AFLGroundDrawer : GroundDrawer
     {
         private const int CENTER_CIRCLE_DIAMETER = 1000;
         private const int INNER_CIRCLE_DIAMETER = 300;
@@ -22,20 +22,18 @@ namespace RadiantTulip.View.Game
         private const int BEHIND_POST_HEIGHT = 300;
         private const int FIFTY_DISTANCE_OUT = 5000;
 
-        private Ground _ground;
         private Brush _color = Brushes.White;
         private double _scaleX;
         private double _scaleY;
 
         public AFLGroundDrawer(Ground ground)
         {
-            _ground = ground;
+            Ground = ground;
         }
 
-        public void Draw(Canvas canvas)
+        public override void Draw(Canvas canvas)
         {
-            _scaleX = (_ground.Width + _ground.Padding * 2) / canvas.ActualWidth;
-            _scaleY = (_ground.Height + _ground.Padding * 2) / canvas.ActualHeight;
+            Setup(canvas);
 
             var boundry = CreateBoundry(canvas);
 
@@ -61,18 +59,18 @@ namespace RadiantTulip.View.Game
 
         private Shape Create50Line(Canvas canvas, bool left)
         {
-            var xPositionCentre = left ? ScaleWidth(_ground.Padding) : canvas.ActualWidth - ScaleWidth(_ground.Padding);
+            var xPositionCentre = left ? ScaleX(Ground.Padding) : canvas.ActualWidth - ScaleX(Ground.Padding);
             var yPositionCentre = canvas.ActualHeight / 2;
 
             var geometry = new StreamGeometry();
 
             using (var gc = geometry.Open())
             {
-                gc.BeginFigure(new Point(xPositionCentre, yPositionCentre + ScaleHeight(FIFTY_DISTANCE_OUT)), false, false);
+                gc.BeginFigure(new Point(xPositionCentre, yPositionCentre + ScaleY(FIFTY_DISTANCE_OUT)), false, false);
 
                 gc.ArcTo(
-                    point: new Point(xPositionCentre, yPositionCentre - ScaleHeight(FIFTY_DISTANCE_OUT)),
-                    size: new System.Windows.Size(ScaleWidth(FIFTY_DISTANCE_OUT), ScaleHeight(FIFTY_DISTANCE_OUT)),
+                    point: new Point(xPositionCentre, yPositionCentre - ScaleY(FIFTY_DISTANCE_OUT)),
+                    size: new System.Windows.Size(ScaleX(FIFTY_DISTANCE_OUT), ScaleY(FIFTY_DISTANCE_OUT)),
                     rotationAngle: 180,
                     isLargeArc: true,
                     sweepDirection: left ? SweepDirection.Counterclockwise : SweepDirection.Clockwise,
@@ -88,90 +86,92 @@ namespace RadiantTulip.View.Game
             };
         }
 
-        private Ellipse CreateBoundry(Canvas canvas)
+        private Shape CreateBoundry(Canvas canvas)
         {
-            return new Ellipse
+            var result = new Ellipse
             {
-                Width = ScaleWidth(_ground.Width),
-                Height = ScaleHeight(_ground.Height),
-                Margin = new Thickness(ScaleWidth(_ground.Padding), ScaleHeight(_ground.Padding), ScaleWidth(_ground.Padding), ScaleHeight(_ground.Padding)),
+                Width = Ground.Width,
+                Height = Ground.Height,
                 Stroke = _color
             };
+
+            return ScaleShape(result);
         }
 
         private List<Shape> CreateGoalPosts(Canvas canvas, bool left)
         {
-            var result = new List<Line>();
+            var posts = new List<Line>();
 
             //Behind Posts
-            result.Add(new Line 
+            posts.Add(new Line 
             { 
-                Y1 = (canvas.ActualHeight / 2) - (ScaleHeight(DISTANCE_BETWEEN_POSTS) * 1.5),
-                X1 = left ? ScaleWidth(_ground.Padding) - ScaleWidth(BEHIND_POST_HEIGHT) : (canvas.ActualWidth - ScaleWidth(_ground.Padding)) + ScaleWidth(BEHIND_POST_HEIGHT)
+                Y1 = CentreY() - DISTANCE_BETWEEN_POSTS * 1.5,
+                X1 = left ? -BEHIND_POST_HEIGHT : Ground.Width + BEHIND_POST_HEIGHT
             });
-            result.Add(new Line 
+            posts.Add(new Line 
             {
-                Y1 = (canvas.ActualHeight / 2) + (ScaleHeight(DISTANCE_BETWEEN_POSTS) * 1.5),
-                X1 = left ? ScaleWidth(_ground.Padding) - ScaleWidth(BEHIND_POST_HEIGHT) : (canvas.ActualWidth - ScaleWidth(_ground.Padding)) + ScaleWidth(BEHIND_POST_HEIGHT)
+                Y1 = CentreY() + DISTANCE_BETWEEN_POSTS * 1.5,
+                X1 = left ? -BEHIND_POST_HEIGHT : Ground.Width + BEHIND_POST_HEIGHT
             });
 
 
             //Goal Posts
-            result.Add(new Line 
+            posts.Add(new Line 
             {
-                Y1 = (canvas.ActualHeight / 2) - (ScaleHeight(DISTANCE_BETWEEN_POSTS) / 2),
-                X1 = left ? ScaleWidth(_ground.Padding) - ScaleWidth(GOAL_POST_HEIGHT) : (canvas.ActualWidth - ScaleWidth(_ground.Padding)) + ScaleWidth(GOAL_POST_HEIGHT)
+                Y1 = CentreY() - DISTANCE_BETWEEN_POSTS / 2,
+                X1 = left ? -GOAL_POST_HEIGHT : Ground.Width + GOAL_POST_HEIGHT
             });
-            result.Add(new Line 
+            posts.Add(new Line 
             {
-                Y1 = (canvas.ActualHeight / 2) + (ScaleHeight(DISTANCE_BETWEEN_POSTS) / 2),
-                X1 = left ? ScaleWidth(_ground.Padding) - ScaleWidth(GOAL_POST_HEIGHT) : (canvas.ActualWidth - ScaleWidth(_ground.Padding)) + ScaleWidth(GOAL_POST_HEIGHT)
+                Y1 = CentreY() + DISTANCE_BETWEEN_POSTS / 2,
+                X1 = left ? -GOAL_POST_HEIGHT : Ground.Width + GOAL_POST_HEIGHT
             });
 
-            foreach(var p in result)
+            var result = new List<Shape>();
+            foreach(var p in posts)
             {
                 p.Y2 = p.Y1;
                 p.Stroke = _color;
 
                 if (left)
-                    p.X2 = 0 + ScaleWidth(_ground.Padding);
+                    p.X2 = 0;
                 else
-                    p.X2 = canvas.ActualWidth - ScaleWidth(_ground.Padding);
+                    p.X2 = Ground.Width;
+
+                result.Add(ScaleLine(p));
             }
 
-            return result.Cast<Shape>().ToList();
-        }
-
-        private Rectangle CreateGoalSquare(Canvas canvas, bool left)
-        {
-            var result = new Rectangle
-            {
-                Width = ScaleWidth(GOAL_SQUARE_LENGTH),
-                Height = ScaleHeight(DISTANCE_BETWEEN_POSTS),
-                Stroke = _color
-            };
-
-            var thickness = new Thickness { Top = (canvas.ActualHeight / 2) - (result.Height / 2) };
-
-            if (left)
-                thickness.Left = 0 + ScaleWidth(_ground.Padding);
-            else
-                thickness.Left = (canvas.ActualWidth - ScaleWidth(_ground.Padding)) - result.Width;
-
-            result.Margin = thickness;
             return result;
         }
 
-        private Shape CreateEnd(Canvas canvas, Ellipse boundry, bool left)
+        private Shape CreateGoalSquare(Canvas canvas, bool left)
         {
-            var xPosition = left ? 0 + ScaleWidth(_ground.Padding) : canvas.ActualWidth - ScaleWidth(_ground.Padding);
+            var result = new Rectangle
+            {
+                Width = GOAL_SQUARE_LENGTH,
+                Height = DISTANCE_BETWEEN_POSTS,
+                Stroke = _color
+            };
+
+            var thickness = new Thickness { Top = CentreY() - (result.Height / 2) };
+
+            if(!left)
+                thickness.Left = Ground.Width - result.Width;
+
+            result.Margin = thickness;
+            return ScaleShape(result);
+        }
+
+        private Shape CreateEnd(Canvas canvas, Shape boundry, bool left)
+        {
+            var xPosition = left ? 0 : Ground.Width;
 
             var result = new Line
             {
                 X1 = xPosition,
-                Y1 = (canvas.ActualHeight / 2) + ScaleHeight(DISTANCE_BETWEEN_POSTS) * 1.5,
+                Y1 = CentreY() + DISTANCE_BETWEEN_POSTS * 1.5,
                 X2 = xPosition,
-                Y2 = (canvas.ActualHeight / 2) - ScaleHeight(DISTANCE_BETWEEN_POSTS) * 1.5,
+                Y2 = CentreY() - DISTANCE_BETWEEN_POSTS * 1.5,
                 Stroke = _color
             };
 
@@ -203,51 +203,41 @@ namespace RadiantTulip.View.Game
                 result.X2 -= distanceIntoGround;
             }*/
             
-            return result;
+            return ScaleLine(result);
         }
 
         private Shape CreateCentreSquare(Canvas canvas)
         {
             var result = new Rectangle
             {
-                Width = ScaleWidth(CENTRE_SQUARE_LENGTH),
-                Height = ScaleHeight(CENTRE_SQUARE_LENGTH),
+                Width = CENTRE_SQUARE_LENGTH,
+                Height = CENTRE_SQUARE_LENGTH,
                 Stroke = _color
             };
 
             result.Margin = CentrePosition(canvas, result.Width, result.Height);
-            return result;
+            return ScaleShape(result);
         }
 
         private Shape CreateCentreCircle(Canvas canvas, int diameter)
         {
             var result = new Ellipse
             {
-                Width = ScaleWidth(diameter),
-                Height = ScaleHeight(diameter),
+                Width = diameter,
+                Height = diameter,
                 Stroke = _color
             };
             result.Margin = CentrePosition(canvas, result.Width, result.Height);
-            return result;
+            return ScaleShape(result);
         }
 
         private Thickness CentrePosition(Canvas canvas, double width, double height)
         {
             return new Thickness 
             { 
-                Left = (canvas.ActualWidth / 2) - (width / 2), 
-                Top = (canvas.ActualHeight / 2) - (height / 2)
+                Left = CentreX() - (width / 2), 
+                Top = CentreY() - (height / 2)
             };
-        }
-
-        private double ScaleHeight(int value)
-        {
-            return value / _scaleY;
-        }
-
-        private double ScaleWidth(int value)
-        {
-            return value / _scaleX;
         }
     }
 }

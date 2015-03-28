@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.View.Game
 {
-    public class WheelChairRugbyGroundDrawer : IGroundDrawer
+    public class WheelChairRugbyGroundDrawer : GroundDrawer
     {
         private const int GOAL_LENGTH = 800;
         private const int KEY_AREA_LENGTH = 175;
@@ -20,20 +20,16 @@ namespace RadiantTulip.View.Game
         private const int GROUND_LENGTH = 2800;
         private const int GROUND_HEIGHT = 1500;
 
-        private Ground _ground;
-        private double _scaleX;
-        private double _scaleY;
         private Brush _color = Brushes.White;
 
         public WheelChairRugbyGroundDrawer(Ground ground)
         {
-            _ground = ground;
+            Ground = ground;
         }
         
-        public void Draw(Canvas canvas)
+        public override void Draw(Canvas canvas)
         {
-            _scaleX = (_ground.Width - _ground.Padding * 2) / canvas.ActualWidth;
-            _scaleY = (_ground.Height - _ground.Padding * 2) / canvas.ActualHeight;
+            Setup(canvas);
 
             canvas.Children.Add(CentreCircle(canvas));
             canvas.Children.Add(Boundry(canvas));
@@ -44,64 +40,61 @@ namespace RadiantTulip.View.Game
 
         private Shape CentreLine(Canvas canvas)
         {
-            return new Line
-            {
-                X1 = canvas.ActualWidth / 2,
-                X2 = canvas.ActualWidth / 2,
-                Y1 = 0 + ScaleHeight(_ground.Padding),
-                Y2 = canvas.ActualHeight - ScaleHeight(_ground.Padding),
-                Stroke = _color
-            };
+            var result = new Line
+             {
+                 X1 = CentreX(),
+                 X2 = CentreX(),
+                 Y1 = 0,
+                 Y2 = Ground.Height,
+                 Stroke = _color
+             };
+
+            return ScaleLine(result);
         }
 
         private Shape KeyArea(Canvas canvas, bool left)
         {
-            return new Rectangle
+            var result = new Rectangle
             {
                 Stroke = _color,
-                Width = ScaleWidth(KEY_AREA_LENGTH),
-                Height = ScaleHeight(KEY_AREA_HEIGHT),
+                Width = KEY_AREA_LENGTH,
+                Height = KEY_AREA_HEIGHT,
                 Margin = new Thickness
                 {
-                    Top = ScaleHeight(_ground.Padding + (_ground.Height / 2) - KEY_AREA_HEIGHT / 2),
-                    Left = left ? ScaleWidth(_ground.Padding) : ScaleWidth(_ground.Width - KEY_AREA_LENGTH)
+                    Top = CentreY() - (KEY_AREA_HEIGHT / 2),
+                    Left = left ? 0 : Ground.Width - KEY_AREA_LENGTH
                 }
             };
+
+            return ScaleShape(result);
         }
 
         private Shape CentreCircle(Canvas canvas)
         {
-            var centreX = (canvas.ActualWidth / 2) - (ScaleWidth(CENTRE_CIRCLE_DIAMETER) / 2);
-            var centreY = (canvas.ActualHeight / 2) - (ScaleHeight(CENTRE_CIRCLE_DIAMETER) / 2);
+            var centreX = CentreX() - (CENTRE_CIRCLE_DIAMETER / 2);
+            var centreY = CentreY() - (CENTRE_CIRCLE_DIAMETER / 2);
 
-            return new Ellipse
+            var result =  new Ellipse
             {
-                Width = ScaleWidth(CENTRE_CIRCLE_DIAMETER),
-                Height = ScaleHeight(CENTRE_CIRCLE_DIAMETER),
+                Width = CENTRE_CIRCLE_DIAMETER,
+                Height = CENTRE_CIRCLE_DIAMETER,
                 Margin = new Thickness { Top = centreY, Left = centreX },
                 Stroke = _color
             };
+
+            return ScaleShape(result);
         }
 
         private Shape Boundry(Canvas canvas)
         {
-            return new Rectangle
+            var result = new Rectangle
             {
-                Width = ScaleWidth(GROUND_LENGTH - _ground.Padding * 2),
-                Height = ScaleHeight(GROUND_HEIGHT - _ground.Padding * 2),
-                Margin = new Thickness { Top = _ground.Padding, Left = _ground.Padding },
+                Width = GROUND_LENGTH,
+                Height = GROUND_HEIGHT,
                 Stroke = _color
             };
-        }
-
-        private double ScaleHeight(int value)
-        {
-            return value / _scaleY;
-        }
-
-        private double ScaleWidth(int value)
-        {
-            return value / _scaleX;
+            
+            return ScaleShape(result);
         }
     }
 }

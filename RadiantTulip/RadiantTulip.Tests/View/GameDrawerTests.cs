@@ -17,7 +17,7 @@ namespace RadiantTulip.Tests.View
         public void Draws_One_Player()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var affects = new List<IVisualAffect>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
@@ -43,7 +43,7 @@ namespace RadiantTulip.Tests.View
         public void Draws_Two_Players()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var affects = new List<IVisualAffect>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
@@ -73,7 +73,7 @@ namespace RadiantTulip.Tests.View
         public void Doesnt_Draw_Non_Visible_Player()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var canvas = new Canvas();
@@ -96,7 +96,7 @@ namespace RadiantTulip.Tests.View
         public void Doesnt_Draw_Non_Visible_Player_Valid_Player()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var affects = new List<IVisualAffect>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
@@ -121,7 +121,7 @@ namespace RadiantTulip.Tests.View
         public void Draws_Ground()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var affects = new List<IVisualAffect>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
@@ -139,7 +139,7 @@ namespace RadiantTulip.Tests.View
         public void Draws_Visual_Artifact()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var affects = new List<IVisualAffect>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
@@ -166,7 +166,7 @@ namespace RadiantTulip.Tests.View
         public void Draws_Multiple_Visual_Artifact()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var affects = new List<IVisualAffect>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
@@ -198,7 +198,7 @@ namespace RadiantTulip.Tests.View
         public void Clears_View_Before_New_Frame()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var affects = new List<IVisualAffect>();
@@ -225,7 +225,7 @@ namespace RadiantTulip.Tests.View
         public void Creates_Ground_Drawer_From_Factory()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var ground = new Ground { Type = GroundType.AFL, Width = 20};
@@ -239,7 +239,7 @@ namespace RadiantTulip.Tests.View
         public void Draws_Ground_From_Ground_Drawer()
         {
             var playerDrawer = new Mock<IPlayerDrawer>();
-            var groundDrawer = new Mock<IGroundDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);            
             var affects = new List<IVisualAffect>();

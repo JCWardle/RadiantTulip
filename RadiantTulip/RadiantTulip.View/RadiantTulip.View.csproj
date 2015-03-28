@@ -168,7 +168,7 @@
     <Compile Include="Game\GameDrawer.cs" />
     <Compile Include="Game\AFLGroundDrawer.cs" />
     <Compile Include="Game\IGameDrawer.cs" />
-    <Compile Include="Game\IGroundDrawer.cs" />
+    <Compile Include="Game\GroundDrawer.cs" />
     <Compile Include="Game\IPlayerDrawer.cs" />
     <Compile Include="Game\VisualAffects\IVisualAffect.cs" />
     <Compile Include="GameWindow.xaml.cs">

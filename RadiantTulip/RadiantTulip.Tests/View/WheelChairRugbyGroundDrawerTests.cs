@@ -102,10 +102,10 @@ namespace RadiantTulip.Tests.View
             groundDrawer.Draw(canvas);
 
             var boundry = (Rectangle)canvas.Children[1];
-            Assert.AreEqual(100, boundry.Margin.Left);
-            Assert.AreEqual(100, boundry.Margin.Top);
-            Assert.AreEqual(2785.7142857142858, boundry.Width);
-            Assert.AreEqual(1473.3333333333335, boundry.Height);
+            Assert.AreEqual(93.75, boundry.Margin.Left);
+            Assert.AreEqual(89.473684210526315, boundry.Margin.Top);
+            Assert.AreEqual(2625, boundry.Width);
+            Assert.AreEqual(1342.1052631578948, boundry.Height);
         }
 
         [Test]
@@ -177,15 +177,15 @@ namespace RadiantTulip.Tests.View
             groundDrawer.Draw(canvas);
 
             var area1 = (Rectangle)canvas.Children[2];
-            Assert.AreEqual(187.5, area1.Width);
-            Assert.AreEqual(906.66666666666674, area1.Height);
-            Assert.AreEqual(107.14285714285714, area1.Margin.Left);
-            Assert.AreEqual(623.33333333333337, area1.Margin.Top);
+            Assert.AreEqual(164.0625, area1.Width);
+            Assert.AreEqual(715.78947368421052, area1.Height);
+            Assert.AreEqual(93.75, area1.Margin.Left);
+            Assert.AreEqual(492.10526315789474, area1.Margin.Top);
             var area2 = (Rectangle)canvas.Children[3];
-            Assert.AreEqual(187.5, area2.Width);
-            Assert.AreEqual(906.66666666666674, area2.Height);
-            Assert.AreEqual(3026.7857142857142, area2.Margin.Left);
-            Assert.AreEqual(623.33333333333337, area2.Margin.Top);
+            Assert.AreEqual(164.0625, area2.Width);
+            Assert.AreEqual(715.78947368421052, area2.Height);
+            Assert.AreEqual(2742.1875, area2.Margin.Left);
+            Assert.AreEqual(492.10526315789474, area2.Margin.Top);
         }
 
         [Test]
@@ -259,8 +259,8 @@ namespace RadiantTulip.Tests.View
             var line = (Line)canvas.Children[4];
             Assert.AreEqual(1400, line.X1);
             Assert.AreEqual(1400, line.X2);
-            Assert.AreEqual(115.38461538461539, line.Y1);
-            Assert.AreEqual(1384.6153846153845, line.Y2);
+            Assert.AreEqual(88.235294117647058, line.Y1);
+            Assert.AreEqual(1411.7647058823529, line.Y2);
         }
     }
 }
