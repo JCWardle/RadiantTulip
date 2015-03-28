@@ -35,9 +35,6 @@ namespace RadiantTulip.View.Game
         {
             Setup(canvas);
 
-            _scaleX = (Ground.Width + Ground.Padding * 2) / canvas.ActualWidth;
-            _scaleY = (Ground.Height + Ground.Padding * 2) / canvas.ActualHeight;
-
             var boundry = CreateBoundry(canvas);
 
             canvas.Children.Add(CreateCentreCircle(canvas, CENTER_CIRCLE_DIAMETER));
@@ -62,18 +59,18 @@ namespace RadiantTulip.View.Game
 
         private Shape Create50Line(Canvas canvas, bool left)
         {
-            var xPositionCentre = left ? ScaleWidth(Ground.Padding) : canvas.ActualWidth - ScaleWidth(Ground.Padding);
+            var xPositionCentre = left ? ScaleX(Ground.Padding) : canvas.ActualWidth - ScaleX(Ground.Padding);
             var yPositionCentre = canvas.ActualHeight / 2;
 
             var geometry = new StreamGeometry();
 
             using (var gc = geometry.Open())
             {
-                gc.BeginFigure(new Point(xPositionCentre, yPositionCentre + ScaleHeight(FIFTY_DISTANCE_OUT)), false, false);
+                gc.BeginFigure(new Point(xPositionCentre, yPositionCentre + ScaleY(FIFTY_DISTANCE_OUT)), false, false);
 
                 gc.ArcTo(
-                    point: new Point(xPositionCentre, yPositionCentre - ScaleHeight(FIFTY_DISTANCE_OUT)),
-                    size: new System.Windows.Size(ScaleWidth(FIFTY_DISTANCE_OUT), ScaleHeight(FIFTY_DISTANCE_OUT)),
+                    point: new Point(xPositionCentre, yPositionCentre - ScaleY(FIFTY_DISTANCE_OUT)),
+                    size: new System.Windows.Size(ScaleX(FIFTY_DISTANCE_OUT), ScaleY(FIFTY_DISTANCE_OUT)),
                     rotationAngle: 180,
                     isLargeArc: true,
                     sweepDirection: left ? SweepDirection.Counterclockwise : SweepDirection.Clockwise,
@@ -241,16 +238,6 @@ namespace RadiantTulip.View.Game
                 Left = CentreX() - (width / 2), 
                 Top = CentreY() - (height / 2)
             };
-        }
-
-        private double ScaleHeight(int value)
-        {
-            return value / _scaleY;
-        }
-
-        private double ScaleWidth(int value)
-        {
-            return value / _scaleX;
         }
     }
 }
