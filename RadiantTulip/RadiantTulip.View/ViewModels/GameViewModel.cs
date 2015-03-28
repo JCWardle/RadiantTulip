@@ -34,6 +34,7 @@ namespace RadiantTulip.View.ViewModels
         private List<IVisualAffect> _visualAffects;
         private Group _selectedGroup;
 
+        #region Commands
         private ICommand _play;
         private ICommand _pause;
         private ICommand _forward;
@@ -51,6 +52,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _groupAffectUncheckedCommand;
         private ICommand _playerAffectUncheckedCommand;
         private ICommand _shapeChangedCommand;
+        private ICommand _resizeCommand;
 
         public GameViewModel() {}
 
@@ -138,6 +140,18 @@ namespace RadiantTulip.View.ViewModels
         public ICommand ShapeChangedCommand
         {
             get { return _shapeChangedCommand ?? (_shapeChangedCommand = new DelegateCommand<object>(ShapeChanged)); }
+        }
+
+        public ICommand ResizeCommand
+        {
+            get { return _resizeCommand ?? (_resizeCommand = new DelegateCommand(Resize)); }
+        }
+
+        #endregion
+
+        private void Resize()
+        {
+            UpdateView();
         }
 
         private void ShapeChanged(object obj)
@@ -276,6 +290,7 @@ namespace RadiantTulip.View.ViewModels
             SetState();
         }
 
+        #region Play Back Methods
         private void Stop()
         {
             _timer.Stop();
@@ -316,6 +331,10 @@ namespace RadiantTulip.View.ViewModels
             _timer.Interval = _gameUpdater.Increment;
             _timer.Start();
         }
+
+        #endregion
+
+        #region Binding Properties
 
         public Model.Game Game
         {
@@ -427,6 +446,8 @@ namespace RadiantTulip.View.ViewModels
                 _selectedGroup = value;
             }
         }
+
+        #endregion
 
         public Action UpdateView { get; set; }
 

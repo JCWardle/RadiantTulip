@@ -7,6 +7,11 @@
         xmlns:cp="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="MainWindow" Height="600" Width="1200"
         Background="#494949">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="SizeChanged">
+            <i:InvokeCommandAction Command="{Binding ResizeCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
