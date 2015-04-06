@@ -103,15 +103,15 @@
     <EmbeddedResource Include="TestFiles\OnePlayerBig.xlsx" />
     <EmbeddedResource Include="TestFiles\Ground1.json" />
     <EmbeddedResource Include="TestFiles\Ground2.json" />
-    <None Include="TestFiles\MultiplePositions.csv" />
-    <None Include="TestFiles\OnePlayer.csv" />
+    <EmbeddedResource Include="TestFiles\MultiplePositions.csv" />
+    <EmbeddedResource Include="TestFiles\OnePlayer.csv" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\Patersons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="TestFiles\TwoPlayers.csv" />
-    <None Include="TestFiles\TwoTeams.csv" />
+    <EmbeddedResource Include="TestFiles\TwoPlayers.csv" />
+    <EmbeddedResource Include="TestFiles\TwoTeams.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RadiantTulip.Model\RadiantTulip.Model.csproj">
