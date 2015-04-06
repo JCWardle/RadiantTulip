@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace RadiantTulip.Model.Converter
 {
-    class VisualDataConverter
+    public class VisualDataConverter : ICoordinateConverter
     {
+        public Position Convert(Position position, Ground ground)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
