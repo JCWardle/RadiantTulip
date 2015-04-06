@@ -25,34 +25,45 @@ namespace RadiantTulip.View.Game.VisualAffects
             if (_players.Count < 3)
                 return;
 
-            var polygon = new Polyline { Fill = new SolidColorBrush(Color.FromArgb(50, 0, 0, 125)) };
-            var points = new PointCollection();
+            var triangles = new List<Polygon>();
 
             foreach(var p in _players)
-            {
-                AddPlayerConnections(p, canvas, points);
-            }
+                FillInConnections(p, canvas).ForEach(c => triangles.Add(c));
 
-            polygon.Points = new PointCollection();
-            foreach (var p in points.Distinct())
-                polygon.Points.Add(p);
-
-            canvas.Children.Add(polygon);
+            triangles.ForEach(t => canvas.Children.Add(t));
         }
 
-        private void AddPlayerConnections(Player player, Canvas canvas, PointCollection points)
+        private List<Polygon> FillInConnections(Player player, Canvas canvas)
         {
-            var currentPlayerTransformation = TransformToCanvas(player.CurrentPosition.X, player.CurrentPosition.Y, _ground, canvas);
-            var currentPlayerPoint = new Point { X = currentPlayerTransformation.Item1, Y = currentPlayerTransformation.Item2 };
-
-            foreach(var p in _players)
+            var result = new List<Polygon>();
+            for(var i = 0; i < _players.Count; i++)
             {
-                if (p == player)
+                if (_players[0] == player)
                     continue;
-                var point = TransformToCanvas(p.CurrentPosition.X, p.CurrentPosition.Y, _ground, canvas);
-                points.Add(new Point { X = point.Item1, Y = point.Item2 });
-                points.Add(currentPlayerPoint);
+
+                if (i + 1 >= _players.Count)
+                    result.Add(CreateTriangle(player, _players[0], _players[1], canvas));
+                else if (i + 2 >= _players.Count)
+                    result.Add(CreateTriangle(player, _players[i + 1], _players[0], canvas));
+                else
+                    result.Add(CreateTriangle(player, _players[i + 1], _players[i + 2], canvas));
             }
+
+            return result;
+        }
+
+        private Polygon CreateTriangle(Player player, Player player2, Player player3, Canvas canvas)
+        {
+            var triangle = new Polygon {Fill = new SolidColorBrush(Color.FromArgb(100, 0, 0, 125))};
+            var transform = TransformToCanvas(player.CurrentPosition.X, player.CurrentPosition.Y, _ground, canvas);
+
+            triangle.Points.Add(new Point { X = transform.Item1, Y = transform.Item2 });
+            transform = TransformToCanvas(player2.CurrentPosition.X, player2.CurrentPosition.Y, _ground, canvas);
+            triangle.Points.Add(new Point { X = transform.Item1, Y = transform.Item2 });
+            transform = TransformToCanvas(player3.CurrentPosition.X, player3.CurrentPosition.Y, _ground, canvas);
+            triangle.Points.Add(new Point { X = transform.Item1, Y = transform.Item2 });
+
+            return triangle;
         }
 
         public bool AffectFor(List<Model.Player> players, GroupAffect affect)
