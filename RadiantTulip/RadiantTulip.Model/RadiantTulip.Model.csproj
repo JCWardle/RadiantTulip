@@ -39,6 +39,7 @@
       <Private>True</Private>
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -56,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Converter\GPSConverter.cs" />
     <Compile Include="Converter\ICoordinateConverter.cs" />
+    <Compile Include="Converter\VisualDataConverter.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameCreator.cs" />
     <Compile Include="GameState.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="IGameCreator.cs" />
     <Compile Include="IGroundReader.cs" />
     <Compile Include="IModelUpdater.cs" />
+    <Compile Include="Input\CsvVisualReader.cs" />
     <Compile Include="Input\ExcelReader.cs" />
     <Compile Include="Input\ISpatialReader.cs" />
     <Compile Include="JsonGroundReader.cs" />

@@ -21,13 +21,13 @@ namespace RadiantTulip.Model
             var game = new Game();
             game.Ground = new Ground
             {
-                CentreLatitude = -31.944191,
-                CentreLongitude = 115.829766,
-                Height = 13500,
-                Width = 17500,
+                CentreLatitude = 0,
+                CentreLongitude = 0,
+                Height = 1500,
+                Width = 2800,
                 Rotation = 0,
-                Type = GroundType.AFL,
-                Padding = 100
+                Type = GroundType.WheelChairRugby,
+                Padding = 0
             };
 
             game.Teams = _reader.GetTeams(spatialData);
