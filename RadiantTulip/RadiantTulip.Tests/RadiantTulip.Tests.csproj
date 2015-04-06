@@ -106,6 +106,7 @@
     <EmbeddedResource Include="TestFiles\Ground2.json" />
     <EmbeddedResource Include="TestFiles\MultiplePositions.csv" />
     <EmbeddedResource Include="TestFiles\OnePlayer.csv" />
+    <EmbeddedResource Include="TestFiles\WheelChairRugby.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\Patersons.png">

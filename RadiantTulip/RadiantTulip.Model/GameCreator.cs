@@ -16,19 +16,9 @@ namespace RadiantTulip.Model
             _reader = reader;
         }
 
-        public Game CreateGame(Stream spatialData)
+        public Game CreateGame(Stream spatialData, Ground ground)
         {
-            var game = new Game();
-            game.Ground = new Ground
-            {
-                CentreLatitude = 0,
-                CentreLongitude = 0,
-                Height = 1500,
-                Width = 2800,
-                Rotation = 0,
-                Type = GroundType.WheelChairRugby,
-                Padding = 0
-            };
+            var game = new Game() { Ground = ground };
 
             game.Teams = _reader.GetTeams(spatialData);
 
@@ -37,7 +27,7 @@ namespace RadiantTulip.Model
                 {
                     var positions = new List<Position>();
                     foreach (var pos in p.Positions)
-                        positions.Add(_converter.Convert(pos, game.Ground));
+                        positions.Add(_converter.Convert(pos, ground));
                     p.Positions = positions;
                 }
 

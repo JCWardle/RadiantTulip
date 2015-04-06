@@ -42,11 +42,9 @@ namespace RadiantTulip.View
 
         protected override DependencyObject CreateShell()
         {
-            var gameWindow = Container.Resolve<GameWindow>();
-            gameWindow.Show();
             var setupWindow = Container.Resolve<GameSetup>();
             setupWindow.Show();
-            return gameWindow;
+            return setupWindow;
         }
     }
 }

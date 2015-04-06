@@ -16,7 +16,8 @@ namespace RadiantTulip.View.ViewModels
         bool AdvancedSettings { get; set; }
         ICommand AdvancedSettingsToggle { get; }
         ICommand SelectedGroundChanged { get; }
+        ICommand StartGameCommand { get; }
         IEnumerable<GroundType> GroundTypes { get; }
-        ObservableCollection<Ground> SelectableGrounds { get; }
+        IList<Ground> SelectableGrounds { get; }
     }
 }

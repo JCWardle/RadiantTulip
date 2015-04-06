@@ -18,7 +18,7 @@ namespace RadiantTulip.Tests.Model
         {
             var reader = new JsonGroundReader();
             IList<Ground> result;
-            using (var stream = GetFilePath("Ground1.json"))
+            using (var stream = TestFileHelper.GetFilePath("Ground1.json"))
             {
                 var list = new List<Stream>() { stream };
                 result = reader.ReadGrounds(list);
@@ -41,8 +41,8 @@ namespace RadiantTulip.Tests.Model
         {
             var reader = new JsonGroundReader();
             IList<Ground> result;
-            using (var stream1 = GetFilePath("Ground2.json"))
-            using (var stream2 = GetFilePath("Ground1.json"))
+            using (var stream1 = TestFileHelper.GetFilePath("Ground2.json"))
+            using (var stream2 = TestFileHelper.GetFilePath("Ground1.json"))
             {
                 var list = new List<Stream>() { stream1, stream2 };
                 result = reader.ReadGrounds(list);
@@ -70,9 +70,27 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(GroundType.AFL, ground.Type);
         }
 
-        private Stream GetFilePath(string fileName)
+        [Test]
+        public void Read_Wheel_Chair_Rugby_Ground()
         {
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Concat("RadiantTulip.Tests.TestFiles.", fileName));
+            var reader = new JsonGroundReader();
+            IList<Ground> result;
+            using (var stream = TestFileHelper.GetFilePath("WheelChairRugby.json"))
+            {
+                var list = new List<Stream>() { stream };
+                result = reader.ReadGrounds(list);
+            }
+
+            Assert.AreEqual(1, result.Count);
+            var ground = result[0];
+            Assert.AreEqual(0, ground.CentreLatitude);
+            Assert.AreEqual(0, ground.CentreLongitude);
+            Assert.AreEqual(1500, ground.Height);
+            Assert.AreEqual(2800, ground.Width);
+            Assert.AreEqual(0, ground.Padding);
+            Assert.AreEqual("Wheel Chair Rugby", ground.Name);
+            Assert.AreEqual(GroundType.WheelChairRugby, ground.Type);
+
         }
     }
 }

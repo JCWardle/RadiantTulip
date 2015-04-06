@@ -9,6 +9,6 @@ namespace RadiantTulip.Model
 {
     public interface IGameCreator
     {
-        Game CreateGame(Stream stream);
+        Game CreateGame(Stream stream, Ground ground);
     }
 }

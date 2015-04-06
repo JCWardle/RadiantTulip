@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Linq;
 using System.Diagnostics;
+using System.IO;
 
 namespace RadiantTulip.View
 {
@@ -23,10 +24,10 @@ namespace RadiantTulip.View
         private readonly IGameDrawer _drawer;
         private IGameViewModel _view;
 
-        public GameWindow(IUnityContainer container)
+        public GameWindow(IUnityContainer container, Ground ground, Stream positions)
         {
             InitializeComponent();
-            this.DataContext = container.Resolve<IGameViewModel>();
+            this.DataContext = container.Resolve<IGameViewModel>(new ParameterOverride("ground", ground), new ParameterOverride("positions", positions));
             
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);
