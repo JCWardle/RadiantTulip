@@ -26,6 +26,8 @@ namespace RadiantTulip.View.Game.VisualAffects
             {
                 case GroupAffect.Lines:
                     return new Lines(players, game.Ground);
+                case GroupAffect.OutterCoverage:
+                    return new OutterCoverage(players, game.Ground);
             }
 
             throw new NotImplementedException();
