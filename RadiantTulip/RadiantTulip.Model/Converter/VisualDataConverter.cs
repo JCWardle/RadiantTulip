@@ -10,7 +10,12 @@ namespace RadiantTulip.Model.Converter
     {
         public Position Convert(Position position, Ground ground)
         {
-            throw new NotImplementedException();
+            return new Position 
+            { 
+                TimeStamp = position.TimeStamp, 
+                X = position.X,
+                Y = ground.Height - position.Y
+            };
         }
     }
 }
