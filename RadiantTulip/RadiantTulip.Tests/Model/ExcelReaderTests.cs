@@ -15,7 +15,7 @@ namespace RadiantTulip.Tests.Model
         public void Read_One_Player()
         {
             List<Team> result;
-            using (var stream = GetFilePath("OnePlayer.xlsx"))
+            using (var stream = TestFileHelper.GetFilePath("OnePlayer.xlsx"))
             {
                 var input = new ExcelReader();
                 result = input.GetTeams(stream);
@@ -50,7 +50,7 @@ namespace RadiantTulip.Tests.Model
         public void Read_Two_Players()
         {
             List<Team> result;
-            using (var stream = GetFilePath("TwoPlayers.xlsx"))
+            using (var stream = TestFileHelper.GetFilePath("TwoPlayers.xlsx"))
             {
                 var input = new ExcelReader();
                 result = input.GetTeams(stream);
@@ -105,18 +105,13 @@ namespace RadiantTulip.Tests.Model
         public void Read_Lots_Of_Positions_One_Player()
         {
             List<Team> result;
-            using (var stream = GetFilePath("OnePlayerBig.xlsx"))
+            using (var stream = TestFileHelper.GetFilePath("OnePlayerBig.xlsx"))
             {
                 var input = new ExcelReader();
                 result = input.GetTeams(stream);
             }
 
             Assert.AreEqual(18510, result[0].Players[0].Positions.Count);
-        }
-
-        private Stream GetFilePath(string fileName)
-        {
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream(string.Concat("RadiantTulip.Tests.TestFiles.", fileName));
         }
     }
 }

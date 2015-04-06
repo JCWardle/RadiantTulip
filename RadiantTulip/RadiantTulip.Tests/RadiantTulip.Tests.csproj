@@ -78,12 +78,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Model\CsvVisualReaderTests.cs" />
     <Compile Include="Model\ExcelReaderTests.cs" />
     <Compile Include="Model\GameCreatorTests.cs" />
     <Compile Include="Model\GPSConverterTests.cs" />
     <Compile Include="Model\JsonGroundReaderTests.cs" />
     <Compile Include="Model\ModelUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestFileHelper.cs" />
     <Compile Include="View\AFLGroundDrawerTests.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
     <Compile Include="View\PlayerDrawerTests.cs" />
@@ -101,11 +103,15 @@
     <EmbeddedResource Include="TestFiles\OnePlayerBig.xlsx" />
     <EmbeddedResource Include="TestFiles\Ground1.json" />
     <EmbeddedResource Include="TestFiles\Ground2.json" />
+    <None Include="TestFiles\MultiplePositions.csv" />
+    <None Include="TestFiles\OnePlayer.csv" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\Patersons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="TestFiles\TwoPlayers.csv" />
+    <None Include="TestFiles\TwoTeams.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RadiantTulip.Model\RadiantTulip.Model.csproj">
