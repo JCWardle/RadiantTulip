@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
+using RadiantTulip.Model;
 using RadiantTulip.Model.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace RadiantTulip.Tests.Model
 {
@@ -26,6 +28,10 @@ namespace RadiantTulip.Tests.Model
             var player = team.Players[0];
             Assert.AreEqual("Scott", player.Name);
             Assert.AreEqual(1, player.Positions.Count);
+            Assert.IsTrue(player.Visible);
+            Assert.AreEqual(Size.Medium, player.Size);
+            Assert.AreEqual(PlayerShape.Circle, player.Shape);
+            Assert.AreEqual(Color.FromRgb(255, 0, 0), player.Colour);
             var position = player.Positions[0];
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
@@ -46,6 +52,10 @@ namespace RadiantTulip.Tests.Model
             var player = team.Players[0];
             Assert.AreEqual("Scott", player.Name);
             Assert.AreEqual(1, player.Positions.Count);
+            Assert.IsTrue(player.Visible);
+            Assert.AreEqual(Size.Medium, player.Size);
+            Assert.AreEqual(PlayerShape.Circle, player.Shape);
+            Assert.AreEqual(Color.FromRgb(255, 0, 0), player.Colour);
             var position = player.Positions[0];
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
@@ -53,6 +63,10 @@ namespace RadiantTulip.Tests.Model
             player = team.Players[1];
             Assert.AreEqual("Batt", player.Name);
             Assert.AreEqual(1, player.Positions.Count);
+            Assert.IsTrue(player.Visible);
+            Assert.AreEqual(Size.Medium, player.Size);
+            Assert.AreEqual(PlayerShape.Circle, player.Shape);
+            Assert.AreEqual(Color.FromRgb(255, 0, 0), player.Colour);
             position = player.Positions[0];
             Assert.AreEqual(13.234827, position.X);
             Assert.AreEqual(8.552656, position.Y);

@@ -13,8 +13,8 @@ namespace RadiantTulip.Model.Converter
             return new Position 
             { 
                 TimeStamp = position.TimeStamp, 
-                X = position.X,
-                Y = ground.Height - position.Y
+                X = position.X * 100,
+                Y = ground.Height - position.Y * 100
             };
         }
     }

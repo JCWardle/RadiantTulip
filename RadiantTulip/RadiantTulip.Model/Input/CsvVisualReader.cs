@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace RadiantTulip.Model.Input
 {
@@ -33,7 +34,15 @@ namespace RadiantTulip.Model.Input
 
                 if(player == null)
                 {
-                    player = new Player { Name = data[0], Positions = new List<Position>() };
+                    player = new Player 
+                    { 
+                        Name = data[0], 
+                        Positions = new List<Position>(), 
+                        Visible = true, 
+                        Size = Size.Medium, 
+                        Shape = PlayerShape.Circle,
+                        Colour = Color.FromRgb(255, 0, 0)
+                    };
                     team.Players.Add(player);
                 }
 

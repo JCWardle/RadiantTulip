@@ -483,7 +483,7 @@ namespace RadiantTulip.View.ViewModels
 
         public GameViewModel(IUnityContainer container, IGameCreator creator)
         {
-            using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\SmallFullTeam.xlsx", FileMode.Open))
+            using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\5minute-test-export.txt", FileMode.Open))
                 _game = creator.CreateGame(stream);
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));

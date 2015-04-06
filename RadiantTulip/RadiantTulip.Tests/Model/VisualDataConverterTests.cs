@@ -15,7 +15,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Convert_Position()
         {
-            var position = new Position { TimeStamp = TimeSpan.Zero, X = 100, Y = 100 };
+            var position = new Position { TimeStamp = TimeSpan.Zero, X = 1, Y = 1 };
             var ground = new Ground() { Width = 2800, Height = 1500 };
             var converter = new VisualDataConverter();
 
@@ -29,7 +29,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Convert_Position_Out_Of_Range()
         {
-            var position = new Position { TimeStamp = TimeSpan.Zero, X = 100, Y = 1600 };
+            var position = new Position { TimeStamp = TimeSpan.Zero, X = 1, Y = 16 };
             var ground = new Ground() { Width = 2800, Height = 1500 };
             var converter = new VisualDataConverter();
 
