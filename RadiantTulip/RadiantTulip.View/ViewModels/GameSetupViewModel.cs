@@ -19,6 +19,7 @@ namespace RadiantTulip.View.ViewModels
         private Ground _ground;
         private string _positionalData;
         private bool _advancedSettings;
+        private IGameCreatorFactory _factory;
         private ICommand _toggleAdvancedSettings;
         private ICommand _selectedGroundChanged;
         private ICommand _startGame;
@@ -86,8 +87,17 @@ namespace RadiantTulip.View.ViewModels
 
         private void StartGame(Window window)
         {
-            var stream = new FileStream(_positionalData, FileMode.Open);
-            var gameWindow = _container.Resolve<GameWindow>(new ParameterOverride("ground", Ground), new ParameterOverride("positions", stream));
+            var creator = _factory.CreateGameCreator(_positionalData);
+            Model.Game game = null;
+            using(var stream = new FileStream(_positionalData, FileMode.Open))
+            {
+                game = creator.CreateGame(stream, Ground);
+            }
+
+            if (game == null)
+                MessageBox.Show("Game cannot be created");
+
+            var gameWindow = _container.Resolve<GameWindow>(new ParameterOverride("game", game));
             gameWindow.Show();
             window.Close();
         }
@@ -111,9 +121,10 @@ namespace RadiantTulip.View.ViewModels
 
         public GameSetupViewModel(){}
 
-        public GameSetupViewModel(IUnityContainer container, IGroundReader reader)
+        public GameSetupViewModel(IUnityContainer container, IGroundReader reader, IGameCreatorFactory factory)
         {
             _container = container;
+            _factory = factory;
             _advancedSettings = false;
             Ground = new Ground();
 

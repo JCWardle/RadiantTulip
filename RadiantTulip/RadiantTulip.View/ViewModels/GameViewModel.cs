@@ -481,11 +481,9 @@ namespace RadiantTulip.View.ViewModels
 
         public Action UpdateView { get; set; }
 
-        public GameViewModel(IUnityContainer container, IGameCreator creator, Ground ground, Stream positions)
+        public GameViewModel(IUnityContainer container, Model.Game game)
         {
-            _game = creator.CreateGame(positions, ground);
-            positions.Dispose();
-            positions = null;
+            _game = game;
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
             _affectFactory = container.Resolve<IAffectFactory>();

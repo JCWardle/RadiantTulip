@@ -24,10 +24,10 @@ namespace RadiantTulip.View
         private readonly IGameDrawer _drawer;
         private IGameViewModel _view;
 
-        public GameWindow(IUnityContainer container, Ground ground, Stream positions)
+        public GameWindow(IUnityContainer container, Model.Game game)
         {
             InitializeComponent();
-            this.DataContext = container.Resolve<IGameViewModel>(new ParameterOverride("ground", ground), new ParameterOverride("positions", positions));
+            this.DataContext = container.Resolve<IGameViewModel>(new ParameterOverride("game", game));
             
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);

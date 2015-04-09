@@ -27,6 +27,7 @@ namespace RadiantTulip.View
             Container.RegisterType(typeof(IGameCreator), typeof(GameCreator));
             Container.RegisterType(typeof (IModelUpdater), typeof (ModelUpdater));
             Container.RegisterType(typeof(IGroundReader), typeof(JsonGroundReader));
+            Container.RegisterType(typeof(IGameCreatorFactory), typeof(GameCreatorFactory));
 
             //Drawing
             Container.RegisterType(typeof (IGameDrawer), typeof (GameDrawer));
