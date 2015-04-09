@@ -4,9 +4,11 @@
         xmlns:v="clr-namespace:RadiantTulip.View"
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        Title="GameSetup" Width="300"
+        Title="GameSetup"
+        Height="auto"
         Background="#494949"
-        x:Name="SetupWindow">
+        x:Name="SetupWindow"
+        SizeToContent="WidthAndHeight">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -96,7 +98,7 @@
             <Label Content="Ground Padding (m)" Grid.Column="0" Grid.Row="4"/>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Ground.Padding}"/>
             <Label Content="Rotation (Degrees)" Grid.Column="0" Grid.Row="5"/>
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Ground.Rotation}"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Ground.Rotation}"/>
         </Grid>
         <Button Content="Start Game">
             <i:Interaction.Triggers>
