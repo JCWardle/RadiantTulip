@@ -4,8 +4,11 @@
         xmlns:v="clr-namespace:RadiantTulip.View"
         xmlns:VM="clr-namespace:RadiantTulip.View.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        Title="GameSetup" Width="300"
-        Background="#494949">
+        Title="GameSetup"
+        Height="auto"
+        Background="#494949"
+        x:Name="SetupWindow"
+        SizeToContent="WidthAndHeight">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -40,7 +43,13 @@
             <v:FileDialog Grid.Row="0" Grid.Column="1" SelectedFile="{Binding PositionalData}"/>
 
             <Label Content="Game Type:" Grid.Row="1" Grid.Column="0"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Ground.Type}" ItemsSource="{Binding GroundTypes}"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Ground.Type}" ItemsSource="{Binding GroundTypes}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedGroundChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
             
             <Label Content="Field of play" Grid.Row="2" Grid.Column="0"/>
             <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding SelectableGrounds}" SelectedItem="{Binding Ground}">
@@ -71,6 +80,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -87,7 +97,15 @@
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Ground.Height}"/>
             <Label Content="Ground Padding (m)" Grid.Column="0" Grid.Row="4"/>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Ground.Padding}"/>
+            <Label Content="Rotation (Degrees)" Grid.Column="0" Grid.Row="5"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Ground.Rotation}"/>
         </Grid>
-        <Button Content="Start Game"/>
+        <Button Content="Start Game">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:InvokeCommandAction Command="{Binding StartGameCommand}" CommandParameter="{Binding ElementName=SetupWindow}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
     </StackPanel>
 </Window>

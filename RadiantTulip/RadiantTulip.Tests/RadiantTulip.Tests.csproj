@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Model\CsvVisualReaderTests.cs" />
     <Compile Include="Model\ExcelReaderTests.cs" />
+    <Compile Include="Model\GameCreatorFactoryTests.cs" />
     <Compile Include="Model\GameCreatorTests.cs" />
     <Compile Include="Model\GPSConverterTests.cs" />
     <Compile Include="Model\JsonGroundReaderTests.cs" />
@@ -106,6 +107,7 @@
     <EmbeddedResource Include="TestFiles\Ground2.json" />
     <EmbeddedResource Include="TestFiles\MultiplePositions.csv" />
     <EmbeddedResource Include="TestFiles\OnePlayer.csv" />
+    <EmbeddedResource Include="TestFiles\WheelChairRugby.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\Patersons.png">

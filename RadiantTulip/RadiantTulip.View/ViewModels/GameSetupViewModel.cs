@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Unity;
 using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace RadiantTulip.View.ViewModels
@@ -17,9 +19,12 @@ namespace RadiantTulip.View.ViewModels
         private Ground _ground;
         private string _positionalData;
         private bool _advancedSettings;
+        private IGameCreatorFactory _factory;
         private ICommand _toggleAdvancedSettings;
         private ICommand _selectedGroundChanged;
+        private ICommand _startGame;
         private ObservableCollection<Ground> _selectableGrounds;
+        private IUnityContainer _container;
 
         public Ground Ground
         {
@@ -33,11 +38,11 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
-        public ObservableCollection<Ground> SelectableGrounds
+        public IList<Ground> SelectableGrounds
         {
             get
             {
-                return _selectableGrounds;
+                return _selectableGrounds.Where(g => g.Type == _ground.Type).ToList();
             }
         }
 
@@ -75,9 +80,32 @@ namespace RadiantTulip.View.ViewModels
             get { return _selectedGroundChanged ?? (_selectedGroundChanged = new DelegateCommand(SelectedGroundChange)); }
         }
 
+        public ICommand StartGameCommand
+        {
+            get { return _startGame ?? (_startGame = new DelegateCommand<Window>(StartGame)); }
+        }
+
+        private void StartGame(Window window)
+        {
+            var creator = _factory.CreateGameCreator(_positionalData);
+            Model.Game game = null;
+            using(var stream = new FileStream(_positionalData, FileMode.Open))
+            {
+                game = creator.CreateGame(stream, Ground);
+            }
+
+            if (game == null)
+                MessageBox.Show("Game cannot be created");
+
+            var gameWindow = _container.Resolve<GameWindow>(new ParameterOverride("game", game));
+            gameWindow.Show();
+            window.Close();
+        }
+
         private void SelectedGroundChange()
         {
             OnPropertyChanged("Ground");
+            OnPropertyChanged("SelectableGrounds");
         }
 
         private void ToggleAdvancedSettings()
@@ -93,8 +121,10 @@ namespace RadiantTulip.View.ViewModels
 
         public GameSetupViewModel(){}
 
-        public GameSetupViewModel(IGroundReader reader)
+        public GameSetupViewModel(IUnityContainer container, IGroundReader reader, IGameCreatorFactory factory)
         {
+            _container = container;
+            _factory = factory;
             _advancedSettings = false;
             Ground = new Ground();
 

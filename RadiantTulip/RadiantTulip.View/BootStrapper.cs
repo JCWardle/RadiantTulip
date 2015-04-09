@@ -27,6 +27,7 @@ namespace RadiantTulip.View
             Container.RegisterType(typeof(IGameCreator), typeof(GameCreator));
             Container.RegisterType(typeof (IModelUpdater), typeof (ModelUpdater));
             Container.RegisterType(typeof(IGroundReader), typeof(JsonGroundReader));
+            Container.RegisterType(typeof(IGameCreatorFactory), typeof(GameCreatorFactory));
 
             //Drawing
             Container.RegisterType(typeof (IGameDrawer), typeof (GameDrawer));
@@ -42,11 +43,9 @@ namespace RadiantTulip.View
 
         protected override DependencyObject CreateShell()
         {
-            var gameWindow = Container.Resolve<GameWindow>();
-            gameWindow.Show();
             var setupWindow = Container.Resolve<GameSetup>();
             setupWindow.Show();
-            return gameWindow;
+            return setupWindow;
         }
     }
 }

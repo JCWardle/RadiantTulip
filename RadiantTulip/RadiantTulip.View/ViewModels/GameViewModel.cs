@@ -481,10 +481,9 @@ namespace RadiantTulip.View.ViewModels
 
         public Action UpdateView { get; set; }
 
-        public GameViewModel(IUnityContainer container, IGameCreator creator)
+        public GameViewModel(IUnityContainer container, Model.Game game)
         {
-            using (var stream = new FileStream(@"E:\Code\RadiantTulip\TestData\5minute-test-export.txt", FileMode.Open))
-                _game = creator.CreateGame(stream);
+            _game = game;
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
             _affectFactory = container.Resolve<IAffectFactory>();

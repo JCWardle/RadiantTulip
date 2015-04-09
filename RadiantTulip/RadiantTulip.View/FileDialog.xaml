@@ -8,7 +8,7 @@
     <Grid Margin="0, 0, 0, 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="63"/>
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Column="0" Text="{Binding SelectedFile}" HorizontalAlignment="Stretch"/>

@@ -60,10 +60,12 @@
     <Compile Include="Converter\VisualDataConverter.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameCreator.cs" />
+    <Compile Include="GameCreatorFactory.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Ground.cs" />
     <Compile Include="GroundType.cs" />
     <Compile Include="IGameCreator.cs" />
+    <Compile Include="IGameCreatorFactory.cs" />
     <Compile Include="IGroundReader.cs" />
     <Compile Include="IModelUpdater.cs" />
     <Compile Include="Input\CsvVisualReader.cs" />
@@ -86,6 +88,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Grounds\Pattersons.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Grounds\WheelChairRugby.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
