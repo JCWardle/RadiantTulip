@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,17 @@ namespace RadiantTulip.View
 {
     public class GlobalExceptionHandler : IGlobalExceptionHandler
     {
+        private ILog _logger;
+
+        public GlobalExceptionHandler(ILog logger)
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            _logger = logger;
+        }
+
         public void HandleException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            throw new NotImplementedException();
+            _logger.Fatal(e.Exception);
         }
     }
 }
