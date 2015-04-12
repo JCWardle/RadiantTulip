@@ -8,6 +8,7 @@ using RadiantTulip.View.ViewModels;
 using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using RadiantTulip.View.Game.VisualAffects;
+using log4net;
 
 namespace RadiantTulip.View
 {
@@ -31,7 +32,6 @@ namespace RadiantTulip.View
 
             //Drawing
             Container.RegisterType(typeof (IGameDrawer), typeof (GameDrawer));
-            Container.RegisterType(typeof (GroundDrawer), typeof (AFLGroundDrawer));
             Container.RegisterType(typeof (IPlayerDrawer), typeof (PlayerDrawer));
             Container.RegisterType(typeof(IAffectFactory), typeof(AffectFactory));
             Container.RegisterType(typeof(IGroundDrawerFactory), typeof(GroundDrawerFactory));
@@ -39,6 +39,8 @@ namespace RadiantTulip.View
             //Views
             Container.RegisterType(typeof (IGameViewModel), typeof (GameViewModel));
             Container.RegisterType(typeof(IGameSetupViewModel), typeof(GameSetupViewModel));
+            Container.RegisterType(typeof(IGlobalExceptionHandler), typeof(GlobalExceptionHandler));
+            Container.RegisterType(typeof(ILog), new InjectionFactory(x => LogManager.GetLogger("Radiant Tulip")));
         }
 
         protected override DependencyObject CreateShell()
