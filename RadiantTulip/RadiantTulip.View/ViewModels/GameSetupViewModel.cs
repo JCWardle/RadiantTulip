@@ -27,6 +27,7 @@ namespace RadiantTulip.View.ViewModels
         private ObservableCollection<Ground> _selectableGrounds;
         private IUnityContainer _container;
         private Window _window;
+        private Model.Game _game;
 
         public bool Loading { get; set; }
         public int LoadingProgress { get; set; }
@@ -98,30 +99,39 @@ namespace RadiantTulip.View.ViewModels
             worker.DoWork += CreateGame;
             worker.ProgressChanged += UpdateProgress;
             worker.RunWorkerAsync();
+            worker.RunWorkerCompleted += StartGameWindow;
+            Loading = true;
+            OnPropertyChanged("Loading");
         }
 
         private void UpdateProgress(object sender, ProgressChangedEventArgs e)
         {
             LoadingProgress = e.ProgressPercentage;
+            OnPropertyChanged("LoadingProgress");
+        }
+
+        private void StartGameWindow(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (_game == null)
+            {
+                MessageBox.Show("Game cannot be created");
+                return;
+            }
+
+            var gameWindow = _container.Resolve<GameWindow>(new ParameterOverride("game", _game));
+            gameWindow.Show();
+            _window.Close();
         }
 
         private void CreateGame(object sender, DoWorkEventArgs e)
         {
             var creator = _factory.CreateGameCreator(_positionalData);
-            Model.Game game = null;
             var reportProgress = new Action<int>((sender as BackgroundWorker).ReportProgress);
 
             using (var stream = new FileStream(_positionalData, FileMode.Open))
             {
-                game = creator.CreateGame(stream, Ground, reportProgress);
+                _game = creator.CreateGame(stream, Ground, reportProgress);
             }
-
-            if (game == null)
-                MessageBox.Show("Game cannot be created");
-
-            var gameWindow = _container.Resolve<GameWindow>(new ParameterOverride("game", game));
-            gameWindow.Show();
-            _window.Close();
         }
 
         private void SelectedGroundChange()
