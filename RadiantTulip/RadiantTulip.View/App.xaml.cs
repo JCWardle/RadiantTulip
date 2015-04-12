@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Microsoft.Practices.Unity;
 using System;
+using log4net;
 
 namespace RadiantTulip.View
 {
@@ -19,7 +20,6 @@ namespace RadiantTulip.View
             var exceptionHandler = bootStrapper.Container.Resolve<IGlobalExceptionHandler>();
 
             this.DispatcherUnhandledException += exceptionHandler.HandleException;
-            throw new Exception();
         }
     }
 }
