@@ -96,7 +96,6 @@
     <Compile Include="View\WheelChairRugbyGroundDrawerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="TestFiles\OnePlayer.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

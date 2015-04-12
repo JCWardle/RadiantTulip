@@ -13,6 +13,10 @@ namespace RadiantTulip.View
 
             var bootStrapper = new BootStrapper();
             bootStrapper.Run();
+
+            var exceptionHandler = bootStrapper.Container.Resolve(typeof(IGlobalExceptionHandler), null, null) as IGlobalExceptionHandler;
+
+            this.DispatcherUnhandledException += exceptionHandler.HandleException;
         }
     }
 }

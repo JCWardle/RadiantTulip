@@ -39,6 +39,7 @@ namespace RadiantTulip.View
             //Views
             Container.RegisterType(typeof (IGameViewModel), typeof (GameViewModel));
             Container.RegisterType(typeof(IGameSetupViewModel), typeof(GameSetupViewModel));
+            Container.RegisterType(typeof(IGlobalExceptionHandler), typeof(GlobalExceptionHandler));
         }
 
         protected override DependencyObject CreateShell()
