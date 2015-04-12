@@ -109,7 +109,7 @@
         </Button>
         <Grid Visibility="{Binding Loading, Converter={StaticResource boolToVisibility}, Mode=OneWay}">
             <ProgressBar Minimum="0" Maximum="100" Value="{Binding LoadingProgress}"/>
-            <TextBlock Text="Loading..." HorizontalAlignment="Center" />
+            <TextBlock Text="Loading..." Style="{StaticResource ProgressText}"/>
         </Grid>
     </StackPanel>
 </Window>
