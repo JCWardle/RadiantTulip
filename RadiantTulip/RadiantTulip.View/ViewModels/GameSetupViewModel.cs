@@ -93,6 +93,8 @@ namespace RadiantTulip.View.ViewModels
 
         private void StartGame(Window window)
         {
+            Loading = true;
+            OnPropertyChanged("Loading");
             var worker = new BackgroundWorker();
             _window = window;
             worker.WorkerReportsProgress = true;
@@ -100,8 +102,6 @@ namespace RadiantTulip.View.ViewModels
             worker.ProgressChanged += UpdateProgress;
             worker.RunWorkerAsync();
             worker.RunWorkerCompleted += StartGameWindow;
-            Loading = true;
-            OnPropertyChanged("Loading");
         }
 
         private void UpdateProgress(object sender, ProgressChangedEventArgs e)

@@ -12,5 +12,6 @@
         <converters:AffectSelected x:Key="affectSelected"/>
         <converters:BoolToVisibility x:Key="boolToVisibility"/>
         <converters:SelectedShape x:Key="selectedShape"/>
+        <converters:InvertBoolean x:Key="invertBooleanConverter"/>
     </Application.Resources>
 </Application>
