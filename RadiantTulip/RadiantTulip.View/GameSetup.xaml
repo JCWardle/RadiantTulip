@@ -107,5 +107,9 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
+        <Grid Visibility="{Binding Loading, Converter={StaticResource boolToVisibility}}">
+            <ProgressBar Minimum="0" Maximum="100"/>
+            <TextBlock Text="Text goes here" />
+        </Grid>
     </StackPanel>
 </Window>

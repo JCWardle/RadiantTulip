@@ -5,6 +5,7 @@ using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,10 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _startGame;
         private ObservableCollection<Ground> _selectableGrounds;
         private IUnityContainer _container;
+        private Window _window;
+
+        public bool Loading { get; set; }
+        public int LoadingProgress { get; set; }
 
         public Ground Ground
         {
@@ -87,11 +92,28 @@ namespace RadiantTulip.View.ViewModels
 
         private void StartGame(Window window)
         {
+            var worker = new BackgroundWorker();
+            _window = window;
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += CreateGame;
+            worker.ProgressChanged += UpdateProgress;
+            worker.RunWorkerAsync();
+        }
+
+        private void UpdateProgress(object sender, ProgressChangedEventArgs e)
+        {
+            LoadingProgress = e.ProgressPercentage;
+        }
+
+        private void CreateGame(object sender, DoWorkEventArgs e)
+        {
             var creator = _factory.CreateGameCreator(_positionalData);
             Model.Game game = null;
-            using(var stream = new FileStream(_positionalData, FileMode.Open))
+            var reportProgress = new Action<int>((sender as BackgroundWorker).ReportProgress);
+
+            using (var stream = new FileStream(_positionalData, FileMode.Open))
             {
-                game = creator.CreateGame(stream, Ground);
+                game = creator.CreateGame(stream, Ground, reportProgress);
             }
 
             if (game == null)
@@ -99,7 +121,7 @@ namespace RadiantTulip.View.ViewModels
 
             var gameWindow = _container.Resolve<GameWindow>(new ParameterOverride("game", game));
             gameWindow.Show();
-            window.Close();
+            _window.Close();
         }
 
         private void SelectedGroundChange()

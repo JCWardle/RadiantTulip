@@ -84,6 +84,7 @@
     <Compile Include="Model\GameCreatorTests.cs" />
     <Compile Include="Model\GPSConverterTests.cs" />
     <Compile Include="Model\JsonGroundReaderTests.cs" />
+    <Compile Include="Model\Mocks\MockProgressReporter.cs" />
     <Compile Include="Model\ModelUpdaterTests.cs" />
     <Compile Include="Model\VisualDataConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
