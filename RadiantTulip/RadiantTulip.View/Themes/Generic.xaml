@@ -74,6 +74,7 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#F7941D"/>
         </Style.Resources>
     </Style>
+   
 
     <!-- Specific Styles -->
     <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label" x:Key="Heading">
@@ -137,5 +138,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="ProgressText">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 </ResourceDictionary>

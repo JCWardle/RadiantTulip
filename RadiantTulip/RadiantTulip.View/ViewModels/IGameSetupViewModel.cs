@@ -14,6 +14,8 @@ namespace RadiantTulip.View.ViewModels
         Ground Ground { get; set; }
         string PositionalData { get; set; }
         bool AdvancedSettings { get; set; }
+        bool Loading { get; set; }
+        int LoadingProgress { get; set; }
         ICommand AdvancedSettingsToggle { get; }
         ICommand SelectedGroundChanged { get; }
         ICommand StartGameCommand { get; }

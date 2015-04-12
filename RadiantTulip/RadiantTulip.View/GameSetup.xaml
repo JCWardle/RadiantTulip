@@ -100,12 +100,16 @@
             <Label Content="Rotation (Degrees)" Grid.Column="0" Grid.Row="5"/>
             <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Ground.Rotation}"/>
         </Grid>
-        <Button Content="Start Game">
+        <Button Content="Start Game" IsEnabled="{Binding Path=Loading, Converter={StaticResource invertBooleanConverter}}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <i:InvokeCommandAction Command="{Binding StartGameCommand}" CommandParameter="{Binding ElementName=SetupWindow}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
+        <Grid Visibility="{Binding Loading, Converter={StaticResource boolToVisibility}, Mode=OneWay}">
+            <ProgressBar Minimum="0" Maximum="100" Value="{Binding LoadingProgress}"/>
+            <TextBlock Text="Loading..." Style="{StaticResource ProgressText}"/>
+        </Grid>
     </StackPanel>
 </Window>
