@@ -97,7 +97,8 @@
     <Compile Include="View\Converters\IsSelectedTests.cs" />
     <Compile Include="View\Converters\MultipleSelectTests.cs" />
     <Compile Include="View\Converters\SelectedColourTests.cs" />
-    <Compile Include="View\Converters\SelectedSize.cs" />
+    <Compile Include="View\Converters\SelectedShapeTests.cs" />
+    <Compile Include="View\Converters\SelectedSizeTests.cs" />
     <Compile Include="View\Converters\SingleSelectTests.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
     <Compile Include="View\PlayerDrawerTests.cs" />
