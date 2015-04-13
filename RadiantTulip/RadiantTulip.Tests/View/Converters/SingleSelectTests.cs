@@ -11,22 +11,22 @@ using System.Windows;
 namespace RadiantTulip.Tests.View.Converters
 {
     [TestFixture]
-    public class MultipleSelectTests
+    public class SingleSelectTests
     {
         [Test]
-        public void Multiple_Select_Multiple_Players_Selected()
+        public void Single_Select_Multiple_Players_Selected()
         {
-            var converter = new MultipleSelect();
+            var converter = new SingleSelect();
 
             var result = (Visibility)converter.Convert(SelectionState.MultiplePlayers, null, null, null);
 
-            Assert.AreEqual(Visibility.Visible, result);
+            Assert.AreEqual(Visibility.Collapsed, result);
         }
 
         [Test]
-        public void Multiple_Select_No_Players_Selected()
+        public void Single_Select_No_Players_Selected()
         {
-            var converter = new MultipleSelect();
+            var converter = new SingleSelect();
 
             var result = (Visibility)converter.Convert(SelectionState.None, null, null, null);
 
@@ -34,19 +34,19 @@ namespace RadiantTulip.Tests.View.Converters
         }
 
         [Test]
-        public void Multiple_Select_One_Player_Selected()
+        public void Single_Select_One_Player_Selected()
         {
-            var converter = new MultipleSelect();
+            var converter = new SingleSelect();
 
             var result = (Visibility)converter.Convert(SelectionState.SinglePlayer, null, null, null);
 
-            Assert.AreEqual(Visibility.Collapsed, result);
+            Assert.AreEqual(Visibility.Visible, result);
         }
 
         [Test]
-        public void Multiple_Select_Group_Selected()
+        public void Single_Select_Group_Selected()
         {
-            var converter = new MultipleSelect();
+            var converter = new SingleSelect();
 
             var result = (Visibility)converter.Convert(SelectionState.Group, null, null, null);
 
@@ -55,9 +55,9 @@ namespace RadiantTulip.Tests.View.Converters
 
         [Test]
         [ExpectedException(typeof(NotImplementedException))]
-        public void Multiple_Select_Convert_Back_Not_Implemented()
+        public void Single_Select_Convert_Back_Not_Implemented()
         {
-            var converter = new MultipleSelect();
+            var converter = new SingleSelect();
             converter.ConvertBack(null, null, null, null);
         }
     }
