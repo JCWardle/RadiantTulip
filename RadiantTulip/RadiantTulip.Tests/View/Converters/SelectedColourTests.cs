@@ -45,6 +45,22 @@ namespace RadiantTulip.Tests.View.Converters
         }
 
         [Test]
+        public void Selected_Colour_Two_Players_Different_Selected()
+        {
+            var converter = new SelectedColour();
+            var players = new ObservableCollection<Player>() 
+            { 
+                new Player { Colour = new Color() { B = 255, G = 0, R = 0 } },
+                new Player { Colour = new Color() { B = 0, G = 255, R = 0 } }
+            };
+            var parameters = new object[] { players, null, SelectionState.MultiplePlayers };
+
+            var result = (Color)converter.Convert(parameters, null, null, null);
+
+            Assert.AreEqual(new Color() { B = 255, G = 0, R = 0 }, result);
+        }
+
+        [Test]
         public void Selected_Colour_Group_Selected()
         {
             var converter = new SelectedColour();
@@ -54,6 +70,25 @@ namespace RadiantTulip.Tests.View.Converters
                 { 
                     new Player { Colour = new Color() { B = 255, G = 0, R = 0 } },
                     new Player { Colour = new Color() { B = 255, G = 0, R = 0 } }
+                }
+            };
+            var parameters = new object[] { null, group, SelectionState.Group };
+
+            var result = (Color)converter.Convert(parameters, null, null, null);
+
+            Assert.AreEqual(new Color() { B = 255, G = 0, R = 0 }, result);
+        }
+
+        [Test]
+        public void Selected_Colour_Group_Different_Selected()
+        {
+            var converter = new SelectedColour();
+            var group = new Group
+            {
+                Players = new ObservableCollection<Player>() 
+                { 
+                    new Player { Colour = new Color() { B = 255, G = 0, R = 0 } },
+                    new Player { Colour = new Color() { B = 0, G = 255, R = 0 } }
                 }
             };
             var parameters = new object[] { null, group, SelectionState.Group };
