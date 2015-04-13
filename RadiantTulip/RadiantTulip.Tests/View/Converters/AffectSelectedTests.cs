@@ -148,5 +148,14 @@ namespace RadiantTulip.Tests.View.Converters
 
             Assert.IsTrue(result);
         }
+
+        [Test]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void Convert_Back_Affect_Selected()
+        {
+            var converter = new AffectSelected();
+
+            converter.ConvertBack(null, null, null, null);
+        }
     }
 }
