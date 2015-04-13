@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.View.Game.VisualAffects
 {
-    class Tadpole : Drawer, IVisualAffect
+    public class Tadpole : Drawer, IVisualAffect
     {
         private Player _player;
         private Ground _ground;
