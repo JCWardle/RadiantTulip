@@ -116,19 +116,19 @@
     <EmbeddedResource Include="TestFiles\OnePlayerBig.xlsx" />
     <EmbeddedResource Include="TestFiles\Ground1.json" />
     <EmbeddedResource Include="TestFiles\Ground2.json" />
-    <EmbeddedResource Include="TestFiles\MultiplePositions.csv" />
-    <EmbeddedResource Include="TestFiles\OnePlayer.csv" />
+    <Content Include="TestFiles\MultiplePositions.txt" />
+    <Content Include="TestFiles\OnePlayer.txt" />
     <EmbeddedResource Include="TestFiles\WheelChairRugby.json" />
-    <EmbeddedResource Include="TestFiles\NoPositionalData.csv" />
-    <EmbeddedResource Include="TestFiles\OverflowPosition.csv" />
+    <Content Include="TestFiles\NoPositionalData.txt" />
+    <Content Include="TestFiles\OverflowPosition.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestFiles\NotEnoughColumns.csv" />
+    <Content Include="TestFiles\NotEnoughColumns.txt" />
     <Content Include="TestFiles\Patersons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="TestFiles\TwoPlayers.csv" />
-    <EmbeddedResource Include="TestFiles\TwoTeams.csv" />
+    <Content Include="TestFiles\TwoPlayers.txt" />
+    <Content Include="TestFiles\TwoTeams.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RadiantTulip.Model\RadiantTulip.Model.csproj">

@@ -49,12 +49,11 @@ namespace RadiantTulip.Model.Input
                         Colour = Color.FromRgb(255, 0, 0)
                     };
                     team.Players.Add(player);
-                }
-
-                var frame = double.Parse(data[1]);
+                }                
 
                 try
                 {
+                    var frame = double.Parse(data[1]);
                     player.Positions.Add(new Position { X = double.Parse(data[2]), Y = double.Parse(data[3]), TimeStamp = TimeSpan.FromMilliseconds(100 / FPS * frame) });
                 } 
                 catch(Exception e)

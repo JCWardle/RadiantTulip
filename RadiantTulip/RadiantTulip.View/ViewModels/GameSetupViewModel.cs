@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -100,8 +101,9 @@ namespace RadiantTulip.View.ViewModels
             worker.WorkerReportsProgress = true;
             worker.DoWork += CreateGame;
             worker.ProgressChanged += UpdateProgress;
-            worker.RunWorkerAsync();
             worker.RunWorkerCompleted += StartGameWindow;
+            worker.RunWorkerAsync();
+            
         }
 
         private void UpdateProgress(object sender, ProgressChangedEventArgs e)
@@ -114,7 +116,9 @@ namespace RadiantTulip.View.ViewModels
         {
             if (_game == null)
             {
-                MessageBox.Show("Game cannot be created");
+                Loading = false;
+                LoadingProgress = 0;
+                OnPropertyChanged("Loading");
                 return;
             }
 
@@ -125,12 +129,29 @@ namespace RadiantTulip.View.ViewModels
 
         private void CreateGame(object sender, DoWorkEventArgs e)
         {
-            var creator = _factory.CreateGameCreator(_positionalData);
+            IGameCreator creator = null;
+            try
+            {
+                creator = _factory.CreateGameCreator(_positionalData);
+            }
+            catch (NotImplementedException)
+            {
+                MessageBox.Show("File type not supported, only txt, xlsx and xls are supported.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var reportProgress = new Action<int>((sender as BackgroundWorker).ReportProgress);
 
             using (var stream = new FileStream(_positionalData, FileMode.Open))
             {
-                _game = creator.CreateGame(stream, Ground, reportProgress);
+                try
+                {
+                    _game = creator.CreateGame(stream, Ground, reportProgress);
+                }
+                catch (ArgumentException exc)
+                {
+                    MessageBox.Show(exc.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
