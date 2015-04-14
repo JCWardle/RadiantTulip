@@ -119,8 +119,11 @@
     <EmbeddedResource Include="TestFiles\MultiplePositions.csv" />
     <EmbeddedResource Include="TestFiles\OnePlayer.csv" />
     <EmbeddedResource Include="TestFiles\WheelChairRugby.json" />
+    <EmbeddedResource Include="TestFiles\NoPositionalData.csv" />
+    <EmbeddedResource Include="TestFiles\OverflowPosition.csv" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="TestFiles\NotEnoughColumns.csv" />
     <Content Include="TestFiles\Patersons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

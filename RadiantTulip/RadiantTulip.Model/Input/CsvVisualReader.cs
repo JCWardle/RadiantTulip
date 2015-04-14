@@ -16,11 +16,16 @@ namespace RadiantTulip.Model.Input
         {
             var result = new List<Team>();
             var reader = new TextFieldParser(stream);
+            var line = 0;
             reader.SetDelimiters(",");
 
             while(!reader.EndOfData)
             {
+                line++;
                 var data = reader.ReadFields();
+
+                if (data.Length < 6)
+                    throw new ArgumentException(String.Format("Positional data on line {0} doesn't have enough columns, it requires 6 or more", line));
 
                 var team = result.FirstOrDefault(t => t.Name == data[5]);
 
@@ -47,7 +52,18 @@ namespace RadiantTulip.Model.Input
                 }
 
                 var frame = double.Parse(data[1]);
-                player.Positions.Add( new Position { X = double.Parse(data[2]), Y = double.Parse(data[3]), TimeStamp = TimeSpan.FromMilliseconds(100 / FPS * frame )  });
+
+                try
+                {
+                    player.Positions.Add(new Position { X = double.Parse(data[2]), Y = double.Parse(data[3]), TimeStamp = TimeSpan.FromMilliseconds(100 / FPS * frame) });
+                } 
+                catch(Exception e)
+                {
+                    if (e is OverflowException || e is FormatException)
+                        throw new ArgumentException(String.Format("Positional data in line {0} is not in a numerical format", line));
+                    else
+                        throw e;
+                }
             }
 
             return result;
