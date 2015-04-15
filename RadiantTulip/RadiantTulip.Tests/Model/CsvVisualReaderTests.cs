@@ -104,5 +104,35 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(9.703464, position.Y);
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 4), position.TimeStamp);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Positional data in line 2 is not in a numerical format")]
+        public void Read_OverFlowed_Positional_Information()
+        {
+            var file = TestFileHelper.GetFilePath("OverflowPosition.csv");
+            var reader = new CsvVisualReader();
+
+            reader.GetTeams(file);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Positional data in line 2 is not in a numerical format")]
+        public void Read_Missing_Positional_Information()
+        {
+            var file = TestFileHelper.GetFilePath("NoPositionalData.csv");
+            var reader = new CsvVisualReader();
+
+            reader.GetTeams(file);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Positional data on line 2 doesn't have enough columns, it requires 6 or more")]
+        public void Read_Missing_Columns()
+        {
+            var file = TestFileHelper.GetFilePath("NotEnoughColumns.csv");
+            var reader = new CsvVisualReader();
+
+            reader.GetTeams(file);
+        }
     }
 }

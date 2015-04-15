@@ -1,0 +1,2 @@
+﻿"Scott", 0, 20, 9.845711, 11, "Australia"
+"Scott", 0, , 9.845711, 11, "Australia"
