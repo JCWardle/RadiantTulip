@@ -41,7 +41,17 @@ namespace RadiantTulip.Model
 
             foreach (var t in _game.Teams)
                 foreach (var player in t.Players)
-                   player.CurrentPosition = player.Positions.First(p => p.TimeStamp == _time);
+                {
+                    var newPosition = player.Positions.FirstOrDefault(p => p.TimeStamp == _time);
+
+                    if (newPosition != null)
+                    {
+                        player.CurrentPosition = newPosition;
+                        player.Visible = true;
+                    }
+                    else
+                        player.Visible = false;
+                }
         }
 
         public void ChangeDirection()
