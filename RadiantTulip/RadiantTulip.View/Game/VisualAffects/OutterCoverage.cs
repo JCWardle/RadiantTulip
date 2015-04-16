@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.View.Game.VisualAffects
 {
-    public class OutterCoverage : Drawer, IVisualAffect
+    public class OutterCoverage : IVisualAffect
     {
         private IList<Model.Player> _players;
         private Model.Ground _ground;
@@ -55,13 +55,14 @@ namespace RadiantTulip.View.Game.VisualAffects
         private Polygon CreateTriangle(Player player, Player player2, Player player3, Canvas canvas)
         {
             var triangle = new Polygon {Fill = new SolidColorBrush(Color.FromArgb(100, 0, 0, 125))};
-            var transform = TransformToCanvas(player.CurrentPosition.X, player.CurrentPosition.Y, _ground, canvas);
 
-            triangle.Points.Add(new Point { X = transform.Item1, Y = transform.Item2 });
-            transform = TransformToCanvas(player2.CurrentPosition.X, player2.CurrentPosition.Y, _ground, canvas);
-            triangle.Points.Add(new Point { X = transform.Item1, Y = transform.Item2 });
-            transform = TransformToCanvas(player3.CurrentPosition.X, player3.CurrentPosition.Y, _ground, canvas);
-            triangle.Points.Add(new Point { X = transform.Item1, Y = transform.Item2 });
+            var transform = player.CurrentPosition.TransformToCanvas(_ground, canvas);
+
+            triangle.Points.Add(transform);
+            transform = player2.CurrentPosition.TransformToCanvas(_ground, canvas);
+            triangle.Points.Add(transform);
+            transform = player3.CurrentPosition.TransformToCanvas(_ground, canvas);
+            triangle.Points.Add(transform);
 
             return triangle;
         }
