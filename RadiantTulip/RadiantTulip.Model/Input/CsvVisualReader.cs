@@ -17,6 +17,7 @@ namespace RadiantTulip.Model.Input
             var result = new List<Team>();
             var reader = new TextFieldParser(stream);
             var line = 0;
+            var startingFrame = -1;
             reader.SetDelimiters(",");
 
             while(!reader.EndOfData)
@@ -49,20 +50,18 @@ namespace RadiantTulip.Model.Input
                         Colour = Color.FromRgb(255, 0, 0)
                     };
                     team.Players.Add(player);
-                }                
-
-                try
-                {
-                    var frame = double.Parse(data[1]);
-                    player.Positions.Add(new Position { X = double.Parse(data[2]), Y = double.Parse(data[3]), TimeStamp = TimeSpan.FromMilliseconds(100 / FPS * frame) });
-                } 
-                catch(Exception e)
-                {
-                    if (e is OverflowException || e is FormatException)
-                        throw new ArgumentException(String.Format("Positional data in line {0} is not in a numerical format", line));
-                    else
-                        throw e;
                 }
+
+                double x, y;
+                int frame;
+
+                if (!double.TryParse(data[2], out x) || !double.TryParse(data[3], out y) || !int.TryParse(data[1], out frame))
+                    throw new ArgumentException(String.Format("A number in line {0} is not in a numerical format", line));
+
+                if (startingFrame == -1)
+                    startingFrame = frame;
+
+                player.Positions.Add(new Position { X = x, Y = y, TimeStamp = TimeSpan.FromMilliseconds(100 / FPS * (frame - startingFrame)) });
             }
 
             return result;

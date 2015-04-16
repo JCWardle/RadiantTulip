@@ -83,7 +83,7 @@
 
             <DataTemplate x:Key="GroupSelectorTemplate">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Groups}">
+                    <ListBox ItemsSource="{Binding}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding GroupSelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItem}"/>
@@ -117,12 +117,14 @@
         <TabControl Grid.Column="0" Name="PlayerTabs">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Loaded">
-                    <i:InvokeCommandAction Command="{Binding StopCommand}">
-                        <!--<i:InvokeCommandAction.CommandParameter>
-                            <MultiBinding Converter="">
-                                <Binding 
+                    <i:InvokeCommandAction Command="{Binding SelectionTabLoadedCommand}">
+                        <i:InvokeCommandAction.CommandParameter>
+                            <MultiBinding Converter="{StaticResource tabCreatorConverter}">
+                                <Binding Source="{StaticResource PlayerSelectorTemplate}"  Mode="OneWay"/>
+                                <Binding Source="{StaticResource GroupSelectorTemplate}" Mode="OneWay"/>
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type TabControl}}" Mode="OneWay"/>
                             </MultiBinding>
-                        </i:InvokeCommandAction.CommandParameter>-->
+                        </i:InvokeCommandAction.CommandParameter>
                     </i:InvokeCommandAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>

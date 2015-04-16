@@ -125,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestFiles\NotEnoughColumns.txt" />
+    <EmbeddedResource Include="TestFiles\NotStartingAtZero.txt" />
+    <EmbeddedResource Include="TestFiles\InvalidFrame.txt" />
     <Content Include="TestFiles\Patersons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

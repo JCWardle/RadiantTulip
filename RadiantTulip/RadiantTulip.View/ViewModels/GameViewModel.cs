@@ -150,7 +150,7 @@ namespace RadiantTulip.View.ViewModels
 
         public ICommand SelectionTabLoadedCommand
         {
-            get { return _selectionTabLoadedCommand ?? (_selectionTabLoadedCommand = new DelegateCommand<Tuple<TabControl, DataTemplate, DataTemplate>>(SelectionTabLoaded)); }
+            get { return _selectionTabLoadedCommand ?? (_selectionTabLoadedCommand = new DelegateCommand<Tuple<DataTemplate, DataTemplate, TabControl>>(SelectionTabLoaded)); }
         }
 
         #endregion
@@ -298,9 +298,24 @@ namespace RadiantTulip.View.ViewModels
             SetState();
         }
 
-        private void SelectionTabLoaded(Tuple<TabControl, DataTemplate, DataTemplate> data)
+        private void SelectionTabLoaded(Tuple<DataTemplate, DataTemplate, TabControl> data)
         {
-            
+            var tabControl = data.Item3;
+            foreach(var t in _game.Teams)
+            {
+                var tabItem = new TabItem();
+                tabItem.Header = t.Name;
+                tabItem.ContentTemplate = data.Item1;
+                tabItem.Content = t;
+                tabControl.Items.Add(tabItem);
+            }
+
+            var groupItem = new TabItem();
+            groupItem.Header = "Groups";
+            groupItem.ContentTemplate = data.Item2;
+            groupItem.Content = Groups;
+
+            tabControl.Items.Add(groupItem);
         }
 
         #endregion
