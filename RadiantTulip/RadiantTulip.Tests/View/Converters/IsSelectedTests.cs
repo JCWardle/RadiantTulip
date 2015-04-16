@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace RadiantTulip.Tests.View.Converters
 {
@@ -46,6 +47,18 @@ namespace RadiantTulip.Tests.View.Converters
             var player = new Player();
             var players = new ObservableCollection<Player>() { new Player(), new Player() };
             var parameters = new object[] { player, players };
+
+            var result = (bool)converter.Convert(parameters, null, null, null);
+
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void Returns_False_For_Disconnected_Objects()
+        {
+            var converter = new IsSelected();
+            var players = new ObservableCollection<Player>() { new Player(), new Player() };
+            var parameters = new object[] { BindingOperations.DisconnectedSource, players };
 
             var result = (bool)converter.Convert(parameters, null, null, null);
 

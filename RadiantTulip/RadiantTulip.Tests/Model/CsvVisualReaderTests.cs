@@ -86,6 +86,33 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
+        public void Positions_Start_At_Zero()
+        {
+            var file = TestFileHelper.GetFilePath("NotStartingAtZero.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetTeams(file);
+
+            Assert.AreEqual(1, result.Count);
+            var team = result.First();
+            Assert.AreEqual(1, team.Players.Count);
+            var player = team.Players.First();
+            Assert.AreEqual(1, player.Positions.Count);
+            var position = player.Positions[0];
+            Assert.AreEqual(TimeSpan.Zero, position.TimeStamp);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "A number in line 1 is not in a numerical format")]
+        public void Read_Invalid_Frame()
+        {
+            var file = TestFileHelper.GetFilePath("InvalidFrame.txt");
+            var reader = new CsvVisualReader();
+
+            reader.GetTeams(file);
+        }
+
+        [Test]
         public void Read_Multiple_Positions()
         {
             var file = TestFileHelper.GetFilePath("MultiplePositions.txt");
@@ -106,7 +133,7 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Positional data in line 2 is not in a numerical format")]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "A number in line 2 is not in a numerical format")]
         public void Read_OverFlowed_Positional_Information()
         {
             var file = TestFileHelper.GetFilePath("OverflowPosition.txt");
@@ -116,7 +143,7 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Positional data in line 2 is not in a numerical format")]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "A number in line 2 is not in a numerical format")]
         public void Read_Missing_Positional_Information()
         {
             var file = TestFileHelper.GetFilePath("NoPositionalData.txt");

@@ -41,6 +41,65 @@
                     </CheckBox>
                 </StackPanel>
             </DataTemplate>
+
+            <DataTemplate x:Key="PlayerSelectorTemplate">
+                <ScrollViewer>
+                    <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.SelectedPlayers, Mode=OneWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerSelectedCommand}"
+                                                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItems}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" x:Name="PlayerSelector">
+                                    <CheckBox>
+                                        <CheckBox.IsChecked>
+                                            <MultiBinding Converter="{StaticResource isSelected}" Mode="OneWay">
+                                                <Binding RelativeSource="{RelativeSource Self}" Path="DataContext" />
+                                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count"/>
+                                            </MultiBinding>
+                                        </CheckBox.IsChecked>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Checked">
+                                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerCheckedCommand}" 
+                                                                               CommandParameter="{Binding}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="Unchecked">
+                                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerUncheckedCommand}" 
+                                                                               CommandParameter="{Binding}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </CheckBox>
+                                    <Label Content="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupSelectorTemplate">
+                <ScrollViewer>
+                    <ListBox ItemsSource="{Binding}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding Path=DataContext.GroupSelectedCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Name}"/>
+                                    <Label Content="{Binding Players.Count}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Window.DataContext>
@@ -56,65 +115,19 @@
 
         <!--Player Selection on left-->
         <TabControl Grid.Column="0" Name="PlayerTabs">
-            <ItemsControl ItemsSource="{Binding Game.Teams}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ScrollViewer>
-                            <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.SelectedPlayers, Mode=OneWay}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerSelectedCommand}"
-                                                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItems}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" x:Name="PlayerSelector">
-                                            <CheckBox>
-                                                <CheckBox.IsChecked>
-                                                    <MultiBinding Converter="{StaticResource isSelected}" Mode="OneWay">
-                                                        <Binding RelativeSource="{RelativeSource Self}" Path="DataContext" />
-                                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
-                                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count"/>
-                                                    </MultiBinding>
-                                                </CheckBox.IsChecked>
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Checked">
-                                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerCheckedCommand}" 
-                                                                               CommandParameter="{Binding}"/>
-                                                    </i:EventTrigger>
-                                                    <i:EventTrigger EventName="Unchecked">
-                                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerUncheckedCommand}" 
-                                                                               CommandParameter="{Binding}"/>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </CheckBox>
-                                            <Label Content="{Binding Name}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </ScrollViewer>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TabItem Header="Groups">
-                <ListBox ItemsSource="{Binding Groups}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding GroupSelectedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=SelectedItem}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="{Binding Name}"/>
-                                <Label Content="{Binding Players.Count}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </TabItem>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding SelectionTabLoadedCommand}">
+                        <i:InvokeCommandAction.CommandParameter>
+                            <MultiBinding Converter="{StaticResource tabCreatorConverter}">
+                                <Binding Source="{StaticResource PlayerSelectorTemplate}"  Mode="OneWay"/>
+                                <Binding Source="{StaticResource GroupSelectorTemplate}" Mode="OneWay"/>
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type TabControl}}" Mode="OneWay"/>
+                            </MultiBinding>
+                        </i:InvokeCommandAction.CommandParameter>
+                    </i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </TabControl>
 
 

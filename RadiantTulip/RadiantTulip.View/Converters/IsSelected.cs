@@ -13,6 +13,9 @@ namespace RadiantTulip.View.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if(values[0] == BindingOperations.DisconnectedSource)
+                return false;
+
             var player = (Player)values[0];
             var collection = (ObservableCollection<Player>)values[1];
 

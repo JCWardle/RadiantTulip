@@ -100,6 +100,7 @@
     <Compile Include="View\Converters\SelectedShapeTests.cs" />
     <Compile Include="View\Converters\SelectedSizeTests.cs" />
     <Compile Include="View\Converters\SingleSelectTests.cs" />
+    <Compile Include="View\Converters\TabCreatorTests.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
     <Compile Include="View\PlayerDrawerTests.cs" />
     <Compile Include="View\WheelChairRugbyGroundDrawerTests.cs" />
@@ -124,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestFiles\NotEnoughColumns.txt" />
+    <EmbeddedResource Include="TestFiles\NotStartingAtZero.txt" />
+    <EmbeddedResource Include="TestFiles\InvalidFrame.txt" />
     <Content Include="TestFiles\Patersons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
