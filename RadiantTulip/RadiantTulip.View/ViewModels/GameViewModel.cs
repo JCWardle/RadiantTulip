@@ -53,6 +53,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _playerAffectUncheckedCommand;
         private ICommand _shapeChangedCommand;
         private ICommand _resizeCommand;
+        private ICommand _selectionTabLoadedCommand;
 
         public GameViewModel() {}
 
@@ -145,6 +146,11 @@ namespace RadiantTulip.View.ViewModels
         public ICommand ResizeCommand
         {
             get { return _resizeCommand ?? (_resizeCommand = new DelegateCommand(Resize)); }
+        }
+
+        public ICommand SelectionTabLoadedCommand
+        {
+            get { return _selectionTabLoadedCommand ?? (_selectionTabLoadedCommand = new DelegateCommand<Tuple<TabControl, DataTemplate, DataTemplate>>(SelectionTabLoaded)); }
         }
 
         #endregion
@@ -290,6 +296,11 @@ namespace RadiantTulip.View.ViewModels
                 SelectedPlayers.Add(p);
             }
             SetState();
+        }
+
+        private void SelectionTabLoaded(Tuple<TabControl, DataTemplate, DataTemplate> data)
+        {
+            
         }
 
         #endregion

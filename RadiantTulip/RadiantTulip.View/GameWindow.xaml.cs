@@ -32,6 +32,7 @@ namespace RadiantTulip.View
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);
             _drawer = container.Resolve<IGameDrawer>(new ParameterOverride("ground", _view.Game.Ground));
+            var temp = this.Resources;
         }
 
         protected void ReRender()
