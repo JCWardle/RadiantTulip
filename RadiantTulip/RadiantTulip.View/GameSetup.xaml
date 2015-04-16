@@ -43,10 +43,10 @@
             <v:FileDialog Grid.Row="0" Grid.Column="1" SelectedFile="{Binding PositionalData}"/>
 
             <Label Content="Game Type:" Grid.Row="1" Grid.Column="0"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Ground.Type}" ItemsSource="{Binding GroundTypes}">
+            <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding GroundType}" ItemsSource="{Binding GroundTypes}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectedGroundChanged}"/>
+                        <i:InvokeCommandAction Command="{Binding SelectedGroundTypeChangedCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
@@ -55,7 +55,7 @@
             <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding SelectableGrounds}" SelectedItem="{Binding Ground}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectedGroundChanged}"/>
+                        <i:InvokeCommandAction Command="{Binding SelectedGroundChangedCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ComboBox.ItemTemplate>

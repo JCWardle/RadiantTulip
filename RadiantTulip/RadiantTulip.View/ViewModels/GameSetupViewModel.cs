@@ -22,9 +22,13 @@ namespace RadiantTulip.View.ViewModels
         private string _positionalData;
         private bool _advancedSettings;
         private IGameCreatorFactory _factory;
+        private GroundType _groundType;
+
         private ICommand _toggleAdvancedSettings;
         private ICommand _selectedGroundChanged;
         private ICommand _startGame;
+        private ICommand _selectedGroupTypeChanged;
+
         private ObservableCollection<Ground> _selectableGrounds;
         private IUnityContainer _container;
         private Window _window;
@@ -77,19 +81,43 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
+        public GroundType GroundType
+        {
+            get
+            {
+                return _groundType;
+            }
+            set
+            {
+                _groundType = value;
+            }
+        }
+
         public ICommand AdvancedSettingsToggle
         {
             get { return _toggleAdvancedSettings ?? (_toggleAdvancedSettings = new DelegateCommand(ToggleAdvancedSettings)); }
         }
 
-        public ICommand SelectedGroundChanged
+        public ICommand SelectedGroundChangedCommand
         {
-            get { return _selectedGroundChanged ?? (_selectedGroundChanged = new DelegateCommand(SelectedGroundChange)); }
+            get { return _selectedGroundChanged ?? (_selectedGroundChanged = new DelegateCommand(SelectedGroundChanged)); }
         }
 
         public ICommand StartGameCommand
         {
             get { return _startGame ?? (_startGame = new DelegateCommand<Window>(StartGame)); }
+        }
+
+        public ICommand SelectedGroundTypeChangedCommand
+        {
+            get { return _selectedGroupTypeChanged ?? (_selectedGroupTypeChanged = new DelegateCommand(SelectedGroundTypeChanged)); }
+        }
+
+        private void SelectedGroundTypeChanged()
+        {
+            Ground = _selectableGrounds.FirstOrDefault(g => g.Type == _groundType);
+            OnPropertyChanged("Ground");
+            OnPropertyChanged("SelectableGrounds");
         }
 
         private void StartGame(Window window)
@@ -155,7 +183,7 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
-        private void SelectedGroundChange()
+        private void SelectedGroundChanged()
         {
             OnPropertyChanged("Ground");
             OnPropertyChanged("SelectableGrounds");
