@@ -110,6 +110,16 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Button" x:Key="Pause" BasedOn="{StaticResource PlayControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Image Source="/Images/Pause.png" Width="50" Height="25"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="Button" x:Key="FastForward" BasedOn="{StaticResource PlayControl}">
         <Setter Property="Template">
             <Setter.Value>

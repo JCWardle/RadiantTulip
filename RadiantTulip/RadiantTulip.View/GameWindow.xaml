@@ -160,10 +160,17 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
-                    <Button Content="Play" Style="{StaticResource Play}">
+                    <Button Content="Play" Style="{StaticResource Play}" Visibility="{Binding Converter={StaticResource invertBoolToVisibilityConverter}, Path=Playing}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding PlayCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="Pause" Style="{StaticResource Pause}" Visibility="{Binding Converter={StaticResource boolToVisibility}, Path=Playing}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding PauseCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>

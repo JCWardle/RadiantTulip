@@ -94,6 +94,7 @@
     <Compile Include="View\Converters\BoolToVisibilityTests.cs" />
     <Compile Include="View\Converters\GroupSelectTests.cs" />
     <Compile Include="View\Converters\InvertBooleanTests.cs" />
+    <Compile Include="View\Converters\InvertBoolToVisibilityTests.cs" />
     <Compile Include="View\Converters\IsSelectedTests.cs" />
     <Compile Include="View\Converters\MultipleSelectTests.cs" />
     <Compile Include="View\Converters\SelectedColourTests.cs" />

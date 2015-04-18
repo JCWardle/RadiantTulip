@@ -21,6 +21,7 @@ namespace RadiantTulip.View.ViewModels
         Group SelectedGroup { get; set; }
         double CurrentTimeMilliseconds { get; set; }
         double FrameIncrement { get; }
+        bool Playing { get; }
         Action UpdateView { get; set; }
         ICommand PlayCommand { get; }
         ICommand PauseCommand { get; }

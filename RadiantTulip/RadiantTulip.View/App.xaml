@@ -15,5 +15,6 @@
         <converters:SelectedShape x:Key="selectedShape"/>
         <converters:InvertBoolean x:Key="invertBooleanConverter"/>
         <converters:TabCreator x:Key="tabCreatorConverter"/>
+        <converters:InvertBoolToVisibility x:Key="invertBoolToVisibilityConverter"/>
     </Application.Resources>
 </Application>

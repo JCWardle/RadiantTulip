@@ -326,6 +326,7 @@ namespace RadiantTulip.View.ViewModels
             _timer.Stop();
             _gameUpdater.Time = new TimeSpan(0, 0, 0, 0, 0);
             UpdateView();
+            OnPropertyChanged("Playing");
         }
 
         private void Rewind()
@@ -351,6 +352,7 @@ namespace RadiantTulip.View.ViewModels
         private void Pause()
         {
             _timer.Stop();
+            OnPropertyChanged("Playing");
         }
 
         private void Play()
@@ -360,6 +362,7 @@ namespace RadiantTulip.View.ViewModels
 
             _timer.Interval = _gameUpdater.Increment;
             _timer.Start();
+            OnPropertyChanged("Playing");
         }
 
         #endregion
@@ -503,6 +506,14 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
+        public bool Playing
+        {
+            get 
+            {
+                return _timer.IsEnabled;
+            }
+        }
+
         #endregion
 
         public Action UpdateView { get; set; }
@@ -522,6 +533,7 @@ namespace RadiantTulip.View.ViewModels
             _runTime = _gameUpdater.MaxTime - _gameUpdater.Time;
             State = SelectionState.None;
             _visualAffects = new List<IVisualAffect>();
+            OnPropertyChanged("Playing");
         }
 
         private void UpdateGame(object o, EventArgs args)

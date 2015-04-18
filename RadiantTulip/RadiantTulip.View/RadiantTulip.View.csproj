@@ -151,6 +151,7 @@
     <Compile Include="Converters\BoolToVisibility.cs" />
     <Compile Include="Converters\GroupSelect.cs" />
     <Compile Include="Converters\InvertBoolean.cs" />
+    <Compile Include="Converters\InvertBoolToVisibility.cs" />
     <Compile Include="Converters\IsSelected.cs" />
     <Compile Include="Converters\MultipleSelect.cs" />
     <Compile Include="Converters\SelectedColour.cs" />
