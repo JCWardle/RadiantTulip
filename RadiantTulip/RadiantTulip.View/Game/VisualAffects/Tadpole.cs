@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.View.Game.VisualAffects
 {
-    public class Tadpole : Drawer, IVisualAffect
+    public class Tadpole : IVisualAffect
     {
         private Player _player;
         private Ground _ground;
@@ -30,11 +30,10 @@ namespace RadiantTulip.View.Game.VisualAffects
                 if (currentPositionIndex - (i + 1) < 0)
                     break;
 
-                var position = _player.Positions[currentPositionIndex - (i + 1)];
-                var transform = TransformToCanvas(position.X, position.Y, _ground, canvas);
+                var position = _player.Positions[currentPositionIndex - (i + 1)].TransformToCanvas(_ground, canvas);
 
-                var x = transform.Item1 - (double)_player.Size / 2;
-                var y = transform.Item2 - (double)_player.Size / 2;
+                var x = position.X - (double)_player.Size / 2;
+                var y = position.Y - (double)_player.Size / 2;
                 var color = _player.Colour;
                 color.A = 50;
 

@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace RadiantTulip.View.Game.VisualAffects
 {
-    public class Lines : Drawer, IVisualAffect
+    public class Lines : IVisualAffect
     {
         private IList<Player> _players;
         private Ground _ground;
@@ -29,14 +29,14 @@ namespace RadiantTulip.View.Game.VisualAffects
             {
                 if (previousPosition != null)
                 {
-                    var firstPos = TransformToCanvas(previousPosition.X, previousPosition.Y, _ground, canvas);
-                    var secondPos = TransformToCanvas(p.CurrentPosition.X, p.CurrentPosition.Y, _ground, canvas);
+                    var firstPos = previousPosition.TransformToCanvas(_ground, canvas);
+                    var secondPos = p.CurrentPosition.TransformToCanvas(_ground, canvas);
                     var line = new Line()
                     {
-                        X1 = firstPos.Item1,
-                        Y1 = firstPos.Item2,
-                        X2 = secondPos.Item1,
-                        Y2 = secondPos.Item2,
+                        X1 = firstPos.X,
+                        Y1 = firstPos.Y,
+                        X2 = secondPos.X,
+                        Y2 = secondPos.Y,
                         StrokeThickness = 2,
                         Stroke = Brushes.LightSteelBlue
                     };

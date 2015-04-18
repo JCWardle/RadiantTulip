@@ -2,7 +2,7 @@
 
 namespace RadiantTulip.Model
 {
-    public class Position
+    public partial class Position
     {
         //Longitude or converted X co-ordinate
         public double X { get; set; }
