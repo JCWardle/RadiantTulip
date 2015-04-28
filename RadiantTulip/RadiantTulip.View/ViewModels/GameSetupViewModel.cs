@@ -29,7 +29,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _startGame;
         private ICommand _selectedGroupTypeChanged;
 
-        private ObservableCollection<Ground> _selectableGrounds;
+        private ObservableCollection<Ground> _selectableGrounds = new ObservableCollection<Ground>();
         private IUnityContainer _container;
         private Window _window;
         private Model.Game _game;
@@ -210,8 +210,6 @@ namespace RadiantTulip.View.ViewModels
             Ground = new Ground();
 
             var streams = Directory.GetFiles("Grounds", "*.json").Select(f => new StreamReader(f).BaseStream).ToList();
-
-            _selectableGrounds = new ObservableCollection<Ground>();
             
             foreach(var g in reader.ReadGrounds(streams))
             {
