@@ -47,7 +47,7 @@ namespace RadiantTulip.Model.Input
                         Visible = true, 
                         Size = Size.Medium, 
                         Shape = PlayerShape.Circle,
-                        Colour = Color.FromRgb(255, 0, 0)
+                        Colour = result.IndexOf(team) == 0 ? Color.FromRgb(0, 0, 0) : Color.FromRgb(255, 255, 255)
                     };
                     team.Players.Add(player);
                 }

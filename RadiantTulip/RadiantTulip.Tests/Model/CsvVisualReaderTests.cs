@@ -31,7 +31,7 @@ namespace RadiantTulip.Tests.Model
             Assert.IsTrue(player.Visible);
             Assert.AreEqual(Size.Medium, player.Size);
             Assert.AreEqual(PlayerShape.Circle, player.Shape);
-            Assert.AreEqual(Color.FromRgb(255, 0, 0), player.Colour);
+            Assert.AreEqual(Color.FromRgb(0, 0, 0), player.Colour);
             var position = player.Positions[0];
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
@@ -55,7 +55,7 @@ namespace RadiantTulip.Tests.Model
             Assert.IsTrue(player.Visible);
             Assert.AreEqual(Size.Medium, player.Size);
             Assert.AreEqual(PlayerShape.Circle, player.Shape);
-            Assert.AreEqual(Color.FromRgb(255, 0, 0), player.Colour);
+            Assert.AreEqual(Color.FromRgb(0, 0, 0), player.Colour);
             var position = player.Positions[0];
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
@@ -66,7 +66,7 @@ namespace RadiantTulip.Tests.Model
             Assert.IsTrue(player.Visible);
             Assert.AreEqual(Size.Medium, player.Size);
             Assert.AreEqual(PlayerShape.Circle, player.Shape);
-            Assert.AreEqual(Color.FromRgb(255, 0, 0), player.Colour);
+            Assert.AreEqual(Color.FromRgb(0, 0, 0), player.Colour);
             position = player.Positions[0];
             Assert.AreEqual(13.234827, position.X);
             Assert.AreEqual(8.552656, position.Y);
@@ -130,6 +130,20 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(11.314343, position.X);
             Assert.AreEqual(9.703464, position.Y);
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 4), position.TimeStamp);
+        }
+
+        [Test]
+        public void Teams_Have_Different_Default_Colours()
+        {
+            var file = TestFileHelper.GetFilePath("TwoTeams.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetTeams(file);
+
+            var player = result[0].Players[0];
+            Assert.AreEqual(Color.FromRgb(0, 0, 0), player.Colour);
+            player = result[1].Players[0];
+            Assert.AreEqual(Color.FromRgb(255, 255, 255), player.Colour);
         }
 
         [Test]
