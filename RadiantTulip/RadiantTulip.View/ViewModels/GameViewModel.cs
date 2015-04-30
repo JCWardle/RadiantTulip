@@ -456,7 +456,7 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return string.Format("{0}:{1}.{2}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds, _gameUpdater.Time.Milliseconds);
+                return _gameUpdater == null ? "" : string.Format("{0}:{1}.{2}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds, _gameUpdater.Time.Milliseconds);
             }
         }
 
@@ -484,7 +484,7 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return _gameUpdater.Time.TotalMilliseconds;
+                return _gameUpdater == null ? 0d : _gameUpdater.Time.TotalMilliseconds;
             }
             set
             {
@@ -502,7 +502,7 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return _gameUpdater.Increment.TotalMilliseconds;
+                return _gameUpdater == null ? 0d : _gameUpdater.Increment.TotalMilliseconds;
             }
         }
 
@@ -510,7 +510,7 @@ namespace RadiantTulip.View.ViewModels
         {
             get 
             {
-                return _timer.IsEnabled;
+                return _timer == null ? true : _timer.IsEnabled;
             }
         }
 
