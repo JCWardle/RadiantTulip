@@ -13,8 +13,8 @@ namespace RadiantTulip.View.Game
     {
         public static Point TransformToCanvas(this Position pos, Ground ground, Canvas canvas)
         {
-            var xpos = pos.X / (ground.Width + ground.Padding) * canvas.ActualWidth;
-            var ypos = pos.Y / (ground.Height + ground.Padding) * canvas.ActualHeight;
+            var xpos = (pos.X + ground.Padding) / (ground.Width + ground.Padding * 2) * canvas.ActualWidth;
+            var ypos = (pos.Y + ground.Padding) / (ground.Height + ground.Padding * 2) * canvas.ActualHeight;
 
             return new Point() { X = xpos, Y = ypos };
         }
