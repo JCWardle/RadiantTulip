@@ -456,7 +456,7 @@ namespace RadiantTulip.View.ViewModels
         {
             get
             {
-                return string.Format("{0}:{1}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds);
+                return string.Format("{0}:{1}:{2}", _gameUpdater.Time.Minutes, _gameUpdater.Time.Seconds, _gameUpdater.Time.Milliseconds);
             }
         }
 
