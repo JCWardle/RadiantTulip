@@ -13,6 +13,8 @@ namespace RadiantTulip.View.Game.VisualAffects
 {
     public class Tadpole : IVisualAffect
     {
+        private const int MIN_POINT_INCREMENT = 10; //Milliseconds
+        private const int TADPOLE_LENGTH = 10;
         private Player _player;
         private Ground _ground;
 
@@ -24,16 +26,19 @@ namespace RadiantTulip.View.Game.VisualAffects
 
         public void Draw(Canvas canvas)
         {
-            var currentPositionIndex = _player.Positions.IndexOf(_player.CurrentPosition);
-            for(var i = 0; i < 4; i++)
+            var currentPosition = _player.CurrentPosition;
+
+            for (var i = 0; i < TADPOLE_LENGTH; i++)
             {
-                if (currentPositionIndex - (i + 1) < 0)
-                    break;
+                currentPosition = _player.Positions.OrderByDescending(p => p.TimeStamp.TotalMilliseconds)
+                    .FirstOrDefault(p => p.TimeStamp.TotalMilliseconds < currentPosition.TimeStamp.TotalMilliseconds - MIN_POINT_INCREMENT);
+                if (currentPosition == null)
+                    return;
 
-                var position = _player.Positions[currentPositionIndex - (i + 1)].TransformToCanvas(_ground, canvas);
+                var transformedPosition = currentPosition.TransformToCanvas(_ground, canvas);
+                var x = transformedPosition.X - (double)_player.Size / 2;
+                var y = transformedPosition.Y - (double)_player.Size / 2;
 
-                var x = position.X - (double)_player.Size / 2;
-                var y = position.Y - (double)_player.Size / 2;
                 var color = _player.Colour;
                 color.A = 50;
 
