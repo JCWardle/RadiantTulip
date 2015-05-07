@@ -1,7 +1,7 @@
 {
     "Height": 1500,
     "Width": 2800,
-    "Padding": 0,
+    "Padding": 200,
     "Name": "Wheel Chair Rugby",
     "Type": "WheelChairRugby",
     "Image": "",
