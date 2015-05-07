@@ -285,7 +285,7 @@
                     </cp:ColorPicker.SelectedColor>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedColorChanged">
-                            <i:InvokeCommandAction Command="{Binding ColourChangedCommand}" CommandParameter="{Binding Path=SelectedColor, RelativeSource={RelativeSource AncestorType={x:Type cp:ColorPicker}}}"/>
+                            <i:InvokeCommandAction Command="{Binding ColourChangedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type cp:ColorPicker}}}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </cp:ColorPicker>

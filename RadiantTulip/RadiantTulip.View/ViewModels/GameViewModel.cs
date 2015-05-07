@@ -18,6 +18,7 @@ using System.Linq;
 using System.Windows.Media;
 using RadiantTulip.View.Game;
 using RadiantTulip.View.Game.VisualAffects;
+using Xceed.Wpf.Toolkit;
 
 namespace RadiantTulip.View.ViewModels
 {
@@ -225,17 +226,18 @@ namespace RadiantTulip.View.ViewModels
             Groups.Add(group);
         }
 
-        private void ColourChanged(object colour)
+        private void ColourChanged(object picker)
         {
+            var colour = ((ColorPicker)picker).SelectedColor;
             if (State == SelectionState.MultiplePlayers || State == SelectionState.SinglePlayer)
             {
                 foreach (var p in SelectedPlayers)
-                    p.Colour = (Color)colour;
+                    p.Colour = colour;
             }
             else if (State == SelectionState.Group)
             {
                 foreach (var p in SelectedGroup.Players)
-                    p.Colour = (Color)colour;
+                    p.Colour = colour;
             }
             UpdateView();
         }
