@@ -43,18 +43,25 @@ namespace RadiantTulip.View
         {
             var element = Game.InputHitTest(Mouse.GetPosition(Game));
             var game = _view.Game;
+            var canvas = (Canvas)sender;
 
             if (element is Shape)
             {
                 var shape = (FrameworkElement)element;
-                var x = ((game.Ground.Width + game.Ground.Padding) * (shape.Margin.Left + shape.Width / 2)) / Game.ActualWidth;
-                var y = ((game.Ground.Height + game.Ground.Padding) * (shape.Margin.Top + shape.Height / 2)) / Game.ActualHeight;
+
+                var x = shape.Margin.Left;
+                var y = shape.Margin.Top;
 
                 foreach (var t in game.Teams)
                 {
-                    var player = t.Players.FirstOrDefault(p => Math.Round(p.CurrentPosition.X, 0) == Math.Round(x, 0) && Math.Round(p.CurrentPosition.Y, 0) == Math.Round(y, 0));
-                    if(player != null)
-                        _view.SelectedPlayers.Add(player);
+                    foreach(var p in t.Players)
+                    {
+                        var size = (double)p.Size;
+                        var currentPosition = p.CurrentPosition.TransformToCanvas(game.Ground, canvas);
+                        if (x > currentPosition.X - size && x < currentPosition.X + size
+                            && y > currentPosition.Y - size && y < currentPosition.Y + size)
+                            _view.SelectedPlayers.Add(p);
+                    }
                 }
             }
         }
