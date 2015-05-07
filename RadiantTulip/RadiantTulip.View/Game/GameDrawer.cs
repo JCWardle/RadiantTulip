@@ -27,8 +27,11 @@ namespace RadiantTulip.View.Game
         {
             canvas.Children.Clear();
             canvas.Background = new SolidColorBrush(Colors.Green);
-            _groundDrawer.Draw(canvas);
 
+            foreach (var v in visualAffects)
+                v.Draw(canvas);
+
+            _groundDrawer.Draw(canvas);
 
             foreach (var t in game.Teams)
             {
@@ -37,9 +40,6 @@ namespace RadiantTulip.View.Game
                     _playerDrawer.Draw(p, game.Ground, canvas);
                 }
             }
-
-            foreach (var v in visualAffects)
-                v.Draw(canvas);
         }
     }
 }
