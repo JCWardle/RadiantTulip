@@ -15,7 +15,7 @@ namespace RadiantTulip.View.Game
         {
             var position = player.CurrentPosition;
             if (position.X > ground.Width + ground.Padding || position.Y > ground.Height + ground.Padding
-                || position.X < 0 || position.Y < 0)
+                || position.X + ground.Padding < 0 || position.Y + ground.Padding < 0)
                 return;
 
             var transform = position.TransformToCanvas(ground, canvas);
