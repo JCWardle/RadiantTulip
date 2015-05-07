@@ -81,7 +81,7 @@ namespace RadiantTulip.Tests.View.Converters
         [Test]
         public void Is_Visible_Group_Different_Selected()
         {
-            var converter = new SelectedSize();
+            var converter = new SelectedVisibility();
             var group = new Group
             {
                 Players = new ObservableCollection<Player>() 
@@ -100,7 +100,7 @@ namespace RadiantTulip.Tests.View.Converters
         [Test]
         public void Is_Visible_Nothing_Selected()
         {
-            var converter = new SelectedSize();
+            var converter = new SelectedVisibility();
             var parameters = new object[] { null, null, SelectionState.None };
 
             var result = (bool?)converter.Convert(parameters, null, null, null);
@@ -112,7 +112,7 @@ namespace RadiantTulip.Tests.View.Converters
         [ExpectedException(typeof(NotImplementedException))]
         public void Is_Visible_Convert_Back_Not_Implemented()
         {
-            var converter = new SelectedSize();
+            var converter = new SelectedVisibility();
 
             converter.ConvertBack(null, null, null, null);
         }

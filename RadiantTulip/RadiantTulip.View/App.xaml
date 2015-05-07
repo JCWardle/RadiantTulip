@@ -16,5 +16,6 @@
         <converters:InvertBoolean x:Key="invertBooleanConverter"/>
         <converters:TabCreator x:Key="tabCreatorConverter"/>
         <converters:InvertBoolToVisibility x:Key="invertBoolToVisibilityConverter"/>
+        <converters:SelectedVisibility x:Key="selectedVisibilityConverter"/>
     </Application.Resources>
 </Application>
