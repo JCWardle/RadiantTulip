@@ -61,7 +61,7 @@ namespace RadiantTulip.Model.Input
                 if (startingFrame == -1)
                     startingFrame = frame;
 
-                player.Positions.Add(new Position { X = x, Y = y, TimeStamp = TimeSpan.FromMilliseconds(100 / FPS * (frame - startingFrame)) });
+                player.Positions.Add(new Position { X = x, Y = y, TimeStamp = TimeSpan.FromMilliseconds(1000 / FPS * (frame - startingFrame)) });
             }
 
             return result;

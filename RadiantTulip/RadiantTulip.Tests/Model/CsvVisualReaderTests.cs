@@ -129,7 +129,7 @@ namespace RadiantTulip.Tests.Model
             position = player.Positions[1];
             Assert.AreEqual(11.314343, position.X);
             Assert.AreEqual(9.703464, position.Y);
-            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 4), position.TimeStamp);
+            Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 40), position.TimeStamp);
         }
 
         [Test]
