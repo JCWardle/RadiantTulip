@@ -36,5 +36,6 @@ namespace RadiantTulip.View.ViewModels
         ICommand ShapeChangedCommand { get; }
         ICommand ResizeCommand { get; }
         ICommand SelectionTabLoadedCommand { get; }
+        ICommand VisibilityChangedCommand { get; }
     }
 }
