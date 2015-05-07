@@ -3,6 +3,7 @@ using NUnit.Framework;
 using RadiantTulip.Model;
 using RadiantTulip.View.Game;
 using RadiantTulip.View.Game.VisualAffects;
+using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -27,7 +28,7 @@ namespace RadiantTulip.Tests.View
             {
                 Players = new List<Player>()
                 {
-                    new Player { Visible = true }
+                    new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } }
                 }
             });
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, game.Ground);
@@ -48,8 +49,8 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var canvas = new Canvas();
-            var player1 = new Player { Visible = true };
-            var player2 = new Player { Visible = true };
+            var player1 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } };
+            var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } };
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
             game.Teams.Add(new Team
             {
@@ -106,8 +107,8 @@ namespace RadiantTulip.Tests.View
             {
                 Players = new List<Player>()
                 {
-                    new Player() {Visible = false},
-                    new Player() {Visible = true}
+                    new Player() {Visible = false, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }},
+                    new Player() {Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }}
                 }
             });
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, game.Ground);
@@ -260,6 +261,33 @@ namespace RadiantTulip.Tests.View
             drawer.DrawGame(canvas, game, affects);
 
             groundDrawer.Verify(g => g.Draw(canvas), Times.Once);
+        }
+
+        [Test]
+        public void Doesnt_Draw_Player_Without_Position()
+        {
+            var playerDrawer = new Mock<IPlayerDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
+            var groundFactory = new Mock<IGroundDrawerFactory>();
+            groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
+            var affects = new List<IVisualAffect>();
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var canvas = new Canvas();
+            playerDrawer.Setup(g => g.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), It.IsAny<Canvas>()));
+
+            game.Teams.Add(new Team
+            {
+                Players = new List<Player>()
+                {
+                    new Player { Visible =  true, CurrentPosition = null }
+                }
+            });
+
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, game.Ground);
+
+            drawer.DrawGame(canvas, game, affects);
+
+            playerDrawer.Verify(g => g.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), It.IsAny<Canvas>()), Times.Never);
         }
     }
 }
