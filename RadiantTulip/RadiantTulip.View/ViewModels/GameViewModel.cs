@@ -55,6 +55,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _shapeChangedCommand;
         private ICommand _resizeCommand;
         private ICommand _selectionTabLoadedCommand;
+        private ICommand _visibilityChangedCommand;
 
         public GameViewModel() {}
 
@@ -152,6 +153,11 @@ namespace RadiantTulip.View.ViewModels
         public ICommand SelectionTabLoadedCommand
         {
             get { return _selectionTabLoadedCommand ?? (_selectionTabLoadedCommand = new DelegateCommand<Tuple<DataTemplate, DataTemplate, TabControl>>(SelectionTabLoaded)); }
+        }
+        
+        public ICommand VisibilityChangedCommand
+        {
+            get { return _visibilityChangedCommand ?? (_visibilityChangedCommand = new DelegateCommand<bool?>(VisibilityChanged)); }
         }
 
         #endregion
@@ -254,6 +260,21 @@ namespace RadiantTulip.View.ViewModels
             {
                 foreach (var p in SelectedGroup.Players)
                     p.Size = size;
+            }
+            UpdateView();
+        }
+
+        private void VisibilityChanged(bool? visibility)
+        {
+            if (State == SelectionState.MultiplePlayers || State == SelectionState.SinglePlayer)
+            {
+                foreach (var p in SelectedPlayers)
+                    p.Visible = visibility.Value;
+            }
+            else if (State == SelectionState.Group)
+            {
+                foreach (var p in SelectedGroup.Players)
+                    p.Visible = visibility.Value;
             }
             UpdateView();
         }

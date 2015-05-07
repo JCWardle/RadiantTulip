@@ -35,7 +35,7 @@ namespace RadiantTulip.View.Game
 
             foreach (var t in game.Teams)
             {
-                foreach (var p in t.Players.Where(p => p.Visible))
+                foreach (var p in t.Players.Where(p => p.Visible && p.CurrentPosition != null))
                 {
                     _playerDrawer.Draw(p, game.Ground, canvas);
                 }
