@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 
 namespace RadiantTulip.Tests.View
 {
-    [TestFixture]
+    [TestFixture, RequiresSTA]
     public class BallDrawerTests
     {
         [Test]
@@ -31,8 +31,8 @@ namespace RadiantTulip.Tests.View
 
             Assert.AreEqual(1, canvas.Children.Count);
             var shape = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(100, shape.Margin.Left);
-            Assert.AreEqual(100, shape.Margin.Top);
+            Assert.AreEqual(97.5d, shape.Margin.Left);
+            Assert.AreEqual(97.5d, shape.Margin.Top);
             var brush = (SolidColorBrush)shape.Fill;
             Assert.AreEqual(ball.Colour, brush.Color);
             Assert.AreEqual((int)RadiantTulip.Model.Size.Medium, shape.Width);
@@ -55,8 +55,8 @@ namespace RadiantTulip.Tests.View
 
             Assert.AreEqual(1, canvas.Children.Count);
             var shape = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(100, shape.Margin.Left);
-            Assert.AreEqual(100, shape.Margin.Top);
+            Assert.AreEqual(94.5d, shape.Margin.Left);
+            Assert.AreEqual(94.5d, shape.Margin.Top);
             var brush = (SolidColorBrush)shape.Fill;
             Assert.AreEqual(ball.Colour, brush.Color);
             Assert.AreEqual((int)RadiantTulip.Model.Size.ExtraLarge + 2, shape.Width);
@@ -78,8 +78,8 @@ namespace RadiantTulip.Tests.View
 
             Assert.AreEqual(1, canvas.Children.Count);
             var shape = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(200, shape.Margin.Left);
-            Assert.AreEqual(200, shape.Margin.Top);
+            Assert.AreEqual(197.5d, shape.Margin.Left);
+            Assert.AreEqual(197.5d, shape.Margin.Top);
         }
     }
 }
