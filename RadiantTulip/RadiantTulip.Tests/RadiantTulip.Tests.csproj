@@ -90,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFileHelper.cs" />
     <Compile Include="View\AFLGroundDrawerTests.cs" />
+    <Compile Include="View\BallDrawerTests.cs" />
     <Compile Include="View\Converters\AffectSelectedTests.cs" />
     <Compile Include="View\Converters\BoolToVisibilityTests.cs" />
     <Compile Include="View\Converters\GroupSelectTests.cs" />
