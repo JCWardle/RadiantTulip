@@ -26,6 +26,7 @@ namespace RadiantTulip.Model
             var game = new Game() { Ground = ground };
 
             game.Teams = _reader.GetTeams(spatialData);
+            game.Ball = _reader.GetBall(spatialData);
 
             var currentProgress = STARTING_PROGRESS;
             var progressIncrement = 0;

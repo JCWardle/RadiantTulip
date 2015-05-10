@@ -109,6 +109,23 @@ namespace RadiantTulip.Tests.Model
             Assert.NotNull(game);
         }
 
+        [Test]
+        public void Sets_Ball_From_Reader()
+        {
+            var ball = new Ball();
+            var spatialReader = new Mock<ISpatialReader>();
+            var coordinateConverter = new Mock<ICoordinateConverter>();
+            var ground = new Ground();
+            spatialReader.Setup(s => s.GetTeams(null)).Returns(new List<Team>());
+            spatialReader.Setup(s => s.GetBall(null)).Returns(ball);
+
+            var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
+
+            var game = gameCreator.CreateGame(null, ground, null);
+
+            Assert.AreEqual(ball, game.Ball);
+        }
+
         private List<Position> CreatePositions(int positionsRequired)
         {
             var result = new List<Position>();
