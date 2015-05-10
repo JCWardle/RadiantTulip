@@ -147,6 +147,54 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
+        public void Ball_Is_Added_At_First_Line()
+        {
+            var file = TestFileHelper.GetFilePath("TwoBallPositions.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetBall(file);
+
+            Assert.AreEqual(Color.FromArgb(100, 255, 255, 0), result.Colour);
+            Assert.AreEqual(2, result.Positions.Count());
+            var position = result.Positions[0];
+            Assert.AreEqual(11.299328, position.X);
+            Assert.AreEqual(9.845711, position.Y);
+            Assert.AreEqual(TimeSpan.Zero, position.TimeStamp);
+        }
+
+        [Test]
+        public void Multiple_Ball_Locations()
+        {
+            var file = TestFileHelper.GetFilePath("TwoBallPositions.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetBall(file);
+
+            Assert.AreEqual(Color.FromArgb(100, 255, 255, 0), result.Colour);
+            Assert.AreEqual(2, result.Positions.Count());
+            var position = result.Positions[0];
+            Assert.AreEqual(11.299328, position.X);
+            Assert.AreEqual(9.845711, position.Y);
+            Assert.AreEqual(TimeSpan.Zero, position.TimeStamp);
+            position = result.Positions[1];
+            Assert.AreEqual(13.234827, position.X);
+            Assert.AreEqual(8.552656, position.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(40), position.TimeStamp);
+        }
+
+        [Test]
+        public void Ball_Mixed_In_With_Players_Missing_Frames()
+        {
+            var file = TestFileHelper.GetFilePath("BallMixedInWithPlayersMissingFrames.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetBall(file);
+
+            Assert.AreEqual(Color.FromArgb(100, 255, 255, 0), result.Colour);
+            Assert.AreEqual(8, result.Positions.Count());
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = "A number in line 2 is not in a numerical format")]
         public void Read_OverFlowed_Positional_Information()
         {

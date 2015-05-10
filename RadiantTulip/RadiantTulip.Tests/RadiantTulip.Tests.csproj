@@ -126,9 +126,12 @@
     <EmbeddedResource Include="TestFiles\OverflowPosition.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="TestFiles\BallAndPlayer.txt" />
     <EmbeddedResource Include="TestFiles\NotEnoughColumns.txt" />
     <EmbeddedResource Include="TestFiles\NotStartingAtZero.txt" />
     <EmbeddedResource Include="TestFiles\InvalidFrame.txt" />
+    <EmbeddedResource Include="TestFiles\TwoBallPositions.txt" />
+    <EmbeddedResource Include="TestFiles\BallMixedInWithPlayersMissingFrames.txt" />
     <Content Include="TestFiles\Patersons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

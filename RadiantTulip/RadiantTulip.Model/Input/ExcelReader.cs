@@ -25,6 +25,12 @@ namespace RadiantTulip.Model.Input
 
             return new List<Team>() { team };
         }
+        
+        public Ball GetBall(Stream stream)
+        {
+            //TODO: Implement when data arrives
+            return null;
+        }
 
         private Player CreatePlayer(IXLWorksheet sheet)
         {
