@@ -654,5 +654,59 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
         }
+
+        [Test]
+        public void Updates_Ball_Current_Position_To_A_Value()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var ball = new Ball() { Positions = new List<Position> 
+            {  
+                new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 }
+            } };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
+                }
+            };
+            game.Teams.Add(new Team { Players = new List<Player> { player } });
+
+            var updater = new ModelUpdater(game);
+            updater.Update();
+            updater.Update();
+
+            Assert.AreEqual(10, ball.CurrentPosition.X);
+            Assert.AreEqual(10, ball.CurrentPosition.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), ball.CurrentPosition.TimeStamp);
+        }
+
+        [Test]
+        public void Updates_Ball_Current_Position_To_Null_With_No_Value()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var ball = new Ball() { Positions = new List<Position> 
+            {  
+                new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 }
+            } };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) }
+                }
+            };
+            game.Teams.Add(new Team { Players = new List<Player> { player } });
+
+            var updater = new ModelUpdater(game);
+            updater.Update();
+            updater.Update();
+            updater.Update();
+
+            Assert.IsNull(game.Ball.CurrentPosition);
+        }
     }
 }

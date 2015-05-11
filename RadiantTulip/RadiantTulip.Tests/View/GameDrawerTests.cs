@@ -24,7 +24,7 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var canvas = new Canvas();
-            var game = new Game() { Ground = new Ground(), Teams = new List<Team>() };
+            var game = new Game() { Ground = new Ground(), Teams = new List<Team>(), Ball = new Ball() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
@@ -53,7 +53,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas();
             var player1 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } };
             var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } };
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
@@ -81,7 +81,7 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var canvas = new Canvas();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
@@ -106,7 +106,7 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var canvas = new Canvas();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
@@ -132,7 +132,7 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var canvas = new Canvas();
-            var game = new Game() { Teams = new List<Team>() };
+            var game = new Game() { Teams = new List<Team>(), Ball = new Ball() };
             game.Ground = new Ground();
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
 
@@ -152,7 +152,7 @@ namespace RadiantTulip.Tests.View
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var visualArtifact = new Mock<IVisualAffect>();
             var canvas = new Canvas();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
@@ -181,7 +181,7 @@ namespace RadiantTulip.Tests.View
             var visualArtifact1 = new Mock<IVisualAffect>();
             var visualArtifact2 = new Mock<IVisualAffect>();
             var canvas = new Canvas();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             game.Teams.Add(new Team
             {
                 Players = new List<Player>()
@@ -211,7 +211,7 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var affects = new List<IVisualAffect>();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             var canvas = new Canvas();
             
             game.Teams.Add(new Team
@@ -254,7 +254,7 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);            
             var affects = new List<IVisualAffect>();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             var canvas = new Canvas();
             groundDrawer.Setup(g => g.Draw(canvas));
 
@@ -282,7 +282,7 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var affects = new List<IVisualAffect>();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground() };
+            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             var canvas = new Canvas();
             playerDrawer.Setup(g => g.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), It.IsAny<Canvas>()));
 
@@ -319,6 +319,8 @@ namespace RadiantTulip.Tests.View
 
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
 
+            drawer.DrawGame(canvas, game, affects);
+
             ballDrawer.Verify(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()), Times.Once);
         }
 
@@ -344,6 +346,8 @@ namespace RadiantTulip.Tests.View
             ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()));
 
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+
+            drawer.DrawGame(canvas, game, affects);
 
             ballDrawer.Verify(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()), Times.Never);
         }
@@ -379,7 +383,46 @@ namespace RadiantTulip.Tests.View
 
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
 
+            drawer.DrawGame(canvas, game, affects);
+
             ballDrawer.Verify(b => b.Draw(canvas, game.Ball, game.Teams[0].Players[0], game.Ground), Times.Once);
+        }
+
+        [Test]
+        public void Draws_The_Ball_With_A_Player_From_Second_Team()
+        {
+            var playerDrawer = new Mock<IPlayerDrawer>();
+            var ballDrawer = new Mock<IBallDrawer>();
+            var groundDrawer = new Mock<GroundDrawer>();
+            var groundFactory = new Mock<IGroundDrawerFactory>();
+            groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
+            var affects = new List<IVisualAffect>();
+            var game = new Game()
+            {
+                Teams = new List<Team>()
+                {
+                    new Team() { Players = new List<Player>() },
+                    new Team() {
+                        Players = new List<Player>()
+                        {
+                            new Player { CurrentPosition = new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }}
+                        }
+                    }
+                },
+                Ground = new Ground(),
+                Ball = new Ball()
+                {
+                    CurrentPosition = new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }
+                }
+            };
+            var canvas = new Canvas();
+            ballDrawer.Setup(b => b.Draw(canvas, game.Ball, game.Teams[1].Players[0], game.Ground));
+
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+
+            drawer.DrawGame(canvas, game, affects);
+
+            ballDrawer.Verify(b => b.Draw(canvas, game.Ball, game.Teams[1].Players[0], game.Ground), Times.Once);
         }
     }
 }
