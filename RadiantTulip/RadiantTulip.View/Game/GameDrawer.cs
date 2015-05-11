@@ -42,7 +42,9 @@ namespace RadiantTulip.View.Game
                 foreach(var team in game.Teams)
                     players = players.Union(team.Players);
 
-                var player = players.FirstOrDefault(p => p.CurrentPosition.X == game.Ball.CurrentPosition.X && p.CurrentPosition.Y == game.Ball.CurrentPosition.Y);
+                var player = players.FirstOrDefault(p => p.CurrentPosition != null &&
+                    p.CurrentPosition.X == game.Ball.CurrentPosition.X && 
+                    p.CurrentPosition.Y == game.Ball.CurrentPosition.Y);
                 _ballDrawer.Draw(canvas, game.Ball, player, game.Ground);
             }
 

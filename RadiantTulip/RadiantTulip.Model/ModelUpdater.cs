@@ -39,6 +39,9 @@ namespace RadiantTulip.Model
             else
                 _time += _increment;
 
+            if(_game.Ball != null && _game.Ball.Positions != null)
+                _game.Ball.CurrentPosition = _game.Ball.Positions.FirstOrDefault(p => p.TimeStamp == _time);
+
             foreach (var t in _game.Teams)
                 foreach (var player in t.Players)
                 {
