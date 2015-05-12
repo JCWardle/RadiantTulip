@@ -208,7 +208,14 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Distance Covered:"/>
-                    <Label Content="99km"/>
+                    <Label>
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource distanceCoveredConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.CurrentTimeMilliseconds" />
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
                 </StackPanel>
                 <ItemsControl ItemsSource="{Binding PlayerAffects}" ItemTemplate="{DynamicResource SingleAffectSelector}" />
             </StackPanel>
