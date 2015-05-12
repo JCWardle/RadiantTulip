@@ -19,7 +19,7 @@ namespace RadiantTulip.Tests.View.Converters
             var converter = new PlayerDistance();
             var parameters = new object[] { player, TimeSpan.Zero };
 
-            var result = (float)converter.Convert(parameters, null, null, null);
+            var result = (double)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(0, result);
         }
@@ -38,7 +38,7 @@ namespace RadiantTulip.Tests.View.Converters
             var converter = new PlayerDistance();
             var parameters = new object[] { player, TimeSpan.FromMilliseconds(10) };
 
-            var result = (float)converter.Convert(parameters, null, null, null);
+            var result = (double)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(14.14, result);
         }
@@ -58,7 +58,7 @@ namespace RadiantTulip.Tests.View.Converters
             var converter = new PlayerDistance();
             var parameters = new object[] { player, TimeSpan.FromMilliseconds(10) };
 
-            var result = (float)converter.Convert(parameters, null, null, null);
+            var result = (double)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(14.14, result);
         }
