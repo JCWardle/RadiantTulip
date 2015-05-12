@@ -54,7 +54,7 @@ namespace RadiantTulip.View
 
                 foreach (var t in game.Teams)
                 {
-                    foreach(var p in t.Players)
+                    foreach(var p in t.Players.Where(p => p.CurrentPosition != null))
                     {
                         var size = (double)p.Size;
                         var currentPosition = p.CurrentPosition.TransformToCanvas(game.Ground, canvas);
