@@ -126,6 +126,33 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(ball, game.Ball);
         }
 
+        [Test]
+        public void Converts_Ball_Positions()
+        {
+            var ball = new Ball { Positions = CreatePositions(3) };
+            var spatialReader = new Mock<ISpatialReader>();
+            var coordinateConverter = new Mock<ICoordinateConverter>();
+            var ground = new Ground();
+            spatialReader.Setup(s => s.GetTeams(null)).Returns(new List<Team>());
+            spatialReader.Setup(s => s.GetBall(null)).Returns(ball);
+            coordinateConverter.Setup(c => c.Convert(ball.Positions[0], ground)).Returns(new Position
+            {
+                X = 10,
+                Y = 10,
+                TimeStamp = TimeSpan.FromMilliseconds(10)
+            });
+
+            var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
+
+            var game = gameCreator.CreateGame(null, ground, null);
+
+            Assert.IsNotNull(game.Ball);
+            ball = game.Ball;
+            Assert.AreEqual(10, ball.Positions[0].X);
+            Assert.AreEqual(10, ball.Positions[0].Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), ball.Positions[0].TimeStamp);
+        }
+
         private List<Position> CreatePositions(int positionsRequired)
         {
             var result = new List<Position>();
