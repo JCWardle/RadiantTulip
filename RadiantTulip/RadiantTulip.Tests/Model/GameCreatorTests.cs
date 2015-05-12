@@ -55,7 +55,7 @@ namespace RadiantTulip.Tests.Model
                 new List<Team>() { new Team { Players = new List<Player> { player } } }
             );
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(player.Positions[0], ground)).Returns(player.Positions[0]);
+            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions[0]);
             var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
             var progressReporter = new MockProgressReporter();
 
@@ -78,7 +78,7 @@ namespace RadiantTulip.Tests.Model
                 new List<Team>() { new Team { Players = new List<Player> { player } } }
             );
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(player.Positions[0], ground)).Returns(player.Positions[0]);
+            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions[0]);
             var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
             var progressReporter = new MockProgressReporter();
 
@@ -101,7 +101,7 @@ namespace RadiantTulip.Tests.Model
                 new List<Team>() { new Team { Players = new List<Player> { player } } }
             );
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(player.Positions[0], ground)).Returns(player.Positions[0]);
+            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions[0]);
             var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
 
             var game = gameCreator.CreateGame(null, ground, null);
@@ -135,7 +135,7 @@ namespace RadiantTulip.Tests.Model
             var ground = new Ground();
             spatialReader.Setup(s => s.GetTeams(null)).Returns(new List<Team>());
             spatialReader.Setup(s => s.GetBall(null)).Returns(ball);
-            coordinateConverter.Setup(c => c.Convert(ball.Positions[0], ground)).Returns(new Position
+            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(new Position
             {
                 X = 10,
                 Y = 10,
@@ -151,6 +151,23 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(10, ball.Positions[0].X);
             Assert.AreEqual(10, ball.Positions[0].Y);
             Assert.AreEqual(TimeSpan.FromMilliseconds(10), ball.Positions[0].TimeStamp);
+        }
+
+        [Test]
+        public void Handles_Ball_With_No_Positions()
+        {
+            var ball = new Ball { Positions = null };
+            var spatialReader = new Mock<ISpatialReader>();
+            var coordinateConverter = new Mock<ICoordinateConverter>();
+            var ground = new Ground();
+            spatialReader.Setup(s => s.GetTeams(null)).Returns(new List<Team>());
+            spatialReader.Setup(s => s.GetBall(null)).Returns(ball);
+
+            var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
+
+            var game = gameCreator.CreateGame(null, ground, null);
+
+            Assert.IsNotNull(game.Ball);
         }
 
         private List<Position> CreatePositions(int positionsRequired)

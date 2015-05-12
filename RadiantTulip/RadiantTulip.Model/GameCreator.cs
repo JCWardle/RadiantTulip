@@ -33,33 +33,39 @@ namespace RadiantTulip.Model
             var countSinceLastUpdate = 0;
             var totalPositions = 0;
 
+            IEnumerable<Position> positions = new List<Position>();
+            foreach (var t in game.Teams)
+            {
+                t.Players.ForEach(p => positions = positions.Concat(p.Positions));
+            }
+
+            if(game.Ball != null && game.Ball.Positions != null)
+                positions = positions.Concat(game.Ball.Positions);
+
             if (reportProgress != null)
             {
-                totalPositions = game.Teams.Sum(t => t.Players.Sum(p => p.Positions.Count()));
+                totalPositions = positions.Count();
                 progressIncrement = totalPositions / (MAX_PROGRESS - STARTING_PROGRESS);
                 if (progressIncrement == 0)
                     progressIncrement = MIN_PROGRESS_INCREMENT;
                 reportProgress(currentProgress);
             }
 
-            foreach(var t in game.Teams)
-                foreach (var p in t.Players)
-                {
-                    var positions = new List<Position>();
-                    foreach (var pos in p.Positions)
-                    {
-                        countSinceLastUpdate++;
-                        positions.Add(_converter.Convert(pos, ground));
+            foreach(var p in positions)
+            {
+                countSinceLastUpdate++;
+                var newPosition = _converter.Convert(p, ground);
+                p.X = newPosition.X;
+                p.Y = newPosition.Y;
+                p.TimeStamp = newPosition.TimeStamp;
 
-                        if (reportProgress != null && countSinceLastUpdate == progressIncrement)
-                        {
-                            countSinceLastUpdate = 0;
-                            currentProgress += (100 - STARTING_PROGRESS) / (totalPositions / progressIncrement);
-                            reportProgress(currentProgress);
-                        }
-                    }
-                    p.Positions = positions;
-                }
+                if (reportProgress != null && countSinceLastUpdate == progressIncrement)
+                {
+                    countSinceLastUpdate = 0;
+                    currentProgress += (100 - STARTING_PROGRESS) / (totalPositions / progressIncrement);
+                    reportProgress(currentProgress);
+                }                
+            }
 
             return game;
         }
