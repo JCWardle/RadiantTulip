@@ -154,6 +154,7 @@
     <Compile Include="Converters\InvertBoolToVisibility.cs" />
     <Compile Include="Converters\IsSelected.cs" />
     <Compile Include="Converters\MultipleSelect.cs" />
+    <Compile Include="Converters\PlayerDistance.cs" />
     <Compile Include="Converters\SelectedColour.cs" />
     <Compile Include="Converters\SelectedShape.cs" />
     <Compile Include="Converters\SelectedSize.cs" />

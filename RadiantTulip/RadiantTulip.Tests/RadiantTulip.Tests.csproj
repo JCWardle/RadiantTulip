@@ -98,6 +98,7 @@
     <Compile Include="View\Converters\InvertBoolToVisibilityTests.cs" />
     <Compile Include="View\Converters\IsSelectedTests.cs" />
     <Compile Include="View\Converters\MultipleSelectTests.cs" />
+    <Compile Include="View\Converters\PlayerDistanceTests.cs" />
     <Compile Include="View\Converters\SelectedColourTests.cs" />
     <Compile Include="View\Converters\SelectedShapeTests.cs" />
     <Compile Include="View\Converters\SelectedSizeTests.cs" />
