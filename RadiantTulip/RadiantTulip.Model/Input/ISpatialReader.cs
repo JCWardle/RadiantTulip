@@ -10,5 +10,6 @@ namespace RadiantTulip.Model.Input
     public interface ISpatialReader
     {
         List<Team> GetTeams(Stream stream);
+        Ball GetBall(Stream stream);
     }
 }

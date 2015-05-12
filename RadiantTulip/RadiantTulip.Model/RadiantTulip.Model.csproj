@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ball.cs" />
     <Compile Include="Converter\GPSConverter.cs" />
     <Compile Include="Converter\ICoordinateConverter.cs" />
     <Compile Include="Converter\VisualDataConverter.cs" />

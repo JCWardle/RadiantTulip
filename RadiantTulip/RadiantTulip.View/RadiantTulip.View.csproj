@@ -166,7 +166,9 @@
     <Compile Include="GameSetup.xaml.cs">
       <DependentUpon>GameSetup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\BallDrawer.cs" />
     <Compile Include="Game\GroundDrawerFactory.cs" />
+    <Compile Include="Game\IBallDrawer.cs" />
     <Compile Include="Game\IGroundDrawerFactory.cs" />
     <Compile Include="Game\PositionExtensions.cs" />
     <Compile Include="Game\VisualAffects\AffectFactory.cs" />

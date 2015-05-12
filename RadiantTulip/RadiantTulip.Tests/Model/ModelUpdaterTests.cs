@@ -11,7 +11,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Game_Getter()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -37,7 +37,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Game_Starts_At_Start()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -63,7 +63,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Player_Starts_At_First_Position()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -91,7 +91,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Player_Moves_Next_Position_After_Update()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -120,7 +120,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Player_Moves_Many_Positions_After_Many_Updates()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -155,7 +155,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Setting_Time_Stamp_Changes_Time()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -187,7 +187,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Game_Moves_Smallest_Increment()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -214,7 +214,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Updates_Multiple_Players()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player1 = new Player
             {
                 Positions = new List<Position>
@@ -256,7 +256,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Updates_Multiple_Teams()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player1 = new Player
             {
                 Positions = new List<Position>
@@ -351,7 +351,7 @@ namespace RadiantTulip.Tests.Model
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Time out of range")]
         public void Set_Time_Must_Be_Within_Maximum_Position_Range()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -377,7 +377,7 @@ namespace RadiantTulip.Tests.Model
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Time out of range")]
         public void Set_Time_Must_Be_Within_Minimum_Position_Range()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -402,7 +402,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Set_Time_Within_Range()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -429,7 +429,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Update_At_End()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -458,7 +458,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Max_Returns_Highest_Position_Time()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -484,7 +484,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Increment_Returns_Small_Increment()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -510,7 +510,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Increment_Returns_Big_Increment()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -536,7 +536,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Plays_Backwards_At_Max_Time()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -565,7 +565,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Plays_Backwards()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -595,7 +595,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Goes_Back_Goes_Forward()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -628,7 +628,7 @@ namespace RadiantTulip.Tests.Model
         [Test]
         public void Rewinds_To_Start_And_Stops()
         {
-            var game = new Game() { Teams = new List<Team>() };
+            var game = CreateGame();
             var player = new Player
             {
                 Positions = new List<Position>
@@ -653,6 +653,119 @@ namespace RadiantTulip.Tests.Model
             updater.Update();
 
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
+        }
+
+        [Test]
+        public void Updates_Ball_Current_Position_To_A_Value()
+        {
+            var game = new Game() { Teams = new List<Team>(), Ball = new Ball() };
+            game.Ball = new Ball() { Positions = new List<Position> 
+            {  
+                new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 }
+            } };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
+                }
+            };
+            game.Teams.Add(new Team { Players = new List<Player> { player } });
+
+            var updater = new ModelUpdater(game);
+            updater.Update();
+            updater.Update();
+
+            Assert.AreEqual(10, game.Ball.CurrentPosition.X);
+            Assert.AreEqual(10, game.Ball.CurrentPosition.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), game.Ball.CurrentPosition.TimeStamp);
+        }
+
+        [Test]
+        public void Updates_Ball_Current_Position_To_Null_With_No_Value()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            game.Ball = new Ball() { Positions = new List<Position> 
+            {  
+                new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 }
+            } };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) }
+                }
+            };
+            game.Teams.Add(new Team { Players = new List<Player> { player } });
+
+            var updater = new ModelUpdater(game);
+            updater.Update();
+            updater.Update();
+            updater.Update();
+
+            Assert.IsNull(game.Ball.CurrentPosition);
+        }
+
+        [Test]
+        public void Updater_Handles_Null_Ball()
+        {
+            var game = new Game() { Teams = new List<Team>() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
+                }
+            };
+            game.Teams.Add(new Team { Players = new List<Player> { player } });
+
+            var updater = new ModelUpdater(game);
+            updater.Update();
+
+            Assert.AreEqual(2, player.CurrentPosition.X);
+            Assert.AreEqual(2, player.CurrentPosition.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), player.CurrentPosition.TimeStamp);
+        }
+
+        [Test]
+        public void Updater_Handles_No_Ball_Positions()
+        {
+            var game = new Game() { Teams = new List<Team>(), Ball = new Ball() };
+            var player = new Player
+            {
+                Positions = new List<Position>
+                {
+                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
+                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
+                }
+            };
+            game.Teams.Add(new Team { Players = new List<Player> { player } });
+
+            var updater = new ModelUpdater(game);
+            updater.Update();
+
+            Assert.AreEqual(2, player.CurrentPosition.X);
+            Assert.AreEqual(2, player.CurrentPosition.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), player.CurrentPosition.TimeStamp);
+        }
+
+        private Game CreateGame()
+        {
+            return new Game()
+            {
+                Teams = new List<Team>(),
+                Ball = new Ball
+                {
+                    Positions = new List<Position>() 
+                    { 
+                        new Position { TimeStamp = TimeSpan.FromMilliseconds(10), X = 10, Y = 10} 
+                    }
+                }
+            };
         }
     }
 }

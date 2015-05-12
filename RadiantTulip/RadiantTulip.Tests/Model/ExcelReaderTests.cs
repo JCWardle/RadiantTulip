@@ -113,5 +113,18 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(18510, result[0].Players[0].Positions.Count);
         }
+
+        [Test]
+        public void Ball_Is_Null_Because_Not_Implemented()
+        {
+            Ball result;
+            using (var stream = TestFileHelper.GetFilePath("OnePlayerBig.xlsx"))
+            {
+                var input = new ExcelReader();
+                result = input.GetBall(stream);
+            }
+
+            Assert.IsNull(result);
+        }
     }
 }

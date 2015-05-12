@@ -16,11 +16,13 @@ namespace RadiantTulip.View.Game
     {
         private GroundDrawer _groundDrawer;
         private IPlayerDrawer _playerDrawer;
+        private IBallDrawer _ballDrawer;
 
-        public GameDrawer(IGroundDrawerFactory groundFactory, IPlayerDrawer playerDrawer, Ground ground)
+        public GameDrawer(IGroundDrawerFactory groundFactory, IPlayerDrawer playerDrawer, IBallDrawer ballDrawer, Ground ground)
         {
             _groundDrawer = groundFactory.CreateGroundDrawer(ground);
             _playerDrawer = playerDrawer;
+            _ballDrawer = ballDrawer;
         }
 
         public void DrawGame(Canvas canvas, GameModel game, IList<IVisualAffect> visualAffects)
@@ -32,6 +34,19 @@ namespace RadiantTulip.View.Game
                 v.Draw(canvas);
 
             _groundDrawer.Draw(canvas);
+
+            if(game.Ball.CurrentPosition != null)
+            {
+                var players = new List<Player>().AsEnumerable();
+
+                foreach(var team in game.Teams)
+                    players = players.Union(team.Players);
+
+                var player = players.FirstOrDefault(p => p.CurrentPosition != null &&
+                    p.CurrentPosition.X == game.Ball.CurrentPosition.X && 
+                    p.CurrentPosition.Y == game.Ball.CurrentPosition.Y);
+                _ballDrawer.Draw(canvas, game.Ball, player, game.Ground);
+            }
 
             foreach (var t in game.Teams)
             {
