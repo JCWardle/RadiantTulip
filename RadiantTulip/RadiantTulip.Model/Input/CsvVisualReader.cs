@@ -14,7 +14,7 @@ namespace RadiantTulip.Model.Input
         private const int FPS = 25;
         private const string BALL_NAME = "Ball";
         private List<Team> _teams = new List<Team>();
-        private Ball _ball = new Ball() { Positions = new List<Position>(), Colour = Color.FromArgb(100, 255, 255, 0)};
+        private Ball _ball = new Ball() { Positions = new List<Position>(), Colour = Color.FromArgb(255, 255, 255, 0)};
         private int _startingFrame = -1;
 
         public List<Team> GetTeams(Stream stream)

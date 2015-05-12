@@ -15,7 +15,7 @@ namespace RadiantTulip.View.Game
     {
         public void Draw(Canvas canvas, Ball ball, Player player, Ground ground)
         {
-            var size = player == null ? (int)RadiantTulip.Model.Size.Medium : (int)player.Size + 2;
+            var size = player == null ? (int)RadiantTulip.Model.Size.Medium : (int)player.Size + 5;
             var position = ball.CurrentPosition.TransformToCanvas(ground, canvas);
 
             canvas.Children.Add(new Ellipse
