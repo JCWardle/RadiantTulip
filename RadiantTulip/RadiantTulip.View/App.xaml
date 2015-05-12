@@ -17,5 +17,6 @@
         <converters:TabCreator x:Key="tabCreatorConverter"/>
         <converters:InvertBoolToVisibility x:Key="invertBoolToVisibilityConverter"/>
         <converters:SelectedVisibility x:Key="selectedVisibilityConverter"/>
+        <converters:PlayerDistance x:Key="distanceCoveredConverter"/>
     </Application.Resources>
 </Application>

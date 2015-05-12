@@ -3,6 +3,7 @@ using RadiantTulip.Model;
 using RadiantTulip.View.Converters;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,8 @@ namespace RadiantTulip.Tests.View.Converters
         {
             var player = new Player { Positions = new List<Position>() };
             var converter = new PlayerDistance();
-            var parameters = new object[] { player, TimeSpan.Zero };
+            var selectedPlayers = new ObservableCollection<Player> { player };
+            var parameters = new object[] { selectedPlayers, 10d };
 
             var result = (double)converter.Convert(parameters, null, null, null);
 
@@ -36,11 +38,12 @@ namespace RadiantTulip.Tests.View.Converters
                 }
             };
             var converter = new PlayerDistance();
-            var parameters = new object[] { player, TimeSpan.FromMilliseconds(10) };
+            var selectedPlayers = new ObservableCollection<Player> { player };
+            var parameters = new object[] { selectedPlayers, 10d };
 
             var result = (double)converter.Convert(parameters, null, null, null);
 
-            Assert.AreEqual(14.14, result);
+            Assert.AreEqual(0.14, result);
         }
 
         [Test]
@@ -56,11 +59,12 @@ namespace RadiantTulip.Tests.View.Converters
                 }
             };
             var converter = new PlayerDistance();
-            var parameters = new object[] { player, TimeSpan.FromMilliseconds(10) };
+            var selectedPlayers = new ObservableCollection<Player> { player };
+            var parameters = new object[] { selectedPlayers, 10d };
 
             var result = (double)converter.Convert(parameters, null, null, null);
 
-            Assert.AreEqual(14.14, result);
+            Assert.AreEqual(0.14, result);
         }
 
         [Test]
@@ -69,6 +73,18 @@ namespace RadiantTulip.Tests.View.Converters
         {
             var converter = new PlayerDistance();
             converter.ConvertBack(null, null, null, null);
+        }
+
+        [Test]
+        public void Player_Distance_No_Players_Selected()
+        {
+            var converter = new PlayerDistance();
+            var selectedPlayers = new ObservableCollection<Player>();
+            var parameters = new object[] { selectedPlayers, 10d };
+
+            var result = (double)converter.Convert(parameters, null, null, null);
+
+            Assert.AreEqual(0, result);
         }
     }
 }
