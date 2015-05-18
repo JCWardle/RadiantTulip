@@ -1,6 +1,7 @@
 ﻿using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,11 @@ namespace RadiantTulip.View.Converters
         /// <returns></returns>
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var player = (Player)values[0];
+            var player = ((ObservableCollection<Player>)values[0]).FirstOrDefault();
             var interval = (TimeSpan)values[1];
+
+            if (player == null)
+                return 0d;
 
             var positions = player.Positions.Where(p => p.TimeStamp <= player.CurrentPosition.TimeStamp
                 && player.CurrentPosition.TimeStamp - p.TimeStamp <= interval).ToList();

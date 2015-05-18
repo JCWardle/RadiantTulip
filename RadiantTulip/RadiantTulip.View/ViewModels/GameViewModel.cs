@@ -35,7 +35,7 @@ namespace RadiantTulip.View.ViewModels
         private List<IVisualAffect> _visualAffects;
         private Group _selectedGroup;
         //TODO Speed Tuner
-        private int _speedTuner;
+        private int _speedTuner = 10;
 
         #region Commands
         private ICommand _play;
@@ -558,6 +558,7 @@ namespace RadiantTulip.View.ViewModels
             set
             {
                 _speedTuner = int.Parse(value);
+                OnPropertyChanged("SpeedTuner");
             }
             get
             {

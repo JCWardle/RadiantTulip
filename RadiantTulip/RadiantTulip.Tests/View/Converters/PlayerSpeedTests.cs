@@ -3,6 +3,7 @@ using RadiantTulip.Model;
 using RadiantTulip.View.Converters;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace RadiantTulip.Tests.View.Converters
             };
             player.CurrentPosition = player.Positions.Last();
             var interval = TimeSpan.FromSeconds(1);
-            var parameters = new object[] { player, interval };
+            var parameters = new object[] { new ObservableCollection<Player> { player }, interval };
             var speedCalculator = new PlayerSpeed();
 
             var result = (double)speedCalculator.Convert(parameters, null, null, null);
@@ -57,7 +58,7 @@ namespace RadiantTulip.Tests.View.Converters
             };
             player.CurrentPosition = player.Positions.Last();
             var interval = TimeSpan.FromMilliseconds(1000);
-            var parameters = new object[] { player, interval };
+            var parameters = new object[] { new ObservableCollection<Player> { player }, interval };
             var speedCalculator = new PlayerSpeed();
 
             var result = (double)speedCalculator.Convert(parameters, null, null, null);
@@ -80,7 +81,7 @@ namespace RadiantTulip.Tests.View.Converters
             };
             player.CurrentPosition = player.Positions.Last();
             var interval = TimeSpan.FromMilliseconds(1000);
-            var parameters = new object[] { player, interval };
+            var parameters = new object[] { new ObservableCollection<Player> { player }, interval };
             var speedCalculator = new PlayerSpeed();
 
             var result = (double)speedCalculator.Convert(parameters, null, null, null);
@@ -103,12 +104,24 @@ namespace RadiantTulip.Tests.View.Converters
             };
             player.CurrentPosition = player.Positions.Last();
             var interval = TimeSpan.FromMilliseconds(100);
-            var parameters = new object[] { player, interval };
+            var parameters = new object[] { new ObservableCollection<Player> { player }, interval };
             var speedCalculator = new PlayerSpeed();
 
             var result = (double)speedCalculator.Convert(parameters, null, null, null);
 
             Assert.AreEqual(1d, result);
+        }
+
+        [Test]
+        public void Doesnt_Calculate_Player_Speed_With_Null_Player()
+        {
+            var interval = TimeSpan.FromMilliseconds(100);
+            var parameters = new object[] { new ObservableCollection<Player>(), interval };
+            var speedCalculator = new PlayerSpeed();
+
+            var result = (double)speedCalculator.Convert(parameters, null, null, null);
+
+            Assert.AreEqual(0d, result);
         }
 
         [Test]
