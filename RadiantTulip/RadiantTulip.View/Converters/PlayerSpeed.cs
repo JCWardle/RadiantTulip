@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RadiantTulip.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace RadiantTulip.View.Converters
     public class PlayerSpeed : IMultiValueConverter
     {
         /// <summary>
-        /// Calculates a players speed
+        /// Calculates a players speed and returns it in m/s
         /// </summary>
         /// <param name="values">First item is the player
         /// Second item is a timespan with the interval that the speed should be calculated over
@@ -21,9 +22,24 @@ namespace RadiantTulip.View.Converters
         /// <returns></returns>
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException();
-        }
+            var player = (Player)values[0];
+            var interval = (TimeSpan)values[1];
 
+            var positions = player.Positions.Where(p => p.TimeStamp <= player.CurrentPosition.TimeStamp
+                && player.CurrentPosition.TimeStamp - p.TimeStamp <= interval).ToList();
+
+            var distance = 0d;
+
+            for (var i = 1; i < positions.Count; i++)
+            {
+                distance += positions[i].DistanceTo(positions[i - 1]);
+            }
+
+            var speed = distance / interval.TotalMilliseconds;
+
+            //Convert speed from centimetres / millisecond to metres / second
+            return speed * 10;
+        }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
         {
