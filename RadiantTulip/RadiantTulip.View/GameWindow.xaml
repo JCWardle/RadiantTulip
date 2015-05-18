@@ -204,7 +204,19 @@
                 <Label Name="PlayerName" Content="Create Converter For Player Name"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Speed:"/>
-                    <Label Content="99m/s"/>
+                    <Label>
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource playerSpeedConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                <!-- Speed Tuner -->
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="SpeedTuner"/>
+                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.CurrentTimeMilliseconds" />
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                    <Label Content="m/s"/>
+                    <Label Content="Speed Tuner:" />
+                    <TextBox Text="{Binding SpeedTunerMilliseconds}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Distance Covered:"/>
