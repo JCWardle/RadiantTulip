@@ -30,5 +30,23 @@ namespace RadiantTulip.Tests.Model
 
             Assert.IsTrue(eventTriggered);
         }
+
+        [Test]
+        public void Visible_Set_Notification()
+        {
+            var player = new Player() { Visible = false };
+            var eventTriggered = false;
+
+            player.PropertyChanged +=
+                delegate(object sender, PropertyChangedEventArgs e)
+                {
+                    eventTriggered = true;
+                    Assert.AreEqual("Visible", e.PropertyName);
+                };
+
+            player.Visible = true;
+
+            Assert.IsTrue(eventTriggered);
+        }
     }
 }

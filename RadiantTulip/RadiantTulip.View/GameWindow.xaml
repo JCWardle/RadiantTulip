@@ -56,7 +56,8 @@
                                 <Grid x:Name="PlayerSelector">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="20px"/>
-                                        <ColumnDefinition Width="125px"/>
+                                        <ColumnDefinition Width="105px"/>
+                                        <ColumnDefinition Width="20px"/>
                                         <ColumnDefinition Width="20px"/>
                                     </Grid.ColumnDefinitions>
                                     <CheckBox Grid.Column="0">
@@ -79,6 +80,7 @@
                                         </i:Interaction.Triggers>
                                     </CheckBox>
                                     <Label Content="{Binding Name}" Grid.Column="1"/>
+                                    <StackPanel Grid.Column="2" Style="{StaticResource PlayerVisibility}" Width="20px" Height="20px" Visibility="{Binding Visible, Converter={StaticResource invertBoolToVisibilityConverter}}" />
                                     <StackPanel Width="20px" Height="20px" HorizontalAlignment="Right" Grid.Column="3">
                                         <StackPanel.Background>
                                             <SolidColorBrush Color="{Binding Colour}"/>

@@ -7,7 +7,19 @@ namespace RadiantTulip.Model
     public class Player : INotifyPropertyChanged
     {
         public Team Team { get; set; }
-        public bool Visible { get; set; }
+        private bool _visible;
+        public bool Visible 
+        { 
+            get
+            {
+                return _visible;
+            }
+            set
+            {
+                _visible = value;
+                OnPropertyChanged("Visible");
+            }
+        }
         public List<Position> Positions { get; set; }
         public Position CurrentPosition { get; set; }
         public string Name { get; set; }
