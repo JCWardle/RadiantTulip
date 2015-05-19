@@ -149,8 +149,21 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style TargetType="ToggleButton" x:Key="VisibilityToggle">
+
+    <Style TargetType="Control" x:Key="ContextControl">
+        <Setter Property="Margin">
+            <Setter.Value>
+                <Thickness Right="2.5" Bottom="2.5" Top="2.5" Left="2.5"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width">
+            <Setter.Value>
+                80
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ToggleButton" x:Key="VisibilityToggle" BasedOn="{StaticResource ContextControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
