@@ -35,7 +35,7 @@ namespace RadiantTulip.View.ViewModels
         private List<IVisualAffect> _visualAffects;
         private Group _selectedGroup;
         //TODO Speed Tuner
-        private int _speedTuner = 10;
+        private int _speedTuner = 1000;
 
         #region Commands
         private ICommand _play;

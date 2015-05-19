@@ -218,7 +218,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Speed Tuner:" />
-                    <TextBox Text="{Binding SpeedTunerMilliseconds, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Text="{Binding SpeedTunerMilliseconds, UpdateSourceTrigger=PropertyChanged}" Width="100px" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Distance Covered:"/>
