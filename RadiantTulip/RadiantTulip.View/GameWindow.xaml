@@ -201,7 +201,7 @@
                        
             <!-- Single Player Selection Context -->
             <StackPanel Grid.Row="0" Visibility="{Binding State, Converter={StaticResource singleSelectConverter}, Mode=OneWay}">
-                <Label Name="PlayerName" Content="Create Converter For Player Name"/>
+                <Label Name="PlayerName" Content="{Binding SelectedPlayers, Converter={StaticResource playerNameConverter}, Mode=OneWay}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Speed:"/>
                     <Label>

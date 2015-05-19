@@ -321,6 +321,7 @@ namespace RadiantTulip.View.ViewModels
                 SelectedPlayers.Add(p);
             }
             SetState();
+            OnPropertyChanged("SelectedPlayers");
         }
 
         private void SelectionTabLoaded(Tuple<DataTemplate, DataTemplate, TabControl> data)

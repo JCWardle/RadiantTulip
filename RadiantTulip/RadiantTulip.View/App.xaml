@@ -19,5 +19,6 @@
         <converters:SelectedVisibility x:Key="selectedVisibilityConverter"/>
         <converters:PlayerDistance x:Key="distanceCoveredConverter"/>
         <converters:PlayerSpeed x:Key="playerSpeedConverter"/>
+        <converters:PlayerName x:Key="playerNameConverter"/>
     </Application.Resources>
 </Application>
