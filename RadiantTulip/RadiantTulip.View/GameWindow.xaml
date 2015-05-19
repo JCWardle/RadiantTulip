@@ -334,7 +334,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <ToggleButton Name="VisibilitySelector">
+                <ToggleButton Name="VisibilitySelector" Style="{StaticResource VisibilityToggle}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding VisibilityChangedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}"/>
