@@ -53,8 +53,13 @@
                         </i:Interaction.Triggers>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" x:Name="PlayerSelector">
-                                    <CheckBox>
+                                <Grid x:Name="PlayerSelector">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20px"/>
+                                        <ColumnDefinition Width="125px"/>
+                                        <ColumnDefinition Width="20px"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0">
                                         <CheckBox.IsChecked>
                                             <MultiBinding Converter="{StaticResource isSelected}" Mode="OneWay">
                                                 <Binding RelativeSource="{RelativeSource Self}" Path="DataContext" />
@@ -73,8 +78,13 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </CheckBox>
-                                    <Label Content="{Binding Name}"/>
-                                </StackPanel>
+                                    <Label Content="{Binding Name}" Grid.Column="1"/>
+                                    <StackPanel Width="20px" Height="20px" HorizontalAlignment="Right" Grid.Column="3">
+                                        <StackPanel.Background>
+                                            <SolidColorBrush Color="{Binding Colour}"/>
+                                        </StackPanel.Background>
+                                    </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
