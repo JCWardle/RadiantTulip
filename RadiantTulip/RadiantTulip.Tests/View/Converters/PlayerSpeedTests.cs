@@ -125,6 +125,29 @@ namespace RadiantTulip.Tests.View.Converters
         }
 
         [Test]
+        public void Rounds_Player_Speed_To_Two_Decimal_Places()
+        {
+            var player = new Player
+            {
+                Positions = new List<Position> 
+                {
+                    new Position { X = 0, Y = 0, TimeStamp = TimeSpan.Zero},
+                    new Position { X = 0, Y = 3, TimeStamp = TimeSpan.FromMilliseconds(100) },
+                    new Position { X = 0, Y = 15, TimeStamp = TimeSpan.FromMilliseconds(200) },
+                    new Position { X = 0, Y = 43, TimeStamp = TimeSpan.FromMilliseconds(300) }
+                }
+            };
+            player.CurrentPosition = player.Positions.Last();
+            var interval = TimeSpan.FromMilliseconds(400);
+            var parameters = new object[] { new ObservableCollection<Player> { player }, interval };
+            var speedCalculator = new PlayerSpeed();
+
+            var result = (double)speedCalculator.Convert(parameters, null, null, null);
+
+            Assert.AreEqual(1.08d, result);
+        }
+
+        [Test]
         [ExpectedException(typeof(NotImplementedException))]
         public void Cant_Convert_Back_Player_Speed()
         {

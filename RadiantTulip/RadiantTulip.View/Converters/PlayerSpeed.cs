@@ -42,7 +42,7 @@ namespace RadiantTulip.View.Converters
             var speed = distance / interval.TotalMilliseconds;
 
             //Convert speed from centimetres / millisecond to metres / second
-            return speed * 10;
+            return Math.Round(speed * 10, 2);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
