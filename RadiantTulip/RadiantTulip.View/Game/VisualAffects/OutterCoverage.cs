@@ -27,7 +27,7 @@ namespace RadiantTulip.View.Game.VisualAffects
 
             var triangles = new List<Polygon>();
 
-            foreach(var p in _players)
+            foreach(var p in _players.Where(p => p.CurrentPosition != null))
                 FillInConnections(p, canvas).ForEach(c => triangles.Add(c));
 
             triangles.ForEach(t => canvas.Children.Add(t));

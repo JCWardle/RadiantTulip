@@ -25,7 +25,7 @@ namespace RadiantTulip.View.Game.VisualAffects
         public void Draw(Canvas canvas)
         {
             Position previousPosition = null;
-            foreach(var p in _players)
+            foreach(var p in _players.Where(p => p.CurrentPosition != null))
             {
                 if (previousPosition != null)
                 {
