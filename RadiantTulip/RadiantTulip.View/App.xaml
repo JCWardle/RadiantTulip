@@ -18,5 +18,6 @@
         <converters:InvertBoolToVisibility x:Key="invertBoolToVisibilityConverter"/>
         <converters:SelectedVisibility x:Key="selectedVisibilityConverter"/>
         <converters:PlayerDistance x:Key="distanceCoveredConverter"/>
+        <converters:PlayerSpeed x:Key="playerSpeedConverter"/>
     </Application.Resources>
 </Application>

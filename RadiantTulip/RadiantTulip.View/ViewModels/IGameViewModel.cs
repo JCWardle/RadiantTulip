@@ -22,6 +22,8 @@ namespace RadiantTulip.View.ViewModels
         double CurrentTimeMilliseconds { get; set; }
         double FrameIncrement { get; }
         bool Playing { get; }
+        //Speed Tuner
+        TimeSpan SpeedTuner { get; }
         Action UpdateView { get; set; }
         ICommand PlayCommand { get; }
         ICommand PauseCommand { get; }

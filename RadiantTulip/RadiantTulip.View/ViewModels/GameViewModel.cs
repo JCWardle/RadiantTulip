@@ -34,6 +34,8 @@ namespace RadiantTulip.View.ViewModels
         private ObservableCollection<Group> _groups = new ObservableCollection<Group>();
         private List<IVisualAffect> _visualAffects;
         private Group _selectedGroup;
+        //TODO Speed Tuner
+        private int _speedTuner = 1000;
 
         #region Commands
         private ICommand _play;
@@ -537,6 +539,33 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
+        /// <summary>
+        /// TODO Speed Tuner
+        /// </summary>
+        public TimeSpan SpeedTuner
+        {
+            get
+            {
+                return TimeSpan.FromMilliseconds(_speedTuner);
+            }
+        }
+
+        /// <summary>
+        /// TODO Speed Tuner
+        /// </summary>
+        public string SpeedTunerMilliseconds
+        {
+            set
+            {
+                _speedTuner = int.Parse(value);
+                OnPropertyChanged("SpeedTuner");
+            }
+            get
+            {
+                return _speedTuner.ToString();
+            }
+        }
+
         #endregion
 
         public Action UpdateView { get; set; }
@@ -547,7 +576,7 @@ namespace RadiantTulip.View.ViewModels
 
             _gameUpdater = container.Resolve<IModelUpdater>(new ParameterOverride("game", _game));
             _affectFactory = container.Resolve<IAffectFactory>();
-            
+
             _timer = new DispatcherTimer();
             _timer.Tick += UpdateGame;
             _timer.Interval = _gameUpdater.Increment;
@@ -557,6 +586,9 @@ namespace RadiantTulip.View.ViewModels
             State = SelectionState.None;
             _visualAffects = new List<IVisualAffect>();
             OnPropertyChanged("Playing");
+
+            //Speed Tuner
+            _speedTuner = 10;
         }
 
         private void UpdateGame(object o, EventArgs args)
