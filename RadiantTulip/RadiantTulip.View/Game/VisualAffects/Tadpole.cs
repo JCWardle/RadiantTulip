@@ -28,6 +28,9 @@ namespace RadiantTulip.View.Game.VisualAffects
         {
             var currentPosition = _player.CurrentPosition;
 
+            if (currentPosition == null)
+                return;
+
             for (var i = 0; i < TADPOLE_LENGTH; i++)
             {
                 currentPosition = _player.Positions.OrderByDescending(p => p.TimeStamp.TotalMilliseconds)
