@@ -150,6 +150,58 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Control" x:Key="ContextControl">
+        <Setter Property="Margin">
+            <Setter.Value>
+                <Thickness Right="2.5" Bottom="2.5" Top="2.5" Left="2.5"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width">
+            <Setter.Value>
+                80
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ToggleButton" x:Key="VisibilityToggle" BasedOn="{StaticResource ContextControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border CornerRadius="3" Background="{TemplateBinding Background}">
+                        <ContentPresenter Margin="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"
+                            IsHitTestVisible="False"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="/Images/Eye-Small.png"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="/Images/Eye-Cross-Small.png"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="StackPanel" x:Key="PlayerVisibility">
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="/Images/Eye-Cross-Small.png"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style TargetType="TextBlock" x:Key="ProgressText">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>

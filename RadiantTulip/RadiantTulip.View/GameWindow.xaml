@@ -53,8 +53,14 @@
                         </i:Interaction.Triggers>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" x:Name="PlayerSelector">
-                                    <CheckBox>
+                                <Grid x:Name="PlayerSelector">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20px"/>
+                                        <ColumnDefinition Width="105px"/>
+                                        <ColumnDefinition Width="20px"/>
+                                        <ColumnDefinition Width="20px"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0">
                                         <CheckBox.IsChecked>
                                             <MultiBinding Converter="{StaticResource isSelected}" Mode="OneWay">
                                                 <Binding RelativeSource="{RelativeSource Self}" Path="DataContext" />
@@ -73,8 +79,14 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </CheckBox>
-                                    <Label Content="{Binding Name}"/>
-                                </StackPanel>
+                                    <Label Content="{Binding Name}" Grid.Column="1"/>
+                                    <StackPanel Grid.Column="2" Style="{StaticResource PlayerVisibility}" Width="20px" Height="20px" Visibility="{Binding Visible, Converter={StaticResource invertBoolToVisibilityConverter}}" />
+                                    <StackPanel Width="20px" Height="20px" HorizontalAlignment="Right" Grid.Column="3">
+                                        <StackPanel.Background>
+                                            <SolidColorBrush Color="{Binding Colour}"/>
+                                        </StackPanel.Background>
+                                    </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -196,12 +208,12 @@
         <Grid Grid.Column="2" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
                        
             <!-- Single Player Selection Context -->
             <StackPanel Grid.Row="0" Visibility="{Binding State, Converter={StaticResource singleSelectConverter}, Mode=OneWay}">
-                <Label Name="PlayerName" Content="Create Converter For Player Name"/>
+                <Label Name="PlayerName" Content="{Binding SelectedPlayers, Converter={StaticResource playerNameConverter}, Mode=OneWay}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Speed:"/>
                     <Label>
@@ -281,8 +293,8 @@
             </StackPanel>
 
             <!-- Player Context Controls -->
-            <UniformGrid Grid.Row="1" Height="60" Rows="2" Name="Tools">
-                <ComboBox Name="SizeSelector" ItemsSource="{Binding SizeOptions}">
+            <UniformGrid Grid.Row="1" Rows="2" Name="Tools">
+                <ComboBox Name="SizeSelector" ItemsSource="{Binding SizeOptions}" Style="{StaticResource ContextControl}">
                     <ComboBox.SelectedValue>
                         <MultiBinding Converter="{StaticResource selectedSize}" Mode="OneWay">
                             <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
@@ -296,7 +308,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <cp:ColorPicker Name="ColourSelector">
+                <cp:ColorPicker Name="ColourSelector" Style="{StaticResource ContextControl}">
                     <cp:ColorPicker.SelectedColor>
                         <MultiBinding Converter="{StaticResource selectedColour}" Mode="OneWay">
                             <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
@@ -310,7 +322,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </cp:ColorPicker>
-                <ComboBox Name="ShapeSelector" ItemsSource="{Binding ShapeOptions}">
+                <ComboBox Name="ShapeSelector" ItemsSource="{Binding ShapeOptions}" Style="{StaticResource ContextControl}">
                     <ComboBox.SelectedValue>
                         <MultiBinding Converter="{StaticResource selectedShape}" Mode="OneWay">
                             <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
@@ -324,7 +336,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <ToggleButton Name="VisibilitySelector">
+                <ToggleButton Name="VisibilitySelector" Style="{StaticResource VisibilityToggle}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding VisibilityChangedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}"/>
