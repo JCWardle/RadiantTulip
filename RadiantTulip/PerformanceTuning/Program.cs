@@ -15,6 +15,14 @@ using System.Windows.Data;
 
 namespace PerformanceTuning
 {
+    public class Position
+    {
+        //Longitude or converted X co-ordinate
+        public double X { get; set; }
+        //Latitude or converted Y co-ordinate
+        public double Y { get; set; }
+        public TimeSpan TimeStamp { get; set; }
+    }
 
     public class Player : INotifyPropertyChanged
     {
@@ -32,8 +40,8 @@ namespace PerformanceTuning
                 OnPropertyChanged("Visible");
             }
         }
-        public Dictionary<TimeSpan, Position> Positions { get; set; }
-        public KeyValuePair<TimeSpan, Position> CurrentPosition { get; set; }
+        public LinkedList<Position> Positions { get; set; }
+        public Position CurrentPosition { get; set; }
         public string Name { get; set; }
         public Size Size { get; set; }
         public PlayerShape Shape { get; set; }
@@ -49,18 +57,49 @@ namespace PerformanceTuning
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
-    public class Position
-    {
-        //Longitude or converted X co-ordinate
-        public double X { get; set; }
-        //Latitude or converted Y co-ordinate
-        public double Y { get; set; }
-    }
     public static class PositionExtensions
     {
         public static double DistanceTo(this Position pos1, Position pos2)
         {
             return Math.Sqrt(Math.Pow(pos1.X - pos2.X, 2) + Math.Pow(pos1.Y - pos2.Y, 2));
+        }
+
+
+    }
+
+    public class PlayerSpeed : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            var player = ((ObservableCollection<Player>)values[0]).FirstOrDefault();
+            var interval = (TimeSpan)values[1];
+
+            if (player == null)
+                return 0d;
+
+            var distance = 0d;
+            var previousPosition = player.Positions.Find(player.CurrentPosition);
+
+            while(player.CurrentPosition.TimeStamp - previousPosition.Value.TimeStamp < interval)
+            {
+                distance += previousPosition.Value.DistanceTo(previousPosition.Previous.Value);
+                previousPosition = previousPosition.Previous;
+            }
+
+            /*for (var i = 1; i < positions.Count; i++)
+            {
+                distance += positions[i].DistanceTo(positions[i - 1]);
+            }*/
+
+            var speed = distance / interval.TotalMilliseconds;
+
+            //Convert speed from centimetres / millisecond to metres / second
+            return Math.Round(speed * 10, 2);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -116,48 +155,15 @@ namespace PerformanceTuning
 
         private static Player ConvertPlayer(RadiantTulip.Model.Player player)
         {
-            
-            var result = new Player { Name = player.Name, Shape = player.Shape, Size = player.Size, Visible = true, Positions = new Dictionary<TimeSpan, Position>() };
-            foreach(var p in player.Positions)
+            var result = new Player { Name = player.Name, Shape = player.Shape, Size = player.Size, Visible = true, Positions = new LinkedList<Position>() };
+            foreach(var p in player.Positions.OrderBy(pos => pos.TimeStamp))
             {
-                result.Positions.Add(p.TimeStamp, new Position{ X = p.X, Y = p.Y });
+                result.Positions.AddLast(new Position { TimeStamp = p.TimeStamp, X = p.X, Y = p.Y });
             }
 
-            result.CurrentPosition = new KeyValuePair<TimeSpan,Position>(player.Positions[player.Positions.Count / 2].TimeStamp, 
-                result.Positions[player.Positions[player.Positions.Count / 2].TimeStamp]);
+            var middleTimeStamp = player.Positions[result.Positions.Count / 2].TimeStamp;
+            result.CurrentPosition = result.Positions.First(p => p.TimeStamp == middleTimeStamp);
             return result;
-        }
-
-        public class PlayerSpeed : IMultiValueConverter
-        {
-            public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                var player = ((ObservableCollection<Player>)values[0]).FirstOrDefault();
-                var interval = (TimeSpan)values[1];
-
-                if (player == null)
-                    return 0d;
-
-                var positions = player.Positions.Where(p => p.Key <= player.CurrentPosition.Key
-                    && player.CurrentPosition.Key - p.Key <= interval).ToList();
-
-                var distance = 0d;
-
-                for (var i = 1; i < positions.Count; i++)
-                {
-                    distance += positions[i].Value.DistanceTo(positions[i - 1].Value);
-                }
-
-                var speed = distance / interval.TotalMilliseconds;
-
-                //Convert speed from centimetres / millisecond to metres / second
-                return Math.Round(speed * 10, 2);
-            }
-
-            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }
