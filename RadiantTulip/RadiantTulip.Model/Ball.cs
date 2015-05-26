@@ -10,7 +10,7 @@ namespace RadiantTulip.Model
     public class Ball
     {
         public Color Colour { get; set; }
-        public IList<Position> Positions { get; set; }
-        public Position CurrentPosition { get; set; }
+        public LinkedList<Position> Positions { get; set; }
+        public LinkedListNode<Position> CurrentPosition { get; set; }
     }
 }

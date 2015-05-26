@@ -37,7 +37,7 @@ namespace RadiantTulip.Model.Input
             var result = new Player
             {
                 Visible = true,
-                Positions = new List<Position>(),
+                Positions = new LinkedList<Position>(),
                 Name = sheet.Name,
                 Size = Size.Medium,
                 Colour = Color.FromRgb(255, 0, 0)
@@ -50,7 +50,7 @@ namespace RadiantTulip.Model.Input
             {
                 if(!row.Cell(3).IsEmpty() && !row.Cell(4).IsEmpty())
                 {
-                    result.Positions.Add(new Position
+                    result.Positions.AddLast(new Position
                         {
                             TimeStamp = time,
                             Y = row.Cell(3).GetDouble(),

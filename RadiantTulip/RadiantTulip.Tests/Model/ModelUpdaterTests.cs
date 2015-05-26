@@ -14,12 +14,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -40,12 +38,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -66,12 +62,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -84,8 +78,8 @@ namespace RadiantTulip.Tests.Model
             var updater = new ModelUpdater(game);
 
             var currentPosition = updater.Game.Teams[0].Players[0].CurrentPosition;
-            Assert.AreEqual(1, currentPosition.X);
-            Assert.AreEqual(1, currentPosition.Y);
+            Assert.AreEqual(1, currentPosition.Value.X);
+            Assert.AreEqual(1, currentPosition.Value.Y);
         }
 
         [Test]
@@ -94,12 +88,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -113,8 +105,8 @@ namespace RadiantTulip.Tests.Model
             updater.Update();
 
             var currentPosition = updater.Game.Teams[0].Players[0].CurrentPosition;
-            Assert.AreEqual(2, currentPosition.X);
-            Assert.AreEqual(2, currentPosition.Y);
+            Assert.AreEqual(2, currentPosition.Value.X);
+            Assert.AreEqual(2, currentPosition.Value.Y);
         }
 
         [Test]
@@ -123,15 +115,13 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
-                    new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) },
-                    new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 30) },
-                    new Position { X = 5, Y = 5, TimeStamp = new TimeSpan(0, 0, 0, 0, 40) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.Positions.AddLast(new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
+            player.Positions.AddLast(new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 30) });
+            player.Positions.AddLast(new Position { X = 5, Y = 5, TimeStamp = new TimeSpan(0, 0, 0, 0, 40) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -148,8 +138,8 @@ namespace RadiantTulip.Tests.Model
             updater.Update();
 
             var currentPosition = updater.Game.Teams[0].Players[0].CurrentPosition;
-            Assert.AreEqual(5, currentPosition.X);
-            Assert.AreEqual(5, currentPosition.Y);
+            Assert.AreEqual(5, currentPosition.Value.X);
+            Assert.AreEqual(5, currentPosition.Value.Y);
         }
 
         [Test]
@@ -158,12 +148,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -180,8 +168,8 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 0), updater.Time);
             var currentPosition = updater.Game.Teams[0].Players[0].CurrentPosition;
-            Assert.AreEqual(1, currentPosition.X);
-            Assert.AreEqual(1, currentPosition.Y);
+            Assert.AreEqual(1, currentPosition.Value.X);
+            Assert.AreEqual(1, currentPosition.Value.Y);
         }
 
         [Test]
@@ -190,12 +178,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -217,20 +203,16 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player1 = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player1.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player1.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var player2 = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player2.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player2.Positions.AddLast(new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -245,12 +227,12 @@ namespace RadiantTulip.Tests.Model
             updater.Update();
 
             var position1 = updater.Game.Teams[0].Players[0].CurrentPosition;
-            Assert.AreEqual(2, position1.X);
-            Assert.AreEqual(2, position1.Y);
+            Assert.AreEqual(2, position1.Value.X);
+            Assert.AreEqual(2, position1.Value.Y);
 
             var position2 = updater.Game.Teams[0].Players[1].CurrentPosition;
-            Assert.AreEqual(4, position2.X);
-            Assert.AreEqual(4, position2.Y);
+            Assert.AreEqual(4, position2.Value.X);
+            Assert.AreEqual(4, position2.Value.Y);
         }
 
         [Test]
@@ -259,20 +241,16 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player1 = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player1.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player1.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var player2 = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player2.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player2.Positions.AddLast(new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team1 = new Team()
             {
                 Players = new List<Player>()
@@ -295,12 +273,12 @@ namespace RadiantTulip.Tests.Model
             updater.Update();
 
             var position1 = updater.Game.Teams[0].Players[0].CurrentPosition;
-            Assert.AreEqual(2, position1.X);
-            Assert.AreEqual(2, position1.Y);
+            Assert.AreEqual(2, position1.Value.X);
+            Assert.AreEqual(2, position1.Value.Y);
 
             var position2 = updater.Game.Teams[1].Players[0].CurrentPosition;
-            Assert.AreEqual(4, position2.X);
-            Assert.AreEqual(4, position2.Y);
+            Assert.AreEqual(4, position2.Value.X);
+            Assert.AreEqual(4, position2.Value.Y);
         }
 
         [Test]
@@ -354,12 +332,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -380,12 +356,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -405,12 +379,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -432,12 +404,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -461,12 +431,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -487,12 +455,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -513,12 +479,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 30, 0) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 30, 0) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -539,12 +503,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -568,13 +530,11 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -598,13 +558,11 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -631,12 +589,10 @@ namespace RadiantTulip.Tests.Model
             var game = CreateGame();
             var player = new Player
             {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -659,46 +615,33 @@ namespace RadiantTulip.Tests.Model
         public void Updates_Ball_Current_Position_To_A_Value()
         {
             var game = new Game() { Teams = new List<Team>(), Ball = new Ball() };
-            game.Ball = new Ball() { Positions = new List<Position> 
-            {  
-                new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 }
-            } };
-            var player = new Player
-            {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) }
-                }
-            };
+            game.Ball = new Ball() { Positions = new LinkedList<Position>() };
+            game.Ball.Positions.AddLast(new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 });
+            var player = new Player { Positions = new LinkedList<Position> () };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
             updater.Update();
             updater.Update();
 
-            Assert.AreEqual(10, game.Ball.CurrentPosition.X);
-            Assert.AreEqual(10, game.Ball.CurrentPosition.Y);
-            Assert.AreEqual(TimeSpan.FromMilliseconds(10), game.Ball.CurrentPosition.TimeStamp);
+            Assert.AreEqual(10, game.Ball.CurrentPosition.Value.X);
+            Assert.AreEqual(10, game.Ball.CurrentPosition.Value.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), game.Ball.CurrentPosition.Value.TimeStamp);
         }
 
         [Test]
         public void Updates_Ball_Current_Position_To_Null_With_No_Value()
         {
             var game = new Game() { Teams = new List<Team>() };
-            game.Ball = new Ball() { Positions = new List<Position> 
-            {  
-                new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 }
-            } };
-            var player = new Player
-            {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) }
-                }
-            };
+            game.Ball = new Ball() { Positions = new LinkedList<Position>() };
+            game.Ball.Positions.AddLast(new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 });
+
+            var player = new Player { Positions = new LinkedList<Position>() };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
@@ -713,59 +656,48 @@ namespace RadiantTulip.Tests.Model
         public void Updater_Handles_Null_Ball()
         {
             var game = new Game() { Teams = new List<Team>() };
-            var player = new Player
-            {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
-                }
-            };
+            var player = new Player { Positions = new LinkedList<Position>() };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
             updater.Update();
 
-            Assert.AreEqual(2, player.CurrentPosition.X);
-            Assert.AreEqual(2, player.CurrentPosition.Y);
-            Assert.AreEqual(TimeSpan.FromMilliseconds(10), player.CurrentPosition.TimeStamp);
+            Assert.AreEqual(2, player.CurrentPosition.Value.X);
+            Assert.AreEqual(2, player.CurrentPosition.Value.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), player.CurrentPosition.Value.TimeStamp);
         }
 
         [Test]
         public void Updater_Handles_No_Ball_Positions()
         {
             var game = new Game() { Teams = new List<Team>(), Ball = new Ball() };
-            var player = new Player
-            {
-                Positions = new List<Position>
-                {
-                    new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) },
-                    new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) },
-                }
-            };
+            var player = new Player { Positions = new LinkedList<Position>() };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
+            player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
             updater.Update();
 
-            Assert.AreEqual(2, player.CurrentPosition.X);
-            Assert.AreEqual(2, player.CurrentPosition.Y);
-            Assert.AreEqual(TimeSpan.FromMilliseconds(10), player.CurrentPosition.TimeStamp);
+            Assert.AreEqual(2, player.CurrentPosition.Value.X);
+            Assert.AreEqual(2, player.CurrentPosition.Value.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), player.CurrentPosition.Value.TimeStamp);
         }
 
         private Game CreateGame()
         {
-            return new Game()
+            var result = new Game()
             {
                 Teams = new List<Team>(),
                 Ball = new Ball
                 {
-                    Positions = new List<Position>() 
-                    { 
-                        new Position { TimeStamp = TimeSpan.FromMilliseconds(10), X = 10, Y = 10} 
-                    }
+                    Positions = new LinkedList<Position>()
                 }
-            };
+            }; 
+            result.Ball.Positions.AddLast(new Position { TimeStamp = TimeSpan.FromMilliseconds(10), X = 10, Y = 10});
+            return result;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Windows.Shapes;
 using RadiantTulip.View.Game;
 using System.Windows.Media;
 using PlayerSize = RadiantTulip.Model.Size;
+using System.Collections.Generic;
 
 namespace RadiantTulip.Tests.View
 {
@@ -19,11 +20,11 @@ namespace RadiantTulip.Tests.View
             var player = new Player
                 {
                     Size = PlayerSize.Small,
-                    CurrentPosition = new Position
+                    CurrentPosition = new LinkedListNode<Position>(new Position
                     {
                         X = 500,
                         Y = 500
-                    },
+                    }),
                     Shape = PlayerShape.Circle
                 };
             var ground = new Ground { Height = 1000, Width = 1000 };
@@ -48,11 +49,11 @@ namespace RadiantTulip.Tests.View
             var player = new Player
                 {
                     Size = PlayerSize.Small,
-                    CurrentPosition = new Position
+                    CurrentPosition = new LinkedListNode<Position>(new Position
                     {
                         X = 250,
                         Y = 300
-                    },
+                    }),
                     Shape = PlayerShape.Circle
                 };
             var ground = new Ground { Height = 500, Width = 1000 };
@@ -76,11 +77,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 500,
                     Y = 450
-                }
+                })
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -95,11 +96,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = -50,
                     Y = 200
-                }
+                })
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100};
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -114,11 +115,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = -50,
                     Y = 450
-                }
+                })
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -133,11 +134,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 250,
                     Y = 200
-                }
+                })
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -152,11 +153,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 100,
                     Y = -50
-                }
+                })
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -171,11 +172,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 100,
                     Y = -50
-                }
+                })
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -190,11 +191,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 100,
                     Y = 550
-                },
+                }),
                 Shape = PlayerShape.Circle
             };
             var ground = new Ground { Height = 500, Width = 400 };
@@ -210,11 +211,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 100,
                     Y = 450
-                }
+                })
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -231,11 +232,11 @@ namespace RadiantTulip.Tests.View
             {
                 Size = PlayerSize.Medium,
                 Colour = new Color { R = 0, G = 0, B = 255 },
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 10,
                     Y = 10
-                },
+                }),
                 Shape = PlayerShape.Circle
             };
 
@@ -259,11 +260,11 @@ namespace RadiantTulip.Tests.View
             {
                 Size = PlayerSize.Large,
                 Colour = new Color { R = 0, G = 0, B = 255 },
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 10,
                     Y = 10
-                },
+                }),
                 Shape = PlayerShape.Circle
             };
 
@@ -287,11 +288,11 @@ namespace RadiantTulip.Tests.View
             {
                 Size = PlayerSize.Large,
                 Colour = new Color { R = 0, G = 0, B = 255 },
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 10,
                     Y = 10
-                },
+                }),
                 Shape = PlayerShape.Square
             };
 
@@ -313,11 +314,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 100,
                     Y = 550
-                },
+                }),
                 Shape = PlayerShape.Circle
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
@@ -333,11 +334,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 10,
                     Y = 10
-                },
+                }),
                 Shape = PlayerShape.Circle
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
@@ -353,11 +354,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 450,
                     Y = 10
-                },
+                }),
                 Shape = PlayerShape.Circle
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
@@ -373,11 +374,11 @@ namespace RadiantTulip.Tests.View
         {
             var player = new Player
             {
-                CurrentPosition = new Position
+                CurrentPosition = new LinkedListNode<Position>(new Position
                 {
                     X = 300,
                     Y = 10
-                },
+                }),
                 Shape = PlayerShape.Circle
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };

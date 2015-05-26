@@ -14,11 +14,11 @@ namespace RadiantTulip.View.Game
         public void Draw(Player player, Ground ground, Canvas canvas)
         {
             var position = player.CurrentPosition;
-            if (position.X > ground.Width + ground.Padding || position.Y > ground.Height + ground.Padding
-                || position.X + ground.Padding < 0 || position.Y + ground.Padding < 0)
+            if (position.Value.X > ground.Width + ground.Padding || position.Value.Y > ground.Height + ground.Padding
+                || position.Value.X + ground.Padding < 0 || position.Value.Y + ground.Padding < 0)
                 return;
 
-            var transform = position.TransformToCanvas(ground, canvas);
+            var transform = position.Value.TransformToCanvas(ground, canvas);
             var x = transform.X - (double)player.Size / 2;
             var y = transform.Y - (double)player.Size / 2;
 

@@ -29,8 +29,8 @@ namespace RadiantTulip.View.Converters
             if (player == null)
                 return 0d;
 
-            var positions = player.Positions.Where(p => p.TimeStamp <= player.CurrentPosition.TimeStamp
-                && player.CurrentPosition.TimeStamp - p.TimeStamp <= interval).ToList();
+            var positions = player.Positions.Where(p => p.TimeStamp <= player.CurrentPosition.Value.TimeStamp
+                && player.CurrentPosition.Value.TimeStamp - p.TimeStamp <= interval).ToList();
 
             var distance = 0d;
 

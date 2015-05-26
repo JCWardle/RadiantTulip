@@ -21,7 +21,11 @@ namespace RadiantTulip.Tests.View
         {
             var canvas = new Canvas();
             var ballDrawer = new BallDrawer();
-            var ball = new Ball { CurrentPosition = new Position { X = 100, Y = 100 }, Colour = Color.FromArgb(100, 255, 255, 0) };
+            var ball = new Ball 
+            { 
+                CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100 }), 
+                Colour = Color.FromArgb(100, 255, 255, 0) 
+            };
             var ground = new Ground { Height = 500, Width = 500 };
             canvas.Measure(new System.Windows.Size(500, 500));
             canvas.Arrange(new Rect(0, 0, 500, 500));
@@ -44,7 +48,11 @@ namespace RadiantTulip.Tests.View
         {
             var canvas = new Canvas();
             var ballDrawer = new BallDrawer();
-            var ball = new Ball { CurrentPosition = new Position { X = 100, Y = 100 }, Colour = Color.FromArgb(100, 255, 255, 0) };
+            var ball = new Ball
+            {
+                CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100 }),
+                Colour = Color.FromArgb(100, 255, 255, 0)
+            };
             var ground = new Ground { Height = 500, Width = 500 };
             var player = new Player() { Size = RadiantTulip.Model.Size.ExtraLarge };
             canvas.Measure(new System.Windows.Size(500, 500));
@@ -68,7 +76,11 @@ namespace RadiantTulip.Tests.View
         {
             var canvas = new Canvas();
             var ballDrawer = new BallDrawer();
-            var ball = new Ball { CurrentPosition = new Position { X = 100, Y = 100 }, Colour = Color.FromArgb(100, 255, 255, 0) };
+            var ball = new Ball
+            {
+                CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100 }),
+                Colour = Color.FromArgb(100, 255, 255, 0)
+            };
             var ground = new Ground { Height = 500, Width = 500, Padding = 100 };
             canvas.Measure(new System.Windows.Size(700, 700));
             canvas.Arrange(new Rect(0, 0, 700, 700));

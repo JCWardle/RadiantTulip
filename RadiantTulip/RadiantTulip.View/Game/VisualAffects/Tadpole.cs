@@ -33,12 +33,12 @@ namespace RadiantTulip.View.Game.VisualAffects
 
             for (var i = 0; i < TADPOLE_LENGTH; i++)
             {
-                currentPosition = _player.Positions.OrderByDescending(p => p.TimeStamp.TotalMilliseconds)
-                    .FirstOrDefault(p => p.TimeStamp.TotalMilliseconds < currentPosition.TimeStamp.TotalMilliseconds - MIN_POINT_INCREMENT);
+                currentPosition = currentPosition.Previous;
+
                 if (currentPosition == null)
                     return;
 
-                var transformedPosition = currentPosition.TransformToCanvas(_ground, canvas);
+                var transformedPosition = currentPosition.Value.TransformToCanvas(_ground, canvas);
                 var x = transformedPosition.X - (double)_player.Size / 2;
                 var y = transformedPosition.Y - (double)_player.Size / 2;
 

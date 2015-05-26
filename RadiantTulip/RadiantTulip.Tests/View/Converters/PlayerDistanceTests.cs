@@ -16,7 +16,7 @@ namespace RadiantTulip.Tests.View.Converters
         [Test]
         public void Player_Has_No_Positions()
         {
-            var player = new Player { Positions = new List<Position>() };
+            var player = new Player { Positions = new LinkedList<Position>() };
             var converter = new PlayerDistance();
             var selectedPlayers = new ObservableCollection<Player> { player };
             var parameters = new object[] { selectedPlayers, 10d };
@@ -31,12 +31,10 @@ namespace RadiantTulip.Tests.View.Converters
         {
             var player = new Player()
             {
-                Positions = new List<Position>()
-                {
-                    new Position { X = 10, Y = 10, TimeStamp = TimeSpan.Zero },
-                    new Position { X = 20, Y = 20, TimeStamp = TimeSpan.FromMilliseconds(10) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 10, Y = 10, TimeStamp = TimeSpan.Zero });
+            player.Positions.AddLast(new Position { X = 20, Y = 20, TimeStamp = TimeSpan.FromMilliseconds(10) });
             var converter = new PlayerDistance();
             var selectedPlayers = new ObservableCollection<Player> { player };
             var parameters = new object[] { selectedPlayers, 10d };
@@ -51,13 +49,11 @@ namespace RadiantTulip.Tests.View.Converters
         {
             var player = new Player()
             {
-                Positions = new List<Position>()
-                {
-                    new Position { X = 10, Y = 10, TimeStamp = TimeSpan.Zero },
-                    new Position { X = 20, Y = 20, TimeStamp = TimeSpan.FromMilliseconds(10) },
-                    new Position { X = 20, Y = 20, TimeStamp = TimeSpan.FromMilliseconds(20) }
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 10, Y = 10, TimeStamp = TimeSpan.Zero });
+            player.Positions.AddLast(new Position { X = 20, Y = 20, TimeStamp = TimeSpan.FromMilliseconds(10) });
+            player.Positions.AddLast(new Position { X = 30, Y = 30, TimeStamp = TimeSpan.FromMilliseconds(20) });
             var converter = new PlayerDistance();
             var selectedPlayers = new ObservableCollection<Player> { player };
             var parameters = new object[] { selectedPlayers, 10d };

@@ -29,7 +29,15 @@ namespace RadiantTulip.Tests.View
             {
                 Players = new List<Player>()
                 {
-                    new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } }
+                    new Player { 
+                        Visible = true, 
+                        CurrentPosition = new LinkedListNode<Position>(new Position
+                            { 
+                                X = 1, 
+                                Y = 1, 
+                                TimeStamp = TimeSpan.Zero 
+                            })
+                    }
                 }
             });
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
@@ -51,8 +59,8 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var canvas = new Canvas();
-            var player1 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } };
-            var player2 = new Player { Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero } };
+            var player1 = new Player { Visible = true, CurrentPosition = new LinkedListNode<Position>(new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }) };
+            var player2 = new Player { Visible = true, CurrentPosition = new LinkedListNode<Position>(new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }) };
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             game.Teams.Add(new Team
             {
@@ -111,8 +119,8 @@ namespace RadiantTulip.Tests.View
             {
                 Players = new List<Player>()
                 {
-                    new Player() {Visible = false, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }},
-                    new Player() {Visible = true, CurrentPosition = new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }}
+                    new Player() {Visible = false, CurrentPosition = new LinkedListNode<Position>(new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }) },
+                    new Player() {Visible = true, CurrentPosition = new LinkedListNode<Position>(new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }) }
                 }
             });
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
@@ -310,10 +318,15 @@ namespace RadiantTulip.Tests.View
             var groundFactory = new Mock<IGroundDrawerFactory>();
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var affects = new List<IVisualAffect>();
-            var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() 
+            var game = new Game()
             {
-                CurrentPosition = new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }
-            } };
+                Teams = new List<Team>(),
+                Ground = new Ground(),
+                Ball = new Ball()
+                {
+                    CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero })
+                }
+            };
             var canvas = new Canvas();
             ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()));
 
@@ -368,14 +381,14 @@ namespace RadiantTulip.Tests.View
                     new Team() {
                         Players = new List<Player>()
                         {
-                            new Player { CurrentPosition = new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }}
+                            new Player { CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }) }
                         }
                     }
                 },
                 Ground = new Ground(),
                 Ball = new Ball()
                 {
-                    CurrentPosition = new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }
+                    CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero })
                 }
             };
             var canvas = new Canvas();
@@ -405,14 +418,14 @@ namespace RadiantTulip.Tests.View
                     new Team() {
                         Players = new List<Player>()
                         {
-                            new Player { CurrentPosition = new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }}
+                            new Player { CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }) }
                         }
                     }
                 },
                 Ground = new Ground(),
                 Ball = new Ball()
                 {
-                    CurrentPosition = new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero }
+                    CurrentPosition = new LinkedListNode<Position>(new Position { X = 100, Y = 100, TimeStamp = TimeSpan.Zero })
                 }
             };
             var canvas = new Canvas();
