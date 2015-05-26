@@ -11,20 +11,29 @@ namespace RadiantTulip.View.Converters
 {
     public class PlayerDistance : IMultiValueConverter
     {
+        /// <summary>
+        /// Calculates the total distance the player has travelled for the game.
+        /// It gets the distance from the player's current position.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             var player = ((ObservableCollection<Player>)values[0]).FirstOrDefault();
-            var time = TimeSpan.FromMilliseconds((double)values[1]);
             var distance = 0d;
 
-            if (player == null)
+            if (player == null || player.CurrentPosition == null)
                 return distance;
 
-            var positions = player.Positions.Where(p => p.TimeStamp <= time).OrderBy(p => p.TimeStamp).ToList();
-            
-            for(var i = 1; i < positions.Count; i++)
+            var previousPosition = player.CurrentPosition;
+
+            while (previousPosition.Previous != null)
             {
-                distance += positions[i].DistanceTo(positions[i - 1]); 
+                distance += previousPosition.Value.DistanceTo(previousPosition.Previous.Value);
+                previousPosition = previousPosition.Previous;
             }
 
             //Convert from cm to metres
