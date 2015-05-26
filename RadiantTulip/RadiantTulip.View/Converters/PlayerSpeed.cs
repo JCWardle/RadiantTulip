@@ -29,14 +29,13 @@ namespace RadiantTulip.View.Converters
             if (player == null)
                 return 0d;
 
-            var positions = player.Positions.Where(p => p.TimeStamp <= player.CurrentPosition.Value.TimeStamp
-                && player.CurrentPosition.Value.TimeStamp - p.TimeStamp <= interval).ToList();
-
             var distance = 0d;
+            var previousPosition = player.CurrentPosition;
 
-            for (var i = 1; i < positions.Count; i++)
+            while (player.CurrentPosition.Value.TimeStamp - previousPosition.Value.TimeStamp < interval && previousPosition.Previous != null)
             {
-                distance += positions[i].DistanceTo(positions[i - 1]);
+                distance += previousPosition.Value.DistanceTo(previousPosition.Previous.Value);
+                previousPosition = previousPosition.Previous;
             }
 
             var speed = distance / interval.TotalMilliseconds;
