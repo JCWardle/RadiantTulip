@@ -18,6 +18,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -42,6 +43,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -66,6 +68,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -92,6 +95,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -122,6 +126,7 @@ namespace RadiantTulip.Tests.Model
             player.Positions.AddLast(new Position { X = 3, Y = 3, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
             player.Positions.AddLast(new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 30) });
             player.Positions.AddLast(new Position { X = 5, Y = 5, TimeStamp = new TimeSpan(0, 0, 0, 0, 40) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -152,6 +157,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -182,6 +188,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -207,12 +214,14 @@ namespace RadiantTulip.Tests.Model
             };
             player1.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player1.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player1.PositionsLookup = FillLookup(player1.Positions);
             var player2 = new Player
             {
                 Positions = new LinkedList<Position>()
             };
             player2.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player2.Positions.AddLast(new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player2.PositionsLookup = FillLookup(player2.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -245,12 +254,14 @@ namespace RadiantTulip.Tests.Model
             };
             player1.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player1.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player1.PositionsLookup = FillLookup(player1.Positions);
             var player2 = new Player
             {
                 Positions = new LinkedList<Position>()
             };
             player2.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player2.Positions.AddLast(new Position { X = 4, Y = 4, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player2.PositionsLookup = FillLookup(player2.Positions);
             var team1 = new Team()
             {
                 Players = new List<Player>()
@@ -336,6 +347,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -360,6 +372,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -383,6 +396,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -408,6 +422,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -435,6 +450,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -459,6 +475,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -483,6 +500,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 30, 0) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -507,6 +525,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -535,6 +554,7 @@ namespace RadiantTulip.Tests.Model
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -563,6 +583,7 @@ namespace RadiantTulip.Tests.Model
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -593,6 +614,7 @@ namespace RadiantTulip.Tests.Model
             };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             var team = new Team()
             {
                 Players = new List<Player>()
@@ -617,9 +639,11 @@ namespace RadiantTulip.Tests.Model
             var game = new Game() { Teams = new List<Team>(), Ball = new Ball() };
             game.Ball = new Ball() { Positions = new LinkedList<Position>() };
             game.Ball.Positions.AddLast(new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 });
+            game.Ball.PositionsLookup = FillLookup(game.Ball.Positions);
             var player = new Player { Positions = new LinkedList<Position> () };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
@@ -637,11 +661,13 @@ namespace RadiantTulip.Tests.Model
             var game = new Game() { Teams = new List<Team>() };
             game.Ball = new Ball() { Positions = new LinkedList<Position>() };
             game.Ball.Positions.AddLast(new Position { TimeStamp = TimeSpan.FromMilliseconds(10), Y = 10, X = 10 });
+            game.Ball.PositionsLookup = FillLookup(game.Ball.Positions);
 
             var player = new Player { Positions = new LinkedList<Position>() };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 20) });
+            player.PositionsLookup = FillLookup(player.Positions);
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
@@ -659,6 +685,7 @@ namespace RadiantTulip.Tests.Model
             var player = new Player { Positions = new LinkedList<Position>() };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
@@ -676,6 +703,7 @@ namespace RadiantTulip.Tests.Model
             var player = new Player { Positions = new LinkedList<Position>() };
             player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = new TimeSpan(0, 0, 0, 0, 0) });
             player.Positions.AddLast(new Position { X = 2, Y = 2, TimeStamp = new TimeSpan(0, 0, 0, 0, 10) });
+            player.PositionsLookup = FillLookup(player.Positions);
             game.Teams.Add(new Team { Players = new List<Player> { player } });
 
             var updater = new ModelUpdater(game);
@@ -693,10 +721,30 @@ namespace RadiantTulip.Tests.Model
                 Teams = new List<Team>(),
                 Ball = new Ball
                 {
-                    Positions = new LinkedList<Position>()
+                    Positions = new LinkedList<Position>(),
+                    PositionsLookup = new Dictionary<TimeSpan,LinkedListNode<Position>>()
                 }
             }; 
             result.Ball.Positions.AddLast(new Position { TimeStamp = TimeSpan.FromMilliseconds(10), X = 10, Y = 10});
+            return result;
+        }
+
+        private Dictionary<TimeSpan, LinkedListNode<Position>> FillLookup(LinkedList<Position> positions)
+        {
+            var result = new Dictionary<TimeSpan, LinkedListNode<Position>>();
+            LinkedListNode<Position> position = null;
+
+            do
+            {
+                if (position == null)
+                    position = positions.First;
+                else
+                    position = position.Next;
+
+                result.Add(position.Value.TimeStamp, position);
+
+            } while (position != positions.Last);
+
             return result;
         }
     }

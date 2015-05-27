@@ -53,24 +53,26 @@ namespace RadiantTulip.Model
 
             if (_game.Ball != null && _game.Ball.Positions != null)
             {
-                _game.Ball.CurrentPosition = MovePosition(_game.Ball.CurrentPosition, _game.Ball.Positions, lookupTime);
+                _game.Ball.CurrentPosition = MovePosition(_game.Ball.CurrentPosition, _game.Ball.Positions, _game.Ball.PositionsLookup, lookupTime);
             }
 
             foreach (var t in _game.Teams)
             {
                 foreach (var player in t.Players)
                 {
-                    player.CurrentPosition = MovePosition(player.CurrentPosition, player.Positions, lookupTime);
+                    player.CurrentPosition = MovePosition(player.CurrentPosition, player.Positions, player.PositionsLookup, lookupTime);
                 }
             }
         }
 
-        private LinkedListNode<Position> MovePosition(LinkedListNode<Position> currentPosition, LinkedList<Position> positions, bool lookup)
+        private LinkedListNode<Position> MovePosition(LinkedListNode<Position> currentPosition, 
+            LinkedList<Position> positions, 
+            Dictionary<TimeSpan, LinkedListNode<Position>> lookupList, 
+            bool lookup)
         {
             if (currentPosition == null || lookup)
             {
-                var newPosition = positions.FirstOrDefault(p => p.TimeStamp == _time);
-                return positions.Find(newPosition);
+                return lookupList.ContainsKey(_time) ? lookupList[_time] : null;
             }
             else if (_state == State.Forwards)
             {
