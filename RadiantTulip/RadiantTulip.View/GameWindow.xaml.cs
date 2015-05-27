@@ -57,7 +57,7 @@ namespace RadiantTulip.View
                     foreach(var p in t.Players.Where(p => p.CurrentPosition != null))
                     {
                         var size = (double)p.Size;
-                        var currentPosition = p.CurrentPosition.TransformToCanvas(game.Ground, canvas);
+                        var currentPosition = p.CurrentPosition.Value.TransformToCanvas(game.Ground, canvas);
                         if (x > currentPosition.X - size && x < currentPosition.X + size
                             && y > currentPosition.Y - size && y < currentPosition.Y + size)
                             _view.SelectedPlayers.Add(p);

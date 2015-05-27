@@ -32,7 +32,7 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(Size.Medium, player.Size);
             Assert.AreEqual(PlayerShape.Circle, player.Shape);
             Assert.AreEqual(Color.FromRgb(0, 0, 0), player.Colour);
-            var position = player.Positions[0];
+            var position = player.Positions.First.Value;
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
         }
@@ -56,7 +56,7 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(Size.Medium, player.Size);
             Assert.AreEqual(PlayerShape.Circle, player.Shape);
             Assert.AreEqual(Color.FromRgb(0, 0, 0), player.Colour);
-            var position = player.Positions[0];
+            var position = player.Positions.First.Value;
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
 
@@ -67,9 +67,25 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(Size.Medium, player.Size);
             Assert.AreEqual(PlayerShape.Circle, player.Shape);
             Assert.AreEqual(Color.FromRgb(0, 0, 0), player.Colour);
-            position = player.Positions[0];
+            position = player.Positions.First.Value;
             Assert.AreEqual(13.234827, position.X);
             Assert.AreEqual(8.552656, position.Y);
+        }
+
+        [Test]
+        public void Player_Positions_Get_Added_To_The_Lookup()
+        {
+            var file = TestFileHelper.GetFilePath("MultiplePositions.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetTeams(file);
+
+            var player = result[0].Players[0];
+            Assert.AreEqual(2, player.PositionsLookup.Keys.Count);
+            Assert.AreEqual(11.299328, player.PositionsLookup[TimeSpan.Zero].Value.X);
+            Assert.AreEqual(9.845711, player.PositionsLookup[TimeSpan.Zero].Value.Y);
+            Assert.AreEqual(11.314343, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 40)].Value.X);
+            Assert.AreEqual(9.703464, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 40)].Value.Y);
         }
 
         [Test]
@@ -98,7 +114,7 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(1, team.Players.Count);
             var player = team.Players.First();
             Assert.AreEqual(1, player.Positions.Count);
-            var position = player.Positions[0];
+            var position = player.Positions.First.Value;
             Assert.AreEqual(TimeSpan.Zero, position.TimeStamp);
         }
 
@@ -122,11 +138,11 @@ namespace RadiantTulip.Tests.Model
 
             var player = result[0].Players[0];
             Assert.AreEqual(2, player.Positions.Count);
-            var position = player.Positions[0];
+            var position = player.Positions.First.Value;
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
             Assert.AreEqual(TimeSpan.Zero, position.TimeStamp);
-            position = player.Positions[1];
+            position = player.Positions.First.Next.Value;
             Assert.AreEqual(11.314343, position.X);
             Assert.AreEqual(9.703464, position.Y);
             Assert.AreEqual(new TimeSpan(0, 0, 0, 0, 40), position.TimeStamp);
@@ -156,7 +172,7 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(Color.FromArgb(255, 255, 255, 0), result.Colour);
             Assert.AreEqual(2, result.Positions.Count());
-            var position = result.Positions[0];
+            var position = result.Positions.First.Value;
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
             Assert.AreEqual(TimeSpan.Zero, position.TimeStamp);
@@ -172,11 +188,11 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(Color.FromArgb(255, 255, 255, 0), result.Colour);
             Assert.AreEqual(2, result.Positions.Count());
-            var position = result.Positions[0];
+            var position = result.Positions.First.Value;
             Assert.AreEqual(11.299328, position.X);
             Assert.AreEqual(9.845711, position.Y);
             Assert.AreEqual(TimeSpan.Zero, position.TimeStamp);
-            position = result.Positions[1];
+            position = result.Positions.Last.Value;
             Assert.AreEqual(13.234827, position.X);
             Assert.AreEqual(8.552656, position.Y);
             Assert.AreEqual(TimeSpan.FromMilliseconds(40), position.TimeStamp);
@@ -192,6 +208,21 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(Color.FromArgb(255, 255, 255, 0), result.Colour);
             Assert.AreEqual(8, result.Positions.Count());
+        }
+
+        [Test]
+        public void Adds_Ball_Positions_To_A_Lookup()
+        {
+            var file = TestFileHelper.GetFilePath("TwoBallPositions.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetBall(file);
+
+            Assert.AreEqual(2, result.PositionsLookup.Keys.Count);
+            Assert.AreEqual(11.299328, result.PositionsLookup[TimeSpan.Zero].Value.X);
+            Assert.AreEqual(9.845711, result.PositionsLookup[TimeSpan.Zero].Value.Y);
+            Assert.AreEqual(13.234827, result.PositionsLookup[TimeSpan.FromMilliseconds(40)].Value.X);
+            Assert.AreEqual(8.552656, result.PositionsLookup[TimeSpan.FromMilliseconds(40)].Value.Y);
         }
 
         [Test]

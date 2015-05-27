@@ -22,22 +22,20 @@ namespace RadiantTulip.Tests.Model
             var ground = new Ground();
             var player = new Player() 
             {
-                Positions = new List<Position>
-                {
-                     new Position { X = 1 , Y = 1, TimeStamp = TimeSpan.Zero}
-                }
+                Positions = new LinkedList<Position>()
             };
+            player.Positions.AddLast(new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero });
             spatialReader.Setup(s => s.GetTeams(null)).Returns(
                 new List<Team>() { new Team { Players = new List<Player> { player } } }
                 );
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(player.Positions[0], ground)).Returns(player.Positions[0]);
+            coordinateConverter.Setup(c => c.Convert(player.Positions.First.Value, ground)).Returns(player.Positions.First.Value);
             var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
             var progressReporter = new MockProgressReporter();
             
             var result = gameCreator.CreateGame(null, ground, progressReporter.ReportProgress);
 
-            coordinateConverter.Verify(c => c.Convert(player.Positions[0], ground), Times.Once);
+            coordinateConverter.Verify(c => c.Convert(player.Positions.First.Value, ground), Times.Once);
             spatialReader.Verify(s => s.GetTeams(null), Times.Once);
             Assert.AreEqual(ground, result.Ground);
         }
@@ -55,7 +53,7 @@ namespace RadiantTulip.Tests.Model
                 new List<Team>() { new Team { Players = new List<Player> { player } } }
             );
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions[0]);
+            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions.First.Value);
             var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
             var progressReporter = new MockProgressReporter();
 
@@ -78,7 +76,7 @@ namespace RadiantTulip.Tests.Model
                 new List<Team>() { new Team { Players = new List<Player> { player } } }
             );
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions[0]);
+            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions.First.Value);
             var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
             var progressReporter = new MockProgressReporter();
 
@@ -101,7 +99,7 @@ namespace RadiantTulip.Tests.Model
                 new List<Team>() { new Team { Players = new List<Player> { player } } }
             );
             var coordinateConverter = new Mock<ICoordinateConverter>();
-            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions[0]);
+            coordinateConverter.Setup(c => c.Convert(It.IsAny<Position>(), ground)).Returns(player.Positions.First.Value);
             var gameCreator = new GameCreator(coordinateConverter.Object, spatialReader.Object);
 
             var game = gameCreator.CreateGame(null, ground, null);
@@ -148,9 +146,9 @@ namespace RadiantTulip.Tests.Model
 
             Assert.IsNotNull(game.Ball);
             ball = game.Ball;
-            Assert.AreEqual(10, ball.Positions[0].X);
-            Assert.AreEqual(10, ball.Positions[0].Y);
-            Assert.AreEqual(TimeSpan.FromMilliseconds(10), ball.Positions[0].TimeStamp);
+            Assert.AreEqual(10, ball.Positions.First.Value.X);
+            Assert.AreEqual(10, ball.Positions.First.Value.Y);
+            Assert.AreEqual(TimeSpan.FromMilliseconds(10), ball.Positions.First.Value.TimeStamp);
         }
 
         [Test]
@@ -170,15 +168,15 @@ namespace RadiantTulip.Tests.Model
             Assert.IsNotNull(game.Ball);
         }
 
-        private List<Position> CreatePositions(int positionsRequired)
+        private LinkedList<Position> CreatePositions(int positionsRequired)
         {
-            var result = new List<Position>();
+            var result = new LinkedList<Position>();
             var timeStamp = TimeSpan.Zero;
             var x = 0;
             var y = 0;
             for(var i = 0; i < positionsRequired; i++)
             {
-                result.Add(new Position
+                result.AddLast(new Position
                 {
                     TimeStamp = timeStamp,
                     X = x,

@@ -30,7 +30,7 @@ namespace RadiantTulip.View.Game.VisualAffects
                 if (previousPosition != null)
                 {
                     var firstPos = previousPosition.TransformToCanvas(_ground, canvas);
-                    var secondPos = p.CurrentPosition.TransformToCanvas(_ground, canvas);
+                    var secondPos = p.CurrentPosition.Value.TransformToCanvas(_ground, canvas);
                     var line = new Line()
                     {
                         X1 = firstPos.X,
@@ -43,7 +43,7 @@ namespace RadiantTulip.View.Game.VisualAffects
                     canvas.Children.Add(line);
                 }
 
-                previousPosition = p.CurrentPosition;
+                previousPosition = p.CurrentPosition.Value;
             }
         }
 

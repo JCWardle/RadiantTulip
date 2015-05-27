@@ -56,12 +56,12 @@ namespace RadiantTulip.View.Game.VisualAffects
         {
             var triangle = new Polygon {Fill = new SolidColorBrush(Color.FromArgb(100, 0, 0, 125))};
 
-            var transform = player.CurrentPosition.TransformToCanvas(_ground, canvas);
+            var transform = player.CurrentPosition.Value.TransformToCanvas(_ground, canvas);
 
             triangle.Points.Add(transform);
-            transform = player2.CurrentPosition.TransformToCanvas(_ground, canvas);
+            transform = player2.CurrentPosition.Value.TransformToCanvas(_ground, canvas);
             triangle.Points.Add(transform);
-            transform = player3.CurrentPosition.TransformToCanvas(_ground, canvas);
+            transform = player3.CurrentPosition.Value.TransformToCanvas(_ground, canvas);
             triangle.Points.Add(transform);
 
             return triangle;
