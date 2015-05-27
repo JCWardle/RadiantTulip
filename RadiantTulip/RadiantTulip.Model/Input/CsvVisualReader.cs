@@ -14,7 +14,12 @@ namespace RadiantTulip.Model.Input
         private const int FPS = 25;
         private const string BALL_NAME = "Ball";
         private List<Team> _teams = new List<Team>();
-        private Ball _ball = new Ball() { Positions = new LinkedList<Position>(), Colour = Color.FromArgb(255, 255, 255, 0)};
+        private Ball _ball = new Ball() 
+        { 
+            Positions = new LinkedList<Position>(), 
+            Colour = Color.FromArgb(255, 255, 255, 0), 
+            PositionsLookup = new Dictionary<TimeSpan,LinkedListNode<Position>>()
+        };
         private int _startingFrame = -1;
 
         public List<Team> GetTeams(Stream stream)
@@ -66,7 +71,9 @@ namespace RadiantTulip.Model.Input
             if(_startingFrame == -1)
                 _startingFrame = frame;
 
-            _ball.Positions.AddLast(new Position { X = x, Y = y, TimeStamp = TimeSpan.FromMilliseconds(1000 / FPS * (frame - _startingFrame)) });
+            var timeStamp = TimeSpan.FromMilliseconds(1000 / FPS * (frame - _startingFrame));
+            _ball.Positions.AddLast(new Position { X = x, Y = y, TimeStamp = timeStamp });
+            _ball.PositionsLookup.Add(timeStamp, _ball.Positions.Last);
         }
 
         private void Player(double x, double y, int frame, string name, Team team)

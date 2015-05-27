@@ -12,5 +12,6 @@ namespace RadiantTulip.Model
         public Color Colour { get; set; }
         public LinkedList<Position> Positions { get; set; }
         public LinkedListNode<Position> CurrentPosition { get; set; }
+        public Dictionary<TimeSpan, LinkedListNode<Position>> PositionsLookup { get; set; }
     }
 }

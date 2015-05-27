@@ -211,6 +211,21 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
+        public void Adds_Ball_Positions_To_A_Lookup()
+        {
+            var file = TestFileHelper.GetFilePath("TwoBallPositions.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetBall(file);
+
+            Assert.AreEqual(2, result.PositionsLookup.Keys.Count);
+            Assert.AreEqual(11.299328, result.PositionsLookup[TimeSpan.Zero].Value.X);
+            Assert.AreEqual(9.845711, result.PositionsLookup[TimeSpan.Zero].Value.Y);
+            Assert.AreEqual(13.234827, result.PositionsLookup[TimeSpan.FromMilliseconds(40)].Value.X);
+            Assert.AreEqual(8.552656, result.PositionsLookup[TimeSpan.FromMilliseconds(40)].Value.Y);
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentException), ExpectedMessage = "A number in line 2 is not in a numerical format")]
         public void Read_OverFlowed_Positional_Information()
         {
