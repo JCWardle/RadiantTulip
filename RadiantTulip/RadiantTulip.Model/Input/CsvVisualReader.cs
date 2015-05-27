@@ -82,7 +82,9 @@ namespace RadiantTulip.Model.Input
             if (_startingFrame == -1)
                 _startingFrame = frame;
 
-            player.Positions.AddLast(new Position { X = x, Y = y, TimeStamp = TimeSpan.FromMilliseconds(1000 / FPS * (frame - _startingFrame)) });
+            var timeStamp = TimeSpan.FromMilliseconds(1000 / FPS * (frame - _startingFrame));
+            player.Positions.AddLast(new Position { X = x, Y = y, TimeStamp = timeStamp });
+            player.PositionsLookup.Add(timeStamp, player.Positions.Last);
         }
 
         private Team CreateTeam(string name)
@@ -96,6 +98,7 @@ namespace RadiantTulip.Model.Input
             {
                 Name = name,
                 Positions = new LinkedList<Position>(),
+                PositionsLookup = new Dictionary<TimeSpan,LinkedListNode<Position>>(),
                 Visible = true,
                 Size = Size.Medium,
                 Shape = PlayerShape.Circle,

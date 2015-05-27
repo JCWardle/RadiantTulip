@@ -38,6 +38,7 @@ namespace RadiantTulip.Model.Input
             {
                 Visible = true,
                 Positions = new LinkedList<Position>(),
+                PositionsLookup = new Dictionary<TimeSpan,LinkedListNode<Position>>(),
                 Name = sheet.Name,
                 Size = Size.Medium,
                 Colour = Color.FromRgb(255, 0, 0)
@@ -56,6 +57,7 @@ namespace RadiantTulip.Model.Input
                             Y = row.Cell(3).GetDouble(),
                             X = row.Cell(4).GetDouble()
                         });
+                    result.PositionsLookup.Add(time, result.Positions.Last);
                     time = time.Add(new TimeSpan(0,0,0,0, 100));
                 }
                 row = row.RowBelow();

@@ -50,6 +50,24 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
+        public void Player_Positions_Get_Added_To_The_Lookup()
+        {
+            var file = TestFileHelper.GetFilePath("OnePlayer.xlsx");
+            var reader = new ExcelReader();
+
+            var result = reader.GetTeams(file);
+
+            var player = result[0].Players[0];
+            Assert.AreEqual(3, player.PositionsLookup.Keys.Count);
+            Assert.AreEqual(-31.94453774, player.PositionsLookup[TimeSpan.Zero].Value.Y);
+            Assert.AreEqual(115.830865, player.PositionsLookup[TimeSpan.Zero].Value.X);
+            Assert.AreEqual(-31.94453884, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 100)].Value.Y);
+            Assert.AreEqual(115.8308643, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 100)].Value.X);
+            Assert.AreEqual(-31.94453984, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 200)].Value.Y);
+            Assert.AreEqual(115.8308636, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 200)].Value.X);
+        }
+
+        [Test]
         public void Read_Two_Players()
         {
             List<Team> result;

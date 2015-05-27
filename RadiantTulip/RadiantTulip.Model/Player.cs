@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media;
 
@@ -22,6 +23,7 @@ namespace RadiantTulip.Model
         }
         public LinkedList<Position> Positions { get; set; }
         public LinkedListNode<Position> CurrentPosition { get; set; }
+        public Dictionary<TimeSpan, LinkedListNode<Position>> PositionsLookup { get; set; }
         public string Name { get; set; }
         private Color _colour;
         public Color Colour

@@ -73,6 +73,22 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
+        public void Player_Positions_Get_Added_To_The_Lookup()
+        {
+            var file = TestFileHelper.GetFilePath("MultiplePositions.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetTeams(file);
+
+            var player = result[0].Players[0];
+            Assert.AreEqual(2, player.PositionsLookup.Keys.Count);
+            Assert.AreEqual(11.299328, player.PositionsLookup[TimeSpan.Zero].Value.X);
+            Assert.AreEqual(9.845711, player.PositionsLookup[TimeSpan.Zero].Value.Y);
+            Assert.AreEqual(11.314343, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 40)].Value.X);
+            Assert.AreEqual(9.703464, player.PositionsLookup[new TimeSpan(0, 0, 0, 0, 40)].Value.Y);
+        }
+
+        [Test]
         public void Read_Two_Teams()
         {
             var file = TestFileHelper.GetFilePath("TwoTeams.txt");
