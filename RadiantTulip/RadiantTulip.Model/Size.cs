@@ -10,12 +10,12 @@ namespace RadiantTulip.Model
     public enum Size
     {
         [Description("S")]
-        Small = 3,
+        Small = 20,
         [Description("M")]
-        Medium = 5,
+        Medium = 30,
         [Description("L")]
-        Large = 7,
+        Large = 40,
         [Description("XL")]
-        ExtraLarge = 9
+        ExtraLarge = 50
     }
 }

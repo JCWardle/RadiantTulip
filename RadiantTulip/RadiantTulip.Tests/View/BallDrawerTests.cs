@@ -35,8 +35,8 @@ namespace RadiantTulip.Tests.View
 
             Assert.AreEqual(1, canvas.Children.Count);
             var shape = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(97.5d, shape.Margin.Left);
-            Assert.AreEqual(97.5d, shape.Margin.Top);
+            Assert.AreEqual(85d, shape.Margin.Left);
+            Assert.AreEqual(85d, shape.Margin.Top);
             var brush = (SolidColorBrush)shape.Fill;
             Assert.AreEqual(ball.Colour, brush.Color);
             Assert.AreEqual((int)RadiantTulip.Model.Size.Medium, shape.Width);
@@ -63,12 +63,12 @@ namespace RadiantTulip.Tests.View
 
             Assert.AreEqual(1, canvas.Children.Count);
             var shape = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(93d, shape.Margin.Left);
-            Assert.AreEqual(93d, shape.Margin.Top);
+            Assert.AreEqual(70d, shape.Margin.Left);
+            Assert.AreEqual(70d, shape.Margin.Top);
             var brush = (SolidColorBrush)shape.Fill;
             Assert.AreEqual(ball.Colour, brush.Color);
-            Assert.AreEqual((int)RadiantTulip.Model.Size.ExtraLarge + 5, shape.Width);
-            Assert.AreEqual((int)RadiantTulip.Model.Size.ExtraLarge + 5, shape.Height);
+            Assert.AreEqual(60, shape.Width);
+            Assert.AreEqual(60, shape.Height);
         }
 
         [Test]
@@ -90,8 +90,8 @@ namespace RadiantTulip.Tests.View
 
             Assert.AreEqual(1, canvas.Children.Count);
             var shape = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(197.5d, shape.Margin.Left);
-            Assert.AreEqual(197.5d, shape.Margin.Top);
+            Assert.AreEqual(179d, shape.Margin.Left);
+            Assert.AreEqual(179d, shape.Margin.Top);
         }
     }
 }

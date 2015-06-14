@@ -18,9 +18,11 @@ namespace RadiantTulip.View.Game
                 || position.Value.X + ground.Padding < 0 || position.Value.Y + ground.Padding < 0)
                 return;
 
+            var size = ((double)player.Size) / (ground.Width) * canvas.ActualWidth;
+
             var transform = position.Value.TransformToCanvas(ground, canvas);
-            var x = transform.X - (double)player.Size / 2;
-            var y = transform.Y - (double)player.Size / 2;
+            var x = transform.X - size / 2;
+            var y = transform.Y - size / 2;
 
             Shape shape = null;
 
@@ -29,8 +31,8 @@ namespace RadiantTulip.View.Game
             else if (player.Shape == PlayerShape.Square)
                 shape = new Rectangle();
 
-            shape.Width = (int)player.Size;
-            shape.Height = (int)player.Size;
+            shape.Width = size;
+            shape.Height = size;
             shape.Margin = new Thickness {Left = x, Top = y};
             shape.Fill = new SolidColorBrush(player.Colour);
             canvas.Children.Add(shape);
