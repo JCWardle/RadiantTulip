@@ -408,13 +408,15 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
+            canvas.Measure(new System.Windows.Size(150, 150));
+            canvas.Arrange(new Rect(0, 0, 150, 150));
             var drawer = new PlayerDrawer();
 
             drawer.Draw(player, ground, canvas);
 
             var ellipse = (Ellipse)canvas.Children[0];
-            Assert.AreEqual(0, ellipse.Width);
-            Assert.AreEqual(0, ellipse.Height);
+            Assert.AreEqual(11.25d, ellipse.Width);
+            Assert.AreEqual(11.25d, ellipse.Height);
         }
     }
 }

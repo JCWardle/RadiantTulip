@@ -66,13 +66,12 @@
     
     <Style TargetType="ComboBox">
         <Setter Property="Background" Value="#BDB7B9"/>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
     <Style TargetType="ComboBoxItem">
         <Setter Property="Background" Value="#BDB7B9"/>
-        <Style.Resources>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#F7941D"/>
-        </Style.Resources>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
    
 
