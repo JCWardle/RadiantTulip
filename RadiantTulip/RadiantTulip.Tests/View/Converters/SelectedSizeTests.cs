@@ -22,7 +22,7 @@ namespace RadiantTulip.Tests.View.Converters
             var players = new ObservableCollection<Player>() { player };
             var parameters = new object[] { players, null, SelectionState.SinglePlayer };
 
-            var result = (Size)converter.Convert(parameters, null, null, null);
+            var result = (int)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(Size.Medium, result);
         }
@@ -38,7 +38,7 @@ namespace RadiantTulip.Tests.View.Converters
             };
             var parameters = new object[] { players, null, SelectionState.MultiplePlayers };
 
-            var result = (Size)converter.Convert(parameters, null, null, null);
+            var result = (int)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(Size.Large, result);
         }
@@ -54,7 +54,7 @@ namespace RadiantTulip.Tests.View.Converters
             };
             var parameters = new object[] { players, null, SelectionState.MultiplePlayers };
 
-            var result = (Size)converter.Convert(parameters, null, null, null);
+            var result = (int)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(Size.Large, result);
         }
@@ -73,7 +73,7 @@ namespace RadiantTulip.Tests.View.Converters
             };
             var parameters = new object[] { null, group, SelectionState.Group };
 
-            var result = (Size)converter.Convert(parameters, null, null, null);
+            var result = (int)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(Size.ExtraLarge, result);
         }
@@ -92,7 +92,7 @@ namespace RadiantTulip.Tests.View.Converters
             };
             var parameters = new object[] { null, group, SelectionState.Group };
 
-            var result = (Size)converter.Convert(parameters, null, null, null);
+            var result = (int)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(Size.ExtraLarge, result);
         }
@@ -103,7 +103,7 @@ namespace RadiantTulip.Tests.View.Converters
             var converter = new SelectedSize();
             var parameters = new object[] { null, null, SelectionState.None };
 
-            var result = (Size)converter.Convert(parameters, null, null, null);
+            var result = (int)converter.Convert(parameters, null, null, null);
 
             Assert.AreEqual(Size.Medium, result);
         }

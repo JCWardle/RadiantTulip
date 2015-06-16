@@ -38,7 +38,7 @@ namespace RadiantTulip.Model
                 OnPropertyChanged("Colour");
             }
         }
-        public Size Size { get; set; }
+        public int Size { get; set; }
         public PlayerShape Shape { get; set; }
 
         protected void OnPropertyChanged(string name)

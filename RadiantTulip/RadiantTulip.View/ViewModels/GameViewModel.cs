@@ -119,7 +119,7 @@ namespace RadiantTulip.View.ViewModels
 
         public ICommand SizeChangedCommand
         {
-            get { return _sizeChanged ?? (_sizeChanged = new DelegateCommand<object>(SizeChanged)); }
+            get { return _sizeChanged ?? (_sizeChanged = new DelegateCommand<string>(SizeChanged)); }
         }
 
         public ICommand PlayerAffectCheckedCommand
@@ -250,9 +250,9 @@ namespace RadiantTulip.View.ViewModels
             UpdateView();
         }
 
-        private void SizeChanged(object obj)
+        private void SizeChanged(string obj)
         {
-            var size = (RadiantTulip.Model.Size)obj;
+            var size = Model.Size.GetSize(obj);
             if (State == SelectionState.MultiplePlayers || State == SelectionState.SinglePlayer)
             {
                 foreach (var p in SelectedPlayers)
@@ -446,11 +446,11 @@ namespace RadiantTulip.View.ViewModels
             }
         }
 
-        public IEnumerable<RadiantTulip.Model.Size> SizeOptions
+        public IEnumerable<String> SizeOptions
         {
             get
             {
-                return Enum.GetValues(typeof(RadiantTulip.Model.Size)).Cast<RadiantTulip.Model.Size>();
+                return Model.Size.GetOptions();
             }
         }
 

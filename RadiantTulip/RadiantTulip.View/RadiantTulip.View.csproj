@@ -243,6 +243,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="GameTypeSettings\AFL.json" />
+    <None Include="GameTypeSettings\WheelChairRugby.json" />
     <Content Include="Grounds\Edihad.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

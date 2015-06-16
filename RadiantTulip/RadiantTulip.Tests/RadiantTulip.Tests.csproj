@@ -87,6 +87,8 @@
     <Compile Include="Model\Mocks\MockProgressReporter.cs" />
     <Compile Include="Model\ModelUpdaterTests.cs" />
     <Compile Include="Model\PlayerTests.cs" />
+    <Compile Include="Model\SettingsReaderTests.cs" />
+    <Compile Include="Model\SizeTests.cs" />
     <Compile Include="Model\VisualDataConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFileHelper.cs" />
@@ -129,6 +131,8 @@
     <EmbeddedResource Include="TestFiles\WheelChairRugby.json" />
     <EmbeddedResource Include="TestFiles\NoPositionalData.txt" />
     <EmbeddedResource Include="TestFiles\OverflowPosition.txt" />
+    <None Include="TestFiles\MissingSettings.json" />
+    <None Include="TestFiles\ValidSettings.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestFiles\BallAndPlayer.txt" />

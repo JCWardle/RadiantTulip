@@ -16,6 +16,7 @@ namespace RadiantTulip.Tests.View
     [TestFixture, RequiresSTA]
     public class BallDrawerTests
     {
+
         [Test]
         public void Draws_Ball_Without_Player()
         {
