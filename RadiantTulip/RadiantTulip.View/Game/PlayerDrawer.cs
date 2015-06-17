@@ -26,7 +26,7 @@ namespace RadiantTulip.View.Game
                 || position.Value.X + ground.Padding < 0 || position.Value.Y + ground.Padding < 0)
                 return;
 
-            var size = ((double)player.Size) / (ground.Width) * canvas.ActualWidth;
+            var size = ((double)_scaleSettings[player.Size]) / (ground.Width) * canvas.ActualWidth;
 
             var transform = position.Value.TransformToCanvas(ground, canvas);
             var x = transform.X - size / 2;

@@ -111,7 +111,8 @@ namespace RadiantTulip.Tests.View
                 {
                     X = -50,
                     Y = 200
-                })
+                }),
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100};
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -149,7 +150,8 @@ namespace RadiantTulip.Tests.View
                 {
                     X = 250,
                     Y = 200
-                })
+                }),
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -187,7 +189,8 @@ namespace RadiantTulip.Tests.View
                 {
                     X = 100,
                     Y = -50
-                })
+                }),
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -207,7 +210,8 @@ namespace RadiantTulip.Tests.View
                     X = 100,
                     Y = 550
                 }),
-                Shape = PlayerShape.Circle
+                Shape = PlayerShape.Circle,
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -226,7 +230,8 @@ namespace RadiantTulip.Tests.View
                 {
                     X = 100,
                     Y = 450
-                })
+                }),
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -334,7 +339,8 @@ namespace RadiantTulip.Tests.View
                     X = 100,
                     Y = 550
                 }),
-                Shape = PlayerShape.Circle
+                Shape = PlayerShape.Circle,
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -354,7 +360,8 @@ namespace RadiantTulip.Tests.View
                     X = 10,
                     Y = 10
                 }),
-                Shape = PlayerShape.Circle
+                Shape = PlayerShape.Circle,
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -374,7 +381,8 @@ namespace RadiantTulip.Tests.View
                     X = 450,
                     Y = 10
                 }),
-                Shape = PlayerShape.Circle
+                Shape = PlayerShape.Circle,
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -394,7 +402,8 @@ namespace RadiantTulip.Tests.View
                     X = 300,
                     Y = 10
                 }),
-                Shape = PlayerShape.Circle
+                Shape = PlayerShape.Circle,
+                Size = PlayerSize.Medium
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
@@ -455,7 +464,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas { Width = 150, Height = 150 };
             canvas.Measure(new System.Windows.Size(150, 150));
             canvas.Arrange(new Rect(0, 0, 150, 150));
-            var drawer = new PlayerDrawer(scaleSettings);
+            var drawer = new PlayerDrawer(settings);
 
             drawer.Draw(player, ground, canvas);
 
