@@ -110,6 +110,7 @@
     <Compile Include="View\Converters\TabCreatorTests.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
     <Compile Include="View\PlayerDrawerTests.cs" />
+    <Compile Include="View\SizeSettingsTests.cs" />
     <Compile Include="View\WheelChairRugbyGroundDrawerTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,8 @@
     <EmbeddedResource Include="TestFiles\WheelChairRugby.json" />
     <EmbeddedResource Include="TestFiles\NoPositionalData.txt" />
     <EmbeddedResource Include="TestFiles\OverflowPosition.txt" />
+    <EmbeddedResource Include="TestFiles\MissingSettings.json" />
+    <EmbeddedResource Include="TestFiles\ValidSettings.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestFiles\BallAndPlayer.txt" />

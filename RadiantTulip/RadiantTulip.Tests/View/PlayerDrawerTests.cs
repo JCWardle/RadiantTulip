@@ -8,12 +8,23 @@ using RadiantTulip.View.Game;
 using System.Windows.Media;
 using PlayerSize = RadiantTulip.Model.Size;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RadiantTulip.Tests.View
 {
     [TestFixture, RequiresSTA]
     public class PlayerDrawerTests
     {
+        private IReadOnlyDictionary<PlayerSize, int> scaleSettings = new ReadOnlyDictionary<PlayerSize, int>(
+            new Dictionary<PlayerSize, int>            
+            {
+                { PlayerSize.Small, 20 },
+                { PlayerSize.Medium, 30 },
+                { PlayerSize.Large, 40},
+                { PlayerSize.ExtraLarge, 50}
+            }
+        );
+
         [Test]
         public void Convert_Player_Coordinates_Square_Ground()
         {
@@ -31,7 +42,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas { Width = 150, Height = 150 };
             canvas.Measure(new System.Windows.Size(150, 150));
             canvas.Arrange(new Rect(0, 0, 150, 150));
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
 
@@ -60,7 +71,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas { Width = 300, Height = 150 };
             canvas.Measure(new System.Windows.Size(300, 150));
             canvas.Arrange(new Rect(0, 0, 300, 150));
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
             
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -85,7 +96,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(0, canvas.Children.Count);
@@ -104,7 +115,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100};
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -123,7 +134,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(0, canvas.Children.Count);
@@ -142,7 +153,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -161,7 +172,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(0, canvas.Children.Count);
@@ -180,7 +191,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -200,7 +211,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(0, canvas.Children.Count);
@@ -219,7 +230,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 400, Width = 200, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -242,7 +253,7 @@ namespace RadiantTulip.Tests.View
 
             var ground = new Ground { Height = 500, Width = 400 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
 
@@ -272,7 +283,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas { Width = 150, Height = 150 };
             canvas.Measure(new System.Windows.Size(150, 150));
             canvas.Arrange(new Rect(0, 0, 150, 150));
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
 
@@ -302,7 +313,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas { Width = 150, Height = 150 };
             canvas.Measure(new System.Windows.Size(150, 150));
             canvas.Arrange(new Rect(0, 0, 150, 150));
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
 
@@ -327,7 +338,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -347,7 +358,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -367,7 +378,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -387,7 +398,7 @@ namespace RadiantTulip.Tests.View
             };
             var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
             var canvas = new Canvas { Width = 150, Height = 150 };
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
             Assert.AreEqual(1, canvas.Children.Count);
@@ -410,13 +421,47 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas { Width = 150, Height = 150 };
             canvas.Measure(new System.Windows.Size(150, 150));
             canvas.Arrange(new Rect(0, 0, 150, 150));
-            var drawer = new PlayerDrawer();
+            var drawer = new PlayerDrawer(scaleSettings);
 
             drawer.Draw(player, ground, canvas);
 
             var ellipse = (Ellipse)canvas.Children[0];
             Assert.AreEqual(11.25d, ellipse.Width);
             Assert.AreEqual(11.25d, ellipse.Height);
+        }
+
+        [Test]
+        public void Player_Size_Scales_With_Scale_Settings()
+        {
+            var settings = new ReadOnlyDictionary<PlayerSize, int>(
+            new Dictionary<PlayerSize, int>            
+            {
+                { PlayerSize.Small, 20 },
+                { PlayerSize.Medium, 60 },
+                { PlayerSize.Large, 70 },
+                { PlayerSize.ExtraLarge, 80}
+            });
+            var player = new Player
+            {
+                CurrentPosition = new LinkedListNode<Position>(new Position
+                {
+                    X = 300,
+                    Y = 10
+                }),
+                Shape = PlayerShape.Circle,
+                Size = PlayerSize.Medium
+            };
+            var ground = new Ground { Height = 500, Width = 400, Padding = 100 };
+            var canvas = new Canvas { Width = 150, Height = 150 };
+            canvas.Measure(new System.Windows.Size(150, 150));
+            canvas.Arrange(new Rect(0, 0, 150, 150));
+            var drawer = new PlayerDrawer(scaleSettings);
+
+            drawer.Draw(player, ground, canvas);
+
+            var ellipse = (Ellipse)canvas.Children[0];
+            Assert.AreEqual(22.50d, ellipse.Width);
+            Assert.AreEqual(22.50d, ellipse.Height);
         }
     }
 }

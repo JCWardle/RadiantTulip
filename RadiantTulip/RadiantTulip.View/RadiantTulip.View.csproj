@@ -173,6 +173,8 @@
     <Compile Include="Game\GroundDrawerFactory.cs" />
     <Compile Include="Game\IBallDrawer.cs" />
     <Compile Include="Game\IGroundDrawerFactory.cs" />
+    <Compile Include="Game\ISizeSettings.cs" />
+    <Compile Include="Game\SizeSettings.cs" />
     <Compile Include="PositionExtensions.cs" />
     <Compile Include="Game\VisualAffects\AffectFactory.cs" />
     <Compile Include="Game\VisualAffects\GroupAffect.cs" />
@@ -255,6 +257,8 @@
     <Content Include="Grounds\WheelChairRugby.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="GameTypeSettings\AFL.json" />
+    <None Include="GameTypeSettings\WheelChairRugby.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
