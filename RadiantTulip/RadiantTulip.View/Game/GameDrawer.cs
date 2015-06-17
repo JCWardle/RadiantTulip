@@ -59,7 +59,7 @@ namespace RadiantTulip.View.Game
                 var player = players.FirstOrDefault(p => p.CurrentPosition != null &&
                     p.CurrentPosition.Value.X == game.Ball.CurrentPosition.Value.X &&
                     p.CurrentPosition.Value.Y == game.Ball.CurrentPosition.Value.Y);
-                _ballDrawer.Draw(canvas, game.Ball, player, game.Ground);
+                _ballDrawer.Draw(canvas, game.Ball, player, game.Ground, _scaleSettings);
             }
 
             foreach (var t in game.Teams)

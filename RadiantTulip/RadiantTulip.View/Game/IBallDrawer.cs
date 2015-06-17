@@ -10,6 +10,6 @@ namespace RadiantTulip.View.Game
 {
     public interface IBallDrawer
     {
-        void Draw(Canvas canvas, Ball ball, Player player, Ground ground);
+        void Draw(Canvas canvas, Ball ball, Player player, Ground ground, IReadOnlyDictionary<Size, int> scaleSettings);
     }
 }

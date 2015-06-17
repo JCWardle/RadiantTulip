@@ -340,13 +340,13 @@ namespace RadiantTulip.Tests.View
                 }
             };
             var canvas = new Canvas();
-            ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()));
+            ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>(), _scaleSettings));
 
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
-            ballDrawer.Verify(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()), Times.Once);
+            ballDrawer.Verify(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>(), _scaleSettings), Times.Once);
         }
 
         [Test]
@@ -368,13 +368,13 @@ namespace RadiantTulip.Tests.View
                 }
             };
             var canvas = new Canvas();
-            ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()));
+            ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>(), _scaleSettings));
 
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
-            ballDrawer.Verify(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()), Times.Never);
+            ballDrawer.Verify(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>(), _scaleSettings), Times.Never);
         }
 
         [Test]
@@ -404,13 +404,13 @@ namespace RadiantTulip.Tests.View
                 }
             };
             var canvas = new Canvas();
-            ballDrawer.Setup(b => b.Draw(canvas, game.Ball, game.Teams[0].Players[0], game.Ground));
+            ballDrawer.Setup(b => b.Draw(canvas, game.Ball, game.Teams[0].Players[0], game.Ground, _scaleSettings));
 
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
-            ballDrawer.Verify(b => b.Draw(canvas, game.Ball, game.Teams[0].Players[0], game.Ground), Times.Once);
+            ballDrawer.Verify(b => b.Draw(canvas, game.Ball, game.Teams[0].Players[0], game.Ground, _scaleSettings), Times.Once);
         }
 
         [Test]
@@ -441,13 +441,13 @@ namespace RadiantTulip.Tests.View
                 }
             };
             var canvas = new Canvas();
-            ballDrawer.Setup(b => b.Draw(canvas, game.Ball, game.Teams[1].Players[0], game.Ground));
+            ballDrawer.Setup(b => b.Draw(canvas, game.Ball, game.Teams[1].Players[0], game.Ground, _scaleSettings));
 
             var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
-            ballDrawer.Verify(b => b.Draw(canvas, game.Ball, game.Teams[1].Players[0], game.Ground), Times.Once);
+            ballDrawer.Verify(b => b.Draw(canvas, game.Ball, game.Teams[1].Players[0], game.Ground, _scaleSettings), Times.Once);
         }
     }
 }
