@@ -21,17 +21,25 @@ namespace RadiantTulip.View
 {
     public partial class GameWindow
     {
+        private const string SETTINGS_LOCATION = "GameTypeSettings/{0}.json";
         private readonly IGameDrawer _drawer;
         private IGameViewModel _view;
 
-        public GameWindow(IUnityContainer container, Model.Game game)
+        public GameWindow(IUnityContainer container, ISizeSettings sizeSettings,Model.Game game)
         {
             InitializeComponent();
             this.DataContext = container.Resolve<IGameViewModel>(new ParameterOverride("game", game));
+            IReadOnlyDictionary<Model.Size, int> settings = null;
+
+            using(var stream =  new FileStream(String.Format(SETTINGS_LOCATION, game.Ground.Type), FileMode.Open))
+            {
+                settings = sizeSettings.ReadSizeSettings(stream);
+            }
             
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);
-            _drawer = container.Resolve<IGameDrawer>(new ParameterOverride("ground", _view.Game.Ground));
+            _drawer = container.Resolve<IGameDrawer>(new ParameterOverride("ground", _view.Game.Ground),
+                new ParameterOverride("scaleSettings", settings));
         }
 
         protected void ReRender()

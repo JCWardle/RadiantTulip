@@ -5,15 +5,27 @@ using RadiantTulip.View.Game;
 using RadiantTulip.View.Game.VisualAffects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Shapes;
+using PlayerSize = RadiantTulip.Model.Size;
 
 namespace RadiantTulip.Tests.View
 {
     [TestFixture, RequiresSTA]
     public class GameDrawerTests
     {
+        private IReadOnlyDictionary<PlayerSize, int> _scaleSettings = new ReadOnlyDictionary<PlayerSize, int>(
+    new Dictionary<PlayerSize, int>            
+            {
+                { PlayerSize.Small, 20 },
+                { PlayerSize.Medium, 30 },
+                { PlayerSize.Large, 40},
+                { PlayerSize.ExtraLarge, 50}
+            }
+);
+
         [Test]
         public void Draws_One_Player()
         {
@@ -40,13 +52,13 @@ namespace RadiantTulip.Tests.View
                     }
                 }
             });
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
-            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas));
+            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas, _scaleSettings));
 
             drawer.DrawGame(canvas, game, new List<IVisualAffect>());
 
-            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas, _scaleSettings), Times.Once);
         }
 
         [Test]
@@ -70,14 +82,14 @@ namespace RadiantTulip.Tests.View
                     player2
                 }
             });
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
-            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas));
+            playerDrawer.Setup(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas, _scaleSettings));
 
             drawer.DrawGame(canvas, game, new List<IVisualAffect>());
 
-            playerDrawer.Verify(p => p.Draw(player1, It.IsAny<Ground>(), canvas), Times.Once);
-            playerDrawer.Verify(p => p.Draw(player2, It.IsAny<Ground>(), canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(player1, It.IsAny<Ground>(), canvas, _scaleSettings), Times.Once);
+            playerDrawer.Verify(p => p.Draw(player2, It.IsAny<Ground>(), canvas, _scaleSettings), Times.Once);
         }
 
         [Test]
@@ -97,11 +109,11 @@ namespace RadiantTulip.Tests.View
                     new Player() {Visible = false}
                 }
             });
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, new List<IVisualAffect>());
 
-            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Never);
+            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas, _scaleSettings), Times.Never);
         }
 
         [Test]
@@ -123,11 +135,11 @@ namespace RadiantTulip.Tests.View
                     new Player() {Visible = true, CurrentPosition = new LinkedListNode<Position>(new Position { X = 1, Y = 1, TimeStamp = TimeSpan.Zero }) }
                 }
             });
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
-            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas), Times.Once);
+            playerDrawer.Verify(p => p.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), canvas, _scaleSettings), Times.Once);
         }
 
         [Test]
@@ -142,7 +154,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas();
             var game = new Game() { Teams = new List<Team>(), Ball = new Ball() };
             game.Ground = new Ground();
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
@@ -168,7 +180,7 @@ namespace RadiantTulip.Tests.View
                     new Player { Visible = true }
                 }
             });
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             affects.Add(visualArtifact.Object);
 
@@ -197,7 +209,7 @@ namespace RadiantTulip.Tests.View
                     new Player { Visible= true }
                 }
             });
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             visualArtifact1.Setup(v => v.Draw(canvas));
             visualArtifact2.Setup(v => v.Draw(canvas));
@@ -230,7 +242,7 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             canvas.Children.Add(new Ellipse());
             drawer.DrawGame(canvas, game, affects);
@@ -248,7 +260,7 @@ namespace RadiantTulip.Tests.View
             groundFactory.Setup(g => g.CreateGroundDrawer(It.IsAny<Ground>())).Returns(groundDrawer.Object);
             var ground = new Ground { Type = GroundType.AFL, Width = 20};
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, ground, _scaleSettings);
 
             groundFactory.Verify(g => g.CreateGroundDrawer(ground), Times.Once);
         }
@@ -274,7 +286,7 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
@@ -292,7 +304,7 @@ namespace RadiantTulip.Tests.View
             var affects = new List<IVisualAffect>();
             var game = new Game() { Teams = new List<Team>(), Ground = new Ground(), Ball = new Ball() };
             var canvas = new Canvas();
-            playerDrawer.Setup(g => g.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), It.IsAny<Canvas>()));
+            playerDrawer.Setup(g => g.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), It.IsAny<Canvas>(), _scaleSettings));
 
             game.Teams.Add(new Team
             {
@@ -302,11 +314,11 @@ namespace RadiantTulip.Tests.View
                 }
             });
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
-            playerDrawer.Verify(g => g.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), It.IsAny<Canvas>()), Times.Never);
+            playerDrawer.Verify(g => g.Draw(It.IsAny<Player>(), It.IsAny<Ground>(), It.IsAny<Canvas>(), _scaleSettings), Times.Never);
         }
 
         [Test]
@@ -330,7 +342,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas();
             ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()));
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
@@ -358,7 +370,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas();
             ballDrawer.Setup(b => b.Draw(canvas, It.IsAny<Ball>(), null, It.IsAny<Ground>()));
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
@@ -394,7 +406,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas();
             ballDrawer.Setup(b => b.Draw(canvas, game.Ball, game.Teams[0].Players[0], game.Ground));
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 
@@ -431,7 +443,7 @@ namespace RadiantTulip.Tests.View
             var canvas = new Canvas();
             ballDrawer.Setup(b => b.Draw(canvas, game.Ball, game.Teams[1].Players[0], game.Ground));
 
-            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground);
+            var drawer = new GameDrawer(groundFactory.Object, playerDrawer.Object, ballDrawer.Object, game.Ground, _scaleSettings);
 
             drawer.DrawGame(canvas, game, affects);
 

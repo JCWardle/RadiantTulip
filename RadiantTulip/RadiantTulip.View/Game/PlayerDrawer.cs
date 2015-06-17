@@ -12,21 +12,15 @@ namespace RadiantTulip.View.Game
     /// </summary>
     public class PlayerDrawer : IPlayerDrawer
     {
-        private IReadOnlyDictionary<Model.Size, int> _scaleSettings;
 
-        public PlayerDrawer(IReadOnlyDictionary<Model.Size, int> scaleSettings)
-        {
-            _scaleSettings = scaleSettings;
-        }
-
-        public void Draw(Player player, Ground ground, Canvas canvas)
+        public void Draw(Player player, Ground ground, Canvas canvas, IReadOnlyDictionary<Model.Size, int> scaleSettings)
         {
             var position = player.CurrentPosition;
             if (position.Value.X > ground.Width + ground.Padding || position.Value.Y > ground.Height + ground.Padding
                 || position.Value.X + ground.Padding < 0 || position.Value.Y + ground.Padding < 0)
                 return;
 
-            var size = ((double)_scaleSettings[player.Size]) / (ground.Width) * canvas.ActualWidth;
+            var size = ((double)scaleSettings[player.Size]) / (ground.Width) * canvas.ActualWidth;
 
             var transform = position.Value.TransformToCanvas(ground, canvas);
             var x = transform.X - size / 2;
