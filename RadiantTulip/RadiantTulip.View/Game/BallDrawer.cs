@@ -15,9 +15,9 @@ namespace RadiantTulip.View.Game
     {
         private const int BALL_PADDING = 10;
 
-        public void Draw(Canvas canvas, Ball ball, Player player, Ground ground)
+        public void Draw(Canvas canvas, Ball ball, Player player, Ground ground, IReadOnlyDictionary<Model.Size, int> scaleSettings)
         {
-            var size = player == null ? (double)RadiantTulip.Model.Size.Medium : (double)player.Size + BALL_PADDING;
+            var size = player == null ? (double)scaleSettings[Model.Size.Medium] : (double)scaleSettings[player.Size] + BALL_PADDING;
             size = size / ground.Width * canvas.ActualWidth;
             var position = ball.CurrentPosition.Value.TransformToCanvas(ground, canvas);
 

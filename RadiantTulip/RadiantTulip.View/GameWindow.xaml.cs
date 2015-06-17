@@ -21,17 +21,25 @@ namespace RadiantTulip.View
 {
     public partial class GameWindow
     {
+        private const string SETTINGS_LOCATION = "GameTypeSettings/{0}.json";
         private readonly IGameDrawer _drawer;
         private IGameViewModel _view;
+        private IReadOnlyDictionary<Model.Size, int> _settings;
 
-        public GameWindow(IUnityContainer container, Model.Game game)
+        public GameWindow(IUnityContainer container, ISizeSettings sizeSettings,Model.Game game)
         {
             InitializeComponent();
             this.DataContext = container.Resolve<IGameViewModel>(new ParameterOverride("game", game));
+
+            using(var stream =  new FileStream(String.Format(SETTINGS_LOCATION, game.Ground.Type), FileMode.Open))
+            {
+                _settings = sizeSettings.ReadSizeSettings(stream);
+            }
             
             _view = (IGameViewModel)this.DataContext;
             _view.UpdateView = new Action(ReRender);
-            _drawer = container.Resolve<IGameDrawer>(new ParameterOverride("ground", _view.Game.Ground));
+            _drawer = container.Resolve<IGameDrawer>(new ParameterOverride("ground", _view.Game.Ground),
+                new ParameterOverride("scaleSettings", _settings));
         }
 
         protected void ReRender()
@@ -56,7 +64,7 @@ namespace RadiantTulip.View
                 {
                     foreach(var p in t.Players.Where(p => p.CurrentPosition != null))
                     {
-                        var size = (double)p.Size / (game.Ground.Width) * canvas.ActualWidth;
+                        var size = (double)_settings[p.Size]/ (game.Ground.Width) * canvas.ActualWidth;
                         var currentPosition = p.CurrentPosition.Value.TransformToCanvas(game.Ground, canvas);
                         if (x > currentPosition.X - size && x < currentPosition.X + size
                             && y > currentPosition.Y - size && y < currentPosition.Y + size)

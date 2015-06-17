@@ -1,15 +1,15 @@
 ﻿using RadiantTulip.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace RadiantTulip.View.Game
 {
-    public interface IBallDrawer
+    public interface ISizeSettings
     {
-        void Draw(Canvas canvas, Ball ball, Player player, Ground ground, IReadOnlyDictionary<Size, int> scaleSettings);
+        IReadOnlyDictionary<Size, int> ReadSizeSettings(Stream stream);
     }
 }

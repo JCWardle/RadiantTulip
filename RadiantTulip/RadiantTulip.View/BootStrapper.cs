@@ -36,6 +36,7 @@ namespace RadiantTulip.View
             Container.RegisterType(typeof(IAffectFactory), typeof(AffectFactory));
             Container.RegisterType(typeof(IGroundDrawerFactory), typeof(GroundDrawerFactory));
             Container.RegisterType(typeof(IBallDrawer), typeof(BallDrawer));
+            Container.RegisterType(typeof(ISizeSettings), typeof(SizeSettings));
 
             //Views
             Container.RegisterType(typeof (IGameViewModel), typeof (GameViewModel));

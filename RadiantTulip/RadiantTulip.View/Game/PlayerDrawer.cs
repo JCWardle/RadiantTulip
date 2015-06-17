@@ -3,6 +3,7 @@ using RadiantTulip.Model;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace RadiantTulip.View.Game
 {
@@ -11,14 +12,15 @@ namespace RadiantTulip.View.Game
     /// </summary>
     public class PlayerDrawer : IPlayerDrawer
     {
-        public void Draw(Player player, Ground ground, Canvas canvas)
+
+        public void Draw(Player player, Ground ground, Canvas canvas, IReadOnlyDictionary<Model.Size, int> scaleSettings)
         {
             var position = player.CurrentPosition;
             if (position.Value.X > ground.Width + ground.Padding || position.Value.Y > ground.Height + ground.Padding
                 || position.Value.X + ground.Padding < 0 || position.Value.Y + ground.Padding < 0)
                 return;
 
-            var size = ((double)player.Size) / (ground.Width) * canvas.ActualWidth;
+            var size = ((double)scaleSettings[player.Size]) / (ground.Width) * canvas.ActualWidth;
 
             var transform = position.Value.TransformToCanvas(ground, canvas);
             var x = transform.X - size / 2;

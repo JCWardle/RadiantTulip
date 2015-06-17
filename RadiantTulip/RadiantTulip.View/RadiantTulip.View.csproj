@@ -109,6 +109,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -173,6 +177,8 @@
     <Compile Include="Game\GroundDrawerFactory.cs" />
     <Compile Include="Game\IBallDrawer.cs" />
     <Compile Include="Game\IGroundDrawerFactory.cs" />
+    <Compile Include="Game\ISizeSettings.cs" />
+    <Compile Include="Game\SizeSettings.cs" />
     <Compile Include="PositionExtensions.cs" />
     <Compile Include="Game\VisualAffects\AffectFactory.cs" />
     <Compile Include="Game\VisualAffects\GroupAffect.cs" />
@@ -255,6 +261,12 @@
     <Content Include="Grounds\WheelChairRugby.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="GameTypeSettings\AFL.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GameTypeSettings\WheelChairRugby.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
