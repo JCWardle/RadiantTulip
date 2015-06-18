@@ -17,7 +17,7 @@ namespace RadiantTulip.Model.Input
         private Ball _ball = new Ball() 
         { 
             Positions = new LinkedList<Position>(), 
-            Colour = Color.FromArgb(255, 255, 255, 0), 
+            Colour = Color.FromArgb(255, 255, 0, 0), 
             PositionsLookup = new Dictionary<TimeSpan,LinkedListNode<Position>>()
         };
         private int _startingFrame = -1;

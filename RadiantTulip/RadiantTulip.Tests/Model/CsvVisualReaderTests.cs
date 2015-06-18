@@ -170,7 +170,6 @@ namespace RadiantTulip.Tests.Model
 
             var result = reader.GetBall(file);
 
-            Assert.AreEqual(Color.FromArgb(255, 255, 255, 0), result.Colour);
             Assert.AreEqual(2, result.Positions.Count());
             var position = result.Positions.First.Value;
             Assert.AreEqual(11.299328, position.X);
@@ -186,7 +185,6 @@ namespace RadiantTulip.Tests.Model
 
             var result = reader.GetBall(file);
 
-            Assert.AreEqual(Color.FromArgb(255, 255, 255, 0), result.Colour);
             Assert.AreEqual(2, result.Positions.Count());
             var position = result.Positions.First.Value;
             Assert.AreEqual(11.299328, position.X);
@@ -206,8 +204,18 @@ namespace RadiantTulip.Tests.Model
 
             var result = reader.GetBall(file);
 
-            Assert.AreEqual(Color.FromArgb(255, 255, 255, 0), result.Colour);
             Assert.AreEqual(8, result.Positions.Count());
+        }
+
+        [Test]
+        public void Ball_Is_Red()
+        {
+            var file = TestFileHelper.GetFilePath("TwoBallPositions.txt");
+            var reader = new CsvVisualReader();
+
+            var result = reader.GetBall(file);
+
+            Assert.AreEqual(Color.FromArgb(255, 255, 0, 0), result.Colour);
         }
 
         [Test]
