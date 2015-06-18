@@ -141,7 +141,7 @@ namespace RadiantTulip.Tests.Model
         }
 
         [Test]
-        public void Ball_Is_Null_Because_Not_Implemented()
+        public void Ball_Is_Empty_But_Instanciated_Because_Its_Not_Implemented()
         {
             Ball result;
             using (var stream = TestFileHelper.GetFilePath("OnePlayerBig.xlsx"))
@@ -150,7 +150,7 @@ namespace RadiantTulip.Tests.Model
                 result = input.GetBall(stream);
             }
 
-            Assert.IsNull(result);
+            Assert.IsNotNull(result);
         }
     }
 }
