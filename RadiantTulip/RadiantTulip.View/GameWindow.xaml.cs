@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using System.Linq;
 using System.Diagnostics;
 using System.IO;
+using RadiantTulip.View.Settings;
 
 namespace RadiantTulip.View
 {

@@ -177,8 +177,8 @@
     <Compile Include="Drawing\GroundDrawerFactory.cs" />
     <Compile Include="Drawing\IBallDrawer.cs" />
     <Compile Include="Drawing\IGroundDrawerFactory.cs" />
-    <Compile Include="Drawing\ISizeSettings.cs" />
-    <Compile Include="Drawing\SizeSettings.cs" />
+    <Compile Include="Settings\ISizeSettings.cs" />
+    <Compile Include="Settings\SizeSettings.cs" />
     <Compile Include="PositionExtensions.cs" />
     <Compile Include="Drawing\VisualAffects\AffectFactory.cs" />
     <Compile Include="Drawing\VisualAffects\GroupAffect.cs" />

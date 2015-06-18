@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantTulip.View.Drawing
+namespace RadiantTulip.View.Settings
 {
     public interface ISizeSettings
     {

@@ -9,6 +9,7 @@ using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using RadiantTulip.View.Drawing.VisualAffects;
 using log4net;
+using RadiantTulip.View.Settings;
 
 namespace RadiantTulip.View
 {
