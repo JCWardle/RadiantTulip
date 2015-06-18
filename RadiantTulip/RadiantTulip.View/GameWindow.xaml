@@ -308,7 +308,8 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <cp:ColorPicker Name="ColourSelector" Style="{StaticResource ContextControl}">
+                <cp:ColorPicker Name="ColourSelector" Style="{StaticResource ContextControl}"
+                        ShowAdvancedButton="False">
                     <cp:ColorPicker.SelectedColor>
                         <MultiBinding Converter="{StaticResource selectedColour}" Mode="OneWay">
                             <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
