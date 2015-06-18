@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
 using RadiantTulip.Model;
-using RadiantTulip.View.Game;
+using RadiantTulip.View.Drawing;
 using RadiantTulip.View.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -44,7 +44,7 @@ namespace RadiantTulip.View
 
         protected void ReRender()
         {
-            _drawer.DrawGame(Game, _view.Game, _view.VisualAffects);
+            _drawer.DrawGame(this.Game, _view.Game, _view.VisualAffects);
         }
 
         private void Game_MouseUp(object sender, MouseButtonEventArgs e)

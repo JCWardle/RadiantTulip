@@ -1,5 +1,5 @@
 ﻿using RadiantTulip.Model;
-using RadiantTulip.View.Game.VisualAffects;
+using RadiantTulip.View.Drawing.VisualAffects;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
