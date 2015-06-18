@@ -29,7 +29,7 @@ namespace RadiantTulip.Model.Input
         public Ball GetBall(Stream stream)
         {
             //TODO: Implement when data arrives
-            return null;
+            return new Ball();
         }
 
         private Player CreatePlayer(IXLWorksheet sheet)
