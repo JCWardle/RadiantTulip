@@ -1,10 +1,10 @@
-﻿using RadiantTulip.View.Game.VisualAffects;
+﻿using RadiantTulip.View.Drawing.VisualAffects;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using GameModel = RadiantTulip.Model.Game;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Drawing
 {
     public interface IGameDrawer
     {

@@ -16,8 +16,8 @@ using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
 using System.Windows.Media;
-using RadiantTulip.View.Game;
-using RadiantTulip.View.Game.VisualAffects;
+using RadiantTulip.View.Drawing;
+using RadiantTulip.View.Drawing.VisualAffects;
 using Xceed.Wpf.Toolkit;
 
 namespace RadiantTulip.View.ViewModels

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantTulip.View.Game.VisualAffects
+namespace RadiantTulip.View.Drawing.VisualAffects
 {
     public class AffectFactory : IAffectFactory
     {

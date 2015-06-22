@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace RadiantTulip.View.Game.VisualAffects
+namespace RadiantTulip.View.Drawing.VisualAffects
 {
     public interface IVisualAffect
     {

@@ -4,7 +4,7 @@ using NUnit.Framework;
 using RadiantTulip.Model;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using RadiantTulip.View.Game;
+using RadiantTulip.View.Drawing;
 using System.Windows.Media;
 using PlayerSize = RadiantTulip.Model.Size;
 using System.Collections.Generic;

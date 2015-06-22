@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Drawing
 {
     public abstract class GroundDrawer
     {

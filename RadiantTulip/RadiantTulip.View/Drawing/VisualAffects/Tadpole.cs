@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace RadiantTulip.View.Game.VisualAffects
+namespace RadiantTulip.View.Drawing.VisualAffects
 {
     public class Tadpole : IVisualAffect
     {

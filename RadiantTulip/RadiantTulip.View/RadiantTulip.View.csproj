@@ -173,21 +173,21 @@
     <Compile Include="GameSetup.xaml.cs">
       <DependentUpon>GameSetup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\BallDrawer.cs" />
-    <Compile Include="Game\GroundDrawerFactory.cs" />
-    <Compile Include="Game\IBallDrawer.cs" />
-    <Compile Include="Game\IGroundDrawerFactory.cs" />
-    <Compile Include="Game\ISizeSettings.cs" />
-    <Compile Include="Game\SizeSettings.cs" />
+    <Compile Include="Drawing\BallDrawer.cs" />
+    <Compile Include="Drawing\GroundDrawerFactory.cs" />
+    <Compile Include="Drawing\IBallDrawer.cs" />
+    <Compile Include="Drawing\IGroundDrawerFactory.cs" />
+    <Compile Include="Settings\ISizeSettings.cs" />
+    <Compile Include="Settings\SizeSettings.cs" />
     <Compile Include="PositionExtensions.cs" />
-    <Compile Include="Game\VisualAffects\AffectFactory.cs" />
-    <Compile Include="Game\VisualAffects\GroupAffect.cs" />
-    <Compile Include="Game\VisualAffects\IAffectFactory.cs" />
-    <Compile Include="Game\VisualAffects\Lines.cs" />
-    <Compile Include="Game\VisualAffects\OutterCoverage.cs" />
-    <Compile Include="Game\VisualAffects\PlayerAffect.cs" />
-    <Compile Include="Game\VisualAffects\Tadpole.cs" />
-    <Compile Include="Game\WheelChairRugbyGroundDrawer.cs" />
+    <Compile Include="Drawing\VisualAffects\AffectFactory.cs" />
+    <Compile Include="Drawing\VisualAffects\GroupAffect.cs" />
+    <Compile Include="Drawing\VisualAffects\IAffectFactory.cs" />
+    <Compile Include="Drawing\VisualAffects\Lines.cs" />
+    <Compile Include="Drawing\VisualAffects\OutterCoverage.cs" />
+    <Compile Include="Drawing\VisualAffects\PlayerAffect.cs" />
+    <Compile Include="Drawing\VisualAffects\Tadpole.cs" />
+    <Compile Include="Drawing\WheelChairRugbyGroundDrawer.cs" />
     <Compile Include="GlobalExceptionHandler.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="IGlobalExceptionHandler.cs" />
@@ -213,12 +213,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Game\GameDrawer.cs" />
-    <Compile Include="Game\AFLGroundDrawer.cs" />
-    <Compile Include="Game\IGameDrawer.cs" />
-    <Compile Include="Game\GroundDrawer.cs" />
-    <Compile Include="Game\IPlayerDrawer.cs" />
-    <Compile Include="Game\VisualAffects\IVisualAffect.cs" />
+    <Compile Include="Drawing\GameDrawer.cs" />
+    <Compile Include="Drawing\AFLGroundDrawer.cs" />
+    <Compile Include="Drawing\IGameDrawer.cs" />
+    <Compile Include="Drawing\GroundDrawer.cs" />
+    <Compile Include="Drawing\IPlayerDrawer.cs" />
+    <Compile Include="Drawing\VisualAffects\IVisualAffect.cs" />
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -229,7 +229,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\PlayerDrawer.cs" />
+    <Compile Include="Drawing\PlayerDrawer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Drawing
 {
     public class AFLGroundDrawer : GroundDrawer
     {

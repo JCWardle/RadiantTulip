@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Drawing
 {
     public interface IPlayerDrawer
     {

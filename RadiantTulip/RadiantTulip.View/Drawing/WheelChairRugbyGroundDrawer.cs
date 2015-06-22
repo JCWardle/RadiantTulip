@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Drawing
 {
     public class WheelChairRugbyGroundDrawer : GroundDrawer
     {

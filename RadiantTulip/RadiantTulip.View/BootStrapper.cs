@@ -3,12 +3,13 @@ using Microsoft.Practices.Unity;
 using RadiantTulip.Model;
 using RadiantTulip.Model.Converter;
 using RadiantTulip.Model.Input;
-using RadiantTulip.View.Game;
+using RadiantTulip.View.Drawing;
 using RadiantTulip.View.ViewModels;
 using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
-using RadiantTulip.View.Game.VisualAffects;
+using RadiantTulip.View.Drawing.VisualAffects;
 using log4net;
+using RadiantTulip.View.Settings;
 
 namespace RadiantTulip.View
 {

@@ -5,7 +5,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Drawing
 {
     /// <summary>
     /// Co-ordinates start at the top left at 0,0

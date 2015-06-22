@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using RadiantTulip.Model;
-using RadiantTulip.View.Game;
+using RadiantTulip.View.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

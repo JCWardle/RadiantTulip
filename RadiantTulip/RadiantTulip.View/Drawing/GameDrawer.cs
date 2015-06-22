@@ -1,5 +1,5 @@
 ﻿using RadiantTulip.Model;
-using RadiantTulip.View.Game.VisualAffects;
+using RadiantTulip.View.Drawing.VisualAffects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using GameModel = RadiantTulip.Model.Game;
 
-namespace RadiantTulip.View.Game
+namespace RadiantTulip.View.Drawing
 {
     public class GameDrawer : IGameDrawer
     {

@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using RadiantTulip.View.Game;
+using RadiantTulip.View.Drawing;
 using System.Windows.Media;
 
-namespace RadiantTulip.View.Game.VisualAffects
+namespace RadiantTulip.View.Drawing.VisualAffects
 {
     public class Lines : IVisualAffect
     {
