@@ -13,5 +13,7 @@ namespace RadiantTulip.View.Drawing.VisualAffects
         void Draw(Canvas canvas);
         bool AffectFor(List<Player> players, GroupAffect affect);
         bool AffectFor(List<Player> players, PlayerAffect affect);
+        List<string> Options();
+        void SetOption(string option);
     }
 }

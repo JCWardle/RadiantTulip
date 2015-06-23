@@ -20,5 +20,6 @@
         <converters:PlayerDistance x:Key="distanceCoveredConverter"/>
         <converters:PlayerSpeed x:Key="playerSpeedConverter"/>
         <converters:PlayerName x:Key="playerNameConverter"/>
+        <converters:VisualAffectOptions x:Key="visualAffectOptionsConverter"/>
     </Application.Resources>
 </Application>

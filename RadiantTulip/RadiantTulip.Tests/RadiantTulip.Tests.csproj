@@ -108,6 +108,7 @@
     <Compile Include="View\Converters\SelectedVisibilityTests.cs" />
     <Compile Include="View\Converters\SingleSelectTests.cs" />
     <Compile Include="View\Converters\TabCreatorTests.cs" />
+    <Compile Include="View\Converters\VisualAffectOptionsTests.cs" />
     <Compile Include="View\GameDrawerTests.cs" />
     <Compile Include="View\PlayerDrawerTests.cs" />
     <Compile Include="View\SizeSettingsTests.cs" />

@@ -85,5 +85,16 @@ namespace RadiantTulip.View.Drawing.VisualAffects
         {
             return false;
         }
+
+
+        public List<string> Options()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetOption(string option)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

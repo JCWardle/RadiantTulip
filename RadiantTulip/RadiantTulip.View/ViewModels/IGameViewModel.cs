@@ -25,6 +25,7 @@ namespace RadiantTulip.View.ViewModels
         //Speed Tuner
         TimeSpan SpeedTuner { get; }
         Action UpdateView { get; set; }
+        IEnumerable<PlayerAffect> PlayerAffects { get; }
         ICommand PlayCommand { get; }
         ICommand PauseCommand { get; }
         ICommand ForwardCommand { get; }

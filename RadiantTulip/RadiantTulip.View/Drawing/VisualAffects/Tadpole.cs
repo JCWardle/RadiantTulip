@@ -67,5 +67,20 @@ namespace RadiantTulip.View.Drawing.VisualAffects
         {
             return players.Contains(_player) && affect == PlayerAffect.Tadpole;
         }
+
+
+        public List<string> Options()
+        {
+            return new List<String> {
+                "Small",
+                "Medium",
+                "Large"
+            };
+        }
+
+        public void SetOption(string option)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

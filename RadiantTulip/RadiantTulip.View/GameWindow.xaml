@@ -19,26 +19,46 @@
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate x:Key="SingleAffectSelector">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="{Binding}"/>
-                    <CheckBox>
-                        <CheckBox.IsChecked>
-                            <MultiBinding Converter="{StaticResource affectSelected}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
-                                <Binding Path="."/>
-                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.VisualAffects" />
-                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count" />
-                            </MultiBinding>
-                        </CheckBox.IsChecked>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Checked">
-                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectCheckedCommand}" CommandParameter="{Binding}"/>
-                            </i:EventTrigger>
-                            <i:EventTrigger EventName="Unchecked">
-                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectUncheckedCommand}" CommandParameter="{Binding}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </CheckBox>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding}"/>
+                        <CheckBox>
+                            <CheckBox.IsChecked>
+                                <MultiBinding Converter="{StaticResource affectSelected}" Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                    <Binding Path="."/>
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.VisualAffects" />
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count" />
+                                </MultiBinding>
+                            </CheckBox.IsChecked>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectCheckedCommand}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.PlayerAffectUncheckedCommand}" CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding Path=Children[0].Children[1].IsChecked, Converter={StaticResource boolToVisibility}, RelativeSource={RelativeSource AncestorType=StackPanel}}">
+                        <ItemsControl>
+                            <ItemsControl.ItemsSource>
+                                <MultiBinding Converter="{StaticResource visualAffectOptionsConverter}" Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers" />
+                                    <Binding Path="."/>
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.VisualAffects" />
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPlayers.Count" />
+                                    <Binding RelativeSource="{RelativeSource AncestorType=StackPanel}" Path="Visibility"/>
+                                </MultiBinding>
+                            </ItemsControl.ItemsSource>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
                 </StackPanel>
             </DataTemplate>
 

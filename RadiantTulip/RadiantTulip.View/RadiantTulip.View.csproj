@@ -167,6 +167,7 @@
     <Compile Include="Converters\AffectSelected.cs" />
     <Compile Include="Converters\SelectedVisibility.cs" />
     <Compile Include="Converters\TabCreator.cs" />
+    <Compile Include="Converters\VisualAffectOptions.cs" />
     <Compile Include="FileDialog.xaml.cs">
       <DependentUpon>FileDialog.xaml</DependentUpon>
     </Compile>
