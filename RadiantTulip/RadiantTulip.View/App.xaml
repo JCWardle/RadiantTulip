@@ -21,5 +21,6 @@
         <converters:PlayerSpeed x:Key="playerSpeedConverter"/>
         <converters:PlayerName x:Key="playerNameConverter"/>
         <converters:VisualAffectOptions x:Key="visualAffectOptionsConverter"/>
+        <converters:BindingCombiner x:Key="bindingCombinerConverter"/>
     </Application.Resources>
 </Application>

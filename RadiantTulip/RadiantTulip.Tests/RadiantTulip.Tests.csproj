@@ -93,6 +93,7 @@
     <Compile Include="View\AFLGroundDrawerTests.cs" />
     <Compile Include="View\BallDrawerTests.cs" />
     <Compile Include="View\Converters\AffectSelectedTests.cs" />
+    <Compile Include="View\Converters\BindingCombinerTests.cs" />
     <Compile Include="View\Converters\BoolToVisibilityTests.cs" />
     <Compile Include="View\Converters\GroupSelectTests.cs" />
     <Compile Include="View\Converters\InvertBooleanTests.cs" />

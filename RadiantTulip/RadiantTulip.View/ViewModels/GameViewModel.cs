@@ -58,6 +58,7 @@ namespace RadiantTulip.View.ViewModels
         private ICommand _resizeCommand;
         private ICommand _selectionTabLoadedCommand;
         private ICommand _visibilityChangedCommand;
+        private ICommand _visualAffectOptionSelected;
 
         public GameViewModel() {}
 
@@ -162,6 +163,11 @@ namespace RadiantTulip.View.ViewModels
             get { return _visibilityChangedCommand ?? (_visibilityChangedCommand = new DelegateCommand<bool?>(VisibilityChanged)); }
         }
 
+        public ICommand VisualAffectOptionSelectedCommand
+        {
+            get { return _visualAffectOptionSelected ?? (_visualAffectOptionSelected = new DelegateCommand<object[]>(VisualAffectOptionSelected)); }
+        }
+
         #endregion
 
         #region Window Command Implementations
@@ -169,6 +175,32 @@ namespace RadiantTulip.View.ViewModels
         private void Resize()
         {
             UpdateView();
+        }
+
+        private void VisualAffectOptionSelected(object[] values)
+        {
+            var optionSelected = (string)values[0];
+            var affect = values[1];
+            IList<IVisualAffect> affects = new List<IVisualAffect>();
+
+            if(affect.GetType().IsAssignableFrom(typeof(PlayerAffect)))
+            {
+                var selectedPlayers = SelectedPlayers.ToList();
+                foreach(var v in _visualAffects)
+                {
+                    if (v.AffectFor(selectedPlayers, (PlayerAffect)affect))
+                        v.SetOption(optionSelected);
+                }
+            }
+            else if(affect.GetType().IsAssignableFrom(typeof(GroupAffect)))
+            {
+                var selectedPlayers = SelectedGroup.Players.ToList();
+                foreach (var v in _visualAffects)
+                {
+                    if (v.AffectFor(selectedPlayers, (GroupAffect)affect))
+                        v.SetOption(optionSelected);
+                }
+            }
         }
 
         private void ShapeChanged(object obj)

@@ -19,8 +19,12 @@
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate x:Key="SingleAffectSelector">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <Label Content="{Binding}"/>
                         <CheckBox>
                             <CheckBox.IsChecked>
@@ -41,7 +45,7 @@
                             </i:Interaction.Triggers>
                         </CheckBox>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding Path=Children[0].Children[1].IsChecked, Converter={StaticResource boolToVisibility}, RelativeSource={RelativeSource AncestorType=StackPanel}}">
+                    <StackPanel Grid.Row="1" Visibility="{Binding Path=Children[0].Children[1].IsChecked, Converter={StaticResource boolToVisibility}, RelativeSource={RelativeSource AncestorType=Grid}}">
                         <ItemsControl>
                             <ItemsControl.ItemsSource>
                                 <MultiBinding Converter="{StaticResource visualAffectOptionsConverter}" Mode="OneWay">
@@ -54,12 +58,25 @@
                             </ItemsControl.ItemsSource>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding}"/>
+                                    <Button Content="{Binding}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=DataContext.VisualAffectOptionSelectedCommand}">
+                                                    <i:InvokeCommandAction.CommandParameter>
+                                                        <MultiBinding Converter="{StaticResource bindingCombinerConverter}">
+                                                            <Binding Path="."/>
+                                                            <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}"/>
+                                                        </MultiBinding>
+                                                    </i:InvokeCommandAction.CommandParameter>
+                                                </i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
             </DataTemplate>
 
             <DataTemplate x:Key="PlayerSelectorTemplate">
