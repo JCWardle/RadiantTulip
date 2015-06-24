@@ -13,8 +13,7 @@ namespace RadiantTulip.View.Drawing.VisualAffects
 {
     public class Tadpole : IVisualAffect
     {
-        private const int MIN_POINT_INCREMENT = 10; //Milliseconds
-        private const int TADPOLE_LENGTH = 10;
+        private int _tadpoleLength = 10;
         private Player _player;
         private Ground _ground;
 
@@ -31,7 +30,7 @@ namespace RadiantTulip.View.Drawing.VisualAffects
             if (currentPosition == null)
                 return;
 
-            for (var i = 0; i < TADPOLE_LENGTH; i++)
+            for (var i = 0; i < _tadpoleLength; i++)
             {
                 currentPosition = currentPosition.Previous;
 
@@ -80,7 +79,18 @@ namespace RadiantTulip.View.Drawing.VisualAffects
 
         public void SetOption(string option)
         {
-            throw new NotImplementedException();
+            switch(option)
+            {
+                case "Small":
+                    _tadpoleLength = 5;
+                    break;
+                case "Medium":
+                    _tadpoleLength = 10;
+                    break;
+                case "Large":
+                    _tadpoleLength = 30;
+                    break;
+            }
         }
     }
 }
