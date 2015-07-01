@@ -16,29 +16,52 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadiantTulip.Model", "Radia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadiantTulip.View", "RadiantTulip.View\RadiantTulip.View.csproj", "{1AB68A28-2810-420B-A527-6E9B72164C61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadiantTulip.API", "RadiantTulip.API\RadiantTulip.API.csproj", "{CDDD05AF-F055-4F6A-AF45-8330A57BB0F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadiantTulip.Web", "RadiantTulip.Web\RadiantTulip.Web.csproj", "{E2493F86-29CA-446F-A779-D8505AF05C56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{939D4D45-EB9C-4EFE-B344-D8220E521B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{939D4D45-EB9C-4EFE-B344-D8220E521B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939D4D45-EB9C-4EFE-B344-D8220E521B2C}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{939D4D45-EB9C-4EFE-B344-D8220E521B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{939D4D45-EB9C-4EFE-B344-D8220E521B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939D4D45-EB9C-4EFE-B344-D8220E521B2C}.Release|x64.ActiveCfg = Release|Any CPU
 		{B6580426-3E13-4338-B307-34F7696AB476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6580426-3E13-4338-B307-34F7696AB476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6580426-3E13-4338-B307-34F7696AB476}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{B6580426-3E13-4338-B307-34F7696AB476}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6580426-3E13-4338-B307-34F7696AB476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6580426-3E13-4338-B307-34F7696AB476}.Release|x64.ActiveCfg = Release|Any CPU
 		{1AB68A28-2810-420B-A527-6E9B72164C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1AB68A28-2810-420B-A527-6E9B72164C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB68A28-2810-420B-A527-6E9B72164C61}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{1AB68A28-2810-420B-A527-6E9B72164C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AB68A28-2810-420B-A527-6E9B72164C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB68A28-2810-420B-A527-6E9B72164C61}.Release|x64.ActiveCfg = Release|Any CPU
+		{CDDD05AF-F055-4F6A-AF45-8330A57BB0F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDD05AF-F055-4F6A-AF45-8330A57BB0F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDD05AF-F055-4F6A-AF45-8330A57BB0F0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CDDD05AF-F055-4F6A-AF45-8330A57BB0F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDD05AF-F055-4F6A-AF45-8330A57BB0F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDD05AF-F055-4F6A-AF45-8330A57BB0F0}.Release|x64.ActiveCfg = Release|Any CPU
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Debug|x64.ActiveCfg = Debug|x64
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Debug|x64.Build.0 = Debug|x64
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Release|x64.ActiveCfg = Release|x64
+		{E2493F86-29CA-446F-A779-D8505AF05C56}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

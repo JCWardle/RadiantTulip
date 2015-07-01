@@ -1,0 +1,12 @@
+﻿<Window x:Class="RadiantTulip.Web.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <cefSharp:ChromiumWebBrowser Grid.Row="0"
+            Address="local://index.html" >
+
+        </cefSharp:ChromiumWebBrowser>
+    </Grid>
+</Window>
