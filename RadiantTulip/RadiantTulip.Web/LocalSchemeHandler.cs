@@ -26,7 +26,7 @@ namespace RadiantTulip.Web
             var uri = new Uri(request.Url);
             string file = string.Empty;
             if (uri.AbsolutePath != "/")
-                file = string.Format("{0}{1}", uri.Authority, uri.AbsolutePath);
+                file = uri.AbsolutePath.Substring(1);
             else
                 file = uri.Authority;
 
