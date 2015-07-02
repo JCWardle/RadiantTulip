@@ -3,9 +3,15 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Radiant Tulip</title>
+    <script src="Scripts/angular.js" type="text/javascript"></script>
+    <script src="Scripts/Controllers/SetupController.js" type="text/javascript"></script>
+    <script src="Scripts/app.js" type="text/javascript"></script>
 </head>
-<body>
+<body ng-app="radiantTulip">
     <h1>HelloWorld!</h1>
+    <div ng-controller="setupController">
+        {{ SomeShit }}
+    </div>
 </body>
 </html>
