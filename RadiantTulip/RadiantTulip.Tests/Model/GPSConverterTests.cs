@@ -57,7 +57,7 @@ namespace RadiantTulip.Tests.Model
 
             Assert.Greater(result.X, ground.Width / 2d);
             Assert.Less(result.Y, ground.Height / 2d);
-            Assert.AreEqual(10528.586359803765d, result.X);
+            Assert.AreEqual(10528.586359803767d, result.X);
             Assert.AreEqual(7224.0197770889663d, result.Y);
             Assert.AreEqual(new DateTime(1, 1, 1), new DateTime(1, 1, 1));
         }
@@ -164,7 +164,7 @@ namespace RadiantTulip.Tests.Model
 
             var result = converter.Convert(position, ground);
 
-            Assert.AreEqual(399.93071071314364d, result.X);
+            Assert.AreEqual(399.93071071314353d, result.X);
             Assert.AreEqual(250.00000000000009d, result.Y);
         }
 
@@ -190,7 +190,7 @@ namespace RadiantTulip.Tests.Model
 
             var result = converter.Convert(position, ground);
 
-            Assert.AreEqual(399.93071071314364d, result.X);
+            Assert.AreEqual(399.93071071314353d, result.X);
             Assert.AreEqual(239.98381722506443d, result.Y);
         }
     }
