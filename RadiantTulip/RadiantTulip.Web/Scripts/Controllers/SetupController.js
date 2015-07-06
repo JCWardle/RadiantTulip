@@ -1,4 +1,6 @@
 ﻿angular.module('radiantTulip', [])
 .controller("setupController", function setupController($scope) {
-    $scope.SomeShit = "Derp";
+    $scope.positionalData = {};
+    $scope.gameTypes = [ "AFL", "Wheel Chair Rugby" ];
+    $scope.fields = [{ name: "Pattersons", type: "AFL" }, { name: "Standard Court", type: "Wheel Chair Rugby" }];
 });

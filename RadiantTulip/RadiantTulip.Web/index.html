@@ -5,13 +5,16 @@
     <meta charset="utf-8" />
     <title>Radiant Tulip</title>
     <script src="Scripts/angular.js" type="text/javascript"></script>
+    <script src="Scripts/angular-route.js" type="text/javascript"></script>
     <script src="Scripts/app.js" type="text/javascript"></script>
     <script src="Scripts/Controllers/setupController.js" type="text/javascript"></script>
+
+    <!-- Views -->
+    <!-- Setup View -->
+    <script type="text/ng-template" src="Views/Setup.html"></script>
 </head>
-<body ng-app="radiantTulip">
+<body ng-app="radiant">
     <h1>HelloWorld!</h1>
-    <div ng-controller="setupController">
-        {{ SomeShit }}
-    </div>
+    <div ng-view></div>
 </body>
 </html>

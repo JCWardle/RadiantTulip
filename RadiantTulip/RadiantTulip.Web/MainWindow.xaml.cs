@@ -29,6 +29,7 @@ namespace RadiantTulip.Web
                     SchemeHandlerFactory = new LocalSchemeHandlerFactory(),
                     SchemeName = "local"
                 });
+            settings.RemoteDebuggingPort = 8088;
             Cef.Initialize(settings);
             InitializeComponent();
         }
