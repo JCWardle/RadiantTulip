@@ -1,3 +1,6 @@
 ﻿{
-    "Framwork": "jasmine"
+    "Framwork": "jasmine",
+    "Tests": [ 
+        { "Path":  "setupControllerSpecs.js" }
+    ]
 }
