@@ -93,7 +93,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIRunner.cs" />
+    <Compile Include="GroundTypeController.cs" />
+    <Compile Include="IApiRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RadiantTulip.Model\RadiantTulip.Model.csproj">

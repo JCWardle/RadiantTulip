@@ -154,6 +154,7 @@
     <Content Include="Scripts\Controllers\setupController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Services\GroundTypeService.js" />
     <Content Include="Tests\lib\boot.js" />
     <Content Include="Tests\lib\console.js" />
     <Content Include="Tests\lib\jasmine-html.js" />
