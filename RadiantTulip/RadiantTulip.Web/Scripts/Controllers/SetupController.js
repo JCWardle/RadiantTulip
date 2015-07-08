@@ -1,4 +1,4 @@
-﻿angular.module('radiantTulip', [])
+﻿angular.module('radiant')
 .controller("setupController", function setupController($scope) {
     $scope.positionalData = {};
     $scope.gameTypes = [ "AFL", "Wheel Chair Rugby" ];

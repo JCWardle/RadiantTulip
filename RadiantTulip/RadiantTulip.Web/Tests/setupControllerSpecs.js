@@ -3,7 +3,7 @@
 /// <reference path="../Scripts/Controllers/setupController.js" />
 
 describe('setup window validation', function () {
-    beforeEach(module('radiantTulip'));
+    beforeEach(module('radiant'));
 
     var $controller;
 
