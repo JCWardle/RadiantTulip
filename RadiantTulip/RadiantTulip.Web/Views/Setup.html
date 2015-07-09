@@ -1,3 +1,16 @@
 ﻿<div ng-controller="setupController">
-    {{ SomeShit }}
+    <div>
+        <div>
+            <label>Data:</label>
+            <input type="file" ng-model="positionalData"/>
+        </div>
+        <div>
+            <label>Game:</label>
+            <select ng-model="gameType" ng-options="g for g in gameTypes"></select>
+        </div>        
+        <div>
+            <label>Field:</label>
+            <select ng-model="field" ng-options="f.name for f in fields"></select>
+        </div>
+    </div>
 </div>

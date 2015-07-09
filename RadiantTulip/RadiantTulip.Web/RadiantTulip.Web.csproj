@@ -154,10 +154,10 @@
     <Content Include="Scripts\Controllers\setupController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Services\groundTypeService.js">
+    <Content Include="Scripts\Services\gameTypeService.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tests\groundTypeServiceSpecs.js" />
+    <Content Include="Tests\gameTypeServiceSpecs.js" />
     <Content Include="Tests\lib\boot.js" />
     <Content Include="Tests\lib\console.js" />
     <Content Include="Tests\lib\jasmine-html.js" />

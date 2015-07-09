@@ -2,7 +2,7 @@
 /// <reference path="../Scripts/angular-mocks.js"/>
 /// <reference path="../Scripts/angular-route.js" />
 /// <reference path="../Scripts/app.js" />
-/// <reference path="../Scripts/Services/groundTypeService.js" />
+/// <reference path="../Scripts/Services/gameTypeService.js" />
 
 describe('game type service', function () {
     var service, $httpBackend;
@@ -23,10 +23,10 @@ describe('game type service', function () {
     });
 
     it('fetches all game types', function () {
+        var result;
         $httpBackend.expectGET(url);
-        service.getData();
+        service.gameTypes().then(function (d) { result = d });
         $httpBackend.flush();
-        result = service.gameTypes();
         expect(result.length).toEqual(2);
         expect(result[0]).toEqual("AFL");
         expect(result[1]).toEqual("Wheel Chair Rugby");
