@@ -6,22 +6,27 @@
 
 describe("setup window", function () {
     beforeEach(module('radiant'));
+    
 
     var $controller;
 
-    beforeEach(inject(function (_$controller_) {
+    beforeEach(inject(function (_$controller_, gameTypeService, $q) {
         $controller = _$controller_;
+
+        spyOn(gameTypeService, "gameTypes").and.callFake(function () {
+            var deferred = $q.defer();
+            deferred.resolve(["AFL", "Wheel Chair Rugby"]);
+            return deferred.promise;
+        });
     }));
 
-    it("fetches game types from the game type service", function () {
+    it("fetches game types from the game type service", inject(function ($rootScope) {
         var $scope = {};
-        var mockService = { gameTypes: function() {}};
-        spyOn(mockService, "gameTypes")
-            .and.returnValue(["AFL", "Wheel Chair Rugby"]);
 
-        var controller = $controller("setupController", { $scope: $scope, gameTypeService: mockService });
+        var controller = $controller("setupController", { $scope: $scope });
 
-        expect(mockService.gameTypes).toHaveBeenCalled();
+        $rootScope.$apply();
+
         expect($scope.gameTypes).toEqual(["AFL", "Wheel Chair Rugby"]);
-    });
+    }));
 });
