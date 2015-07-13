@@ -1,0 +1,16 @@
+﻿.top-buffer { margin-top:20px; }
+
+fieldset {  
+    background-color: #eee;
+    border: 3px solid rgba(0,0,0,0.1);
+    padding: 30px 38px 66px;
+    margin: 0 auto;
+}
+
+legend {
+    background-color: #eee;
+    border: 3px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 10px;
+}

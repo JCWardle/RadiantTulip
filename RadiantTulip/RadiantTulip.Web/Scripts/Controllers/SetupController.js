@@ -12,7 +12,7 @@
 
         $scope.changeGameType = function () {
             angular.forEach($scope.grounds, function (value) {
-                if (value.Type.replace(/ /g, "") === $scope.gameType) {
+                if (value.Type === $scope.gameType.replace(/ /g, "")) {
                     $scope.ground = value;
                     return;
                 }
@@ -27,4 +27,10 @@
                 }
             });
         };
+
+        $scope.toggleAdvancedSettings = function () {
+            $scope.showAdvancedSettings = !$scope.showAdvancedSettings;
+        }
+
+        $scope.showAdvancedSettings = false;
 }]);

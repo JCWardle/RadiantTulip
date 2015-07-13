@@ -101,4 +101,21 @@ describe("setup window", function () {
 
         expect($scope.gameType).toEqual("Wheel Chair Rugby");
     });
+
+    it("hides advanced settings by default", function () {
+        var $scope = {};
+
+        var controller = $controller("setupController", { $scope: $scope });
+
+        expect($scope.showAdvancedSettings).toEqual(false);
+    });
+
+    it("shows advanced settings when button advanced settings button is pressed", function () {
+        var $scope = {};
+
+        var controller = $controller("setupController", { $scope: $scope });
+        $scope.toggleAdvancedSettings();
+
+        expect($scope.showAdvancedSettings).toEqual(true);
+    })
 });

@@ -1,40 +1,53 @@
-﻿<div ng-controller="setupController">
-    <div>
-        <div>
-            <label>Data:</label>
-            <input type="file" ng-model="positionalData"/>
-        </div>
-        <div>
-            <label>Game:</label>
-            <select ng-model="gameType" ng-options="g for g in gameTypes" ng-change="changeGameType()"></select>
-        </div>        
-        <div>
-            <label>Ground:</label>
-            <select ng-model="ground" ng-options="g.Name for g in grounds" ng-change="changeGround()"></select>
-        </div>
-        <div>
-            <label>Centre Longitude:</label>
-            <input type="text" ng-model="ground.CentreLongitude" />
-        </div>
-        <div>
-            <label>Centre Latitude:</label>
-            <input type="text" ng-model="ground.CentreLatitude" />
-        </div>
-        <div>
-            <label>Height:</label>
-            <input type="text" ng-model="ground.Height" />
-        </div>
-        <div>
-            <label>Width:</label>
-            <input type="text" ng-model="ground.Width" />
-        </div>
-        <div>
-            <label>Padding:</label>
-            <input type="text" ng-model="ground.Padding" />
-        </div>
-        <div>
-            <label>Rotation:</label>
-            <input type="text" ng-model="ground.Rotation" />
-        </div>
+﻿<div ng-controller="setupController" class="container">
+    <div class="span12 pagination-centered">
+        <fieldset>
+            <legend>Setup game</legend>
+            <form ng-submit="submit()">
+                <div class="row">
+                    <label class="col-md-2">Data:</label>
+                    <input required class="col-md-10" type="file" ng-model="positionalData" />
+                </div>
+                <div class="row top-buffer">
+                    <label class="col-md-2">Game:</label>
+                    <select required class="col-md-10" ng-model="gameType" ng-options="g for g in gameTypes" ng-change="changeGameType()"></select>
+                </div>
+                <div class="row top-buffer">
+                    <label class="col-md-2">Ground:</label>
+                    <select required class="col-md-10" ng-model="ground" ng-options="g.Name for g in grounds" ng-change="changeGround()"></select>
+                </div>
+                <div class="row top-buffer">
+                    <input class="col-md-12" type="button" value="Advanced Settings" ng-click="toggleAdvancedSettings()" />
+                </div>
+                <div ng-show="showAdvancedSettings">
+                    <div class="row top-buffer">
+                        <label class="col-md-2">Centre Longitude:</label>
+                        <input class="col-md-10" type="text" ng-model="ground.CentreLongitude" />
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-2">Centre Latitude:</label>
+                        <input class="col-md-10" type="text" ng-model="ground.CentreLatitude" />
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-2">Height:</label>
+                        <input class="col-md-10" type="text" ng-model="ground.Height" />
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-2">Width:</label>
+                        <input class="col-md-10" type="text" ng-model="ground.Width" />
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-2">Padding:</label>
+                        <input class="col-md-10" type="text" ng-model="ground.Padding" />
+                    </div>
+                    <div class="row top-buffer">
+                        <label class="col-md-2">Rotation:</label>
+                        <input class="col-md-10" type="text" ng-model="ground.Rotation" />
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <input type="submit" class="col-md-12" value="Play Ball" />
+                </div>
+            </form>
+        </fieldset>
     </div>
 </div>
