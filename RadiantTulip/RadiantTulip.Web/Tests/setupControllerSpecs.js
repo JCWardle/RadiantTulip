@@ -3,6 +3,7 @@
 /// <reference path="../Scripts/angular-route.js" />
 /// <reference path="../Scripts/app.js" />
 /// <reference path="../Scripts/Controllers/setupController.js" />
+/// <reference path="../Scripts/Services/gameTypeService.js" />
 
 describe("setup window", function () {
     beforeEach(module('radiant'));

@@ -109,7 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIRunner.cs" />
-    <Compile Include="FieldController.cs" />
+    <Compile Include="GroundController.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="GroundTypeController.cs" />
     <Compile Include="IApiRunner.cs" />

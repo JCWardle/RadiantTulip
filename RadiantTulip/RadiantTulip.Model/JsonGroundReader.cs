@@ -24,7 +24,6 @@ namespace RadiantTulip.Model
                     {
                         CentreLatitude = (double)JsonConvert.DeserializeObject(obj["CentreLatitude"].ToString(), typeof(double)),
                         CentreLongitude = (double)JsonConvert.DeserializeObject(obj["CentreLongitude"].ToString(), typeof(double)),
-                        Image = obj["Image"].ToString(),
                         Height = (int)JsonConvert.DeserializeObject(obj["Height"].ToString(), typeof(int)),
                         Width = (int)JsonConvert.DeserializeObject(obj["Width"].ToString(), typeof(int)),
                         Padding = (int)JsonConvert.DeserializeObject(obj["Padding"].ToString(), typeof(int)),

@@ -34,7 +34,7 @@ namespace RadiantTulip.Tests.Api
             fileSystem.Setup(f => f.GetFileStream("file"))
                 .Returns(_stream);
 
-            var controller = new FieldController(reader.Object, fileSystem.Object);
+            var controller = new GroundController(reader.Object, fileSystem.Object);
 
             var result = controller.Get();
 

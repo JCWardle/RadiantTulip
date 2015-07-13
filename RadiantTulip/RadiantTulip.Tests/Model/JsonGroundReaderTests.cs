@@ -26,7 +26,6 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(1, result.Count);
             var ground = result.First();
-            Assert.AreEqual(@"E:\Code\RadiantTulip\RadiantTulip\Grounds\Patersons.png", ground.Image);
             Assert.AreEqual(-31.944664, ground.CentreLatitude);
             Assert.AreEqual(115.830156, ground.CentreLongitude);
             Assert.AreEqual(22100, ground.Height);
@@ -50,7 +49,6 @@ namespace RadiantTulip.Tests.Model
 
             Assert.AreEqual(2, result.Count);
             var ground = result[1];
-            Assert.AreEqual(@"E:\Code\RadiantTulip\RadiantTulip\Grounds\Patersons.png", ground.Image);
             Assert.AreEqual(-31.944664, ground.CentreLatitude);
             Assert.AreEqual(115.830156, ground.CentreLongitude);
             Assert.AreEqual(22100, ground.Height);
@@ -60,7 +58,6 @@ namespace RadiantTulip.Tests.Model
             Assert.AreEqual(GroundType.AFL, ground.Type);
 
             ground = result[0];
-            Assert.AreEqual(@"E:\Code\RadiantTulip\RadiantTulip\Grounds\MCG.png", ground.Image);
             Assert.AreEqual(-37.819963, ground.CentreLatitude);
             Assert.AreEqual(144.983435, ground.CentreLongitude);
             Assert.AreEqual(22100, ground.Height);
