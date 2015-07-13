@@ -27,6 +27,13 @@ namespace RadiantTulip.API
 
             config.DependencyResolver = new UnityDependencyResolver(container);
 
+
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting
+                = Newtonsoft.Json.Formatting.Indented;
+
+            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add
+                (new Newtonsoft.Json.Converters.StringEnumConverter());
+
             var corsOptions = new CorsOptions
             {
                 PolicyProvider = new CorsPolicyProvider
