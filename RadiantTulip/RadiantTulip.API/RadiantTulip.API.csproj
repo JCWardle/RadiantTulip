@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIRunner.cs" />
+    <Compile Include="GameController.cs" />
     <Compile Include="GroundController.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="GroundTypeController.cs" />

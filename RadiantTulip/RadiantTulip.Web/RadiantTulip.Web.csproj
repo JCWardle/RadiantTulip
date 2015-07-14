@@ -187,6 +187,10 @@
     <Content Include="Scripts\Controllers\setupController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Directives\fileInput.js" />
+    <Content Include="Scripts\Services\gameService.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Services\gameTypeService.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

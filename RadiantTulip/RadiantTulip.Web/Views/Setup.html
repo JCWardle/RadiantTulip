@@ -2,10 +2,10 @@
     <div class="span12 pagination-centered">
         <fieldset>
             <legend>Setup game</legend>
-            <form ng-submit="submit()">
+            <form ng-submit="createGame()">
                 <div class="row">
                     <label class="col-md-2">Data:</label>
-                    <input required class="col-md-10" type="file" ng-model="positionalData" />
+                    <input required class="col-md-10" type="file" file-input="fileInput" />
                 </div>
                 <div class="row top-buffer">
                     <label class="col-md-2">Game:</label>

@@ -1,10 +1,12 @@
 ﻿angular.module('radiant')
-.controller("setupController", ["$scope", "gameTypeService", "groundService",
-    function setupController($scope, gameTypeService, groundService) {
+.controller("setupController", ["$scope", "gameTypeService", "groundService", "gameService",
+    function setupController($scope, gameTypeService, groundService, gameService) {
         $scope.positionalData = {};
         gameTypeService.gameTypes().then(function(d) { 
             $scope.gameTypes = d
         });
+
+        $scope.fileInput = "derp";
 
         groundService.grounds().then(function (d) {
             $scope.grounds = d;
@@ -33,4 +35,8 @@
         }
 
         $scope.showAdvancedSettings = false;
+
+        $scope.createGame = function () {
+            gameService.createGame($scope.ground, $scope.fileInput);
+        }
 }]);
